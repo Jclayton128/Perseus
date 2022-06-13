@@ -9,6 +9,11 @@ public class SystemCrateHandler : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         _iconSprite.sprite = SystemChunk.GetComponent<SystemHandler>().GetIcon();
     }
 

@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class DebugController : MonoBehaviour
 {
-    PlayerMovementHandler _playerPH;
+    PlayerHandler _playerPH;
     GameController _gameController;
-
+    SystemsLibrary _systemsLibrary;
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _systemsLibrary = FindObjectOfType<SystemsLibrary>();
     }
 
 
     public void HandleMoreThrust()
     {
         if (_playerPH == null) 
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyThrust(20f);
 
@@ -24,7 +25,7 @@ public class DebugController : MonoBehaviour
     public void HandleLessThrust()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyThrust(-20f);
 
@@ -32,7 +33,7 @@ public class DebugController : MonoBehaviour
     public void HandleMoreMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyMass(2f);
 
@@ -40,22 +41,27 @@ public class DebugController : MonoBehaviour
     public void HandleLessMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyMass(-2f);
     }
     public void HandleMoreTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyTurnRate(20f);
     }
     public void HandleLessTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerMovementHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
 
         _playerPH.ModifyTurnRate(20f);
+    }
+
+    public void HandleSpawnRandomSystem()
+    {
+        _systemsLibrary.SpawnRandomSystemCrate();
     }
 }
