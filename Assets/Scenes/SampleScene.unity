@@ -7089,6 +7089,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8957654523758894297, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
+      propertyPath: _mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8957654523758894297, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
+      propertyPath: _thrust
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -8957654523758894297, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
+      propertyPath: _turnRate
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 2482856763183021888, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_Name
       value: PlayerArcher
@@ -7140,6 +7152,10 @@ PrefabInstance:
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
+      propertyPath: _startingSystems.Array.data[0]
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.data[1]

@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.6669226
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalRotation.x
@@ -53,11 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.745127
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 263.66
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: _icon
@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponType: 0
+  _inputCon: {fileID: 0}
+  _weaponType: 1
   _activationCost: 0
   _sustainCostRate: 0
-  _turretTurnRate: 50
+  _turretTurnRate: 180

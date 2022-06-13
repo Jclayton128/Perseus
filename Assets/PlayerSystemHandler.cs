@@ -56,7 +56,6 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
-        //sh.GetComponent<BaseSystem>().Initialize(_playerHandler);
         sh.IntegrateSystem(_playerHandler);
         _systemsOnBoard.Add(sh);
         _UICon.IntegrateNewSystem(_systemsOnBoard.Count - 1, sh.GetIcon(), 1);
@@ -64,7 +63,6 @@ public class PlayerSystemHandler : MonoBehaviour
 
         if (sh.IsSecondary)
         {
-
             if (!_activeSecondarySystem)
             {
                 _activeSecondarySystem = sh;

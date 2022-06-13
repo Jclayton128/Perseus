@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherTurretWeapon : BaseSystem
+public class TurretWeaponSystem : BaseSystem
 {
     //settings
     [SerializeField] float _turretTurnRate = 50f;
@@ -21,13 +21,13 @@ public class ArcherTurretWeapon : BaseSystem
 
     private void Update()
     {
+        if (!_inputCon) Initialize();
         if (_isInstalled) return;
         UpdateTurretFacingToMousePos();
     }
 
     private void UpdateTurretFacingToMousePos()
     {
-        Debug.Log("turning");
         Vector3 targetDir = _inputCon.MousePos - transform.position;
         float angleToTargetFromNorth = Vector3.SignedAngle(targetDir, Vector2.up, transform.forward);
         Quaternion angleToPoint = Quaternion.Euler(0, 0, -1 * angleToTargetFromNorth);

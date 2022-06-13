@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputCon: {fileID: 0}
   _weaponType: 1
   _activationCost: 0
   _sustainCostRate: 0
