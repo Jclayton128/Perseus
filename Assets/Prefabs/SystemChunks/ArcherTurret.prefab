@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.556
+      objectReference: {fileID: 0}
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
       value: ArcherTurret
@@ -37,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalPosition.z
@@ -102,6 +106,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
   m_PrefabInstance: {fileID: 6840208074536586873}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6894287794442961043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+  m_PrefabInstance: {fileID: 6840208074536586873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5076610187721481087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,4 +127,5 @@ MonoBehaviour:
   _weaponType: 1
   _activationCost: 0
   _sustainCostRate: 0
+  _muzzle: {fileID: 6894287794442961043}
   _turretTurnRate: 50

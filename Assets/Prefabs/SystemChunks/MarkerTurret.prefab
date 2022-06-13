@@ -102,6 +102,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
   m_PrefabInstance: {fileID: 6840208074536586873}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6894287794442961043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+  m_PrefabInstance: {fileID: 6840208074536586873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8938237238309472325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,4 +123,5 @@ MonoBehaviour:
   _weaponType: 1
   _activationCost: 0
   _sustainCostRate: 0
+  _muzzle: {fileID: 6894287794442961043}
   _turretTurnRate: 180

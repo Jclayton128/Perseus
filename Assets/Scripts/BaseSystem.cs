@@ -9,9 +9,10 @@ public abstract class BaseSystem : MonoBehaviour
     protected PoolController _poolCon;
     protected SystemHandler _systemHandler;
 
-    [SerializeField] protected PoolController.WeaponType _weaponType;
+    [SerializeField] protected PoolController.ProjectileType _weaponType;
     [SerializeField] protected  float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;
+    [SerializeField] protected Transform _muzzle;
 
     protected bool _isInstalled;
 

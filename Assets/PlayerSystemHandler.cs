@@ -11,9 +11,11 @@ public class PlayerSystemHandler : MonoBehaviour
     UI_Controller _UICon;
 
     //state
-    SystemHandler _activeSecondarySystem;
+    int _activeSecondarySystemIndex;
+    public SystemHandler ActiveSecondarySystem { get; protected set; }
     int _maxSystems;
     List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
+    List<SystemHandler> _secondarySystems = new List<SystemHandler>();
     private void Awake()
     {
         _syslib = FindObjectOfType<SystemsLibrary>();
@@ -63,9 +65,11 @@ public class PlayerSystemHandler : MonoBehaviour
 
         if (sh.IsSecondary)
         {
-            if (!_activeSecondarySystem)
+            _secondarySystems.Add(sh);
+            if (!ActiveSecondarySystem)
             {
-                _activeSecondarySystem = sh;
+                ActiveSecondarySystem = sh;
+                _activeSecondarySystemIndex = _secondarySystems.IndexOf(sh);
             }
         }
     }
@@ -74,4 +78,23 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         return _systemsOnBoard;
     }
+
+    public void ToggleActiveSystemUp()
+    {
+        _activeSecondarySystemIndex++;
+        _activeSecondarySystemIndex = 
+            Mathf.Clamp(_activeSecondarySystemIndex ,0, _secondarySystems.Count - 1);
+        ActiveSecondarySystem = _systemsOnBoard[_activeSecondarySystemIndex];
+        _UICon.HighlightNewSecondary(_systemsOnBoard.IndexOf(ActiveSecondarySystem));
+    }
+
+    public void ToggleActiveSystemDown()
+    {
+        _activeSecondarySystemIndex--;
+        _activeSecondarySystemIndex =
+            Mathf.Clamp(_activeSecondarySystemIndex, 0, _secondarySystems.Count - 1);
+        ActiveSecondarySystem = _systemsOnBoard[_activeSecondarySystemIndex];
+        _UICon.HighlightNewSecondary(_systemsOnBoard.IndexOf(ActiveSecondarySystem));
+    }
+
 }

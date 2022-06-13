@@ -11,7 +11,8 @@ public class TurretWeaponSystem : BaseSystem
 
     public override void Activate()
     {
-        throw new NotImplementedException();
+        Debug.Log("pew");
+        _poolCon.SpawnProjectile(_weaponType, _muzzle);
     }
 
     public override void Deactivate()

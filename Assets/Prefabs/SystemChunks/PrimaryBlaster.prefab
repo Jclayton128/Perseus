@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: BlasterSystem
+      value: PrimaryBlaster
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_FlipY
@@ -70,6 +70,10 @@ PrefabInstance:
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: SystemType
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: CanBeActivated
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: LocalPosition.y

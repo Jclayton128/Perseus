@@ -7,6 +7,7 @@ public class PlayerHandler : MonoBehaviour
 {
     InputController _inputCon;
     Rigidbody2D _rb;
+    PlayerSystemHandler _playerSystemHandler;
 
     //settings
     float _turningForce = 300f;
@@ -21,6 +22,7 @@ public class PlayerHandler : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerSystemHandler = GetComponent<PlayerSystemHandler>();
 
         _inputCon = FindObjectOfType<InputController>();
         _inputCon.OnAccelBegin += HandleBeginAccelerating;
@@ -38,7 +40,9 @@ public class PlayerHandler : MonoBehaviour
     {
         UpdateAccelDecel();
         UpdateMouseTurning();
-    }   
+        UpdateWeaponSelecting();
+    }
+
 
     private void UpdateAccelDecel()
     {
@@ -64,6 +68,20 @@ public class PlayerHandler : MonoBehaviour
         }
 
         //transform.rotation = Quaternion.LookRotation()
+    }
+
+    private void UpdateWeaponSelecting()
+    {
+        if (Input.mouseScrollDelta.y > 0.02f)
+        {
+            _playerSystemHandler.ToggleActiveSystemUp();
+            return;
+        }
+        if (Input.mouseScrollDelta.y < -0.02f)
+        {
+            _playerSystemHandler.ToggleActiveSystemDown();
+            return;
+        }
     }
 
     #endregion
