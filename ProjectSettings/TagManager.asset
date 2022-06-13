@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - SystemCrate
+  - PlayerShip
+  - PlayerWeapon
+  - EnemyShip
+  - EnemyWeapon
   - 
   - 
   - 

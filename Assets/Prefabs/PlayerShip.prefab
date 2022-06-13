@@ -7,9 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2167021266327147065, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+      propertyPath: Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167021266327147065, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+      propertyPath: Thrust
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
       propertyPath: m_Name
-      value: PlayerArcher
+      value: PlayerShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4974917334998511879, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
       propertyPath: m_RootOrder
@@ -72,5 +84,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0563b9d91986c88449d835b0328d5c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6896044386114938150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2482856763183021888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff723ddbe5d4da40a1c1ff7981d55a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
