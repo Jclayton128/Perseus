@@ -6,19 +6,11 @@ using TMPro;
 
 public class SystemIconDriver : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _levelTMP = null;
-    [SerializeField] Image _systemIcon;
-    [SerializeField] Image _hintIcon;
+    [SerializeField] protected TextMeshProUGUI _levelTMP = null;
+    [SerializeField] protected Image _systemIcon;
 
-    Sprite _primarySprite;
-    Sprite _secondarySprite;
-
-    public void Initialize(Sprite primary, Sprite secondary)
+    public virtual void Initialize()
     {
-        _primarySprite = primary;
-        _secondarySprite = secondary;
-        DehighlightAsActiveSecondaryIfNotPrimary();
-        DehighlightAsActivePrimary();
         _systemIcon.sprite = null;
         _levelTMP.text = "";
     }
@@ -29,33 +21,4 @@ public class SystemIconDriver : MonoBehaviour
         _levelTMP.text = level.ToString();
     }
 
-    public void HighlightAsActivePrimary()
-    {
-        _hintIcon.enabled = true;
-        _hintIcon.sprite = _primarySprite;
-    }
-
-    public void DehighlightAsActivePrimary()
-    {
-        _hintIcon.enabled = false;
-        _hintIcon.sprite = null;
-    }
-    public void HighlightAsActiveSecondaryIfNotPrimary()
-    {
-        if (_hintIcon.sprite != _primarySprite)
-        {
-            _hintIcon.enabled = true;
-            _hintIcon.sprite = _secondarySprite;
-        }
-
-    }
-
-    public void DehighlightAsActiveSecondaryIfNotPrimary()
-    {
-        if (_hintIcon.sprite != _primarySprite)
-        {
-            _hintIcon.enabled = false;
-            _hintIcon.sprite = null;
-        }
-    }
 }

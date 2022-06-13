@@ -36,11 +36,16 @@ public class PlayerHandler : MonoBehaviour
     }
 
     #region Flow
+    private void Update()
+    {
+        UpdateWeaponSelecting();
+    }
+
     private void FixedUpdate()
     {
         UpdateAccelDecel();
         UpdateMouseTurning();
-        UpdateWeaponSelecting();
+
     }
 
 
@@ -72,14 +77,14 @@ public class PlayerHandler : MonoBehaviour
 
     private void UpdateWeaponSelecting()
     {
-        if (Input.mouseScrollDelta.y > 0.02f)
+        if (Input.mouseScrollDelta.y > 0.00f)
         {
-            _playerSystemHandler.ToggleActiveSystemUp();
+            _playerSystemHandler.ToggleActiveWeaponUp();
             return;
         }
-        if (Input.mouseScrollDelta.y < -0.02f)
+        if (Input.mouseScrollDelta.y < -0.00f)
         {
-            _playerSystemHandler.ToggleActiveSystemDown();
+            _playerSystemHandler.ToggleActiveWeaponDown();
             return;
         }
     }

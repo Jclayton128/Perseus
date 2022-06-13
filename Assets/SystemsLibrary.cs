@@ -5,15 +5,19 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields, 
-        PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
-        ArcherTurret, MarkerTurret}
+    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields}
+
+    public enum WeaponType {PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
+        ArcherTurret, MarkerTurret
+    }
     [SerializeField] SystemHandler[] _allSystems = null;
+    [SerializeField] WeaponHandler[] _allWeapons = null;
     [SerializeField] GameObject _cratePrefab = null;
     GameController _gameCon;
 
     //state
     Dictionary<SystemType, SystemHandler> _systems = new Dictionary<SystemType, SystemHandler>();
+    Dictionary<WeaponType, WeaponHandler> _weapons = new Dictionary<WeaponType, WeaponHandler>();
 
     private void Awake()
     {
@@ -21,6 +25,10 @@ public class SystemsLibrary : MonoBehaviour
         foreach (var system in _allSystems)
         {
             _systems.Add(system.SystemType, system);
+        }
+        foreach (var weapon in _allWeapons)
+        {
+            _weapons.Add(weapon.WeaponType, weapon);
         }
     }
 
@@ -33,6 +41,19 @@ public class SystemsLibrary : MonoBehaviour
         else
         {
             Debug.Log($"No system on file for type {systype}");
+            return null;
+        }
+    }
+
+    public GameObject GetWeapon(WeaponType weaptype)
+    {
+        if (_weapons.ContainsKey(weaptype))
+        {
+            return _weapons[weaptype].gameObject;
+        }
+        else
+        {
+            Debug.Log($"No weapon on file for type {weaptype}");
             return null;
         }
     }

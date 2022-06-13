@@ -11,8 +11,7 @@ public class SystemHandler : MonoBehaviour
     public float ThrustToAdd;
     public float TurnRateToAdd;
 
-    public bool CanBeActivated = false;
-    public bool IsSecondary = false;
+
 
     private void Awake()
     {
