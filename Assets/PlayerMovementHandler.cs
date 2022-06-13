@@ -30,6 +30,10 @@ public class PlayerMovementHandler : MonoBehaviour
         HandleUpdatedSpecs();
 
         _rb = GetComponent<Rigidbody2D>();
+
+        _inputCon.GetComponent<GameController>().RegisterPlayer(this.gameObject);
+
+        
     }
 
     #region Flow
@@ -43,12 +47,14 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         if (_isAccelerating)
         {
-            _rb.AddForce(transform.up * (_currentSpecs.Thrust / _currentSpecs.Mass));
+            _rb.AddForce(transform.up * (_currentSpecs.Thrust / _currentSpecs.Mass) * Time.fixedDeltaTime);
         }
     }
+
     private void UpdateMouseTurning()
     {
-        float angleToTarget = Vector3.SignedAngle(_inputCon.MousePos, transform.up, transform.forward);
+        Vector2 mouseDir = _inputCon.MousePos - transform.position;
+        float angleToTarget = Vector3.SignedAngle(mouseDir, transform.up, transform.forward);
         float angleWithTurnDamper = Mathf.Clamp(angleToTarget, -10, 10);
         float currentTurnRate = Mathf.Clamp(-_currentSpecs.TurnRate * angleWithTurnDamper / 10, -_currentSpecs.TurnRate, _currentSpecs.TurnRate);
         if (angleToTarget > 0.02)
@@ -59,6 +65,8 @@ public class PlayerMovementHandler : MonoBehaviour
         {
             _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, currentTurnRate, _turningForce * Time.deltaTime);
         }
+
+        //transform.rotation = Quaternion.LookRotation()
     }
 
     #endregion
@@ -80,11 +88,14 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         _isDecelerating = true;
         _isAccelerating = false;
+
+        _rb.drag = _currentSpecs.Thrust/_currentSpecs.Mass/50f;
     }
 
     private void HandleStopDecelerating()
     {
         _isDecelerating = false;
+        _rb.drag = 0;
     }
 
 

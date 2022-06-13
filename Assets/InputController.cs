@@ -10,8 +10,16 @@ public class InputController : MonoBehaviour
     public Action OnDecelBegin;
     public Action OnDecelEnd;
     public Action OnMousePositionMove;
+    Ray ray;
+    float distance;
+    Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 0));
 
-    public Vector2 MousePos { get; private set; }
+    //settings
+
+
+    //state
+    public Vector3 MousePos { get; private set; }
+
 
     private void Update()
     {
@@ -41,8 +49,11 @@ public class InputController : MonoBehaviour
 
     private void UpdateMouseInput()
     {
-        MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        xy.Raycast(ray, out distance);
+        MousePos = ray.GetPoint(distance);
 
     }
+
 
 }

@@ -23,6 +23,24 @@ public class PhysicsHandler : MonoBehaviour
         return specs;
     }
 
+    public void ModifyThrust(float amountToAdd)
+    {
+        Thrust += amountToAdd;
+        OnSpecsUpdate?.Invoke();
+    }
+
+    public void ModifyMass(float amountToAdd)
+    {
+        Mass += amountToAdd;
+        OnSpecsUpdate?.Invoke();
+    }
+
+    public void ModifyTurnRate(float amountToAdd)
+    {
+        TurnRate += amountToAdd;
+        OnSpecsUpdate?.Invoke();
+    }
+
 }
 
 public struct SpecsPack
