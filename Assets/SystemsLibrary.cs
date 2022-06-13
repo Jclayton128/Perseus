@@ -5,7 +5,8 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields}
+    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields, 
+        PrimaryBlaster, SecondaryBlaster, TertiaryBlaster}
     [SerializeField] SystemHandler[] _allSystems = null;
     [SerializeField] GameObject _cratePrefab = null;
     GameController _gameCon;
