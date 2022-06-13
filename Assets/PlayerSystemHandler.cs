@@ -7,7 +7,7 @@ public class PlayerSystemHandler : MonoBehaviour
 {
     SystemsLibrary _syslib;
     [SerializeField] SystemsLibrary.SystemType[] _startingSystems = null;
-    PlayerHandler _movementHandler;
+    PlayerHandler _playerHandler;
     UI_Controller _UICon;
 
     //state
@@ -19,7 +19,12 @@ public class PlayerSystemHandler : MonoBehaviour
         _syslib = FindObjectOfType<SystemsLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
         _maxSystems = _UICon.GetMaxSystems();
-        _movementHandler = GetComponent<PlayerHandler>();
+        _playerHandler = GetComponent<PlayerHandler>();
+
+    }
+
+    private void Start()
+    {
         LoadStartingSystems();
     }
 
@@ -51,14 +56,24 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
-        sh.IntegrateSystem(_movementHandler);
+        //sh.GetComponent<BaseSystem>().Initialize(_playerHandler);
+        sh.IntegrateSystem(_playerHandler);
         _systemsOnBoard.Add(sh);
         _UICon.IntegrateNewSystem(_systemsOnBoard.Count - 1, sh.GetIcon(), 1);
         go.transform.localPosition = sh.LocalPosition;
 
-        if (!_activeSecondarySystem)
+        if (sh.IsSecondary)
         {
-            _activeSecondarySystem = sh;
+
+            if (!_activeSecondarySystem)
+            {
+                _activeSecondarySystem = sh;
+            }
         }
+    }
+
+    public List<SystemHandler> GetSystemsOnBoard()
+    {
+        return _systemsOnBoard;
     }
 }

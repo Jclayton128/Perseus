@@ -11,6 +11,14 @@ public class SystemHandler : MonoBehaviour
     public float ThrustToAdd;
     public float TurnRateToAdd;
 
+    public bool CanBeActivated = false;
+    public bool IsSecondary = false;
+
+    private void Awake()
+    {
+
+    }
+
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -25,6 +33,8 @@ public class SystemHandler : MonoBehaviour
         ph.ModifyMass(MassToAdd);
         ph.ModifyThrust(ThrustToAdd);
         ph.ModifyTurnRate(TurnRateToAdd);
+
+        GetComponent<BaseSystem>()?.Initialize();
 
     }
 }

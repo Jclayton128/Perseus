@@ -6479,6 +6479,8 @@ MonoBehaviour:
   - {fileID: 5101282958865086666, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
   - {fileID: 131665632764898145, guid: 4be3ee01b1f162f42acc4f0b7ea85066, type: 3}
   - {fileID: 131665632764898145, guid: 89be5e12118d8c44d87ab968562a49bb, type: 3}
+  - {fileID: 3155093058175072793, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+  - {fileID: 3155093058175072793, guid: fbf47c910971103418acae4f8a5be61c, type: 3}
   _cratePrefab: {fileID: 3229868845704914807, guid: 4e3eee03aad482746bf8600923e3a3df, type: 3}
 --- !u!4 &973215305
 Transform:
@@ -7137,15 +7139,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.data[1]
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.data[2]
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080017518621438453, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_Mass
@@ -8053,6 +8055,7 @@ GameObject:
   - component: {fileID: 2102641475}
   - component: {fileID: 2102641477}
   - component: {fileID: 2102641478}
+  - component: {fileID: 2102641479}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -8146,6 +8149,18 @@ MonoBehaviour:
   - {fileID: 1548843414}
   _primaryFireHintSprite: {fileID: 21300000, guid: 8013a4b22fcbef54ea6f6d288bf7ebf3, type: 3}
   _secondaryFireHintSprite: {fileID: 21300000, guid: d3e68f556897a06499d261b7e0fcd07f, type: 3}
+--- !u!114 &2102641479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102641472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e5801e109c6a74b993a765692cb181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2107131018
 GameObject:
   m_ObjectHideFlags: 0

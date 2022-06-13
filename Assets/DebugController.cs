@@ -7,10 +7,12 @@ public class DebugController : MonoBehaviour
     PlayerHandler _playerPH;
     GameController _gameController;
     SystemsLibrary _systemsLibrary;
+    PlayerSystemHandler _playerSystemsHandler;
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
         _systemsLibrary = FindObjectOfType<SystemsLibrary>();
+        _playerSystemsHandler = _gameController.GetPlayerGO().GetComponent<PlayerSystemHandler>();  
     }
 
 
@@ -62,6 +64,6 @@ public class DebugController : MonoBehaviour
 
     public void HandleSpawnRandomSystem()
     {
-        _systemsLibrary.SpawnRandomSystemCrate();
+        _systemsLibrary.SpawnUniqueRandomSystemCrate(_playerSystemsHandler.GetSystemsOnBoard());
     }
 }

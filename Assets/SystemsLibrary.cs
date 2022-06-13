@@ -6,7 +6,8 @@ using System;
 public class SystemsLibrary : MonoBehaviour
 {
     public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields, 
-        PrimaryBlaster, SecondaryBlaster, TertiaryBlaster}
+        PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
+        ArcherTurret, MarkerTurret}
     [SerializeField] SystemHandler[] _allSystems = null;
     [SerializeField] GameObject _cratePrefab = null;
     GameController _gameCon;
@@ -36,12 +37,20 @@ public class SystemsLibrary : MonoBehaviour
         }
     }
 
-    public void SpawnRandomSystemCrate()
+    public void SpawnUniqueRandomSystemCrate(List<SystemHandler> systemsOnBoard)
     {
-        int rand = UnityEngine.Random.Range(0, _allSystems.Length);
+        List<SystemHandler> possibleSystems = new List<SystemHandler>();
+        foreach (var system in _allSystems)
+        {
+            if (!systemsOnBoard.Contains(system))
+            {
+                possibleSystems.Add(system);
+            }
+        }
+        int rand = UnityEngine.Random.Range(0, possibleSystems.Count);
 
         GameObject go = Instantiate(_cratePrefab);
-        go.GetComponent<SystemCrateHandler>().SystemChunk = _allSystems[rand].gameObject;
+        go.GetComponent<SystemCrateHandler>().SystemChunk = possibleSystems[rand].gameObject;
         go.GetComponent<SystemCrateHandler>().Initialize();
 
         Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
