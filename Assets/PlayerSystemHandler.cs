@@ -7,11 +7,12 @@ public class PlayerSystemHandler : MonoBehaviour
 {
     SystemsLibrary _syslib;
     [SerializeField] SystemsLibrary.SystemType[] _startingSystems = null;
-
+    PlayerMovementHandler _movementHandler;
 
     private void Awake()
     {
         _syslib = FindObjectOfType<SystemsLibrary>();
+        _movementHandler = GetComponent<PlayerMovementHandler>();
         LoadStartingSystems();
     }
 
@@ -37,7 +38,8 @@ public class PlayerSystemHandler : MonoBehaviour
     private void GainSystem(GameObject newSystem)
     {
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
-        go.transform.localPosition =
-            newSystem.GetComponent<SystemHandler>().LocalPosition;
+        SystemHandler sh = newSystem.GetComponent<SystemHandler>();
+        sh.IntegrateSystem(_movementHandler);
+        go.transform.localPosition = sh.LocalPosition;
     }
 }

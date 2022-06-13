@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: EngineSystem 1
+      value: HeavyArmor
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -54,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: MassToAdd
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: SystemType

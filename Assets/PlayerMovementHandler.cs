@@ -6,30 +6,27 @@ using UnityEngine;
 public class PlayerMovementHandler : MonoBehaviour
 {
     InputController _inputCon;
-    PhysicsHandler _physicsHandler;
     Rigidbody2D _rb;
 
     //settings
     float _turningForce = 300f;
 
     //state
-    SpecsPack _currentSpecs;
     bool _isAccelerating;
     bool _isDecelerating;
+    [SerializeField] float _thrust = 10f;
+    [SerializeField] float _mass = 2f;
+    [SerializeField] float _turnRate = 50f;
 
     private void Awake()
     {
+        _rb = GetComponent<Rigidbody2D>();
+
         _inputCon = FindObjectOfType<InputController>();
         _inputCon.OnAccelBegin += HandleBeginAccelerating;
         _inputCon.OnAccelEnd += HandleStopAccelerating;
         _inputCon.OnDecelBegin += HandleBeginDecelerating;
         _inputCon.OnDecelEnd += HandleStopDecelerating;
-
-        _physicsHandler = GetComponent<PhysicsHandler>();
-        _physicsHandler.OnSpecsUpdate += HandleUpdatedSpecs;
-        HandleUpdatedSpecs();
-
-        _rb = GetComponent<Rigidbody2D>();
 
         _inputCon.GetComponent<GameController>().RegisterPlayer(this.gameObject);
 
@@ -47,7 +44,7 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         if (_isAccelerating)
         {
-            _rb.AddForce(transform.up * (_currentSpecs.Thrust / _currentSpecs.Mass) * Time.fixedDeltaTime);
+            _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
         }
     }
 
@@ -56,7 +53,7 @@ public class PlayerMovementHandler : MonoBehaviour
         Vector2 mouseDir = _inputCon.MousePos - transform.position;
         float angleToTarget = Vector3.SignedAngle(mouseDir, transform.up, transform.forward);
         float angleWithTurnDamper = Mathf.Clamp(angleToTarget, -10, 10);
-        float currentTurnRate = Mathf.Clamp(-_currentSpecs.TurnRate * angleWithTurnDamper / 10, -_currentSpecs.TurnRate, _currentSpecs.TurnRate);
+        float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / 10, -_turnRate, _turnRate);
         if (angleToTarget > 0.02)
         {
             _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, currentTurnRate, _turningForce * Time.deltaTime);
@@ -89,7 +86,7 @@ public class PlayerMovementHandler : MonoBehaviour
         _isDecelerating = true;
         _isAccelerating = false;
 
-        _rb.drag = _currentSpecs.Thrust/_currentSpecs.Mass/50f;
+        _rb.drag = _thrust/_mass/50f;
     }
 
     private void HandleStopDecelerating()
@@ -98,10 +95,22 @@ public class PlayerMovementHandler : MonoBehaviour
         _rb.drag = 0;
     }
 
+    #endregion
 
-    private void HandleUpdatedSpecs()
+    #region Modify Specs
+    public void ModifyThrust(float amountToAdd)
     {
-        _currentSpecs = _physicsHandler.GetUpdatedSpecsPack();
+        _thrust += amountToAdd;
+    }
+
+    public void ModifyMass(float amountToAdd)
+    {
+        _mass += amountToAdd;
+    }
+
+    public void ModifyTurnRate(float amountToAdd)
+    {
+        _turnRate += amountToAdd;
     }
 
     #endregion
