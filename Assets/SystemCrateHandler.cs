@@ -5,7 +5,7 @@ using UnityEngine;
 public class SystemCrateHandler : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _iconSprite = null;
-    public GameObject SystemChunk;
+    public GameObject SystemOrWeaponChunk;
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class SystemCrateHandler : MonoBehaviour
 
     public void Initialize()
     {
-        _iconSprite.sprite = SystemChunk.GetComponent<SystemHandler>().GetIcon();
+        _iconSprite.sprite = SystemOrWeaponChunk.GetComponent<SystemHandler>().GetIcon();
     }
 
 }

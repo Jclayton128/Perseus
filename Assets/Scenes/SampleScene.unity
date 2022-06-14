@@ -1402,7 +1402,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 4000
+        scalar: 2000
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -7779,11 +7779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8957654523758894297, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _thrust
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8957654523758894297, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _turnRate
-      value: 180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2482856763183021888, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_Name
@@ -7839,7 +7839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingWeapons.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingSystems.Array.data[0]
@@ -7855,11 +7855,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingWeapons.Array.data[1]
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6896044386114938150, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: _startingWeapons.Array.data[2]
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080017518621438453, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_Mass
@@ -8943,10 +8943,10 @@ ParticleSystem:
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
-    donutRadius: 3.65
+    donutRadius: 7.12
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 15}
+    m_Scale: {x: 1, y: 1, z: 2}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -9254,7 +9254,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 500
+        scalar: 200
         minScalar: 30
         maxCurve:
           serializedVersion: 2

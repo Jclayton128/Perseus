@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BaseSystem : MonoBehaviour
 {
     protected PlayerHandler _ph;
-    public InputController _inputCon;
+    protected InputController _inputCon;
     protected PoolController _poolCon;
     protected SystemHandler _systemHandler;
 
@@ -14,16 +14,14 @@ public abstract class BaseSystem : MonoBehaviour
     [SerializeField] protected float _sustainCostRate = 0;
     [SerializeField] protected Transform _muzzle;
 
-    protected bool _isInstalled;
+    public bool _isInstalled;
 
 
-    public virtual void Initialize()
+    public void Initialize()
     {
-        //Debug.Log("initializing");
         _isInstalled = true;
         _inputCon = FindObjectOfType<InputController>();
         _poolCon = _inputCon.GetComponent<PoolController>();
-
         _systemHandler = GetComponent<SystemHandler>();
         
     }

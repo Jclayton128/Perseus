@@ -23,7 +23,12 @@ public class TurretWeaponSystem : BaseSystem
     private void Update()
     {
         if (!_inputCon) Initialize();
-        if (_isInstalled) return;
+        if (!_isInstalled)
+        {
+            Debug.Log("not installed");
+            return;
+        }
+
         UpdateTurretFacingToMousePos();
     }
 

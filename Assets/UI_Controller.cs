@@ -38,6 +38,11 @@ public class UI_Controller : MonoBehaviour
         _weaponIcons[index].HighlightAsActiveSecondaryIfNotPrimary();
     }
 
+    public void DepictAsPrimary(int index)
+    {
+        _weaponIcons[index].HighlightAsActivePrimary();
+    }
+
     public void IntegrateNewSystem(int index, Sprite sprite, int level)
     {
         if (index < 0 || index >= _systemIcons.Length)
@@ -60,6 +65,11 @@ public class UI_Controller : MonoBehaviour
     }
 
     public int GetMaxSystems()
+    {
+        return _systemIcons.Length;
+    }
+
+    public int GetMaxWeapons()
     {
         return _weaponIcons.Length;
     }

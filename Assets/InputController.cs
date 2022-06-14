@@ -10,6 +10,9 @@ public class InputController : MonoBehaviour
     public Action OnDecelBegin;
     public Action OnDecelEnd;
     public Action OnMousePositionMove;
+    public Action<int> OnScroll;
+    public Action<int> OnMouseDown;
+    public Action<int> OnMouseUp;
     Ray ray;
     float distance;
     Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 0));
@@ -25,6 +28,42 @@ public class InputController : MonoBehaviour
     {
         UpdateKeyboardInput();
         UpdateMouseInput();
+        UpdateMouseScrollInput();
+        UpdateMouseFiringInput();
+    }
+
+    private void UpdateMouseFiringInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            OnMouseDown?.Invoke(0);
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            OnMouseUp?.Invoke(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            OnMouseDown?.Invoke(1);
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            OnMouseUp?.Invoke(1);
+        }
+    }
+
+    private void UpdateMouseScrollInput()
+    {
+        if (Input.mouseScrollDelta.y > 0.00f)
+        {
+            OnScroll?.Invoke(1);
+            return;
+        }
+        if (Input.mouseScrollDelta.y < -0.00f)
+        {
+            OnScroll?.Invoke(-1);
+            return;
+        }
     }
 
     private void UpdateKeyboardInput()

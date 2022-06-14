@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerSystemHandler : MonoBehaviour
 {
     SystemsLibrary _syslib;
+    InputController _inputCon;
     [SerializeField] SystemsLibrary.SystemType[] _startingSystems = null;
     [SerializeField] SystemsLibrary.WeaponType[] _startingWeapons = null;
     PlayerHandler _playerHandler;
@@ -15,13 +16,21 @@ public class PlayerSystemHandler : MonoBehaviour
    public  int _activeWeaponIndex;
     public WeaponHandler ActiveWeapon { get; protected set; }
     int _maxSystems;
+    int _maxWeapons;
     List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
-    List<WeaponHandler> _weaponsOnBoard = new List<WeaponHandler>();
+    public List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
+    List<WeaponHandler> _allWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
     {
         _syslib = FindObjectOfType<SystemsLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
+        _inputCon = _UICon.GetComponent<InputController>();
+        _inputCon.OnScroll += ScrollThroughActiveWeapons;
+        _inputCon.OnMouseDown += ActivateWeapons;
+        _inputCon.OnMouseUp += DeactivateWeapons;
+
         _maxSystems = _UICon.GetMaxSystems();
+        _maxWeapons = _UICon.GetMaxWeapons();
         _playerHandler = GetComponent<PlayerHandler>();
 
     }
@@ -59,7 +68,16 @@ public class PlayerSystemHandler : MonoBehaviour
                 Debug.Log("unable to hold any more systems");
                 return;
             }
-            GainSystem(sch.SystemChunk);
+
+            if (sch.GetComponent<SystemHandler>())
+            {
+                GainSystem(sch.SystemOrWeaponChunk);
+            }
+            if (sch.GetComponent<WeaponHandler>())
+            {
+                GainWeapon(sch.SystemOrWeaponChunk);
+            }
+
             Destroy(collision.gameObject);
         }
 
@@ -69,18 +87,24 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
         WeaponHandler wh = newWeapon.GetComponent<WeaponHandler>();
-        wh.IntegrateSystem();
-        _weaponsOnBoard.Add(wh);
+        wh.Initialize();
+        _allWeaponsOnBoard.Add(wh);
         if (wh.IsSecondary)
         {
             if (!ActiveWeapon)
             {
                 ActiveWeapon = wh;
-                _activeWeaponIndex = _weaponsOnBoard.IndexOf(wh);
+                _activeWeaponIndex = _allWeaponsOnBoard.IndexOf(wh);
                 _UICon.HighlightNewSecondary(_activeWeaponIndex);
             }
         }
-        _UICon.IntegrateNewWeapon(_weaponsOnBoard.Count - 1, wh.GetIcon(), 2);
+        else
+        {
+            _primaryWeaponsOnBoard.Add(wh);
+            _UICon.DepictAsPrimary(_allWeaponsOnBoard.IndexOf(wh));
+
+        }
+        _UICon.IntegrateNewWeapon(_allWeaponsOnBoard.Count - 1, wh.GetIcon(), 2);
         go.transform.localPosition = wh.LocalPosition;
     }
     private void GainSystem(GameObject newSystem)
@@ -98,22 +122,42 @@ public class PlayerSystemHandler : MonoBehaviour
         return _systemsOnBoard;
     }
 
-    public void ToggleActiveWeaponUp()
+    private void ScrollThroughActiveWeapons(int direction)
     {
-        _activeWeaponIndex++;
-        _activeWeaponIndex = 
-            Mathf.Clamp(_activeWeaponIndex ,1, _weaponsOnBoard.Count - 1);
-        ActiveWeapon = _weaponsOnBoard[_activeWeaponIndex];
-        _UICon.HighlightNewSecondary(_weaponsOnBoard.IndexOf(ActiveWeapon));
+        _activeWeaponIndex += direction;
+        _activeWeaponIndex = Mathf.Clamp(_activeWeaponIndex, 1, _allWeaponsOnBoard.Count - 1);
+        ActiveWeapon = _allWeaponsOnBoard[_activeWeaponIndex];
+        _UICon.HighlightNewSecondary(_allWeaponsOnBoard.IndexOf(ActiveWeapon));
     }
 
-    public void ToggleActiveWeaponDown()
+    private void ActivateWeapons(int priOrSec)
     {
-        _activeWeaponIndex--;
-        _activeWeaponIndex =
-            Mathf.Clamp(_activeWeaponIndex, 1, _weaponsOnBoard.Count - 1);
-        ActiveWeapon = _weaponsOnBoard[_activeWeaponIndex];
-        _UICon.HighlightNewSecondary(_weaponsOnBoard.IndexOf(ActiveWeapon));
+        if (priOrSec == 0)  // Primary Weapons
+        {
+            foreach (var priweap in _primaryWeaponsOnBoard)
+            {
+                priweap.BaseSystem.Activate();
+            }
+        }
+        if (priOrSec == 1) // Active Secondary Weapon
+        {
+            ActiveWeapon.BaseSystem.Activate();
+        }
+    }
+
+    private void DeactivateWeapons(int priOrSec)
+    {
+        if (priOrSec == 0)  // Primary Weapons
+        {
+            foreach (var priweap in _primaryWeaponsOnBoard)
+            {
+                priweap.BaseSystem.Deactivate();
+            }
+        }
+        if (priOrSec == 1) // Active Secondary Weapon
+        {
+            ActiveWeapon.BaseSystem.Deactivate();
+        }
     }
 
 }

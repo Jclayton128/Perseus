@@ -11,8 +11,6 @@ public class SystemHandler : MonoBehaviour
     public float ThrustToAdd;
     public float TurnRateToAdd;
 
-
-
     private void Awake()
     {
 
@@ -32,8 +30,6 @@ public class SystemHandler : MonoBehaviour
         ph.ModifyMass(MassToAdd);
         ph.ModifyThrust(ThrustToAdd);
         ph.ModifyTurnRate(TurnRateToAdd);
-
-        GetComponent<BaseSystem>()?.Initialize();
 
     }
 }

@@ -11,6 +11,13 @@ public class WeaponHandler : MonoBehaviour
 
     public bool IsSecondary = false;
 
+    public BaseSystem BaseSystem;
+
+    public void Initialize()
+    {
+        BaseSystem = GetComponent<BaseSystem>();
+    }
+
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -20,8 +27,4 @@ public class WeaponHandler : MonoBehaviour
         return _icon;
     }
 
-    internal void IntegrateSystem()
-    {
-        
-    }
 }

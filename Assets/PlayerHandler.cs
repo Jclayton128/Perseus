@@ -36,10 +36,6 @@ public class PlayerHandler : MonoBehaviour
     }
 
     #region Flow
-    private void Update()
-    {
-        UpdateWeaponSelecting();
-    }
 
     private void FixedUpdate()
     {
@@ -47,7 +43,6 @@ public class PlayerHandler : MonoBehaviour
         UpdateMouseTurning();
 
     }
-
 
     private void UpdateAccelDecel()
     {
@@ -75,19 +70,6 @@ public class PlayerHandler : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation()
     }
 
-    private void UpdateWeaponSelecting()
-    {
-        if (Input.mouseScrollDelta.y > 0.00f)
-        {
-            _playerSystemHandler.ToggleActiveWeaponUp();
-            return;
-        }
-        if (Input.mouseScrollDelta.y < -0.00f)
-        {
-            _playerSystemHandler.ToggleActiveWeaponDown();
-            return;
-        }
-    }
 
     #endregion
 
@@ -129,6 +111,7 @@ public class PlayerHandler : MonoBehaviour
     public void ModifyMass(float amountToAdd)
     {
         _mass += amountToAdd;
+        _rb.mass = _mass;
     }
 
     public void ModifyTurnRate(float amountToAdd)

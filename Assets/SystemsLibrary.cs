@@ -71,7 +71,7 @@ public class SystemsLibrary : MonoBehaviour
         int rand = UnityEngine.Random.Range(0, possibleSystems.Count);
 
         GameObject go = Instantiate(_cratePrefab);
-        go.GetComponent<SystemCrateHandler>().SystemChunk = possibleSystems[rand].gameObject;
+        go.GetComponent<SystemCrateHandler>().SystemOrWeaponChunk = possibleSystems[rand].gameObject;
         go.GetComponent<SystemCrateHandler>().Initialize();
 
         Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
