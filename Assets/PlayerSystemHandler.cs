@@ -12,7 +12,7 @@ public class PlayerSystemHandler : MonoBehaviour
     PlayerHandler _playerHandler;
     UI_Controller _UICon;
 
-    //positive int is for weapons, negative for systems
+    //weapons start at 0+index, start at systems 100+index
     Dictionary<int, GameObject> _gadgetsOnBoard_Debug = new Dictionary<int, GameObject>();
 
     //state
@@ -177,7 +177,7 @@ public class PlayerSystemHandler : MonoBehaviour
         GameObject go = Instantiate<GameObject>(_syslib.GetSystem(index), transform);
         SystemHandler sh = go.GetComponent<SystemHandler>();
         go.transform.localPosition = sh.LocalPosition;
-        _gadgetsOnBoard_Debug.Add(-1 * index, go);
+        _gadgetsOnBoard_Debug.Add(100 + index, go);
     }
 
     public void Debug_RemoveWeapon(int index)
@@ -188,8 +188,8 @@ public class PlayerSystemHandler : MonoBehaviour
 
     public void Debug_RemoveSystem(int index)
     {
-        Destroy(_gadgetsOnBoard_Debug[-1 * index]);
-        _gadgetsOnBoard_Debug.Remove(-1 * index);
+        Destroy(_gadgetsOnBoard_Debug[100 + index]);
+        _gadgetsOnBoard_Debug.Remove(100 + index);
     }
 
     #endregion

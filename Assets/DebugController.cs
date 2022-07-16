@@ -29,6 +29,7 @@ public class DebugController : MonoBehaviour
         foreach (var toggle in _systemToggles)
         {
             int index = Array.IndexOf(_systemToggles, toggle);
+            if (_systemsLibrary.GetSystem(index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.GetSystem(index).ToString();
             toggle.isOn = false;
             _systemToggleStatus[index] = false;
@@ -37,6 +38,7 @@ public class DebugController : MonoBehaviour
         foreach (var toggle in _weaponToggles)
         {
             int index = Array.IndexOf(_weaponToggles, toggle);
+            if (_systemsLibrary.GetWeapon(index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.GetWeapon(index).ToString();
             toggle.isOn = false;
 

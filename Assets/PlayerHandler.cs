@@ -15,9 +15,9 @@ public class PlayerHandler : MonoBehaviour
     //state
     bool _isAccelerating;
     bool _isDecelerating;
-    [SerializeField] float _thrust = 10f;
-    [SerializeField] float _mass = 2f;
-    [SerializeField] float _turnRate = 50f;
+    [SerializeField] float _thrust;
+    [SerializeField] float _mass;
+    [SerializeField] float _turnRate;
 
     private void Awake()
     {

@@ -5,7 +5,8 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields}
+    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields, 
+        ThornShield, AuxBatteries, StemSys_2, StemSys_3, StemSys_4, StemSys_5}
 
     public enum WeaponType {PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
         ArcherTurret, MarkerTurret
@@ -47,11 +48,13 @@ public class SystemsLibrary : MonoBehaviour
 
     public GameObject GetSystem(int index)
     {
+        if (index >= _allSystems.Length) return null;
         return _allSystems[index].gameObject;
     }
 
     public GameObject GetWeapon(int index)
     {
+        if(index >= _allWeapons.Length) return null;
         return _allWeapons[index].gameObject;
     }
 
