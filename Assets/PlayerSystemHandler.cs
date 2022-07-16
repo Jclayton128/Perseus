@@ -12,6 +12,9 @@ public class PlayerSystemHandler : MonoBehaviour
     PlayerHandler _playerHandler;
     UI_Controller _UICon;
 
+    //positive int is for weapons, negative for systems
+    Dictionary<int, GameObject> _gadgetsOnBoard_Debug = new Dictionary<int, GameObject>();
+
     //state
    public  int _activeWeaponIndex;
     public WeaponHandler ActiveWeapon { get; protected set; }
@@ -160,4 +163,34 @@ public class PlayerSystemHandler : MonoBehaviour
         }
     }
 
+    #region Debug tools
+    public void Debug_GainWeapon(int index)
+    {
+        GameObject go = Instantiate<GameObject>(_syslib.GetWeapon(index), transform);
+        WeaponHandler wh = go.GetComponent<WeaponHandler>();
+        go.transform.localPosition = wh.LocalPosition;
+        _gadgetsOnBoard_Debug.Add(index, go);
+    }
+
+    public void Debug_GainSystem(int index)
+    {
+        GameObject go = Instantiate<GameObject>(_syslib.GetSystem(index), transform);
+        SystemHandler sh = go.GetComponent<SystemHandler>();
+        go.transform.localPosition = sh.LocalPosition;
+        _gadgetsOnBoard_Debug.Add(-1 * index, go);
+    }
+
+    public void Debug_RemoveWeapon(int index)
+    {
+        Destroy(_gadgetsOnBoard_Debug[index]);
+        _gadgetsOnBoard_Debug.Remove(index);
+    }
+
+    public void Debug_RemoveSystem(int index)
+    {
+        Destroy(_gadgetsOnBoard_Debug[-1 * index]);
+        _gadgetsOnBoard_Debug.Remove(-1 * index);
+    }
+
+    #endregion
 }

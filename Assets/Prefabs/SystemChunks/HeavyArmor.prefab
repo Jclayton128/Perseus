@@ -185,6 +185,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
       value: HeavyArmor
@@ -265,8 +269,7 @@ PrefabInstance:
       propertyPath: LocalPosition.y
       value: -0.195
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
 --- !u!4 &8541397726584079436 stripped
 Transform:

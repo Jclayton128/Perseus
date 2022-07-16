@@ -45,6 +45,16 @@ public class SystemsLibrary : MonoBehaviour
         }
     }
 
+    public GameObject GetSystem(int index)
+    {
+        return _allSystems[index].gameObject;
+    }
+
+    public GameObject GetWeapon(int index)
+    {
+        return _allWeapons[index].gameObject;
+    }
+
     public GameObject GetWeapon(WeaponType weaptype)
     {
         if (_weapons.ContainsKey(weaptype))
