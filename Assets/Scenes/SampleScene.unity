@@ -8277,7 +8277,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 90
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -12172,6 +12172,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: ShapeModule.arc.mode
       value: 0
       objectReference: {fileID: 0}
@@ -12181,7 +12185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: ShapeModule.alignToDirection
@@ -12209,7 +12213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: LifetimeByEmitterSpeedModule.enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: InitialModule.startRotation.minScalar
@@ -13463,7 +13467,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 90
+    FieldOfView: 100
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

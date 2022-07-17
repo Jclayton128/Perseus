@@ -9,12 +9,14 @@ public class SystemIconDriver : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
     public SystemsLibrary.SystemType System { get; private set; }
-    public bool IsOccupied = false;
+    public bool IsOccupied { get; private set; } = false;
 
     public virtual void Initialize()
     {
         _systemIcon.sprite = null;
+        _systemIcon.color = Color.clear;
         _levelTMP.text = "";
+        IsOccupied = false;
     }
 
     public void ModifyDisplayedSystem(Sprite sprite, int level, SystemsLibrary.SystemType system)
