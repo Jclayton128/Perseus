@@ -5,8 +5,8 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, Engines, HeavyArmor, FasterShieldRegen, MoreShields, 
-        ThornShield, AuxBatteries, StemSys_2, StemSys_3, StemSys_4, StemSys_5}
+    public enum SystemType { None, Afterburner, HeavyArmor, ShieldCore, PDTurret, 
+        ThornShield, AuxBatteries, Antennae, BlinkModule, MineDropper, VampireModule}
 
     public enum WeaponType {PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
         ArcherTurret, MarkerTurret

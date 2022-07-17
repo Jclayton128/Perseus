@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: -1587654815
   m_SortingLayer: 2
   m_SortingOrder: 61
-  m_Sprite: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94a6bc48525292d479044ece5659d89f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputCon: {fileID: 0}
   _weaponType: 1
   _activationCost: 0
   _sustainCostRate: 0
   _muzzle: {fileID: 6894287794442961043}
+  _isInstalled: 0
   _turretTurnRate: 50
 --- !u!114 &982522037941904301
 MonoBehaviour:
@@ -149,3 +149,4 @@ MonoBehaviour:
   WeaponType: 0
   LocalPosition: {x: 0, y: 0}
   IsSecondary: 0
+  BaseSystem: {fileID: 0}

@@ -168,7 +168,7 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(_syslib.GetWeapon(index), transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
-        go.transform.localPosition = wh.LocalPosition;
+        //go.transform.localPosition = wh.LocalPosition;  // no longer needed if system chunks' local is 0,0
         _gadgetsOnBoard_Debug.Add(index, go);
     }
 
@@ -176,7 +176,7 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(_syslib.GetSystem(index), transform);
         SystemHandler sh = go.GetComponent<SystemHandler>();
-        go.transform.localPosition = sh.LocalPosition;
+        //go.transform.localPosition = sh.LocalPosition; // no longer needed if system chunks' local is 0,0
         _gadgetsOnBoard_Debug.Add(100 + index, go);
     }
 
