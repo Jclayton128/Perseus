@@ -163,7 +163,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Engine[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Engine, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Engine, index))
+            {
+                _systemToggles_Engine[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -174,7 +178,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Cockpit[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Cockpit, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Cockpit, index))
+            {
+                _systemToggles_Cockpit[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -185,7 +193,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Tail[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Tail, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Tail, index))
+            {
+                _systemToggles_Tail[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -196,7 +208,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Wings[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Wings, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Wings, index))
+            {
+                _systemToggles_Wings[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -207,7 +223,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Hull[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Hull, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.Hull, index))
+            {
+                _systemToggles_Hull[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -218,7 +238,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_LeftInt[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.LeftInt, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.LeftInt, index))
+            {
+                _systemToggles_LeftInt[index].isOn = false;
+                return;
+            }
         }
         else
         {
@@ -229,7 +253,11 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_RightInt[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.RightInt, index);
+            if (!_playerSystemsHandler.Debug_GainSystem(SystemsLibrary.SystemLocation.RightInt, index))
+            {
+                _systemToggles_RightInt[index].isOn = false;
+                return;
+            }
         }
         else
         {

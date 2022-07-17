@@ -69,6 +69,7 @@ public class UI_Controller : MonoBehaviour
 
     public void ClearSystemSlot(SystemsLibrary.SystemType systemToRemove)
     {
+        Debug.Log($"trying to clear {systemToRemove}");
         foreach (var systemIcon in _systemIcons)
         {
             if (systemIcon.System == systemToRemove)
