@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144691668525176193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.19, z: 0}
+  m_LocalPosition: {x: 0, y: -0.103, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_Children: []
   m_Father: {fileID: 5963362692076520517}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4250327895893050193}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.07, y: 0.032, z: 0}
+  m_LocalPosition: {x: -0.07, y: 0.119, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5963362692076520517}
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6112112559310664184}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.07, y: 0.032, z: 0}
+  m_LocalPosition: {x: 0.07, y: 0.119, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5963362692076520517}
@@ -271,7 +271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7852243587059434104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.064, y: -0.184, z: 0}
+  m_LocalPosition: {x: -0.064, y: -0.097, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5963362692076520517}
@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142981615768779663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.064, y: -0.184, z: 0}
+  m_LocalPosition: {x: 0.064, y: -0.097, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5963362692076520517}
@@ -419,7 +419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: AuxBatteries
+      value: StealthPod
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Sprite
@@ -475,7 +475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: SystemType
-      value: 6
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: SystemLocation
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}

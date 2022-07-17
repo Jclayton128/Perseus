@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800395255006767597}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.121, y: -0.265, z: 0}
+  m_LocalPosition: {x: 0.121, y: -0.376, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6337305188752412671}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041976477704940350}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.121, y: -0.265, z: 0}
+  m_LocalPosition: {x: -0.121, y: -0.376, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6337305188752412671}
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8644922908064622598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.486, z: 0}
+  m_LocalPosition: {x: 0, y: -0.597, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6337305188752412671}
@@ -253,6 +253,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.111
+      objectReference: {fileID: 0}
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
       value: PD_Turret
@@ -307,7 +311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: SystemType
-      value: 4
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: SystemLocation
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}

@@ -12,8 +12,9 @@ public class PlayerSystemHandler : MonoBehaviour
     PlayerHandler _playerHandler;
     UI_Controller _UICon;
 
-    //weapons start at 0+index, start at systems 100+index
-    Dictionary<int, GameObject> _gadgetsOnBoard_Debug = new Dictionary<int, GameObject>();
+    //weapons start at 0+index
+    Dictionary<int, GameObject> _weaponsOnBoard_Debug = new Dictionary<int, GameObject>();
+    Dictionary<SystemsLibrary.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<SystemsLibrary.SystemLocation, GameObject>();
 
     //state
    public  int _activeWeaponIndex;
@@ -112,10 +113,19 @@ public class PlayerSystemHandler : MonoBehaviour
     }
     private void GainSystem(GameObject newSystem)
     {
+
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
+        if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
+        {
+            Debug.Log($"Error - ship already contains a system in {sh.SystemLocation}");
+            return;
+        }
+        _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
         sh.IntegrateSystem(_playerHandler);
         _systemsOnBoard.Add(sh);
+        
+        _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
         _UICon.IntegrateNewSystem(_systemsOnBoard.Count - 1, sh.GetIcon(), 1);
         go.transform.localPosition = sh.LocalPosition;        
     }
@@ -169,27 +179,32 @@ public class PlayerSystemHandler : MonoBehaviour
         GameObject go = Instantiate<GameObject>(_syslib.GetWeapon(index), transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
         //go.transform.localPosition = wh.LocalPosition;  // no longer needed if system chunks' local is 0,0
-        _gadgetsOnBoard_Debug.Add(index, go);
+        _weaponsOnBoard_Debug.Add(index, go);
     }
 
-    public void Debug_GainSystem(int index)
+    public void Debug_GainSystem(SystemsLibrary.SystemLocation location, int index)
     {
-        GameObject go = Instantiate<GameObject>(_syslib.GetSystem(index), transform);
+        //Destroy any other system already at this Location
+        if (_systemsOnBoardByLocation.ContainsKey(location))
+        {
+            Debug_RemoveSystem(location, index);
+        }
+
+        GameObject go = Instantiate<GameObject>(_syslib.GetSystem(location, index), transform);
         SystemHandler sh = go.GetComponent<SystemHandler>();
-        //go.transform.localPosition = sh.LocalPosition; // no longer needed if system chunks' local is 0,0
-        _gadgetsOnBoard_Debug.Add(100 + index, go);
+        _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
     }
 
     public void Debug_RemoveWeapon(int index)
     {
-        Destroy(_gadgetsOnBoard_Debug[index]);
-        _gadgetsOnBoard_Debug.Remove(index);
+        Destroy(_weaponsOnBoard_Debug[index]);
+        _weaponsOnBoard_Debug.Remove(index);
     }
 
-    public void Debug_RemoveSystem(int index)
+    public void Debug_RemoveSystem(SystemsLibrary.SystemLocation location, int index)
     {
-        Destroy(_gadgetsOnBoard_Debug[100 + index]);
-        _gadgetsOnBoard_Debug.Remove(100 + index);
+        Destroy(_systemsOnBoardByLocation[location]);
+        _systemsOnBoardByLocation.Remove(location);
     }
 
     #endregion

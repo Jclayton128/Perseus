@@ -5,13 +5,19 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, Afterburner, HeavyArmor, ShieldCore, PDTurret, 
-        ThornShield, AuxBatteries, Antennae, BlinkModule, MineDropper, VampireModule}
+    public enum SystemType { None, AfterburnerEngine, BlinkEngine, IonEngine, AntennaeCP, StealthPodCP, Cockpit2,
+        PDTurretTail, MineDropperTail, ProjectorTail, DroneBayWings, VampireWings, WreckroWings,
+        ThornHull, HeavyArmorHull, PhaseHull, EmergencyCoreLINT, ShieldCoreLINT, EnergyCoreLINT,
+        AuxBattRINT, ShieldBattRINT, EnergBattRINT}
+
+    public enum SystemLocation {Engine, Cockpit, Tail, Wings, Hull, LeftInt, RightInt}
 
     public enum WeaponType {PrimaryBlaster, SecondaryBlaster, TertiaryBlaster,
         ArcherTurret, MarkerTurret
     }
     [SerializeField] SystemHandler[] _allSystems = null;
+    Dictionary<SystemLocation, List<SystemHandler>> _allSystemsByLocation = new Dictionary<SystemLocation, List<SystemHandler>>();
+
     [SerializeField] WeaponHandler[] _allWeapons = null;
     [SerializeField] GameObject _cratePrefab = null;
     GameController _gameCon;
@@ -22,15 +28,38 @@ public class SystemsLibrary : MonoBehaviour
 
     private void Awake()
     {
-        _gameCon = FindObjectOfType<GameController>();  
+        _gameCon = FindObjectOfType<GameController>();
+
+        List<SystemHandler> _engineSystems = new List<SystemHandler>();
+        List<SystemHandler> _cockpitSystems = new List<SystemHandler>();
+        List<SystemHandler> _tailSystems = new List<SystemHandler>();
+        List<SystemHandler> _wingSystems = new List<SystemHandler>();
+        List<SystemHandler> _hullSystems = new List<SystemHandler>();
+        List<SystemHandler> _leftIntSystems = new List<SystemHandler>();
+        List<SystemHandler> _rightIntSystems = new List<SystemHandler>();
+
+        _allSystemsByLocation[SystemLocation.Engine] = _engineSystems;
+        _allSystemsByLocation[SystemLocation.Cockpit] = _cockpitSystems;
+        _allSystemsByLocation[SystemLocation.Tail] = _tailSystems;
+        _allSystemsByLocation[SystemLocation.Wings] = _wingSystems;
+        _allSystemsByLocation[SystemLocation.Hull] = _hullSystems;
+        _allSystemsByLocation[SystemLocation.LeftInt] = _leftIntSystems;
+        _allSystemsByLocation[SystemLocation.RightInt] = _leftIntSystems;
+
+
+
         foreach (var system in _allSystems)
         {
             _systems.Add(system.SystemType, system);
+            _allSystemsByLocation[system.SystemLocation].Add(system);
+
         }
         foreach (var weapon in _allWeapons)
         {
             _weapons.Add(weapon.WeaponType, weapon);
         }
+
+        Debug.Log($"{_allSystemsByLocation[SystemLocation.Hull][1]}");
     }
 
     public GameObject GetSystem(SystemType systype)
@@ -46,10 +75,10 @@ public class SystemsLibrary : MonoBehaviour
         }
     }
 
-    public GameObject GetSystem(int index)
+    public GameObject GetSystem(SystemLocation location, int index)
     {
-        if (index >= _allSystems.Length) return null;
-        return _allSystems[index].gameObject;
+        if (index >= _allSystemsByLocation[location].Count) return null;
+        return _allSystemsByLocation[location][index].gameObject;
     }
 
     public GameObject GetWeapon(int index)
