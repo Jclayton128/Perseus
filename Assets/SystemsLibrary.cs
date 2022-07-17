@@ -5,7 +5,7 @@ using System;
 
 public class SystemsLibrary : MonoBehaviour
 {
-    public enum SystemType { None, AfterburnerEngine, BlinkEngine, IonEngine, AntennaeCP, StealthPodCP, Cockpit2,
+    public enum SystemType { None, AfterburnerEngine, BlinkEngine, IonEngine, AntennaeCP, StealthPodCP, CompositeCP,
         PDTurretTail, MineDropperTail, ProjectorTail, DroneBayWings, VampireWings, WreckroWings,
         ThornHull, HeavyArmorHull, PhaseHull, EmergencyCoreLINT, ShieldCoreLINT, EnergyCoreLINT,
         AuxBattRINT, ShieldBattRINT, EnergBattRINT}
@@ -44,7 +44,7 @@ public class SystemsLibrary : MonoBehaviour
         _allSystemsByLocation[SystemLocation.Wings] = _wingSystems;
         _allSystemsByLocation[SystemLocation.Hull] = _hullSystems;
         _allSystemsByLocation[SystemLocation.LeftInt] = _leftIntSystems;
-        _allSystemsByLocation[SystemLocation.RightInt] = _leftIntSystems;
+        _allSystemsByLocation[SystemLocation.RightInt] = _rightIntSystems;
 
 
 
