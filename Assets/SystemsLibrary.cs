@@ -46,8 +46,6 @@ public class SystemsLibrary : MonoBehaviour
         _allSystemsByLocation[SystemLocation.LeftInt] = _leftIntSystems;
         _allSystemsByLocation[SystemLocation.RightInt] = _rightIntSystems;
 
-
-
         foreach (var system in _allSystems)
         {
             _systems.Add(system.SystemType, system);
@@ -59,7 +57,6 @@ public class SystemsLibrary : MonoBehaviour
             _weapons.Add(weapon.WeaponType, weapon);
         }
 
-        Debug.Log($"{_allSystemsByLocation[SystemLocation.Hull][1]}");
     }
 
     public GameObject GetSystem(SystemType systype)

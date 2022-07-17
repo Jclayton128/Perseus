@@ -32,7 +32,6 @@ public class PlayerSystemHandler : MonoBehaviour
         _inputCon.OnScroll += ScrollThroughActiveWeapons;
         _inputCon.OnMouseDown += ActivateWeapons;
         _inputCon.OnMouseUp += DeactivateWeapons;
-
         _maxSystems = _UICon.GetMaxSystems();
         _maxWeapons = _UICon.GetMaxWeapons();
         _playerHandler = GetComponent<PlayerHandler>();
@@ -109,11 +108,9 @@ public class PlayerSystemHandler : MonoBehaviour
 
         }
         _UICon.IntegrateNewWeapon(_allWeaponsOnBoard.Count - 1, wh.GetIcon(), 2);
-        go.transform.localPosition = wh.LocalPosition;
     }
     private void GainSystem(GameObject newSystem)
     {
-
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
         if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
@@ -125,9 +122,7 @@ public class PlayerSystemHandler : MonoBehaviour
         sh.IntegrateSystem(_playerHandler);
         _systemsOnBoard.Add(sh);
         
-        _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
-        _UICon.IntegrateNewSystem(_systemsOnBoard.Count - 1, sh.GetIcon(), 1);
-        go.transform.localPosition = sh.LocalPosition;        
+        _UICon.AddNewSystem(sh.GetIcon(), 1, sh.SystemType);      
     }
 
     public List<SystemHandler> GetSystemsOnBoard()
@@ -174,25 +169,39 @@ public class PlayerSystemHandler : MonoBehaviour
     }
 
     #region Debug tools
-    public void Debug_GainWeapon(int index)
+    public bool Debug_GainWeapon(int index)
     {
+        if (_weaponsOnBoard_Debug.Count >= _UICon.GetMaxWeapons())
+        {
+            Debug.Log("Can't gain anymore weapons due to UI limits");
+            return false;
+        }
         GameObject go = Instantiate<GameObject>(_syslib.GetWeapon(index), transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
         //go.transform.localPosition = wh.LocalPosition;  // no longer needed if system chunks' local is 0,0
         _weaponsOnBoard_Debug.Add(index, go);
+        return true;
     }
 
-    public void Debug_GainSystem(SystemsLibrary.SystemLocation location, int index)
+    public bool Debug_GainSystem(SystemsLibrary.SystemLocation location, int index)
     {
+        if (_systemsOnBoardByLocation.Count >= _UICon.GetMaxSystems())
+        {
+            Debug.Log("Can't gain anymore systems due to UI limits");
+            return false;
+        }
         //Destroy any other system already at this Location
         if (_systemsOnBoardByLocation.ContainsKey(location))
         {
             Debug_RemoveSystem(location, index);
         }
 
-        GameObject go = Instantiate<GameObject>(_syslib.GetSystem(location, index), transform);
-        SystemHandler sh = go.GetComponent<SystemHandler>();
-        _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
+        //GameObject go = Instantiate<GameObject>(_syslib.GetSystem(location, index), transform);
+        //SystemHandler sh = go.GetComponent<SystemHandler>();
+        //_systemsOnBoardByLocation.Add(sh.SystemLocation, go);
+
+        GainSystem(_syslib.GetSystem(location, index));
+        return true;
     }
 
     public void Debug_RemoveWeapon(int index)
@@ -203,8 +212,13 @@ public class PlayerSystemHandler : MonoBehaviour
 
     public void Debug_RemoveSystem(SystemsLibrary.SystemLocation location, int index)
     {
-        Destroy(_systemsOnBoardByLocation[location]);
-        _systemsOnBoardByLocation.Remove(location);
+        _UICon.ClearSystemSlot(_syslib.GetSystem(location, index).GetComponent<SystemHandler>().SystemType);
+        if (_systemsOnBoardByLocation.ContainsKey(location))
+        {
+            Destroy(_systemsOnBoardByLocation[location]);
+            _systemsOnBoardByLocation.Remove(location);
+        }
+
     }
 
     #endregion

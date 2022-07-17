@@ -242,7 +242,14 @@ public class DebugController : MonoBehaviour
     { 
         if (_weaponToggles[index].isOn)
         {
-            _playerSystemsHandler.Debug_GainWeapon(index);
+            if (_playerSystemsHandler.Debug_GainWeapon(index))
+            {
+
+            }
+            else
+            {
+                _weaponToggles[index].isOn = false;
+            }
         }
         else
         {

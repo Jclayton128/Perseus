@@ -43,14 +43,40 @@ public class UI_Controller : MonoBehaviour
         _weaponIcons[index].HighlightAsActivePrimary();
     }
 
-    public void IntegrateNewSystem(int index, Sprite sprite, int level)
+    public void AddNewSystem(Sprite sprite, int level, SystemsLibrary.SystemType system)
     {
-        if (index < 0 || index >= _systemIcons.Length)
+        //if (index < 0 || index >= _systemIcons.Length)
+        //{
+        //    Debug.Log("invalid system integration index");
+        //    return;
+        //}
+        bool foundOpenUISLot = false;
+        for (int i = 0; i < _systemIcons.Length; i++)
         {
-            Debug.Log("invalid system integration index");
-            return;
+            if (_systemIcons[i].IsOccupied) continue;
+            else
+            {
+                _systemIcons[i].ModifyDisplayedSystem(sprite, level, system);
+                foundOpenUISLot = true;
+                break;
+            }
         }
-        _systemIcons[index].ModifyDisplayedSystem(sprite, level);
+        if (foundOpenUISLot == false)
+        {
+            Debug.Log("did not find an open System slot on UI");
+        }
+    }
+
+    public void ClearSystemSlot(SystemsLibrary.SystemType systemToRemove)
+    {
+        foreach (var systemIcon in _systemIcons)
+        {
+            if (systemIcon.System == systemToRemove)
+            {
+                systemIcon.ClearUIIcon();
+                return;
+            }
+        }
     }
 
     public void IntegrateNewWeapon(int index, Sprite sprite, int level)
