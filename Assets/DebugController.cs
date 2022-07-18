@@ -11,15 +11,15 @@ public class DebugController : MonoBehaviour
     SystemsLibrary _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
 
-    [SerializeField] Toggle[] _systemToggles_Engine;
-    [SerializeField] Toggle[] _systemToggles_Cockpit;
-    [SerializeField] Toggle[] _systemToggles_Tail;
-    [SerializeField] Toggle[] _systemToggles_Wings;
-    [SerializeField] Toggle[] _systemToggles_Hull;
-    [SerializeField] Toggle[] _systemToggles_LeftInt;
-    [SerializeField] Toggle[] _systemToggles_RightInt;
+    [SerializeField] Toggle[] _systemToggles_Engine = null;
+    [SerializeField] Toggle[] _systemToggles_Cockpit = null;
+    [SerializeField] Toggle[] _systemToggles_Tail = null;
+    [SerializeField] Toggle[] _systemToggles_Wings = null;
+    [SerializeField] Toggle[] _systemToggles_Hull = null;
+    [SerializeField] Toggle[] _systemToggles_LeftInt = null;
+    [SerializeField] Toggle[] _systemToggles_RightInt = null;
 
-    [SerializeField] Toggle[] _weaponToggles;
+    [SerializeField] Toggle[] _weaponToggles = null;
 
     //Dictionary<int, bool> _systemToggleStatus = new Dictionary<int, bool>();
     //Dictionary<int, bool> _weaponToggleStatus = new Dictionary<int, bool>();    
@@ -28,8 +28,12 @@ public class DebugController : MonoBehaviour
     {
         _gameController = GetComponent<GameController>();
         _systemsLibrary = FindObjectOfType<SystemsLibrary>();
-        _playerSystemsHandler = _gameController.GetPlayerGO().GetComponent<PlayerSystemHandler>();
 
+    }
+
+    private void Start()
+    {
+        _playerSystemsHandler = _gameController.GetPlayerGO().GetComponent<PlayerSystemHandler>();
         SetupToggleLabels();
     }
 

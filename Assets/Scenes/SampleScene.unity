@@ -11779,10 +11779,10 @@ RectTransform:
   m_Father: {fileID: 990435008}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 415, y: 125.95}
-  m_SizeDelta: {x: 120.131, y: 718.35}
+  m_AnchorMin: {x: 0.86972344, y: 0.2570573}
+  m_AnchorMax: {x: 0.9948599, y: 1.0053385}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -0.000015258789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &816440408
 GameObject:
@@ -13274,6 +13274,8 @@ MonoBehaviour:
   - {fileID: 4098320486912843964, guid: 158e064aa8b02444a82f5be765212722, type: 3}
   - {fileID: 4290716888164570828, guid: 5733e24dd9be719438bdabbebe45ca1e, type: 3}
   - {fileID: 6955843989113516874, guid: 2dc344a28dc9e324f96b3388b37e977e, type: 3}
+  - {fileID: 6955843989113516874, guid: 39124a709f7fec1438b294d11885a4c7, type: 3}
+  - {fileID: 138079464473438053, guid: 43d0d7b8be5beb243872f62e9b91a889, type: 3}
   _allWeapons:
   - {fileID: 5270541934415662231, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
   - {fileID: 5270541934415662231, guid: 3303187da1d4e8240bfce9955fb90b9b, type: 3}
@@ -19926,10 +19928,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.639
+  m_FalloffIntensity: 0.8
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_LightVolumeOpacity: 0.06
+  m_LightVolumeOpacity: 0.03
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
@@ -19937,8 +19939,8 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 60
-  m_PointLightOuterAngle: 300
+  m_PointLightInnerAngle: 90
+  m_PointLightOuterAngle: 270
   m_PointLightInnerRadius: 7
   m_PointLightOuterRadius: 9
   m_PointLightDistance: 3
@@ -28677,7 +28679,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102641472}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebd78ebb5f2887941a2fa39076dd93c7, type: 3}
   m_Name: 
