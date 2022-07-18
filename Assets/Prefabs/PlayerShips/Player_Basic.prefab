@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0563b9d91986c88449d835b0328d5c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerEngineParticles: {fileID: 0}
   _thrust: 200
   _mass: 2
   _turnRate: 180

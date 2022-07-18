@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
       propertyPath: m_Name
-      value: PlayerFighter
+      value: PlayerBlank
       objectReference: {fileID: 0}
     - target: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
       propertyPath: m_Layer
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0563b9d91986c88449d835b0328d5c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerEngineParticles: {fileID: 0}
   _thrust: 10
   _mass: 2
   _turnRate: 50
@@ -119,3 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingSystems: 05000000
+  _startingWeapons: 
+  _activeWeaponIndex: 0
+  _primaryWeaponsOnBoard: []

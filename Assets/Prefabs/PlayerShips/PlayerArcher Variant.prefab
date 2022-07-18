@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482856763183021888, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_Name
-      value: PlayerArcher
+      value: PlayerArcher Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4720785070263670728, guid: aaf7de5f05937444aa0d5ddb2c4a3508, type: 3}
       propertyPath: m_RootOrder
