@@ -8,7 +8,7 @@ public class PlayerHandler : MonoBehaviour
     InputController _inputCon;
     Rigidbody2D _rb;
     PlayerSystemHandler _playerSystemHandler;
-    [SerializeField] ParticleSystem _playerEngineParticles = null;
+    [SerializeField] ParticleSystem[] _playerEngineParticles = null;
 
     //settings
     float _turningForce = 300f;
@@ -80,13 +80,19 @@ public class PlayerHandler : MonoBehaviour
     {
         _isAccelerating = true;
         _isDecelerating = false;
-        _playerEngineParticles.Play();
+        foreach(var particle in _playerEngineParticles)
+        {
+            particle.Play();
+        }
     }
 
     private void HandleStopAccelerating()
     {
         _isAccelerating = false;
-        _playerEngineParticles.Stop();
+        foreach (var particle in _playerEngineParticles)
+        {
+            particle.Stop();
+        }
     }
 
     private void HandleBeginDecelerating()
