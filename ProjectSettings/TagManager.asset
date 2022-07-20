@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - WarpPortal
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - EnemyWeapon
   - Asteroid
   - Edge
-  - 
-  - 
+  - RadarProfile
+  - RadarDetector
   - 
   - 
   - 
@@ -45,6 +46,9 @@ TagManager:
     uniqueID: 4031116195
     locked: 0
   - name: Actors
+    uniqueID: 2592811543
+    locked: 0
+  - name: Player
     uniqueID: 2707312481
     locked: 0
   - name: Weaponry

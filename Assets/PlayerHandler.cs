@@ -24,7 +24,6 @@ public class PlayerHandler : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerSystemHandler = GetComponent<PlayerSystemHandler>();
-
         _inputCon = FindObjectOfType<InputController>();
         _inputCon.OnAccelBegin += HandleBeginAccelerating;
         _inputCon.OnAccelEnd += HandleStopAccelerating;

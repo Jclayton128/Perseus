@@ -135,6 +135,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _activeWeaponIndex += direction;
         _activeWeaponIndex = Mathf.Clamp(_activeWeaponIndex, 1, _allWeaponsOnBoard.Count - 1);
         ActiveWeapon = _allWeaponsOnBoard[_activeWeaponIndex];
+        if (_allWeaponsOnBoard.Count == 0) return;
         _UICon.HighlightNewSecondary(_allWeaponsOnBoard.IndexOf(ActiveWeapon));
     }
 

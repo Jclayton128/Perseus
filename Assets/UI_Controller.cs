@@ -10,6 +10,7 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] WeaponIconDriver[] _weaponIcons = null;
     [SerializeField] Sprite _primaryFireHintSprite = null;
     [SerializeField] Sprite _secondaryFireHintSprite = null;
+    [SerializeField] RadarScreen _radarScreen = null;
 
     //state
     Image _currentActiveSecondary;
@@ -99,5 +100,10 @@ public class UI_Controller : MonoBehaviour
     public int GetMaxWeapons()
     {
         return _weaponIcons.Length;
+    }
+
+    public RadarScreen GetRadarScreen()
+    {
+        return _radarScreen;
     }
 }
