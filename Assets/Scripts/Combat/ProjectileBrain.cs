@@ -107,7 +107,7 @@ public class ProjectileBrain : MonoBehaviour
         switch (_deathBehaviour)
         {
             case DeathBehaviour.Fizzle:
-
+                _poolCon.ReturnDeadProjectile(this);
                 return;
 
             case DeathBehaviour.Explode:
