@@ -9,7 +9,7 @@ public class PlayerSystemHandler : MonoBehaviour
     InputController _inputCon;
     [SerializeField] Library.SystemType[] _startingSystems = null;
     [SerializeField] Library.WeaponType[] _startingWeapons = null;
-    PlayerHandler _playerHandler;
+    ActorMovement _playerHandler;
     UI_Controller _UICon;
 
     //These are used to check for overlap between two weapons or two systems.
@@ -37,7 +37,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _inputCon.OnMouseUp += DeactivateWeapons;
         _maxSystems = _UICon.GetMaxSystems();
         _maxWeapons = _UICon.GetMaxWeapons();
-        _playerHandler = GetComponent<PlayerHandler>();
+        _playerHandler = GetComponent<ActorMovement>();
 
     }
 

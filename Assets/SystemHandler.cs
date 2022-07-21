@@ -26,7 +26,7 @@ public class SystemHandler : MonoBehaviour
         return _icon;
     }
 
-    public void IntegrateSystem(PlayerHandler ph)
+    public void IntegrateSystem(ActorMovement ph)
     {
         ph.ModifyMass(MassToAdd);
         ph.ModifyThrust(ThrustToAdd);

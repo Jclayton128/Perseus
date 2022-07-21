@@ -76,7 +76,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2148845601266606514}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1641889855
 MonoBehaviour:
@@ -148,7 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2148845601266606514}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &1948606129
 MonoBehaviour:
@@ -550,7 +550,7 @@ Transform:
   m_Children:
   - {fileID: 6855748044169986617}
   m_Father: {fileID: 2148845601266606514}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3599378630118026963
 SpriteRenderer:
@@ -912,11 +912,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
---- !u!198 &2291206457893564455 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
-  m_PrefabInstance: {fileID: 280958097}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8346277630755347104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8346277631012441649, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
@@ -1072,11 +1067,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8346277631012441649, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
   m_PrefabInstance: {fileID: 3240179184875457544}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &3691665194677790910 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
-  m_PrefabInstance: {fileID: 3240179184875457544}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6401954029406834869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1181,24 +1171,6 @@ MonoBehaviour:
   _startingWeapons: 
   _activeWeaponIndex: 0
   _primaryWeaponsOnBoard: []
---- !u!114 &1449635983045557181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089745778583505210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0563b9d91986c88449d835b0328d5c74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerEngineParticles:
-  - {fileID: 3691665194677790910}
-  - {fileID: 2291206457893564455}
-  _thrust: 200
-  _mass: 2
-  _turnRate: 180
 --- !u!114 &2074364254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,3 +1190,23 @@ MonoBehaviour:
   signalFudge: 0.02
   maxRandomNoise: 0.15
   SelfProfile: 0
+--- !u!114 &1449635983045557181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089745778583505210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0563b9d91986c88449d835b0328d5c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engineParticles: []
+  IsPlayer: 0
+  ShouldAccelerate: 0
+  ShouldDecelerate: 0
+  DesiredSteering: {x: 0, y: 0, z: 0}
+  _thrust: 200
+  _mass: 2
+  _turnRate: 180

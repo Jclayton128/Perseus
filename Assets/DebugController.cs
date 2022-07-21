@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DebugController : MonoBehaviour
 {
-    PlayerHandler _playerPH;
+    ActorMovement _playerPH;
     GameController _gameController;
     Library _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
@@ -115,7 +115,7 @@ public class DebugController : MonoBehaviour
     public void HandleMoreThrust()
     {
         if (_playerPH == null) 
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyThrust(20f);
 
@@ -123,7 +123,7 @@ public class DebugController : MonoBehaviour
     public void HandleLessThrust()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyThrust(-20f);
 
@@ -131,7 +131,7 @@ public class DebugController : MonoBehaviour
     public void HandleMoreMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyMass(2f);
 
@@ -139,21 +139,21 @@ public class DebugController : MonoBehaviour
     public void HandleLessMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyMass(-2f);
     }
     public void HandleMoreTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyTurnRate(20f);
     }
     public void HandleLessTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<PlayerHandler>();
+            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
 
         _playerPH.ModifyTurnRate(20f);
     }

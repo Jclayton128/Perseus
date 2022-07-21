@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHandler : MonoBehaviour
+public class ActorMovement : MonoBehaviour
 {
     InputController _inputCon;
     Rigidbody2D _rb;
-    PlayerSystemHandler _playerSystemHandler;
-    [SerializeField] ParticleSystem[] _playerEngineParticles = null;
+    [SerializeField] ParticleSystem[] _engineParticles = null;
 
     //settings
     float _turningForce = 300f;
 
     //state
-    bool _isAccelerating;
-    bool _isDecelerating;
+    public bool IsPlayer = false;
+
+    public bool ShouldAccelerate;
+    public bool ShouldDecelerate;
+    public Vector3 DesiredSteering;
+
     [SerializeField] float _thrust;
     [SerializeField] float _mass;
     [SerializeField] float _turnRate;
@@ -23,19 +26,33 @@ public class PlayerHandler : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerSystemHandler = GetComponent<PlayerSystemHandler>();
-        _inputCon = FindObjectOfType<InputController>();
-        _inputCon.OnAccelBegin += HandleBeginAccelerating;
-        _inputCon.OnAccelEnd += HandleStopAccelerating;
-        _inputCon.OnDecelBegin += HandleBeginDecelerating;
-        _inputCon.OnDecelEnd += HandleStopDecelerating;
+        if (IsPlayer)
+        {
+            _inputCon = FindObjectOfType<InputController>();
+            _inputCon.OnAccelBegin += HandleBeginAccelerating;
+            _inputCon.OnAccelEnd += HandleStopAccelerating;
+            _inputCon.OnDecelBegin += HandleBeginDecelerating;
+            _inputCon.OnDecelEnd += HandleStopDecelerating;
 
-        _inputCon.GetComponent<GameController>().RegisterPlayer(this.gameObject);
-
+            _inputCon.GetComponent<GameController>().RegisterPlayer(this.gameObject);
+        }
         
     }
 
     #region Flow
+
+    private void Update()
+    {
+        if (IsPlayer)
+        {
+            ConverMouseIntoDesiredSteering();
+        }
+    }
+
+    private void ConverMouseIntoDesiredSteering()
+    {
+        DesiredSteering = _inputCon.MousePos - transform.position;
+    }
 
     private void FixedUpdate()
     {
@@ -46,16 +63,24 @@ public class PlayerHandler : MonoBehaviour
 
     private void UpdateAccelDecel()
     {
-        if (_isAccelerating)
+        if (ShouldAccelerate)
         {
             _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+        }
+        if (ShouldDecelerate)
+        {
+            _rb.drag = _thrust / _mass / 50f;
+        }
+        if (!ShouldDecelerate)
+        {
+            _rb.drag = 0;
         }
     }
 
     private void UpdateMouseTurning()
     {
-        Vector2 mouseDir = _inputCon.MousePos - transform.position;
-        float angleToTarget = Vector3.SignedAngle(mouseDir, transform.up, transform.forward);
+       
+        float angleToTarget = Vector3.SignedAngle(DesiredSteering, transform.up, transform.forward);
         float angleWithTurnDamper = Mathf.Clamp(angleToTarget, -10, 10);
         float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / 10, -_turnRate, _turnRate);
         if (angleToTarget > 0.02)
@@ -77,9 +102,8 @@ public class PlayerHandler : MonoBehaviour
 
     private void HandleBeginAccelerating()
     {
-        _isAccelerating = true;
-        _isDecelerating = false;
-        foreach(var particle in _playerEngineParticles)
+        ShouldAccelerate = true;
+        foreach(var particle in _engineParticles)
         {
             particle.Play();
         }
@@ -87,8 +111,8 @@ public class PlayerHandler : MonoBehaviour
 
     private void HandleStopAccelerating()
     {
-        _isAccelerating = false;
-        foreach (var particle in _playerEngineParticles)
+        ShouldAccelerate = false;
+        foreach (var particle in _engineParticles)
         {
             particle.Stop();
         }
@@ -96,16 +120,12 @@ public class PlayerHandler : MonoBehaviour
 
     private void HandleBeginDecelerating()
     {
-        _isDecelerating = true;
-        _isAccelerating = false;
-
-        _rb.drag = _thrust/_mass/50f;
+        ShouldDecelerate = true;
     }
 
     private void HandleStopDecelerating()
     {
-        _isDecelerating = false;
-        _rb.drag = 0;
+        ShouldDecelerate = false;
     }
 
     #endregion
