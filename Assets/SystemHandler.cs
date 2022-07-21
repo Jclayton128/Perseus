@@ -5,8 +5,8 @@ using UnityEngine;
 public class SystemHandler : MonoBehaviour
 {
     [SerializeField] Sprite _icon = null;
-    public SystemsLibrary.SystemType SystemType;
-    public SystemsLibrary.SystemLocation SystemLocation;
+    public Library.SystemType SystemType;
+    public Library.SystemLocation SystemLocation;
     public Vector2 LocalPosition;
     public float MassToAdd;
     public float ThrustToAdd;

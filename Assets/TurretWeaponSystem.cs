@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretWeaponSystem : BaseSystem
+public class TurretWeaponSystem : WeaponHandler
 {
     //settings
     [SerializeField] float _turretTurnRate = 50f;
@@ -12,7 +12,7 @@ public class TurretWeaponSystem : BaseSystem
     public override void Activate()
     {
         Debug.Log("pew");
-        _poolCon.SpawnProjectile(_weaponType, _muzzle);
+        _poolCon.SpawnProjectile(_projectileType, _muzzle);
     }
 
     public override void Deactivate()
@@ -23,11 +23,6 @@ public class TurretWeaponSystem : BaseSystem
     private void Update()
     {
         if (!_inputCon) Initialize();
-        if (!_isInstalled)
-        {
-            Debug.Log("not installed");
-            return;
-        }
 
         UpdateTurretFacingToMousePos();
     }

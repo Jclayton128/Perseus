@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponType: 1
+  _projectileType: 0
   _activationCost: 0
   _sustainCostRate: 0
   _muzzle: {fileID: 528075328982006342}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 61
   m_Sprite: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
     - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: WeaponType
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: IsSecondary

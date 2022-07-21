@@ -17,11 +17,11 @@ TagManager:
   - PlayerWeapon
   - EnemyShip
   - EnemyWeapon
-  - Asteroid
-  - Edge
+  - NeutralShip
+  - NeutralWeapon
   - RadarProfile
   - RadarDetector
-  - 
+  - Edge
   - 
   - 
   - 

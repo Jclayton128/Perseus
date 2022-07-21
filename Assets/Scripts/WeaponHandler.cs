@@ -3,21 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour
+public abstract class WeaponHandler : MonoBehaviour
 {
-    [SerializeField] Sprite _icon = null;
-    public SystemsLibrary.WeaponType WeaponType;
-    public Vector2 LocalPosition;
+    [SerializeField] protected PoolController _poolCon;
+    protected InputController _inputCon;
+
+    [SerializeField] protected Sprite _icon = null;
+    public Library.WeaponType WeaponType;
+    [SerializeField] protected ProjectileBrain.PType _projectileType;
+    [SerializeField] protected float _activationCost = 0;
+    [SerializeField] protected float _sustainCostRate = 0;
+    [SerializeField] protected Transform _muzzle;
 
     public bool IsSecondary = false;
 
-    public BaseSystem BaseSystem;
-
-    public void Initialize()
+    public virtual void Initialize()
     {
-        BaseSystem = GetComponent<BaseSystem>();
+        _inputCon = FindObjectOfType<InputController>();
+        _poolCon = _inputCon.GetComponent<PoolController>();
+        _muzzle = GetComponentInChildren<MuzzleTag>().transform;
     }
-
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -26,5 +31,8 @@ public class WeaponHandler : MonoBehaviour
         }
         return _icon;
     }
+    public abstract void Activate();
+    public abstract void Deactivate();
+
 
 }

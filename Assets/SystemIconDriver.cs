@@ -8,7 +8,7 @@ public class SystemIconDriver : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
-    public SystemsLibrary.SystemType System { get; private set; }
+    public Library.SystemType System { get; private set; }
     public bool IsOccupied { get; private set; } = false;
 
     public virtual void Initialize()
@@ -19,7 +19,7 @@ public class SystemIconDriver : MonoBehaviour
         IsOccupied = false;
     }
 
-    public void ModifyDisplayedSystem(Sprite sprite, int level, SystemsLibrary.SystemType system)
+    public void ModifyDisplayedSystem(Sprite sprite, int level, Library.SystemType system)
     {
         System = system;
         _systemIcon.sprite = sprite;
@@ -30,7 +30,7 @@ public class SystemIconDriver : MonoBehaviour
 
     public void ClearUIIcon()
     {
-        System = SystemsLibrary.SystemType.None;
+        System = Library.SystemType.None;
         _systemIcon.sprite = null;
         _systemIcon.color = Color.clear;
         _levelTMP.text = " ";

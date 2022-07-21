@@ -1,41 +1,87 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolController : MonoBehaviour
-{
-    public enum ProjectileType { None, LaserBolt, Shuriken,
-        HomingMissile, Torpedo, PopRocket, Harpoon}
-
-    [SerializeField] GameObject _weaponPrefab = null;
-
+{   
+    [SerializeField] GameObject[] _projectilePrefabs = null;
+    Library _sysLib;
 
     //state
-    Queue<GameObject> _unusedPool = new Queue<GameObject>();
-    List<GameObject> _activePool = new List<GameObject>();
+    Dictionary<ProjectileBrain.PType, Queue<ProjectileBrain>> _unusedPools = 
+        new Dictionary<ProjectileBrain.PType, Queue<ProjectileBrain>>();
+    Dictionary<ProjectileBrain.PType, List<ProjectileBrain>> _activePools =
+        new Dictionary<ProjectileBrain.PType, List<ProjectileBrain>>();
+    Dictionary<ProjectileBrain.PType, GameObject>_projectileMenu = 
+        new Dictionary<ProjectileBrain.PType, GameObject>();
 
-    public ProjectileHandler SpawnProjectile(ProjectileType weaponType, Transform muzzle)
+    private void Awake()
     {
-        GameObject go;
-        if (_unusedPool.Count == 0)
+        _sysLib = FindObjectOfType<Library>();
+    }
+
+    private void Start()
+    {
+        PrepareProjectileMenu();
+    }
+
+    private void PrepareProjectileMenu()
+    {
+        foreach (var projectile in _projectilePrefabs)
         {
-            go = Instantiate(_weaponPrefab, Vector3.zero, Quaternion.identity) ;
+            ProjectileBrain.PType ptype =
+                projectile.GetComponent<ProjectileBrain>().pType;
+
+            if (!_projectileMenu.ContainsKey(ptype))
+            {
+                _projectileMenu.Add(ptype, projectile);
+
+                Queue<ProjectileBrain> newQueue = new Queue<ProjectileBrain>();
+                _unusedPools.Add(ptype, newQueue);
+
+                List<ProjectileBrain> newList = new List<ProjectileBrain>();
+                _activePools.Add(ptype, newList);
+
+                Debug.Log($"added {ptype} to menu");
+            }
+            else
+            {
+                Debug.Log($"Projectile Menu already contains a {ptype}");
+            }
+        }
+    }
+
+    public ProjectileBrain SpawnProjectile(ProjectileBrain.PType projectileType, Transform muzzle)
+    {
+        Debug.Log($"Asked to spawn a {projectileType}");
+        ProjectileBrain pb;
+        if (_unusedPools[projectileType].Count == 0)
+        {
+            pb = Instantiate(_projectileMenu[projectileType], Vector3.zero, Quaternion.identity)
+                .GetComponent<ProjectileBrain>();
+            pb.Initialize(this);
             
         }
         else
         {
-            go = _unusedPool.Dequeue();
+            pb = _unusedPools[projectileType].Dequeue();
+            pb.gameObject.SetActive(true);
         }
-        _activePool.Add(go);
-        go.transform.position = muzzle.position;
-        go.transform.rotation = muzzle.rotation;
+
+        _activePools[projectileType].Add(pb);
+        pb.transform.position = muzzle.position;
+        pb.transform.rotation = muzzle.rotation;
         
-        return go.GetComponent<ProjectileHandler>();
+        return pb;
 
     }
 
-    private void TransmogrifyProjectile(ProjectileType projType)
+    public void ReturnDeadProjectile(ProjectileBrain deadProjectile)
     {
-
+        _unusedPools[deadProjectile.pType].Enqueue(deadProjectile);
+        _activePools[deadProjectile.pType].Remove(deadProjectile);
+        deadProjectile.gameObject.SetActive(false);
     }
+
 }

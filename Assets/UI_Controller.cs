@@ -44,7 +44,7 @@ public class UI_Controller : MonoBehaviour
         _weaponIcons[index].HighlightAsActivePrimary();
     }
 
-    public void AddNewSystem(Sprite sprite, int level, SystemsLibrary.SystemType system)
+    public void AddNewSystem(Sprite sprite, int level, Library.SystemType system)
     {
         //if (index < 0 || index >= _systemIcons.Length)
         //{
@@ -68,7 +68,7 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-    public void ClearSystemSlot(SystemsLibrary.SystemType systemToRemove)
+    public void ClearSystemSlot(Library.SystemType systemToRemove)
     {
         Debug.Log($"trying to clear {systemToRemove}");
         foreach (var systemIcon in _systemIcons)
@@ -81,15 +81,37 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-    public void IntegrateNewWeapon(int index, Sprite sprite, int level)
+    public void IntegrateNewWeapon(Sprite sprite, int level, Library.WeaponType wType)
     {
-        if (index < 0 || index >= _weaponIcons.Length)
+        bool foundOpenWeaponSLot = false;
+        for (int i = 0; i < _weaponIcons.Length; i++)
         {
-            Debug.Log("invalid weapon integration index");
-            return;
+            if (_weaponIcons[i].IsOccupied) continue;
+            else
+            {
+                _weaponIcons[i].ModifyDisplayedSystem(sprite, level, wType);
+                foundOpenWeaponSLot = true;
+                break;
+            }
+        }
+        if (foundOpenWeaponSLot == false)
+        {
+            Debug.Log("did not find an open Weapon slot on UI");
         }
 
-        _weaponIcons[index].ModifyDisplayedSystem(sprite, level);
+    }
+
+    public void ClearWeaponSlot(Library.WeaponType weaponToRemove)
+    {
+        Debug.Log($"Trying to clear {weaponToRemove}");
+        foreach (var weaponIcon in _weaponIcons)
+        {
+            if (weaponIcon.WeaponType == weaponToRemove)
+            {
+                weaponIcon.ClearUIIcon();
+                return;
+            }
+        }
     }
 
     public int GetMaxSystems()

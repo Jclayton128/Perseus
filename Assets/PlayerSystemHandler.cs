@@ -5,28 +5,31 @@ using UnityEngine;
 
 public class PlayerSystemHandler : MonoBehaviour
 {
-    SystemsLibrary _syslib;
+    Library _syslib;
     InputController _inputCon;
-    [SerializeField] SystemsLibrary.SystemType[] _startingSystems = null;
-    [SerializeField] SystemsLibrary.WeaponType[] _startingWeapons = null;
+    [SerializeField] Library.SystemType[] _startingSystems = null;
+    [SerializeField] Library.WeaponType[] _startingWeapons = null;
     PlayerHandler _playerHandler;
     UI_Controller _UICon;
 
-    //weapons start at 0+index
-    Dictionary<int, GameObject> _weaponsOnBoard_Debug = new Dictionary<int, GameObject>();
-    Dictionary<SystemsLibrary.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<SystemsLibrary.SystemLocation, GameObject>();
+    //These are used to check for overlap between two weapons or two systems.
+    Dictionary<Library.WeaponType, GameObject> _weaponsOnBoard =
+        new Dictionary<Library.WeaponType, GameObject>();
+    Dictionary<Library.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<Library.SystemLocation, GameObject>();
 
     //state
    public  int _activeWeaponIndex;
     public WeaponHandler ActiveWeapon { get; protected set; }
     int _maxSystems;
     int _maxWeapons;
+
+    //These lists are to help with scrolling and shooting multiple primary systems at once
     List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
-    public List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
+    [SerializeField] List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
     List<WeaponHandler> _allWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
     {
-        _syslib = FindObjectOfType<SystemsLibrary>();
+        _syslib = FindObjectOfType<Library>();
         _UICon = FindObjectOfType<UI_Controller>();
         _inputCon = _UICon.GetComponent<InputController>();
         _inputCon.OnScroll += ScrollThroughActiveWeapons;
@@ -66,7 +69,7 @@ public class PlayerSystemHandler : MonoBehaviour
         SystemCrateHandler sch;
         if (collision.gameObject.TryGetComponent<SystemCrateHandler>(out sch))
         {
-            if (_systemsOnBoard.Count >= _maxSystems)
+            if (_systemsOnBoardByLocation.Count >= _maxSystems)
             {
                 Debug.Log("unable to hold any more systems");
                 return;
@@ -89,9 +92,10 @@ public class PlayerSystemHandler : MonoBehaviour
     private void GainWeapon(GameObject newWeapon)
     {
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
-        WeaponHandler wh = newWeapon.GetComponent<WeaponHandler>();
+        WeaponHandler wh = go.GetComponent<WeaponHandler>();
         wh.Initialize();
         _allWeaponsOnBoard.Add(wh);
+        _weaponsOnBoard.Add(wh.WeaponType, go);
         if (wh.IsSecondary)
         {
             if (!ActiveWeapon)
@@ -107,7 +111,8 @@ public class PlayerSystemHandler : MonoBehaviour
             _UICon.DepictAsPrimary(_allWeaponsOnBoard.IndexOf(wh));
 
         }
-        _UICon.IntegrateNewWeapon(_allWeaponsOnBoard.Count - 1, wh.GetIcon(), 2);
+        _UICon.IntegrateNewWeapon(wh.GetIcon(), 2, wh.WeaponType);
+        Debug.Log($"Gained a {wh.WeaponType} the right way");
     }
     private void GainSystem(GameObject newSystem)
     {
@@ -145,12 +150,12 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
-                priweap.BaseSystem.Activate();
+                priweap.Activate();
             }
         }
         if (priOrSec == 1) // Active Secondary Weapon
         {
-            ActiveWeapon.BaseSystem.Activate();
+            ActiveWeapon.Activate();
         }
     }
 
@@ -160,31 +165,29 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
-                priweap.BaseSystem.Deactivate();
+                priweap.Deactivate();
             }
         }
         if (priOrSec == 1) // Active Secondary Weapon
         {
-            ActiveWeapon.BaseSystem.Deactivate();
+            ActiveWeapon.Deactivate();
         }
     }
 
     #region Debug tools
-    public bool Debug_GainWeapon(int index)
+    public bool Debug_TryGainWeapon(int indexInLibrary)
     {
-        if (_weaponsOnBoard_Debug.Count >= _UICon.GetMaxWeapons())
+        if (_weaponsOnBoard.Count >= _UICon.GetMaxWeapons())
         {
             Debug.Log("Can't gain anymore weapons due to UI limits");
             return false;
         }
-        GameObject go = Instantiate<GameObject>(_syslib.GetWeapon(index), transform);
-        WeaponHandler wh = go.GetComponent<WeaponHandler>();
-        //go.transform.localPosition = wh.LocalPosition;  // no longer needed if system chunks' local is 0,0
-        _weaponsOnBoard_Debug.Add(index, go);
+
+        GainWeapon(_syslib.GetWeapon(indexInLibrary));
         return true;
     }
 
-    public bool Debug_GainSystem(SystemsLibrary.SystemLocation location, int index)
+    public bool Debug_TryGainSystem(Library.SystemLocation location, int index)
     {
         if (_systemsOnBoardByLocation.Count >= _UICon.GetMaxSystems())
         {
@@ -205,13 +208,14 @@ public class PlayerSystemHandler : MonoBehaviour
         return true;
     }
 
-    public void Debug_RemoveWeapon(int index)
+    public void Debug_RemoveWeapon(Library.WeaponType weaponType)
     {
-        Destroy(_weaponsOnBoard_Debug[index]);
-        _weaponsOnBoard_Debug.Remove(index);
+        _UICon.ClearWeaponSlot(weaponType);
+        Destroy(_weaponsOnBoard[weaponType]);
+        _weaponsOnBoard.Remove(weaponType);
     }
 
-    public void Debug_RemoveSystem(SystemsLibrary.SystemLocation location, int index)
+    public void Debug_RemoveSystem(Library.SystemLocation location, int index)
     {
         _UICon.ClearSystemSlot(_syslib.GetSystem(location, index).GetComponent<SystemHandler>().SystemType);
         if (_systemsOnBoardByLocation.ContainsKey(location))
