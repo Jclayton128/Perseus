@@ -10,8 +10,8 @@ public class BlasterWH : WeaponHandler
     [SerializeField] float _shotSpeed = 5f;
 
     //state
-    public bool _isFiring;
-    public float _timeOfNextShot;
+    bool _isFiring;
+    float _timeOfNextShot;
 
     public override void Activate()
     {

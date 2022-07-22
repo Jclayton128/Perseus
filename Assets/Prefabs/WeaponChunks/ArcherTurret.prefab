@@ -45,11 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileType: 0
-  _activationCost: 0
-  _sustainCostRate: 0
-  _muzzle: {fileID: 528075328982006342}
-  _isInstalled: 0
   _turretTurnRate: 180
 --- !u!212 &2895815006829263250
 SpriteRenderer:
@@ -111,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528075328982006342}
+  - component: {fileID: 8799983199885762414}
   m_Layer: 0
   m_Name: Muzzle_1
   m_TagString: Untagged
@@ -132,6 +128,18 @@ Transform:
   m_Father: {fileID: 224192949469094795}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8799983199885762414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543628747912721107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706f0645c2aea534ea0882e1e36f9f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4937677336895057722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,6 +166,10 @@ PrefabInstance:
     - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: LocalPosition.y
       value: -0.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615773119955788077, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_RootOrder
@@ -225,9 +237,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5076610187721481087, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+    - {fileID: 8780457460541004273, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+--- !u!1 &1190160963467541320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+  m_PrefabInstance: {fileID: 4937677336895057722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &391027060436349402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
   m_PrefabInstance: {fileID: 4937677336895057722}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &373910325916342289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190160963467541320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3e20d5b01d473428c44305918921f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  WeaponType: 1
+  _projectileType: 0
+  _activationCost: 0
+  _sustainCostRate: 0
+  IsSecondary: 1
+  _maxUpgradeLevel: 1

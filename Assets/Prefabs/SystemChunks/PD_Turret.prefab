@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 82
   m_Sprite: {fileID: 21300000, guid: adbc12a7086a04341bdbbabd9462b2c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 82
   m_Sprite: {fileID: 21300000, guid: adbc12a7086a04341bdbbabd9462b2c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 83
   m_Sprite: {fileID: 21300000, guid: 633fd46605a90dc429de8ff91dfe3073, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -319,8 +319,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+--- !u!1 &4763640050754291053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+  m_PrefabInstance: {fileID: 5257106027768127334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6337305188752412671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
   m_PrefabInstance: {fileID: 5257106027768127334}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1095874061481084983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763640050754291053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95b60d2a652d9f4fac3c3858ed94a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 5e8984065b032d3448c04ef20cd7a292, type: 3}
+  SystemType: 7
+  SystemLocation: 2
+  _maxUpgradeLevel: 1

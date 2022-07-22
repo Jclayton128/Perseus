@@ -124,10 +124,11 @@ public class PlayerSystemHandler : MonoBehaviour
             return;
         }
         _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
-        sh.IntegrateSystem(_playerHandler);
+        SystemIconDriver sid = _UICon.AddNewSystem(sh.GetIcon(), 1, sh.SystemType);
+        sh.IntegrateSystem(sid);
         _systemsOnBoard.Add(sh);
         
-        _UICon.AddNewSystem(sh.GetIcon(), 1, sh.SystemType);      
+
     }
 
     public List<SystemHandler> GetSystemsOnBoard()

@@ -3,21 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretWeaponSystem : WeaponHandler
+public class TurretSteerer : MonoBehaviour
 {
+    InputController _inputCon;
+
     //settings
     [SerializeField] float _turretTurnRate = 50f;
 
-
-    public override void Activate()
+    private void Initialize()
     {
-        Debug.Log("pew");
-        _poolCon.SpawnProjectile(_projectileType, _muzzle);
-    }
-
-    public override void Deactivate()
-    {
-        throw new NotImplementedException();
+        _inputCon = FindObjectOfType<InputController>();
     }
 
     private void Update()

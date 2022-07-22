@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorController : MonoBehaviour
+public class LevelController : MonoBehaviour
 {
     List<ActorMovement> _actorsOnLevel = new List<ActorMovement>();
 

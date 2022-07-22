@@ -44,7 +44,7 @@ public class UI_Controller : MonoBehaviour
         _weaponIcons[index].HighlightAsActivePrimary();
     }
 
-    public void AddNewSystem(Sprite sprite, int level, Library.SystemType system)
+    public SystemIconDriver AddNewSystem(Sprite sprite, int level, Library.SystemType system)
     {
         //if (index < 0 || index >= _systemIcons.Length)
         //{
@@ -52,12 +52,14 @@ public class UI_Controller : MonoBehaviour
         //    return;
         //}
         bool foundOpenUISLot = false;
+        SystemIconDriver sid = null;
         for (int i = 0; i < _systemIcons.Length; i++)
         {
             if (_systemIcons[i].IsOccupied) continue;
             else
             {
                 _systemIcons[i].ModifyDisplayedSystem(sprite, level, system);
+                sid = _systemIcons[i];
                 foundOpenUISLot = true;
                 break;
             }
@@ -66,6 +68,7 @@ public class UI_Controller : MonoBehaviour
         {
             Debug.Log("did not find an open System slot on UI");
         }
+        return sid;
     }
 
     public void ClearSystemSlot(Library.SystemType systemToRemove)

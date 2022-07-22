@@ -13429,24 +13429,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allSystems:
-  - {fileID: 4229818524529229626, guid: ce17edd980a8d2349bb4ea1a7e2c2148, type: 3}
-  - {fileID: 8594080273329340712, guid: 59acf65ebd3d3d8409a29f01775b4a6a, type: 3}
-  - {fileID: 5101282958865086666, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
-  - {fileID: 3055778868689487197, guid: 2a9f53c0dbf435e4180523ba910358ba, type: 3}
-  - {fileID: 2065769023143092405, guid: 070e0c0fa6c48a54f87ceeb272023c72, type: 3}
-  - {fileID: 4783581454553529094, guid: eb2bdfeca707384469fd3064541c3aea, type: 3}
-  - {fileID: 4454226603437681414, guid: bd9a5fad16acd2b40b332ffec789c967, type: 3}
-  - {fileID: 5259836275937000513, guid: ef86996df85360042b4658b9695966e2, type: 3}
-  - {fileID: 4098320486912843964, guid: 158e064aa8b02444a82f5be765212722, type: 3}
-  - {fileID: 4290716888164570828, guid: 5733e24dd9be719438bdabbebe45ca1e, type: 3}
-  - {fileID: 6955843989113516874, guid: 2dc344a28dc9e324f96b3388b37e977e, type: 3}
-  - {fileID: 6955843989113516874, guid: 39124a709f7fec1438b294d11885a4c7, type: 3}
-  - {fileID: 138079464473438053, guid: 43d0d7b8be5beb243872f62e9b91a889, type: 3}
-  - {fileID: 6608644035955424169, guid: ddf4a9c661c6f5e4ba67b0c900f40634, type: 3}
-  - {fileID: 9039976322710525205, guid: 3f388be64a601f940850fbbb7cb13504, type: 3}
-  - {fileID: 6955843989113516874, guid: 6841d4c6f564df64d944228e856682cc, type: 3}
+  - {fileID: -7878786508239175541, guid: ce17edd980a8d2349bb4ea1a7e2c2148, type: 3}
+  - {fileID: -6287602702807955326, guid: 59acf65ebd3d3d8409a29f01775b4a6a, type: 3}
+  - {fileID: -4512575181378527886, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
+  - {fileID: 5860093446402101822, guid: ddf4a9c661c6f5e4ba67b0c900f40634, type: 3}
+  - {fileID: 4981080039851542169, guid: 2a9f53c0dbf435e4180523ba910358ba, type: 3}
+  - {fileID: 5420355907618140801, guid: 6841d4c6f564df64d944228e856682cc, type: 3}
+  - {fileID: 1852466164385898703, guid: 070e0c0fa6c48a54f87ceeb272023c72, type: 3}
+  - {fileID: 2001717565859253831, guid: 43d0d7b8be5beb243872f62e9b91a889, type: 3}
+  - {fileID: 4424873322356670007, guid: eb2bdfeca707384469fd3064541c3aea, type: 3}
+  - {fileID: 1095874061481084983, guid: bd9a5fad16acd2b40b332ffec789c967, type: 3}
+  - {fileID: 710263998831068034, guid: 3f388be64a601f940850fbbb7cb13504, type: 3}
+  - {fileID: 7938875369668043755, guid: ef86996df85360042b4658b9695966e2, type: 3}
+  - {fileID: 2541213939776424517, guid: 158e064aa8b02444a82f5be765212722, type: 3}
+  - {fileID: 1959680900813159105, guid: 5733e24dd9be719438bdabbebe45ca1e, type: 3}
+  - {fileID: 5764748240325834554, guid: 2dc344a28dc9e324f96b3388b37e977e, type: 3}
+  - {fileID: 5318439603241828922, guid: 39124a709f7fec1438b294d11885a4c7, type: 3}
   _allWeapons:
-  - {fileID: 2185400390518202810, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+  - {fileID: 373910325916342289, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
+  - {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+  - {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
+  - {fileID: -3401993238952020647, guid: 3303187da1d4e8240bfce9955fb90b9b, type: 3}
+  - {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
+  - {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
   _cratePrefab: {fileID: 3229868845704914807, guid: 4e3eee03aad482746bf8600923e3a3df, type: 3}
 --- !u!4 &973215305
 Transform:
@@ -14424,6 +14429,14 @@ PrefabInstance:
     - target: {fileID: 2148845601266606514, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002118628085007855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002118628085007855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1702155753
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name

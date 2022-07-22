@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SystemHandler : MonoBehaviour
+public abstract class SystemHandler : MonoBehaviour
 {
     [SerializeField] Sprite _icon = null;
+
+    //state
     public Library.SystemType SystemType;
     public Library.SystemLocation SystemLocation;
-    public Vector2 LocalPosition;
-    public float MassToAdd;
-    public float ThrustToAdd;
-    public float TurnRateToAdd;
+    protected SystemIconDriver _connectedSID;
+    [SerializeField] protected int _maxUpgradeLevel = 1;
+    protected int _currentUpgradeLevel = 1;
 
     private void Awake()
     {
@@ -26,11 +27,43 @@ public class SystemHandler : MonoBehaviour
         return _icon;
     }
 
-    public void IntegrateSystem(ActorMovement ph)
+    public virtual void IntegrateSystem(SystemIconDriver connectedSID)
     {
-        ph.ModifyMass(MassToAdd);
-        ph.ModifyThrust(ThrustToAdd);
-        ph.ModifyTurnRate(TurnRateToAdd);
-
+        _connectedSID = connectedSID;
     }
+
+    public virtual void DeintegrateSystem()
+    {
+        _connectedSID.ClearUIIcon();
+    }
+
+    public bool CheckIfUpgradeable()
+    {
+        if (_maxUpgradeLevel <= 0)
+        {
+            Debug.Log("Invalide upgrade level");
+            return false;
+        }
+        if (_currentUpgradeLevel == _maxUpgradeLevel)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public virtual void Upgrade()
+    {
+        if (_currentUpgradeLevel >= _maxUpgradeLevel)
+        {
+            Debug.Log("Unable to upgrade past max level.");
+            return;
+        }
+
+        _currentUpgradeLevel++;
+    }
+
+
 }

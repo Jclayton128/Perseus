@@ -12,8 +12,9 @@ public class Library : MonoBehaviour
 
     public enum WeaponType
     {
-        PBlaster0, PArcher1, PMissile2, Player3, Player4, Player5, Player6, Player7,
-        Player8, Player9, Player10, Player11, Player12, Player13,Player14, Player15,
+        PBlaster0, PArcherTurret1, PMissile2, PShotgun3, PPopRockets4, PScrapedo5, 
+        PHarpoon6, PDarkblade7, PFlakTurret8, PMarkerTurret9, Player10, Player11, 
+        Player12, Player13,Player14, Player15,
         Player16, Player17, Player18, Player19,
         Enemy20, Enemy21, Enemy22, Enemy23, Enemy24, Enemy25, Enemy26, Enemy27,
         Enemy28, Enemy29, Enemy30, Enemy31, Enemy32, Enemy33, Enemy34,
