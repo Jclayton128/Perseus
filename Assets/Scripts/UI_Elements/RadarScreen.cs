@@ -15,8 +15,8 @@ public class RadarScreen : MonoBehaviour
 
     //param
 
-    public float fadePerSecond;
-    public float risePerSecond;
+    [SerializeField] float _fadePerSecond;
+    [SerializeField] float _risePerSecond;
 
 
 
@@ -33,7 +33,7 @@ public class RadarScreen : MonoBehaviour
     {
         foreach (RadarSector rs in radarSectors)
         {
-            rs.SetRates(risePerSecond, fadePerSecond);
+            rs.SetRates(_risePerSecond, _fadePerSecond);
         }
     }
  
