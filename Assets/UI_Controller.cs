@@ -3,21 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
+using System;
 
 public class UI_Controller : MonoBehaviour
 {
+    #region Scene References
+    [FoldoutGroup("Systems & Weapons")]
     [SerializeField] SystemIconDriver[] _systemIcons = null;
+
+    [FoldoutGroup("Systems & Weapons")]
     [SerializeField] WeaponIconDriver _primaryWeaponIcon = null;
+
+    [FoldoutGroup("Systems & Weapons")]
     [SerializeField] WeaponIconDriver[] _secondaryWeaponIcons = null;
+
+    [FoldoutGroup("Systems & Weapons")]
     [SerializeField] Sprite _primaryFireHintSprite = null;
+
+    [FoldoutGroup("Systems & Weapons")]
     [SerializeField] Sprite _secondaryFireHintSprite = null;
+
     [SerializeField] RadarScreen _radarScreen = null;
+
+    [FoldoutGroup("Scrap & Level")]
+    [SerializeField] Image _scrapBarFill = null;
+
+    [FoldoutGroup("Scrap & Level")]
+    [SerializeField] TextMeshProUGUI _scrapAmountTMP = null;
+
+    [FoldoutGroup("Scrap & Level")]
+    [SerializeField] TextMeshProUGUI _levelTMP = null;
+    #endregion
+
+    //settings
+    [FoldoutGroup("Scrap & Level")]
+    [SerializeField] float _minScrapFactor = 0.13f;
+
+    [FoldoutGroup("Scrap & Level")]
+    [SerializeField] float _maxScrapFactor = 0.87f;
 
     //state
     Image _currentActiveSecondary;
 
-
+    #region Initialization
     private void Awake()
+    {
+        InitializeSystemWeaponIcons();
+        InitializeScrapLevelPanel();
+    }
+
+    private void InitializeScrapLevelPanel()
+    {
+        ModifyScrapAmount(0, 0);
+        ModifyLevel(0);
+    }
+
+    private void InitializeSystemWeaponIcons()
     {
         foreach (var sid in _systemIcons)
         {
@@ -30,9 +72,29 @@ public class UI_Controller : MonoBehaviour
         {
             wid.Initialize(_primaryFireHintSprite, _secondaryFireHintSprite);
         }
-        
     }
 
+    #endregion
+
+    #region Scrap and Level
+
+    public void ModifyScrapAmount(float scrapFillFactor, int totalScrapAmount)
+    {
+        if (scrapFillFactor < 0 || scrapFillFactor > 1f)
+        {
+            Debug.LogError("Invalid Scrap fill factor");
+        }
+
+        _scrapAmountTMP.text = totalScrapAmount.ToString();
+        _scrapBarFill.fillAmount = Mathf.Lerp(_minScrapFactor, _maxScrapFactor, scrapFillFactor);
+    }
+
+    public void ModifyLevel(int newLevel)
+    {
+        _levelTMP.text = newLevel.ToString();
+    }
+
+    #endregion
 
     #region System Icons
     public SystemIconDriver IntegrateNewSystem(SystemHandler sh)
