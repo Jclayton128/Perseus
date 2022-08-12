@@ -7,7 +7,8 @@ using TMPro;
 public class UI_Controller : MonoBehaviour
 {
     [SerializeField] SystemIconDriver[] _systemIcons = null;
-    [SerializeField] WeaponIconDriver[] _weaponIcons = null;
+    [SerializeField] WeaponIconDriver _primaryWeaponIcon = null;
+    [SerializeField] WeaponIconDriver[] _secondaryWeaponIcons = null;
     [SerializeField] Sprite _primaryFireHintSprite = null;
     [SerializeField] Sprite _secondaryFireHintSprite = null;
     [SerializeField] RadarScreen _radarScreen = null;
@@ -23,52 +24,50 @@ public class UI_Controller : MonoBehaviour
             sid.Initialize();
         }
 
-        foreach (var wid in _weaponIcons)
+        _primaryWeaponIcon.Initialize();
+
+        foreach (var wid in _secondaryWeaponIcons)
         {
             wid.Initialize(_primaryFireHintSprite, _secondaryFireHintSprite);
         }
-        _weaponIcons[0].HighlightAsActivePrimary(); // Pri weapon must always be first system;
+        
     }
 
-    public void HighlightNewSecondary(int index)
-    {
-        foreach (var sid in _weaponIcons)
-        {
-            sid.DehighlightAsActiveSecondaryIfNotPrimary();
-        }
-        _weaponIcons[index].HighlightAsActiveSecondaryIfNotPrimary();
-    }
 
-    public void DepictAsPrimary(int index)
-    {
-        _weaponIcons[index].HighlightAsActivePrimary();
-    }
-
-    public SystemIconDriver AddNewSystem(Sprite sprite, int level, Library.SystemType system)
+    #region System Icons
+    public SystemIconDriver IntegrateNewSystem(SystemHandler sh)
     {
         //if (index < 0 || index >= _systemIcons.Length)
         //{
         //    Debug.Log("invalid system integration index");
         //    return;
         //}
-        bool foundOpenUISLot = false;
+        bool foundOpenUISlot = false;
         SystemIconDriver sid = null;
         for (int i = 0; i < _systemIcons.Length; i++)
         {
             if (_systemIcons[i].IsOccupied) continue;
             else
             {
-                _systemIcons[i].ModifyDisplayedSystem(sprite, level, system);
+                _systemIcons[i].DisplayNewSystem(sh);
                 sid = _systemIcons[i];
-                foundOpenUISLot = true;
+                foundOpenUISlot = true;
                 break;
             }
         }
-        if (foundOpenUISLot == false)
+        if (foundOpenUISlot == false)
         {
             Debug.Log("did not find an open System slot on UI");
         }
         return sid;
+    }
+
+    public void ClearAllSystemSlots()
+    {
+        foreach (var slot in _systemIcons)
+        {
+            slot.ClearUIIcon();
+        }
     }
 
     public void ClearSystemSlot(Library.SystemType systemToRemove)
@@ -84,39 +83,74 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-    public void IntegrateNewWeapon(Sprite sprite, int level, Library.WeaponType wType)
+    #endregion
+
+    #region Weapon Icons
+
+    public void HighlightNewSecondaryWeapon(int index)
     {
-        bool foundOpenWeaponSLot = false;
-        for (int i = 0; i < _weaponIcons.Length; i++)
+        foreach (var sid in _secondaryWeaponIcons)
         {
-            if (_weaponIcons[i].IsOccupied) continue;
-            else
+            sid.DehighlightAsActive();
+        }
+        _secondaryWeaponIcons[index].HighlightAsActive();
+    }
+    public void IntegrateNewWeapon(WeaponHandler wh)
+    {
+        if (wh == null)
+        {
+            Debug.LogError("WeaponHandler passed is null!");
+            return;
+        }
+        bool foundOpenWeaponSlot = false;
+        if (wh.IsSecondary)
+        {
+            for (int i = 0; i < _secondaryWeaponIcons.Length; i++)
             {
-                _weaponIcons[i].ModifyDisplayedSystem(sprite, level, wType);
-                foundOpenWeaponSLot = true;
-                break;
+                if (_secondaryWeaponIcons[i].IsOccupied) continue;
+                else
+                {
+                    _secondaryWeaponIcons[i].DisplayNewWeapon(wh);
+                    
+                    foundOpenWeaponSlot = true;
+                    break;
+                }
+            }
+            if (foundOpenWeaponSlot == false)
+            {
+                Debug.Log("did not find an open Secondary Weapon slot on UI");
             }
         }
-        if (foundOpenWeaponSLot == false)
+        else
         {
-            Debug.Log("did not find an open Weapon slot on UI");
+            if (_primaryWeaponIcon.IsOccupied)
+            {
+                Debug.Log("Primary weapon slot was occupied, but is now overwritten");
+            }
+            _primaryWeaponIcon.DisplayNewWeapon(wh);
+            _primaryWeaponIcon.HighlightAsActive();
         }
+        
 
     }
 
-    public void ClearWeaponSlot(Library.WeaponType weaponToRemove)
+    public void ClearPrimaryWeaponSlot()
     {
-        Debug.Log($"Trying to clear {weaponToRemove}");
-        foreach (var weaponIcon in _weaponIcons)
+        _primaryWeaponIcon.ClearUIIcon();
+        _primaryWeaponIcon.DehighlightAsActive();
+    }
+
+    public void ClearAllSecondaryWeaponSlots()
+    {
+        foreach (var icon in _secondaryWeaponIcons)
         {
-            if (weaponIcon.WeaponType == weaponToRemove)
-            {
-                weaponIcon.ClearUIIcon();
-                return;
-            }
+            icon.ClearUIIcon();
         }
     }
 
+    #endregion
+
+    #region Public Gets
     public int GetMaxSystems()
     {
         return _systemIcons.Length;
@@ -124,11 +158,13 @@ public class UI_Controller : MonoBehaviour
 
     public int GetMaxWeapons()
     {
-        return _weaponIcons.Length;
+        return _secondaryWeaponIcons.Length;
     }
 
     public RadarScreen GetRadarScreen()
     {
         return _radarScreen;
     }
+
+    #endregion
 }

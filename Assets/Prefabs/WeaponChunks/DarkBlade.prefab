@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1a472108e17da1c45902382241fe7ff9, type: 3}
+  _description: default description
   WeaponType: 7
   _projectileType: 0
   _activationCost: 0

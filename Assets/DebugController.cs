@@ -175,7 +175,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.Engine, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Engine, index);
         }
     }
     public void HandleSystemToggle_Cockpit(int index)
@@ -190,7 +190,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.Cockpit, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Cockpit, index);
         }
     }
     public void HandleSystemToggle_Tail(int index)
@@ -205,7 +205,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.Tail, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Tail, index);
         }
     }
     public void HandleSystemToggle_Wings(int index)
@@ -220,7 +220,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.Wings, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Wings, index);
         }
     }
     public void HandleSystemToggle_Hull(int index)
@@ -235,7 +235,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.Hull, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Hull, index);
         }
     }
     public void HandleSystemToggle_LeftInt(int index)
@@ -250,7 +250,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.LeftInt, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.LeftInt, index);
         }
     }
     public void HandleSystemToggle_RightInt(int index)
@@ -265,7 +265,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveSystem(Library.SystemLocation.RightInt, index);
+            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.RightInt, index);
         }
     }
 
@@ -282,7 +282,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.Debug_RemoveWeapon(_systemsLibrary.GetWeapon(index).
+            _playerSystemsHandler.RemoveWeapon(_systemsLibrary.GetWeapon(index).
                 GetComponent<WeaponHandler>().WeaponType);
         }
     }

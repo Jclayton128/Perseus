@@ -13614,6 +13614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 620583856}
     m_Modifications:
+    - target: {fileID: 6155252475346808196, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3e68f556897a06499d261b7e0fcd07f, type: 3}
     - target: {fileID: 6946714947010698771, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14368,6 +14372,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingSystems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingWeapons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
       value: 3
@@ -14394,11 +14406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _signalFudge
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _radarAccuracy
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxRandomNoise
@@ -14406,7 +14418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _timeBetweenScans
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _radarTargets.Array.size
@@ -15020,6 +15032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 620583856}
     m_Modifications:
+    - target: {fileID: 6155252475346808196, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3e68f556897a06499d261b7e0fcd07f, type: 3}
     - target: {fileID: 6946714947010698771, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17561,6 +17577,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 620583856}
     m_Modifications:
+    - target: {fileID: 6155252475346808196, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3e68f556897a06499d261b7e0fcd07f, type: 3}
     - target: {fileID: 6946714947010698771, guid: d2cab18ad1f123945a60547e77f4476a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27905,11 +27925,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4733722000926905817, guid: 7739ad94771712c4a9dbfced6b21482f, type: 3}
       propertyPath: _fadePerSecond
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4733722000926905817, guid: 7739ad94771712c4a9dbfced6b21482f, type: 3}
       propertyPath: _risePerSecond
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4733722000926905817, guid: 7739ad94771712c4a9dbfced6b21482f, type: 3}
       propertyPath: radarSectors.Array.size
@@ -29424,8 +29444,8 @@ MonoBehaviour:
   - {fileID: 203386261}
   - {fileID: 481519232}
   - {fileID: 1287281232}
-  _weaponIcons:
-  - {fileID: 1445742285}
+  _primaryWeaponIcon: {fileID: 1445742285}
+  _secondaryWeaponIcons:
   - {fileID: 1578045949}
   - {fileID: 1244913484}
   - {fileID: 427719057}

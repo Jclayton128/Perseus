@@ -262,6 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  _description: The Archer Turret is a powerful, manually-aimed turret. Hold RMB
+    to charge, release to fire.
   WeaponType: 1
   _projectileType: 0
   _activationCost: 0

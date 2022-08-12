@@ -8,54 +8,42 @@ public class WeaponIconDriver : SystemIconDriver
 {
     [SerializeField] Image _hintIcon;
     public Library.WeaponType WeaponType { get; private set; }
-    Sprite _primarySprite;
-    Sprite _secondarySprite;
 
     public void Initialize(Sprite primary, Sprite secondary)
     {
         base.Initialize();
-        _primarySprite = primary;
-        _secondarySprite = secondary;
-        DehighlightAsActiveSecondaryIfNotPrimary();
-        DehighlightAsActivePrimary();
-
+        DehighlightAsActive();
     }
 
-    public void ModifyDisplayedSystem(Sprite sprite, int level, Library.WeaponType weaponType)
+    public void DisplayNewWeapon(WeaponHandler wh)
     {
-        _systemIcon.sprite = sprite;
-        _systemIcon.color = Color.white;
-        _levelTMP.text = level.ToString();
-        WeaponType = weaponType;
+        if (!wh)
+        {
+            Debug.LogError("No WeaponHandler passed!");
+            IsOccupied = false;
+            return;
+        }
+        IsOccupied = true;
+        _systemIcon.sprite = wh.GetIcon();
+        if (_systemIcon.sprite != null)
+        {
+            _systemIcon.color = Color.white;
+        }
+        else
+        {
+            _systemIcon.color = Color.clear;
+        }
+        _levelTMP.text = wh.CurrentUpgradeLevel.ToString();
+        WeaponType = wh.WeaponType;        
     }
 
-    public void HighlightAsActivePrimary()
+    public void HighlightAsActive()
     {
         _hintIcon.enabled = true;
-        _hintIcon.sprite = _primarySprite;
     }
 
-    public void DehighlightAsActivePrimary()
+    public void DehighlightAsActive()
     {
         _hintIcon.enabled = false;
-        _hintIcon.sprite = null;
-    }
-    public void HighlightAsActiveSecondaryIfNotPrimary()
-    {
-        if (_hintIcon.sprite != _primarySprite)
-        {
-            _hintIcon.enabled = true;
-            _hintIcon.sprite = _secondarySprite;
-        }
-
-    }
-
-    public void DehighlightAsActiveSecondaryIfNotPrimary()
-    {
-        if (_hintIcon.sprite != _primarySprite)
-        {
-            _hintIcon.enabled = false;
-            _hintIcon.sprite = null;
-        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public abstract class SystemHandler : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public abstract class SystemHandler : MonoBehaviour
     public Library.SystemLocation SystemLocation;
     protected SystemIconDriver _connectedSID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
-    protected int _currentUpgradeLevel = 1;
+
+    [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
     private void Awake()
     {
@@ -44,7 +46,7 @@ public abstract class SystemHandler : MonoBehaviour
             Debug.Log("Invalide upgrade level");
             return false;
         }
-        if (_currentUpgradeLevel == _maxUpgradeLevel)
+        if (CurrentUpgradeLevel == _maxUpgradeLevel)
         {
             return false;
         }
@@ -56,13 +58,13 @@ public abstract class SystemHandler : MonoBehaviour
 
     public virtual void Upgrade()
     {
-        if (_currentUpgradeLevel >= _maxUpgradeLevel)
+        if (CurrentUpgradeLevel >= _maxUpgradeLevel)
         {
             Debug.Log("Unable to upgrade past max level.");
             return;
         }
 
-        _currentUpgradeLevel++;
+        CurrentUpgradeLevel++;
     }
 
 

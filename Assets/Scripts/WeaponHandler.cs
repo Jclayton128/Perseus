@@ -2,13 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public abstract class WeaponHandler : MonoBehaviour
 {
     protected PoolController _poolCon;
     protected InputController _inputCon;
 
+
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
     [SerializeField] protected Sprite _icon = null;
+
+
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"),Multiline(3), HideLabel]
+    [SerializeField] protected string _description = "default description";
+
     public Library.WeaponType WeaponType;
     [SerializeField] protected ProjectileBrain.PType _projectileType;
     [SerializeField] protected float _activationCost = 0;
@@ -19,7 +29,7 @@ public abstract class WeaponHandler : MonoBehaviour
 
     protected WeaponIconDriver _connectedWID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
-    protected int _currentUpgradeLevel = 1;
+    [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
 
     public virtual void Initialize()
@@ -58,7 +68,7 @@ public abstract class WeaponHandler : MonoBehaviour
             Debug.Log("Invalide upgrade level");
             return false;
         }
-        if (_currentUpgradeLevel == _maxUpgradeLevel)
+        if (CurrentUpgradeLevel == _maxUpgradeLevel)
         {
             return false;
         }
@@ -70,13 +80,13 @@ public abstract class WeaponHandler : MonoBehaviour
 
     public virtual void Upgrade()
     {
-        if (_currentUpgradeLevel >= _maxUpgradeLevel)
+        if (CurrentUpgradeLevel >= _maxUpgradeLevel)
         {
             Debug.Log("Unable to upgrade past max level.");
             return;
         }
 
-        _currentUpgradeLevel++;
+        CurrentUpgradeLevel++;
     }
 
 }

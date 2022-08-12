@@ -9,7 +9,7 @@ public class SystemIconDriver : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
     public Library.SystemType System { get; private set; }
-    public bool IsOccupied { get; private set; } = false;
+    public bool IsOccupied = false;// { get; protected set; } = false;
 
     public virtual void Initialize()
     {
@@ -19,12 +19,15 @@ public class SystemIconDriver : MonoBehaviour
         IsOccupied = false;
     }
 
-    public void ModifyDisplayedSystem(Sprite sprite, int level, Library.SystemType system)
+    public void DisplayNewSystem(SystemHandler sh)
     {
-        System = system;
-        _systemIcon.sprite = sprite;
-        _systemIcon.color = Color.white;
-        _levelTMP.text = level.ToString();
+        System = sh.SystemType;
+        _systemIcon.sprite = sh.GetIcon();
+        if (sh.GetIcon() != null)
+        {
+            _systemIcon.color = Color.white;
+        }
+        _levelTMP.text = sh.CurrentUpgradeLevel.ToString();
         IsOccupied = true;
     }
 
