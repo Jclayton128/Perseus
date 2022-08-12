@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerSystemHandler : MonoBehaviour
 {
-    Library _syslib;
+    SystemWeaponLibrary _syslib;
     InputController _inputCon;
-    [SerializeField] Library.SystemType[] _startingSystems = null;
-    [SerializeField] Library.WeaponType[] _startingWeapons = null;
+    [SerializeField] SystemWeaponLibrary.SystemType[] _startingSystems = null;
+    [SerializeField] SystemWeaponLibrary.WeaponType[] _startingWeapons = null;
     ActorMovement _playerHandler;
     UI_Controller _UICon;
 
     //These are used to check for overlap between two weapons or two systems.
-    Dictionary<Library.WeaponType, GameObject> _weaponsOnBoard =
-        new Dictionary<Library.WeaponType, GameObject>();
-    Dictionary<Library.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<Library.SystemLocation, GameObject>();
+    Dictionary<SystemWeaponLibrary.WeaponType, GameObject> _weaponsOnBoard =
+        new Dictionary<SystemWeaponLibrary.WeaponType, GameObject>();
+    Dictionary<SystemWeaponLibrary.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<SystemWeaponLibrary.SystemLocation, GameObject>();
 
     //state
    public  int _activeWeaponIndex;
@@ -29,7 +29,7 @@ public class PlayerSystemHandler : MonoBehaviour
     [SerializeField] List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
     {
-        _syslib = FindObjectOfType<Library>();
+        _syslib = FindObjectOfType<SystemWeaponLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
         _inputCon = _UICon.GetComponent<InputController>();
         _inputCon.OnScroll += ScrollThroughActiveWeapons;
@@ -189,7 +189,7 @@ public class PlayerSystemHandler : MonoBehaviour
         return true;
     }
 
-    public bool Debug_TryGainSystem(Library.SystemLocation location, int index)
+    public bool Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation location, int index)
     {
         if (_systemsOnBoardByLocation.Count >= _UICon.GetMaxSystems())
         {
@@ -210,7 +210,7 @@ public class PlayerSystemHandler : MonoBehaviour
         return true;
     }
 
-    public void RemoveWeapon(Library.WeaponType weaponType)
+    public void RemoveWeapon(SystemWeaponLibrary.WeaponType weaponType)
     {
         WeaponHandler removedWeapon = _weaponsOnBoard[weaponType].GetComponent<WeaponHandler>();
         if (removedWeapon.IsSecondary)
@@ -250,7 +250,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     }
 
-    public void RemoveSystem(Library.SystemLocation location, int index)
+    public void RemoveSystem(SystemWeaponLibrary.SystemLocation location, int index)
     {
         SystemHandler systemToRemove = _syslib.GetSystem(location, index).GetComponent<SystemHandler>();
         

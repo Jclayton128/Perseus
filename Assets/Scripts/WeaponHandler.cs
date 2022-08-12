@@ -19,7 +19,7 @@ public abstract class WeaponHandler : MonoBehaviour
     [FoldoutGroup("Brochure"),Multiline(3), HideLabel]
     [SerializeField] protected string _description = "default description";
 
-    public Library.WeaponType WeaponType;
+    public SystemWeaponLibrary.WeaponType WeaponType;
     [SerializeField] protected ProjectileBrain.PType _projectileType;
     [SerializeField] protected float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;

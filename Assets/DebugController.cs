@@ -8,7 +8,7 @@ public class DebugController : MonoBehaviour
 {
     ActorMovement _playerPH;
     GameController _gameController;
-    Library _systemsLibrary;
+    SystemWeaponLibrary _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
 
     [SerializeField] Toggle[] _systemToggles_Engine = null;
@@ -27,7 +27,7 @@ public class DebugController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
-        _systemsLibrary = FindObjectOfType<Library>();
+        _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
 
     }
 
@@ -42,63 +42,63 @@ public class DebugController : MonoBehaviour
         foreach (var toggle in _systemToggles_Engine)
         {
             int index = Array.IndexOf(_systemToggles_Engine, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.Engine, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.Engine, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.Engine, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.Engine, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_Cockpit)
         {
             int index = Array.IndexOf(_systemToggles_Cockpit, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.Cockpit, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.Cockpit, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_Tail)
         {
             int index = Array.IndexOf(_systemToggles_Tail, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.Tail, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.Tail, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.Tail, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.Tail, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_Wings)
         {
             int index = Array.IndexOf(_systemToggles_Wings, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.Wings, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.Wings, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.Wings, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.Wings, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_Hull)
         {
             int index = Array.IndexOf(_systemToggles_Hull, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.Hull, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.Hull, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.Hull, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.Hull, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_LeftInt)
         {
             int index = Array.IndexOf(_systemToggles_LeftInt, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.LeftInt, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.LeftInt, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index).ToString();
             toggle.isOn = false;
         }
 
         foreach (var toggle in _systemToggles_RightInt)
         {
             int index = Array.IndexOf(_systemToggles_RightInt, toggle);
-            if (_systemsLibrary.GetSystem(Library.SystemLocation.RightInt, index) == null) continue;
+            if (_systemsLibrary.GetSystem(SystemWeaponLibrary.SystemLocation.RightInt, index) == null) continue;
             toggle.GetComponentInChildren<Text>().text = _systemsLibrary.
-                GetSystem(Library.SystemLocation.RightInt, index).ToString();
+                GetSystem(SystemWeaponLibrary.SystemLocation.RightInt, index).ToString();
             toggle.isOn = false;
         }
 
@@ -167,7 +167,7 @@ public class DebugController : MonoBehaviour
     {
         if (_systemToggles_Engine[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.Engine, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Engine, index))
             {
                 _systemToggles_Engine[index].isOn = false;
                 return;
@@ -175,14 +175,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Engine, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Engine, index);
         }
     }
     public void HandleSystemToggle_Cockpit(int index)
     {
         if (_systemToggles_Cockpit[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.Cockpit, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index))
             {
                 _systemToggles_Cockpit[index].isOn = false;
                 return;
@@ -190,14 +190,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Cockpit, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index);
         }
     }
     public void HandleSystemToggle_Tail(int index)
     {
         if (_systemToggles_Tail[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.Tail, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Tail, index))
             {
                 _systemToggles_Tail[index].isOn = false;
                 return;
@@ -205,14 +205,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Tail, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Tail, index);
         }
     }
     public void HandleSystemToggle_Wings(int index)
     {
         if (_systemToggles_Wings[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.Wings, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Wings, index))
             {
                 _systemToggles_Wings[index].isOn = false;
                 return;
@@ -220,14 +220,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Wings, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Wings, index);
         }
     }
     public void HandleSystemToggle_Hull(int index)
     {
         if (_systemToggles_Hull[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.Hull, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Hull, index))
             {
                 _systemToggles_Hull[index].isOn = false;
                 return;
@@ -235,14 +235,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.Hull, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Hull, index);
         }
     }
     public void HandleSystemToggle_LeftInt(int index)
     {
         if (_systemToggles_LeftInt[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.LeftInt, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index))
             {
                 _systemToggles_LeftInt[index].isOn = false;
                 return;
@@ -250,14 +250,14 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.LeftInt, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index);
         }
     }
     public void HandleSystemToggle_RightInt(int index)
     {
         if (_systemToggles_RightInt[index].isOn)
         {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(Library.SystemLocation.RightInt, index))
+            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.RightInt, index))
             {
                 _systemToggles_RightInt[index].isOn = false;
                 return;
@@ -265,7 +265,7 @@ public class DebugController : MonoBehaviour
         }
         else
         {
-            _playerSystemsHandler.RemoveSystem(Library.SystemLocation.RightInt, index);
+            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.RightInt, index);
         }
     }
 

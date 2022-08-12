@@ -8,8 +8,8 @@ public abstract class SystemHandler : MonoBehaviour
     [SerializeField] Sprite _icon = null;
 
     //state
-    public Library.SystemType SystemType;
-    public Library.SystemLocation SystemLocation;
+    public SystemWeaponLibrary.SystemType SystemType;
+    public SystemWeaponLibrary.SystemLocation SystemLocation;
     protected SystemIconDriver _connectedSID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
 

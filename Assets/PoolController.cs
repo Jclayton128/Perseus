@@ -6,7 +6,7 @@ using UnityEngine;
 public class PoolController : MonoBehaviour
 {   
     [SerializeField] GameObject[] _projectilePrefabs = null;
-    Library _sysLib;
+    SystemWeaponLibrary _sysLib;
 
     //state
     Dictionary<ProjectileBrain.PType, Queue<ProjectileBrain>> _unusedPools = 
@@ -18,7 +18,7 @@ public class PoolController : MonoBehaviour
 
     private void Awake()
     {
-        _sysLib = FindObjectOfType<Library>();
+        _sysLib = FindObjectOfType<SystemWeaponLibrary>();
     }
 
     private void Start()

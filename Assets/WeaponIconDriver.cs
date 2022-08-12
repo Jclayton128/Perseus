@@ -7,7 +7,7 @@ using TMPro;
 public class WeaponIconDriver : SystemIconDriver
 {
     [SerializeField] Image _hintIcon;
-    public Library.WeaponType WeaponType { get; private set; }
+    public SystemWeaponLibrary.WeaponType WeaponType { get; private set; }
 
     public void Initialize(Sprite primary, Sprite secondary)
     {

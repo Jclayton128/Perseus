@@ -8,7 +8,7 @@ public class SystemIconDriver : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
-    public Library.SystemType System { get; private set; }
+    public SystemWeaponLibrary.SystemType System { get; private set; }
     public bool IsOccupied = false;// { get; protected set; } = false;
 
     public virtual void Initialize()
@@ -33,7 +33,7 @@ public class SystemIconDriver : MonoBehaviour
 
     public void ClearUIIcon()
     {
-        System = Library.SystemType.None;
+        System = SystemWeaponLibrary.SystemType.None;
         _systemIcon.sprite = null;
         _systemIcon.color = Color.clear;
         _levelTMP.text = " ";
