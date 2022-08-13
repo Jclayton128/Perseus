@@ -18458,7 +18458,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 34479df0ce1ea9147af248f300a92b3b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -29708,6 +29708,8 @@ GameObject:
   - component: {fileID: 2102641478}
   - component: {fileID: 2102641479}
   - component: {fileID: 2102641480}
+  - component: {fileID: 2102641482}
+  - component: {fileID: 2102641481}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -29870,6 +29872,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cc2997af0e533b4cb46fcb575083b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2102641481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102641472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c109ba845d5d3f842869941d5821a581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scrapPrefab: {fileID: 1481232760935365275, guid: 92890000123525943bcb4263373d8ff9, type: 3}
+  _scrapSprites:
+  - {fileID: 21300000, guid: 238afd160cda798469d72cc5b500cb36, type: 3}
+  - {fileID: 21300000, guid: 6cf3f78a9fbc7e647ae2e04cad64f0d7, type: 3}
+  - {fileID: 21300000, guid: c4f0f5aa1d4d9174aa05e39bae75d7e2, type: 3}
+  - {fileID: 21300000, guid: 6456a025b495c9249a44f43f34311c08, type: 3}
+  - {fileID: 21300000, guid: adbc12a7086a04341bdbbabd9462b2c7, type: 3}
+  - {fileID: 21300000, guid: 2ec57bf51464e914f8695a99ab80155c, type: 3}
+  - {fileID: 21300000, guid: 657591c7a3c645b44be33151742eca7b, type: 3}
+  - {fileID: 21300000, guid: 066b9f6da5099b44d918e75a29e98c00, type: 3}
+--- !u!114 &2102641482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102641472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab6516a26032654d8a004295b708af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2102927340
@@ -30588,8 +30624,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
-      propertyPath: ThreatScore
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _maxHullPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _maxShieldPoints
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

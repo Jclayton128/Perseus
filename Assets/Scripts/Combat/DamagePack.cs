@@ -5,20 +5,30 @@ using UnityEngine;
 public struct DamagePack
 {
     public float NormalDamage;
-    public float ShieldDamage;
+    public float ShieldBonusDamage;
     public float IonDamage;
     public float KnockbackAmount;
     public float ScrapBonus;
 
 
 
-    public DamagePack(float normalDamage, float shieldDamage, float ionDamage,
+    public DamagePack(float normalDamage, float shieldBonusDamage, float ionDamage,
         float knockbackAmount, float scrapBonus)
     {
         NormalDamage = normalDamage;
-        ShieldDamage = shieldDamage;
+        ShieldBonusDamage = shieldBonusDamage;
         IonDamage = ionDamage;
         KnockbackAmount = knockbackAmount; 
-        ScrapBonus = scrapBonus;
+
+        if (normalDamage > 0)
+        {
+            ScrapBonus = scrapBonus;
+        }
+        else
+        {
+            ScrapBonus = 0;
+            Debug.LogError("Scrap Bonus is zero when normal damage is zero to prevent exploitation.");
+        }
+
     }
 }
