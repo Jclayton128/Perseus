@@ -34,11 +34,15 @@ public class Health : MonoBehaviour
     [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
 
     //state
+    [BoxGroup("Current Stats")]
     [ShowInInspector] public float HullPoints { get; protected set; } = 1;
+
+    [BoxGroup("Current Stats")]
     [ShowInInspector] public float ShieldPoints { get; protected set; } = 0;
 
     [Tooltip("Ion factor is the percentage of ionization")]
     private float _ionizationPointsAbsorbed = 0;
+    [BoxGroup("Current Stats")]
     [ShowInInspector] public float IonFactor = 0;
 
     private void Awake()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(Collider2D))]
 public class RadarProfileHandler : MonoBehaviour
 {
     float _highLevel = 10f;
