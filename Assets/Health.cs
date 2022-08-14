@@ -34,15 +34,15 @@ public class Health : MonoBehaviour
     [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
 
     //state
-    [BoxGroup("Current Stats")]
+    //[BoxGroup("Current Stats")]
     [ShowInInspector] public float HullPoints { get; protected set; } = 1;
 
-    [BoxGroup("Current Stats")]
+    //[BoxGroup("Current Stats")]
     [ShowInInspector] public float ShieldPoints { get; protected set; } = 0;
 
     [Tooltip("Ion factor is the percentage of ionization")]
     private float _ionizationPointsAbsorbed = 0;
-    [BoxGroup("Current Stats")]
+    //[BoxGroup("Current Stats")]
     [ShowInInspector] public float IonFactor = 0;
 
     private void Awake()
@@ -50,6 +50,7 @@ public class Health : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _movement = GetComponent<ActorMovement>();
         _particleController = FindObjectOfType<ParticleController>();
+        _scrapController = _particleController.GetComponent<ScrapController>();
 
         HullPoints = _maxHullPoints;
         ShieldPoints = _maxShieldPoints;
@@ -57,12 +58,59 @@ public class Health : MonoBehaviour
         IonFactor = 0;
     }
 
+    #region Flow
     private void Update()
     {
-        //Check for death
-        //Recharge Shield
-        //Reduce Ionization
-        //if player, push visualization to UI elements
+        UpdateDeathCheck();
+        UpdateRechargeShield();
+        UpdateIonization();
+    }
+    private bool UpdateDeathCheck()
+    {
+        if (HullPoints <= 0)
+        {
+            Die();
+            return true;
+        }
+        else return false;
+    }
+
+    private void Die()
+    {
+        Debug.Log("Dead enemy!");
+        Destroy(gameObject);
+    }
+
+    private void UpdateRechargeShield()
+    {
+        ShieldPoints += _shieldHealRate * Time.deltaTime;
+        ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
+    }
+
+    private void UpdateIonization()
+    {
+        _ionizationPointsAbsorbed -= _ionHealRate * Time.deltaTime;
+        _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
+        IonFactor = (_ionizationPointsAbsorbed / _maxHullPoints);
+
+        if (_movement.IsPlayer)
+        {
+            //TODO Update Ionization UI slider
+        }
+    }
+
+    #endregion
+
+    #region Receive Damage
+
+    private void OnTriggerEnter2D(Collider2D weaponImpact)
+    {
+        ProjectileBrain pb;
+        if (weaponImpact.TryGetComponent<ProjectileBrain>(out pb))
+        {
+            ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetVectorAtImpact());
+            pb.DecrementPenetrationOnImpact();
+        }
     }
 
     private void ReceiveDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
@@ -89,23 +137,37 @@ public class Health : MonoBehaviour
 
     }
 
-    private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
-    {
-        HullPoints -= normalDamage;
-
-        if (!_movement.IsPlayer)
-        {
-            int scrapToMake = Mathf.RoundToInt((normalDamage + scrapBonus) * _scrapsPerPointOfNormalDamage);
-            _scrapController.SpawnScraps(scrapToMake, impactPosition, impactHeading);
-        }
-
-    }
-
     private void ReceiveShieldDamage(float shieldDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
         ShieldPoints -= shieldDamage;
-        int amount = Mathf.RoundToInt(shieldDamage * _particlesPerPointOfShieldDamage);
+        float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
+        int amount = Mathf.RoundToInt(damageDone * _particlesPerPointOfShieldDamage);
         _particleController.RequestShieldDamageParticles(amount, transform.position, impactHeading);
+    }
+
+    private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
+    {
+
+        HullPoints -= normalDamage;
+        float damageReceived;
+
+        if (HullPoints < 0)
+        {
+            //A high-damage shot against something with little health left should not create lots of scrap
+            damageReceived = normalDamage + scrapBonus + HullPoints;
+        }
+        else
+        {
+            damageReceived = normalDamage + scrapBonus;
+        }
+
+
+        if (!_movement.IsPlayer)
+        {
+            int scrapToMake = Mathf.RoundToInt((damageReceived) * _scrapsPerPointOfNormalDamage);
+            _scrapController.SpawnScraps(scrapToMake, impactPosition, impactHeading);
+        }
+
     }
 
     private void ReceiveIonDamage(DamagePack incomingDamage)
@@ -114,24 +176,7 @@ public class Health : MonoBehaviour
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
     }
 
-    private bool CheckForDeath()
-    {
-        if (HullPoints <= 0)
-        {
-            Die();
-            return true;
-        }
-        else return false;
-    }
+    #endregion
 
-    private void Die()
-    {
-        throw new NotImplementedException();
-    }
 
-    private void OnTriggerEnter2D(Collider2D impactingWeapon)
-    {
-        // Reduce penetration on the impactingWeapon. Destroy it if necessary
-        // Receive Damage on this
-    }
 }

@@ -21,6 +21,19 @@ public abstract class WeaponHandler : MonoBehaviour
 
     public SystemWeaponLibrary.WeaponType WeaponType;
     [SerializeField] protected ProjectileBrain.PType _projectileType;
+
+    [FoldoutGroup("Damage Pack")]
+    [SerializeField] protected float _normalDamage = 0;
+    [FoldoutGroup("Damage Pack")]
+    [SerializeField] protected float _shieldBonusDamage = 0;
+    [FoldoutGroup("Damage Pack")]
+    [SerializeField] protected float _ionDamage = 0;
+    [FoldoutGroup("Damage Pack")]
+    [SerializeField] protected float _knockBackAmount = 0;
+    [FoldoutGroup("Damage Pack")]
+    [SerializeField] protected float _scrapBonus = 0;
+
+
     [SerializeField] protected float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;
     protected Transform _muzzle;

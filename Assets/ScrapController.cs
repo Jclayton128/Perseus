@@ -15,8 +15,8 @@ public class ScrapController : MonoBehaviour
     float _scrapAverageLifetime = 30f;
     float _scrapLifetimeDeviation = 5f;
     float _scrapAngularVelocityMax = 20f; // degrees per second
-    float _scrapExitSpeedAverage = 6f;
-    float _scrapExitSpeedDeviation = 2f;
+    float _scrapExitSpeedAverage = 1f;
+    float _scrapExitSpeedDeviation = 0.5f;
 
     //state
     
@@ -53,8 +53,9 @@ public class ScrapController : MonoBehaviour
     }
     public void ReturnUnusedScrap(ScrapHandler scrapToPool)
     {
+        scrapToPool.gameObject.SetActive(false);
         _pooledScraps.Enqueue(scrapToPool);
-        _scrapPrefab.gameObject.SetActive(false);
+
     }
 
 

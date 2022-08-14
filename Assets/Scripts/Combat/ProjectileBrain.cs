@@ -45,8 +45,7 @@ public class ProjectileBrain : MonoBehaviour
 
     //state
     float _lifetimeRemaining = 0;
-    float _resilienceRemaining = 0; //Hits it can take from PD turret or number of penetrations allowed
-    DamagePack _damagePack;
+    float _resilienceRemaining = 1; //Hits it can take from PD turret or number of penetrations allowed
     Behaviour _behaviour;
     public PType pType;
     Allegiance _allegiance;
@@ -54,6 +53,9 @@ public class ProjectileBrain : MonoBehaviour
     Vector3 _targetPoint;
     Transform _targetTransform;
     float _genericParameter; // This is a float that can be used to inform specific things, like scrapedo accel rate
+
+    public DamagePack DamagePack;
+    public Vector2 ImpactHeading;
 
     public void Initialize(PoolController poolController)
     {
@@ -66,7 +68,7 @@ public class ProjectileBrain : MonoBehaviour
         DamagePack damagePack, Vector3 targetPoint)
     {
         _lifetimeRemaining = lifetime;
-        _damagePack = damagePack;
+        DamagePack = damagePack;
         _behaviour = behaviour;
         _allegiance = allegiance;
         _deathBehaviour = deathBehaviour;
@@ -78,7 +80,7 @@ public class ProjectileBrain : MonoBehaviour
         _lifetimeRemaining -= Time.deltaTime;
         if (_lifetimeRemaining <= 0)
         {
-            ExecuteDeathSequence();
+            ExecuteLifetimeExpirationSequence();
         }
     }
 
@@ -102,7 +104,7 @@ public class ProjectileBrain : MonoBehaviour
         }
     }
 
-    private void ExecuteDeathSequence()
+    private void ExecuteLifetimeExpirationSequence()
     {
         switch (_deathBehaviour)
         {
@@ -119,4 +121,22 @@ public class ProjectileBrain : MonoBehaviour
                 return;
         }
     }
+
+    #region Public Impact Helpers
+
+    public Vector2 GetVectorAtImpact()
+    {
+        return _rb.velocity.normalized;
+    }
+
+    public void DecrementPenetrationOnImpact()
+    {
+        _resilienceRemaining--;
+        if (_resilienceRemaining <= 0)
+        {
+            _poolCon.ReturnDeadProjectile(this);
+        }
+    }
+
+    #endregion
 }

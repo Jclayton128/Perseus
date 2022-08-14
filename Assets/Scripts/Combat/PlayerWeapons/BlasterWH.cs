@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlasterWH : WeaponHandler
 {
     //settings
-    [SerializeField] float _timeBetweenShots = 0.5f;
+    [SerializeField] float _timeBetweenShots = 0.25f;
     [SerializeField] float _shotLifetime = 2f;
     [SerializeField] float _shotSpeed = 5f;
 
@@ -35,13 +35,11 @@ public class BlasterWH : WeaponHandler
 
     private void Fire()
     {
-        DamagePack dp = new DamagePack(1,0,0,0,0);
+        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
         ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
-
-
     }
 
 }

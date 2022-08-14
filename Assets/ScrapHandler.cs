@@ -36,7 +36,7 @@ public class ScrapHandler : MonoBehaviour
     private void Update()
     {
         _lifetimeRemaining -= Time.deltaTime;
-        if (_lifetimeRemaining < 0)
+        if (_lifetimeRemaining <= 0)
         {
             Fadeaway();
             Invoke(nameof(ReturnToPool), _fadeoutDuration);
