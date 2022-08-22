@@ -8746,11 +8746,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452367743}
   m_CullTransparentMesh: 1
---- !u!198 &453917398 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2291206457893564455, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-  m_PrefabInstance: {fileID: 1067388886}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &455657162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13144,11 +13139,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946098464}
   m_CullTransparentMesh: 1
---- !u!198 &949939532 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3691665194677790910, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-  m_PrefabInstance: {fileID: 1067388886}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &950033345
 GameObject:
   m_ObjectHideFlags: 0
@@ -14643,94 +14633,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _startingSystems.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _startingWeapons.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: -1702155753
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641889855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: -1319428539
-      objectReference: {fileID: 0}
-    - target: {fileID: 1948606129, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1948606129, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1948606129, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: -1319428539
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _signalFudge
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _radarAccuracy
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _maxRandomNoise
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _timeBetweenScans
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _radarTargets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _radarTargets.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _radarTargets.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074364254, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _radarTargets.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: IsPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _engineParticles.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _engineParticles.Array.data[0]
-      value: 
-      objectReference: {fileID: 453917398}
-    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _engineParticles.Array.data[1]
-      value: 
-      objectReference: {fileID: 949939532}
     - target: {fileID: 2148845601266606514, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -14774,14 +14676,6 @@ PrefabInstance:
     - target: {fileID: 2148845601266606514, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002118628085007855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002118628085007855, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1702155753
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name
@@ -30584,6 +30478,10 @@ PrefabInstance:
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: Enemy_Master
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939738846384467041, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467043, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_RootOrder

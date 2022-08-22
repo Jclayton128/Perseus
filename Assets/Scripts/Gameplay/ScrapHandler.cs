@@ -52,4 +52,10 @@ public class ScrapHandler : MonoBehaviour
     {
         _scrapController.ReturnUnusedScrap(this);
     }
+
+    public void CollectScrap()
+    {
+        
+        ReturnToPool();
+    }
 }

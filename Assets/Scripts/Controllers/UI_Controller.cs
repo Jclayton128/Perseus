@@ -55,8 +55,10 @@ public class UI_Controller : MonoBehaviour
 
     private void InitializeScrapLevelPanel()
     {
-        ModifyScrapAmount(0, 0);
-        ModifyLevel(0);
+        // This initialization is now handled by the Player Scrap Handler
+
+        //ModifyScrapAmount(0, 0);
+        //ModifyLevel(0);
     }
 
     private void InitializeSystemWeaponIcons()
