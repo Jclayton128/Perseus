@@ -5,24 +5,19 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
+    //settings
+    [Tooltip("This multiplies the number of particles to make when an FX is spawned. Higher is more.")]
+    [SerializeField] float _shieldGloryFactor = 1;
     
 
-    [SerializeField] ParticleSystem _hullDamageFXprefab = null;
+    [SerializeField] ParticleSystem _shieldDamageFXprefab = null;
 
     internal void RequestShieldDamageParticles(int particlesToMake, Vector3 position, Vector2 impactHeading)
     {
         Quaternion rot = Quaternion.LookRotation(impactHeading, Vector3.forward);
-        ParticleSystem ps = Instantiate(_hullDamageFXprefab.gameObject, position, rot).GetComponent<ParticleSystem>();
-        ParticleSystem.EmissionModule psem = ps.emission;
-
-        ParticleSystem.Burst burst = new ParticleSystem.Burst(0,particlesToMake);
-        psem.SetBurst(0, burst);
-        ps.Play();
+        ParticleSystem ps = Instantiate(_shieldDamageFXprefab.gameObject, position, rot).GetComponent<ParticleSystem>();
+        int count = Mathf.RoundToInt(particlesToMake * _shieldGloryFactor);
+        ps.Emit(count);
     }
 
-    [ContextMenu("Spawn Random hull particles")]
-    private void DebugShieldDamage()
-    {
-        RequestShieldDamageParticles(10, Vector3.one, new Vector2(0, -1));
-    }
 }

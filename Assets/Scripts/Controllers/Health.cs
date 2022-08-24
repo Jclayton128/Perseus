@@ -141,8 +141,8 @@ public class Health : MonoBehaviour
     {
         ShieldPoints -= shieldDamage;
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
-        int amount = Mathf.RoundToInt(damageDone * _particlesPerPointOfShieldDamage);
-        _particleController.RequestShieldDamageParticles(amount, transform.position, impactHeading);
+        int amount = Mathf.FloorToInt(damageDone * _particlesPerPointOfShieldDamage);
+        _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
     }
 
     private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
@@ -165,7 +165,8 @@ public class Health : MonoBehaviour
         if (!_movement.IsPlayer)
         {
             int scrapToMake = Mathf.RoundToInt((damageReceived) * _scrapsPerPointOfNormalDamage);
-            _scrapController.SpawnScraps(scrapToMake, impactPosition, impactHeading);
+
+            _scrapController.SpawnScraps(scrapToMake, ((Vector2)transform.position + impactPosition)/2f, impactHeading);
         }
 
     }

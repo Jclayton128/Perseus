@@ -29806,7 +29806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab6516a26032654d8a004295b708af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hullDamageFXprefab: {fileID: 5119559898222757858, guid: 2d5bf880828650d459b8ffe0f54033e1, type: 3}
+  _shieldGloryFactor: 10
+  _shieldDamageFXprefab: {fileID: 5119559898222757858, guid: fa8d7db93a2f5f94cb298052ccc98d97, type: 3}
 --- !u!1 &2102927340
 GameObject:
   m_ObjectHideFlags: 0
