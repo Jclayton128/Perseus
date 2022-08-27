@@ -36,6 +36,8 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] TextMeshProUGUI _levelTMP = null;
     #endregion
 
+    public enum Context {None, Start, Core, End };
+
     //settings
     [FoldoutGroup("Scrap & Level")]
     [SerializeField] float _minScrapFactor = 0.13f;
