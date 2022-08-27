@@ -1,0 +1,127 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+
+public class AdjustableImageBar : MonoBehaviour
+{
+    [SerializeField] Image _foregroundImageBar = null;
+    [SerializeField] Image _backgroundImageBar = null;
+    Tween _backgroundTween;
+    Tween _memoryTween;
+    
+    //settings
+    [SerializeField] float _minFactor = 0f;
+    [SerializeField] float _maxFactor = 1f;
+    [SerializeField] float _backgroundFadeoutMultiplier;
+
+    [Tooltip("This is how long the background fill amount should remain static despite" +
+        "receiving multiple foreground fill updates")]
+    [SerializeField] float _memoryTimeframe = 2f;
+
+
+    [Range(0,100)]
+    public float Debugvalue = 1;
+    //[Tooltip("Select this if using prospective values to show color differentiation")]
+    //[SerializeField] bool _isIncreaseGood = false;
+
+    //state
+    Color _backgroundStartingColor;
+    Color _foregroundStartingColor;
+    float _memoryEndtime = 0;
+
+    private void Start()
+    {
+        _foregroundStartingColor = _foregroundImageBar.color;
+        _backgroundStartingColor = _backgroundImageBar.color;
+        _backgroundImageBar.fillAmount = 1;
+        SetFactor(1);
+    }
+
+    public void SetFactor(float newRawForegroundFactor)
+    {
+        float newCorrectedForegroundFactor = Mathf.Lerp(_minFactor, _maxFactor, newRawForegroundFactor);
+        if (newRawForegroundFactor > 1f || newRawForegroundFactor < 0)
+        {
+            Debug.LogError("Invalid factor");
+            return;
+        }
+
+        if (!_foregroundImageBar)
+        {
+            Debug.LogError("Must have a foreground Image Bar!");
+            return;
+        }
+
+        // Factor getting lower
+        if (newCorrectedForegroundFactor < _foregroundImageBar.fillAmount)
+        {
+            Debug.Log($"firing since {newCorrectedForegroundFactor} is < {_foregroundImageBar.fillAmount}");
+            //if outside of memory timeframe, update background fill amount
+            if (Time.time >= _memoryEndtime)  
+            {
+                _backgroundImageBar.fillAmount = _foregroundImageBar.fillAmount;
+            }
+            _memoryEndtime = Time.time + _memoryTimeframe;
+
+            _foregroundImageBar.fillAmount = newCorrectedForegroundFactor;
+            float newAmount = _foregroundImageBar.fillAmount;
+
+            if (_backgroundImageBar)
+            {
+                _backgroundTween.Kill();
+                float oldAmount = _backgroundImageBar.fillAmount;
+                _backgroundImageBar.color = _backgroundStartingColor;
+
+                _backgroundTween = _backgroundImageBar.DOColor(Color.clear,
+                    (oldAmount - newAmount) * _backgroundFadeoutMultiplier);
+            }
+
+        } 
+
+        else // Factor getting higher
+        {
+            _foregroundImageBar.fillAmount = Mathf.Lerp(_minFactor, _maxFactor, newRawForegroundFactor);
+            //_backgroundImageBar.fillAmount = _foregroundImageBar.fillAmount;
+            //_backgroundTween.Kill();
+            //_backgroundImageBar.color = _backgroundStartingColor;
+        }
+        
+    }
+
+    [ContextMenu("Debug 25%")]
+    public void DebugTest25()
+    {
+        Debugvalue -= 25;
+        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
+        SetFactor(Debugvalue/100f);
+
+    }
+
+    [ContextMenu("Debug 75%")]
+    public void DebugTest75()
+    {
+        Debugvalue -= 75;
+        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
+        SetFactor(Debugvalue / 100f);
+    }
+
+    [ContextMenu("Debug reset")]
+    public void DebugTest100()
+    {
+        Debugvalue = 100;
+        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
+        SetFactor(Debugvalue / 100f);
+    }
+
+    private void Update()
+    {
+        //For debug:
+        Debugvalue += Time.deltaTime * 2f;
+        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100f);
+        SetFactor(Debugvalue / 100f);
+    }
+
+}
