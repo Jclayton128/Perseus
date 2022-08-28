@@ -16,7 +16,7 @@ public class EnemyMindset : MonoBehaviour
         _health = GetComponent<Health>();
 
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
-        _weaponHandler.Initialize(_energyHandler);
+        _weaponHandler.Initialize(_energyHandler, false);
         _weaponHandler.Activate();
     }
 

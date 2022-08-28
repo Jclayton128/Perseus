@@ -11,17 +11,28 @@ public class BlasterWH : WeaponHandler
     [SerializeField] float _shotSpeed = 5f;
 
     //state
+
     bool _isFiring;
     float _timeOfNextShot;
+    float _minTimeForDespoolSound;
 
     public override void Activate()
     {
         _timeOfNextShot = Time.time + _spoolupTime;
+        _minTimeForDespoolSound = Time.time + _spoolupTime;
         _isFiring = true;
+
+        if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomActivationClip());
+
     }
 
     public override void Deactivate()
     {
+        if (Time.time > _minTimeForDespoolSound && _isFiring)
+        {
+            if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomDeactivationClip());
+        }
+
         _isFiring = false;
     }
 
@@ -37,6 +48,7 @@ public class BlasterWH : WeaponHandler
             else
             {
                 //TODO audio sound of insufficient energy to fire
+                Deactivate();
             }
             _timeOfNextShot = Time.time + _timeBetweenShots;
         }       
@@ -49,6 +61,7 @@ public class BlasterWH : WeaponHandler
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
+        _audioCon.PlayPlayerSound(GetRandomFireClip());
     }
 
 }

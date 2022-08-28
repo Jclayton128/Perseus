@@ -97,7 +97,7 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
-        wh.Initialize(_energyHandler);
+        wh.Initialize(_energyHandler, true);
         _weaponsOnBoard.Add(wh.WeaponType, go);
         _UICon.IntegrateNewWeapon(wh);
 
