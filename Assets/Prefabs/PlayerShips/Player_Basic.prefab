@@ -1202,14 +1202,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
---- !u!198 &3691665194677790910 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
-  m_PrefabInstance: {fileID: 3240179184875457544}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6855748044169986617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8346277631012441649, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+  m_PrefabInstance: {fileID: 3240179184875457544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3691665194677790910 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
   m_PrefabInstance: {fileID: 3240179184875457544}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6401954029406834869
@@ -1290,14 +1290,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8489365244245804194, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
---- !u!4 &2148845601266606514 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4974917334998511879, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
-  m_PrefabInstance: {fileID: 6401954029406834869}
-  m_PrefabAsset: {fileID: 0}
 --- !u!58 &7315198137112853190 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: -4801819376047543693, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+  m_PrefabInstance: {fileID: 6401954029406834869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2148845601266606514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4974917334998511879, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
   m_PrefabInstance: {fileID: 6401954029406834869}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9089745778583505210 stripped
@@ -1322,6 +1322,22 @@ MonoBehaviour:
   _activeWeaponIndex: 0
   _primaryWeaponsOnBoard: []
   _secondaryWeaponsOnBoard: []
+--- !u!114 &1235920834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089745778583505210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e73a52520649364aa09105557716ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrapCollected: 0
+  CurrentLevel: 1
+  _scrapNeededForNextLevel: 0
+  _scrapFactor: 0
 --- !u!114 &2074364254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1378,7 @@ MonoBehaviour:
   _thrust: 200
   _mass: 2
   _turnRate: 180
---- !u!114 &1235920834
+--- !u!114 &4691011983045253245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1371,10 +1387,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 9089745778583505210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e73a52520649364aa09105557716ee6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4157889331d0e5d4685b6fd8ce852212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrapCollected: 0
-  CurrentLevel: 1
-  _scrapNeededForNextLevel: 0
-  _scrapFactor: 0
+  _maxHullPoints: 10
+  _maxShieldPoints: 10
+  _shieldHealRate: 0.2
+  _ionHealRate: 0.1
+  IonFactor: 0
+--- !u!114 &3577009792823772659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089745778583505210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a350f4ef48897bb4fa5e88bac91680e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -243,10 +243,11 @@ MonoBehaviour:
   _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
-  _activationCost: 0
+  _activationCost: 1
   _sustainCostRate: 0
   IsSecondary: 0
   _maxUpgradeLevel: 1
-  _timeBetweenShots: 0.5
-  _shotLifetime: 2
-  _shotSpeed: 5
+  _spoolupTime: 0.75
+  _timeBetweenShots: 0.125
+  _shotLifetime: 1
+  _shotSpeed: 10

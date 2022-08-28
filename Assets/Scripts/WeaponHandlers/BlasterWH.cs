@@ -5,7 +5,8 @@ using UnityEngine;
 public class BlasterWH : WeaponHandler
 {
     //settings
-    [SerializeField] float _timeBetweenShots = 0.25f;
+    [SerializeField] float _spoolupTime = 0.75f;
+    [SerializeField] float _timeBetweenShots = 0.125f;
     [SerializeField] float _shotLifetime = 2f;
     [SerializeField] float _shotSpeed = 5f;
 
@@ -15,7 +16,7 @@ public class BlasterWH : WeaponHandler
 
     public override void Activate()
     {
-        _timeOfNextShot = Time.time + _timeBetweenShots;
+        _timeOfNextShot = Time.time + _spoolupTime;
         _isFiring = true;
     }
 
@@ -28,7 +29,15 @@ public class BlasterWH : WeaponHandler
     {
         if (_isFiring && Time.time >= _timeOfNextShot)
         {             
-            Fire();
+            if (_hostEnergyHandler.CheckEnergy(_activationCost))
+            {
+                _hostEnergyHandler.SpendEnergy(_activationCost);
+                Fire();
+            }
+            else
+            {
+                Debug.Log("insufficient energy to fire blaster");
+            }
             _timeOfNextShot = Time.time + _timeBetweenShots;
         }       
     }
@@ -39,7 +48,7 @@ public class BlasterWH : WeaponHandler
         ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
-        pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
+        pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed + (Vector3)_rb.velocity;
     }
 
 }

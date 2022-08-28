@@ -24,6 +24,16 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Systems & Weapons")]
     [SerializeField] Sprite _secondaryFireHintSprite = null;
 
+    [FoldoutGroup("SHEI")]
+    [SerializeField] AdjustableImageBar _shieldBar = null;
+
+    [FoldoutGroup("SHEI")]
+    [SerializeField] AdjustableImageBar _hullBar = null;
+
+    [FoldoutGroup("SHEI")]
+    [SerializeField] AdjustableImageBar _energyBar = null;
+
+
     [SerializeField] RadarScreen _radarScreen = null;
 
     [FoldoutGroup("Scrap & Level")]
@@ -44,6 +54,7 @@ public class UI_Controller : MonoBehaviour
 
     [FoldoutGroup("Scrap & Level")]
     [SerializeField] float _maxScrapFactor = 0.87f;
+
 
     //state
     Image _currentActiveSecondary;
@@ -230,6 +241,21 @@ public class UI_Controller : MonoBehaviour
     public RadarScreen GetRadarScreen()
     {
         return _radarScreen;
+    }
+
+    public AdjustableImageBar GetShieldBar()
+    {
+        return _shieldBar;
+    }
+
+    public AdjustableImageBar GetHullBar()
+    {
+        return _hullBar;
+    }
+
+    public AdjustableImageBar GetEnergyBar()
+    {
+        return _energyBar;
     }
 
     #endregion

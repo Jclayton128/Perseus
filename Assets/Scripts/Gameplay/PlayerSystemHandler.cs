@@ -10,6 +10,7 @@ public class PlayerSystemHandler : MonoBehaviour
     [SerializeField] SystemWeaponLibrary.SystemType[] _startingSystems = null;
     [SerializeField] SystemWeaponLibrary.WeaponType[] _startingWeapons = null;
     ActorMovement _playerHandler;
+    EnergyHandler _energyHandler;
     UI_Controller _UICon;
 
     //These are used to check for overlap between two weapons or two systems.
@@ -37,7 +38,9 @@ public class PlayerSystemHandler : MonoBehaviour
         _inputCon.OnMouseUp += DeactivateWeapons;
         _maxSystems = _UICon.GetMaxSystems();
         _maxWeapons = _UICon.GetMaxWeapons();
+
         _playerHandler = GetComponent<ActorMovement>();
+        _energyHandler = GetComponent<EnergyHandler>();
 
     }
 
@@ -64,6 +67,7 @@ public class PlayerSystemHandler : MonoBehaviour
             GainWeapon(_syslib.GetWeapon(weapon));
         }
     }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         SystemCrateHandler sch;
@@ -93,7 +97,7 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
-        wh.Initialize();
+        wh.Initialize(_energyHandler);
         _weaponsOnBoard.Add(wh.WeaponType, go);
         _UICon.IntegrateNewWeapon(wh);
 

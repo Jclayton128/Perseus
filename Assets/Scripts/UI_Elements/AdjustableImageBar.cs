@@ -21,12 +21,6 @@ public class AdjustableImageBar : MonoBehaviour
         "receiving multiple foreground fill updates")]
     [SerializeField] float _memoryTimeframe = 2f;
 
-
-    [Range(0,100)]
-    public float Debugvalue = 1;
-    //[Tooltip("Select this if using prospective values to show color differentiation")]
-    //[SerializeField] bool _isIncreaseGood = false;
-
     //state
     Color _backgroundStartingColor;
     Color _foregroundStartingColor;
@@ -90,37 +84,6 @@ public class AdjustableImageBar : MonoBehaviour
         
     }
 
-    [ContextMenu("Debug 25%")]
-    public void DebugTest25()
-    {
-        Debugvalue -= 25;
-        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
-        SetFactor(Debugvalue/100f);
 
-    }
-
-    [ContextMenu("Debug 75%")]
-    public void DebugTest75()
-    {
-        Debugvalue -= 75;
-        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
-        SetFactor(Debugvalue / 100f);
-    }
-
-    [ContextMenu("Debug reset")]
-    public void DebugTest100()
-    {
-        Debugvalue = 100;
-        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100);
-        SetFactor(Debugvalue / 100f);
-    }
-
-    private void Update()
-    {
-        ////For debug:
-        //Debugvalue += Time.deltaTime * 2f;
-        //Debugvalue = Mathf.Clamp(Debugvalue, 0, 100f);
-        //SetFactor(Debugvalue / 100f);
-    }
 
 }

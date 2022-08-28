@@ -11,10 +11,13 @@ public class Health : MonoBehaviour
     ParticleController _particleController;
     ScrapController _scrapController;
     Rigidbody2D _rb;
+    UI_Controller _UIController;
+    AdjustableImageBar _shieldBar;
+    AdjustableImageBar _hullBar;
 
     //global settings
-    [SerializeField] [Range(0,10)] float _particlesPerPointOfShieldDamage = 1f; //Amount of particles created per point of shield damage
-    [SerializeField] [Range(0, 10)] float _scrapsPerPointOfNormalDamage = 1f; //Amount of scrap peeled off per point of hull damage.
+    //[SerializeField] [Range(0,10)] float _particlesPerPointOfShieldDamage = 1f; //Amount of particles created per point of shield damage
+    //[SerializeField] [Range(0, 10)] float _scrapsPerPointOfNormalDamage = 1f; //Amount of scrap peeled off per point of hull damage.
 
     //instance settings
     [FoldoutGroup("Starting Stats")]
@@ -51,9 +54,19 @@ public class Health : MonoBehaviour
         _movement = GetComponent<ActorMovement>();
         _particleController = FindObjectOfType<ParticleController>();
         _scrapController = _particleController.GetComponent<ScrapController>();
+        _UIController = _particleController.GetComponent<UI_Controller>();
+        _shieldBar = _UIController.GetShieldBar();
+        _hullBar = _UIController.GetHullBar();
 
         HullPoints = _maxHullPoints;
         ShieldPoints = _maxShieldPoints;
+
+        if (_movement.IsPlayer)
+        {
+            _hullBar.SetFactor(HullPoints / _maxHullPoints);
+            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+        }
+
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
     }
@@ -62,8 +75,8 @@ public class Health : MonoBehaviour
     private void Update()
     {
         UpdateDeathCheck();
-        UpdateRechargeShield();
         UpdateIonization();
+        UpdateRechargeShield();
     }
     private bool UpdateDeathCheck()
     {
@@ -72,7 +85,8 @@ public class Health : MonoBehaviour
             Die();
             return true;
         }
-        else return false;
+        
+        return false;
     }
 
     private void Die()
@@ -83,21 +97,24 @@ public class Health : MonoBehaviour
 
     private void UpdateRechargeShield()
     {
-        ShieldPoints += _shieldHealRate * Time.deltaTime;
+
+        ShieldPoints += _shieldHealRate * (1-IonFactor) * Time.deltaTime;
         ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
+
+        if (_movement.IsPlayer)
+        {
+            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+        }
     }
 
     private void UpdateIonization()
     {
+        if (_ionizationPointsAbsorbed <= 0) return;
         _ionizationPointsAbsorbed -= _ionHealRate * Time.deltaTime;
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
         IonFactor = (_ionizationPointsAbsorbed / _maxHullPoints);
-
-        if (_movement.IsPlayer)
-        {
-            //TODO Update Ionization UI slider
-        }
     }
+
 
     #endregion
 
@@ -141,8 +158,14 @@ public class Health : MonoBehaviour
     {
         ShieldPoints -= shieldDamage;
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
-        int amount = Mathf.FloorToInt(damageDone * _particlesPerPointOfShieldDamage);
+        int amount = Mathf.FloorToInt(damageDone);
         _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
+        
+        if (_movement.IsPlayer)
+        {
+            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+        }
+
     }
 
     private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
@@ -154,17 +177,22 @@ public class Health : MonoBehaviour
         if (HullPoints < 0)
         {
             //A high-damage shot against something with little health left should not create lots of scrap
-            damageReceived = normalDamage + scrapBonus + HullPoints;
+            damageReceived = normalDamage + scrapBonus + HullPoints; //Decrease damage received by negative Hull Points
         }
         else
         {
             damageReceived = normalDamage + scrapBonus;
+
         }
 
+        if (_movement.IsPlayer)
+        {
+            _hullBar.SetFactor(HullPoints / _maxHullPoints);
+        }
 
         if (!_movement.IsPlayer)
         {
-            int scrapToMake = Mathf.RoundToInt((damageReceived) * _scrapsPerPointOfNormalDamage);
+            int scrapToMake = Mathf.RoundToInt((damageReceived));
 
             _scrapController.SpawnScraps(scrapToMake, ((Vector2)transform.position + impactPosition)/2f, impactHeading);
         }

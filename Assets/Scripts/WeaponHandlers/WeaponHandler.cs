@@ -8,6 +8,8 @@ public abstract class WeaponHandler : MonoBehaviour
 {
     protected PoolController _poolCon;
     protected InputController _inputCon;
+    protected EnergyHandler _hostEnergyHandler;
+    protected Rigidbody2D _rb;
 
 
     //[FoldoutGroup("Brochure")]
@@ -45,11 +47,13 @@ public abstract class WeaponHandler : MonoBehaviour
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
 
-    public virtual void Initialize()
+    public virtual void Initialize(EnergyHandler hostEnergyHandler)
     {
         _inputCon = FindObjectOfType<InputController>();
+        _rb = GetComponentInParent<Rigidbody2D>();
         _poolCon = _inputCon.GetComponent<PoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
+        _hostEnergyHandler = hostEnergyHandler;
     }
     public Sprite GetIcon()
     {
@@ -60,6 +64,7 @@ public abstract class WeaponHandler : MonoBehaviour
         return _icon;
     }
     public abstract void Activate();
+
     public abstract void Deactivate();
 
     //Very likely that individual weapons don't need to integrate uniquely
