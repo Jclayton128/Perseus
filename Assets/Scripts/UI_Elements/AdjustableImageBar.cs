@@ -15,7 +15,7 @@ public class AdjustableImageBar : MonoBehaviour
     //settings
     [SerializeField] float _minFactor = 0f;
     [SerializeField] float _maxFactor = 1f;
-    [SerializeField] float _backgroundFadeoutMultiplier;
+    [SerializeField] float _backgroundFadeoutTime;
 
     [Tooltip("This is how long the background fill amount should remain static despite" +
         "receiving multiple foreground fill updates")]
@@ -58,7 +58,6 @@ public class AdjustableImageBar : MonoBehaviour
         // Factor getting lower
         if (newCorrectedForegroundFactor < _foregroundImageBar.fillAmount)
         {
-            Debug.Log($"firing since {newCorrectedForegroundFactor} is < {_foregroundImageBar.fillAmount}");
             //if outside of memory timeframe, update background fill amount
             if (Time.time >= _memoryEndtime)  
             {
@@ -76,7 +75,7 @@ public class AdjustableImageBar : MonoBehaviour
                 _backgroundImageBar.color = _backgroundStartingColor;
 
                 _backgroundTween = _backgroundImageBar.DOColor(Color.clear,
-                    (oldAmount - newAmount) * _backgroundFadeoutMultiplier);
+                    _backgroundFadeoutTime);
             }
 
         } 
@@ -118,10 +117,10 @@ public class AdjustableImageBar : MonoBehaviour
 
     private void Update()
     {
-        //For debug:
-        Debugvalue += Time.deltaTime * 2f;
-        Debugvalue = Mathf.Clamp(Debugvalue, 0, 100f);
-        SetFactor(Debugvalue / 100f);
+        ////For debug:
+        //Debugvalue += Time.deltaTime * 2f;
+        //Debugvalue = Mathf.Clamp(Debugvalue, 0, 100f);
+        //SetFactor(Debugvalue / 100f);
     }
 
 }
