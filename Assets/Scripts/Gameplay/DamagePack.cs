@@ -27,7 +27,7 @@ public struct DamagePack
         else
         {
             ScrapBonus = 0;
-            Debug.LogError("Scrap Bonus is zero when normal damage is zero to prevent exploitation.");
+            //Scrap Bonus is zero when normal damage is zero to prevent exploitation
         }
 
     }

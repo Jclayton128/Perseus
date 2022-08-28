@@ -28,14 +28,16 @@ public class SystemIconDriver : MonoBehaviour
     {
         if (uiType is null)
         {
-            _parameterImageBar.gameObject.SetActive(false);
+            _parameterImageBar.transform.parent.gameObject.SetActive(false);
+            _parameterImageBar.color = Color.white;
             _parameterTMP.gameObject.SetActive(false);
+            _parameterTMP.text = "";
             return;
         }
 
         if (uiType is string)
         {
-            _parameterImageBar.gameObject.SetActive(false);
+            _parameterImageBar.transform.parent.gameObject.SetActive(false);
             _parameterTMP.gameObject.SetActive(true);
             _parameterTMP.text = (string)uiType;
             return;
@@ -43,7 +45,7 @@ public class SystemIconDriver : MonoBehaviour
 
         if (uiType is float)
         {
-            _parameterImageBar.gameObject.SetActive(true);
+            _parameterImageBar.transform.parent.gameObject.SetActive(true);
             _parameterImageBar.fillAmount = (float)uiType;
 
             _parameterTMP.gameObject.SetActive(false);
@@ -74,6 +76,7 @@ public class SystemIconDriver : MonoBehaviour
         _systemIcon.color = Color.clear;
         _levelTMP.text = " ";
         IsOccupied = false;
+
         SetupUIType(null);
     }
 

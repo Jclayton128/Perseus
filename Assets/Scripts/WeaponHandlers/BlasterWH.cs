@@ -74,7 +74,16 @@ public class BlasterWH : WeaponHandler
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
-        _audioCon.PlayPlayerSound(GetRandomFireClip());
+        
+        if (_isPlayer)
+        {
+            _audioCon.PlayPlayerSound(GetRandomFireClip());
+        }
+        else
+        {
+            _audioCon.PlayRemoteSound(GetRandomFireClip(), transform.position);
+        }
+
 
         _connectedWID?.UpdateUI("firing");
     }

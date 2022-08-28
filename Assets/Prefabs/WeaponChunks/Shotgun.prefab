@@ -215,18 +215,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: fd1f06ee5a568d646be484b43bc72919, type: 3}
   _description: default description
-  SystemUIType: 1
   WeaponType: 3
   _projectileType: 0
-  _normalDamage: 0
+  _normalDamage: 0.25
   _shieldBonusDamage: 0
   _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
-  _activationCost: 0
+  _activationCost: 0.5
   _sustainCostRate: 0
   _activationSounds: []
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 81e2c7cb871c48f42b5c54c28e3ebe5d, type: 3}
+  - {fileID: 8300000, guid: 0abde619abf9cef419a8e28d89823a03, type: 3}
+  - {fileID: 8300000, guid: a7eecc66aaca81649a5bd6c71fdaeaee, type: 3}
+  - {fileID: 8300000, guid: aea8400b3045acc49babc32e86280e7f, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _maxUpgradeLevel: 1
+  _degreeSpread: 30
+  _chargeRate: 3.3
+  _shotLifetime: 0.6
+  _shotSpeed: 10
+  _chargeLevel: 0
