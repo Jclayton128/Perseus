@@ -37,9 +37,9 @@ public class AdjustableImageBar : MonoBehaviour
     public void SetFactor(float newRawForegroundFactor)
     {
         float newCorrectedForegroundFactor = Mathf.Lerp(_minFactor, _maxFactor, newRawForegroundFactor);
-        if (newRawForegroundFactor > 1f || newRawForegroundFactor < 0)
+
+        if (newCorrectedForegroundFactor > 1f || newCorrectedForegroundFactor < 0)
         {
-            Debug.LogError("Invalid factor");
             return;
         }
 

@@ -36,7 +36,7 @@ public class BlasterWH : WeaponHandler
             }
             else
             {
-                Debug.Log("insufficient energy to fire blaster");
+                //TODO audio sound of insufficient energy to fire
             }
             _timeOfNextShot = Time.time + _timeBetweenShots;
         }       
@@ -48,7 +48,7 @@ public class BlasterWH : WeaponHandler
         ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
-        pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed + (Vector3)_rb.velocity;
+        pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
     }
 
 }

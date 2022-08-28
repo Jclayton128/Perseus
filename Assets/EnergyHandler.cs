@@ -67,11 +67,5 @@ public class EnergyHandler : MonoBehaviour
         CurrentEnergy -= energySpent;
     }
 
-    [ContextMenu("spend 10")]
-    public void DebugSpend10()
-    {
-        SpendEnergy(10);
-    }
-
 
 }
