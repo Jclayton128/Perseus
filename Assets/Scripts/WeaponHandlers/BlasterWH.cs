@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlasterWH : WeaponHandler
 {
     //settings
-    [SerializeField] float _spoolupTime = 0.75f;
+    [SerializeField] float _minModeToggle = 0.75f;
     [SerializeField] float _timeBetweenShots = 0.125f;
     [SerializeField] float _shotLifetime = 2f;
     [SerializeField] float _shotSpeed = 5f;
@@ -14,23 +14,36 @@ public class BlasterWH : WeaponHandler
 
     bool _isFiring;
     float _timeOfNextShot;
-    float _minTimeForDespoolSound;
+    float _timeToToggleModes;
+
+    protected override void InitializeWeaponSpecifics()
+    {
+        _connectedWID?.UpdateUI("hey!");
+    }
 
     public override void Activate()
     {
-        _timeOfNextShot = Time.time + _spoolupTime;
-        _minTimeForDespoolSound = Time.time + _spoolupTime;
-        _isFiring = true;
+        if (Time.time > _timeToToggleModes)
+        {
+            _timeOfNextShot = Time.time + _minModeToggle;
+            _timeToToggleModes = Time.time + _minModeToggle;
+            _isFiring = true;
+            _connectedWID?.UpdateUI("warming");
 
-        if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomActivationClip());
+            if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomActivationClip());
+        }
+
 
     }
 
     public override void Deactivate()
     {
-        if (Time.time > _minTimeForDespoolSound && _isFiring)
+        if (Time.time > _timeToToggleModes && _isFiring)
         {
             if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomDeactivationClip());
+            _connectedWID?.UpdateUI("cooling");
+            _timeToToggleModes = Time.time + _minModeToggle;
+
         }
 
         _isFiring = false;
@@ -62,6 +75,17 @@ public class BlasterWH : WeaponHandler
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
         _audioCon.PlayPlayerSound(GetRandomFireClip());
+
+        _connectedWID?.UpdateUI("firing");
     }
 
+    protected override void ImplementWeaponUpgrade()
+    {
+
+    }
+
+    public override object GetUIStatus()
+    {
+        return "blaster";
+    }
 }

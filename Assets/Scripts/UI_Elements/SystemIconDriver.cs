@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class SystemIconDriver : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
+
     public SystemWeaponLibrary.SystemType System { get; private set; }
     public bool IsOccupied = false;// { get; protected set; } = false;
+
+    [SerializeField] protected TextMeshProUGUI _parameterTMP = null;
+    [SerializeField] protected Image _parameterImageBar = null;
 
     public virtual void Initialize()
     {
@@ -17,6 +22,35 @@ public class SystemIconDriver : MonoBehaviour
         _systemIcon.color = Color.clear;
         _levelTMP.text = "";
         IsOccupied = false;
+    }
+
+    protected void SetupUIType(object uiType)
+    {
+        if (uiType is null)
+        {
+            _parameterImageBar.gameObject.SetActive(false);
+            _parameterTMP.gameObject.SetActive(false);
+            return;
+        }
+
+        if (uiType is string)
+        {
+            _parameterImageBar.gameObject.SetActive(false);
+            _parameterTMP.gameObject.SetActive(true);
+            _parameterTMP.text = (string)uiType;
+            return;
+        }
+
+        if (uiType is float)
+        {
+            _parameterImageBar.gameObject.SetActive(true);
+            _parameterImageBar.fillAmount = (float)uiType;
+
+            _parameterTMP.gameObject.SetActive(false);
+
+            return;
+        }
+
     }
 
     public void DisplayNewSystem(SystemHandler sh)
@@ -29,6 +63,8 @@ public class SystemIconDriver : MonoBehaviour
         }
         _levelTMP.text = sh.CurrentUpgradeLevel.ToString();
         IsOccupied = true;
+
+        SetupUIType(sh.GetUIStatus());
     }
 
     public void ClearUIIcon()
@@ -38,7 +74,23 @@ public class SystemIconDriver : MonoBehaviour
         _systemIcon.color = Color.clear;
         _levelTMP.text = " ";
         IsOccupied = false;
+        SetupUIType(null);
+    }
 
+    public void UpdateUI(string newString)
+    {
+        _parameterTMP.text = newString;
+    }
+
+    public void UpdateUI(float factor)
+    {
+        _parameterImageBar.fillAmount = factor;
+    }
+
+    public void UpdateUI(float factor, Color color)
+    {
+        _parameterImageBar.fillAmount = factor;
+        _parameterImageBar.color = color;
     }
 
 }

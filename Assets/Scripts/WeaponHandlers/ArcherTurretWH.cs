@@ -14,4 +14,18 @@ public class ArcherTurretWH : WeaponHandler
         throw new System.NotImplementedException();
     }
 
+    public override object GetUIStatus()
+    {
+        return "archer";
+    }
+
+    protected override void ImplementWeaponUpgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void InitializeWeaponSpecifics()
+    {
+
+    }
 }

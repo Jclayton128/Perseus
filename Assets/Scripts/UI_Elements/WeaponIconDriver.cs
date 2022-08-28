@@ -7,6 +7,7 @@ using TMPro;
 public class WeaponIconDriver : SystemIconDriver
 {
     [SerializeField] Image _hintIcon;
+
     public SystemWeaponLibrary.WeaponType WeaponType { get; private set; }
 
     public void Initialize(Sprite primary, Sprite secondary)
@@ -34,7 +35,9 @@ public class WeaponIconDriver : SystemIconDriver
             _systemIcon.color = Color.clear;
         }
         _levelTMP.text = wh.CurrentUpgradeLevel.ToString();
-        WeaponType = wh.WeaponType;        
+        WeaponType = wh.WeaponType;
+
+        SetupUIType(wh.GetUIStatus());
     }
 
     public void HighlightAsActive()

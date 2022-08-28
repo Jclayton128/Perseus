@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: cfcebd1e866ebf44bb04173487e613f6, type: 3}
   _description: default description
+  SystemUIType: 2
   WeaponType: 0
   _projectileType: 0
   _normalDamage: 2

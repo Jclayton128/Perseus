@@ -172,14 +172,13 @@ public class UI_Controller : MonoBehaviour
         }
         _secondaryWeaponIcons[index].HighlightAsActive();
     }
-    public void IntegrateNewWeapon(WeaponHandler wh)
+    public WeaponIconDriver IntegrateNewWeapon(WeaponHandler wh)
     {
         if (wh == null)
         {
             Debug.LogError("WeaponHandler passed is null!");
-            return;
+            return null;
         }
-        bool foundOpenWeaponSlot = false;
         if (wh.IsSecondary)
         {
             for (int i = 0; i < _secondaryWeaponIcons.Length; i++)
@@ -188,15 +187,12 @@ public class UI_Controller : MonoBehaviour
                 else
                 {
                     _secondaryWeaponIcons[i].DisplayNewWeapon(wh);
-                    
-                    foundOpenWeaponSlot = true;
-                    break;
+                    return _secondaryWeaponIcons[i];
                 }
             }
-            if (foundOpenWeaponSlot == false)
-            {
-                Debug.Log("did not find an open Secondary Weapon slot on UI");
-            }
+            Debug.Log("did not find an open Secondary Weapon slot on UI");
+            return null;
+
         }
         else
         {
@@ -206,6 +202,7 @@ public class UI_Controller : MonoBehaviour
             }
             _primaryWeaponIcon.DisplayNewWeapon(wh);
             _primaryWeaponIcon.HighlightAsActive();
+            return _primaryWeaponIcon;
         }
         
 

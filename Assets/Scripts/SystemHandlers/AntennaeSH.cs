@@ -18,4 +18,9 @@ public class AntennaeSH : SystemHandler
     {
         base.Upgrade();
     }
+
+    public override object GetUIStatus()
+    {
+        throw new System.NotImplementedException();
+    }
 }

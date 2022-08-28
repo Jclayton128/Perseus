@@ -16,7 +16,6 @@ public abstract class WeaponHandler : MonoBehaviour
     [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
     [SerializeField] protected Sprite _icon = null;
 
-
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"),Multiline(3), HideLabel]
     [SerializeField] protected string _description = "default description";
@@ -57,7 +56,8 @@ public abstract class WeaponHandler : MonoBehaviour
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
 
-    public virtual void Initialize(EnergyHandler hostEnergyHandler, bool isPlayer)
+    public void Initialize(EnergyHandler hostEnergyHandler, bool isPlayer,
+        WeaponIconDriver wid)
     {
         _inputCon = FindObjectOfType<InputController>();
         _audioCon = _inputCon.GetComponent<AudioController>();
@@ -66,7 +66,29 @@ public abstract class WeaponHandler : MonoBehaviour
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
         _isPlayer = isPlayer;
+        _connectedWID = wid;
+        InitializeWeaponSpecifics();
     }
+
+    #region Universal Weapon Methods
+    public abstract object GetUIStatus();
+
+    protected abstract void InitializeWeaponSpecifics();
+
+    public abstract void Activate();
+
+    public abstract void Deactivate();
+
+    protected abstract void ImplementWeaponUpgrade();
+
+    #endregion
+
+
+    public void UpdateWeaponIconDriver(WeaponIconDriver newWID)
+    {
+        _connectedWID = newWID;
+    }
+
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -75,22 +97,8 @@ public abstract class WeaponHandler : MonoBehaviour
         }
         return _icon;
     }
-    public abstract void Activate();
 
-    public abstract void Deactivate();
 
-    //Very likely that individual weapons don't need to integrate uniquely
-    //Weapons shouldn't be changing anything about the ship itself.
-    public void IntegrateSystem(WeaponIconDriver connectedWID)
-    {
-        _connectedWID = connectedWID;
-        BroadcastMessage("Initialize");
-    }
-
-    public void DeintegrateSystem()
-    {
-        _connectedWID.ClearUIIcon();
-    }
     public bool CheckIfUpgradeable()
     {
         if (_maxUpgradeLevel <= 0)
@@ -115,8 +123,8 @@ public abstract class WeaponHandler : MonoBehaviour
             Debug.Log("Unable to upgrade past max level.");
             return;
         }
-
         CurrentUpgradeLevel++;
+        ImplementWeaponUpgrade();
     }
 
     #region Sound Helpers

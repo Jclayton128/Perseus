@@ -14,4 +14,18 @@ public class MissileLauncherWH : WeaponHandler
         throw new System.NotImplementedException();
     }
 
+    public override object GetUIStatus()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void ImplementWeaponUpgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void InitializeWeaponSpecifics()
+    {
+        throw new System.NotImplementedException();
+    }
 }

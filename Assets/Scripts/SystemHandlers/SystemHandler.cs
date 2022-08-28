@@ -5,20 +5,24 @@ using Sirenix.OdinInspector;
 
 public abstract class SystemHandler : MonoBehaviour
 {
-    [SerializeField] Sprite _icon = null;
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
+    [SerializeField] protected Sprite _icon = null;
+
+
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), Multiline(3), HideLabel]
+    [SerializeField] protected string _description = "default description";
 
     //state
     public SystemWeaponLibrary.SystemType SystemType;
     public SystemWeaponLibrary.SystemLocation SystemLocation;
-    protected SystemIconDriver _connectedSID;
+    
+    protected SystemIconDriver _connectedID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
 
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
-    private void Awake()
-    {
-
-    }
 
     public Sprite GetIcon()
     {
@@ -31,12 +35,12 @@ public abstract class SystemHandler : MonoBehaviour
 
     public virtual void IntegrateSystem(SystemIconDriver connectedSID)
     {
-        _connectedSID = connectedSID;
+        _connectedID = connectedSID;
     }
 
     public virtual void DeintegrateSystem()
     {
-        _connectedSID.ClearUIIcon();
+        _connectedID.ClearUIIcon();
     }
 
     public bool CheckIfUpgradeable()
@@ -66,6 +70,8 @@ public abstract class SystemHandler : MonoBehaviour
 
         CurrentUpgradeLevel++;
     }
+
+    public abstract object GetUIStatus();
 
 
 }

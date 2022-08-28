@@ -14,4 +14,18 @@ public class ShotgunWH : WeaponHandler
         throw new System.NotImplementedException();
     }
 
+    public override object GetUIStatus()
+    {        
+        return  0.2f;
+    }
+
+    protected override void ImplementWeaponUpgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void InitializeWeaponSpecifics()
+    {
+        
+    }
 }

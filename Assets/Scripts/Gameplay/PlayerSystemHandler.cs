@@ -97,9 +97,10 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
-        wh.Initialize(_energyHandler, true);
+        WeaponIconDriver wid = _UICon.IntegrateNewWeapon(wh);
+        wh.Initialize(_energyHandler, true, wid);
         _weaponsOnBoard.Add(wh.WeaponType, go);
-        _UICon.IntegrateNewWeapon(wh);
+
 
         if (wh.IsSecondary)
         {
@@ -116,7 +117,6 @@ public class PlayerSystemHandler : MonoBehaviour
             _primaryWeaponsOnBoard.Add(wh);
         }
 
-        Debug.Log($"Gained a {wh.WeaponType} the right way");
     }
 
     private void GainSystem(GameObject newSystem)
@@ -227,7 +227,8 @@ public class PlayerSystemHandler : MonoBehaviour
             //foreach secondary weapon, reintegrate
             foreach (var secondaryWeapon in _secondaryWeaponsOnBoard)
             {
-                _UICon.IntegrateNewWeapon(secondaryWeapon);
+                WeaponIconDriver newWID = _UICon.IntegrateNewWeapon(secondaryWeapon);
+                secondaryWeapon.UpdateWeaponIconDriver(newWID);
             }
 
             //reselect an active weapon
