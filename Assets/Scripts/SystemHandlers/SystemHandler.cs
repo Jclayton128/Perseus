@@ -36,11 +36,13 @@ public abstract class SystemHandler : MonoBehaviour
     public virtual void IntegrateSystem(SystemIconDriver connectedSID)
     {
         _connectedID = connectedSID;
+        //Do all the changes to ship here?
     }
 
     public virtual void DeintegrateSystem()
     {
         _connectedID.ClearUIIcon();
+        //Undo all the changes to ship here?
     }
 
     public bool CheckIfUpgradeable()

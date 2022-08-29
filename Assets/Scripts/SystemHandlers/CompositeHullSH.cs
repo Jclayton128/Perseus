@@ -21,6 +21,6 @@ public class CompositeHullSH : SystemHandler
 
     public override object GetUIStatus()
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 }

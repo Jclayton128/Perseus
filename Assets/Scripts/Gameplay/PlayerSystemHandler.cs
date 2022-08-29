@@ -269,7 +269,8 @@ public class PlayerSystemHandler : MonoBehaviour
         _UICon.ClearAllSystemSlots();
         foreach (var system in _systemsOnBoard)
         {
-            _UICon.IntegrateNewSystem(system);
+            SystemIconDriver sid = _UICon.IntegrateNewSystem(system);
+            system.IntegrateSystem(sid);
         }
 
     }
