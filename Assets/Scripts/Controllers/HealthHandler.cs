@@ -125,7 +125,7 @@ public class HealthHandler : MonoBehaviour
         ProjectileBrain pb;
         if (weaponImpact.TryGetComponent<ProjectileBrain>(out pb))
         {
-            ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetVectorAtImpact());
+            ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
             pb.DecrementPenetrationOnImpact();
         }
     }
@@ -155,13 +155,17 @@ public class HealthHandler : MonoBehaviour
             ReceiveIonDamage(incomingDamage);
         }
 
-    }
+        if (Mathf.Abs(incomingDamage.KnockbackAmount) > Mathf.Epsilon)
+        {
+            ReceiveKnockback(incomingDamage.KnockbackAmount, impactHeading);
+        }
 
+    }
     private void ReceiveShieldDamage(float shieldDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
         ShieldPoints -= shieldDamage;
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
-        int amount = Mathf.RoundToInt(damageDone);
+        int amount = Mathf.RoundToInt(damageDone+0.5f) ;
         _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
         
         if (_movement.IsPlayer)
@@ -206,6 +210,14 @@ public class HealthHandler : MonoBehaviour
     {       
         _ionizationPointsAbsorbed += incomingDamage.IonDamage;
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
+    }
+
+    private void ReceiveKnockback(float knockbackAmount, Vector2 impactHeading)
+    {
+        if (knockbackAmount > 0)
+        {
+            _rb.AddForce(knockbackAmount * impactHeading, ForceMode2D.Impulse);
+        }
     }
 
     #endregion

@@ -124,7 +124,7 @@ public class ProjectileBrain : MonoBehaviour
 
     #region Public Impact Helpers
 
-    public Vector2 GetVectorAtImpact()
+    public Vector2 GetNormalizedVectorAtImpact()
     {
         return _rb.velocity.normalized;
     }
