@@ -2,10 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class EnemyLibrary : MonoBehaviour
 {
-    [SerializeField] List<EnemyInfoHolder> _enemyMenu = null;
+    //settings
+    [SerializeField] List<GameObject> _enemyPrefabs = new List<GameObject>();
+
+    //state
+    Dictionary<EnemyInfoHolder.EnemyType, GameObject> _enemies =
+        new Dictionary<EnemyInfoHolder.EnemyType, GameObject>();
+
+    private void Awake()
+    {
+        CreateEnemyDictionary();
+    }
+
+    private void CreateEnemyDictionary()
+    {
+        foreach (GameObject enemy in _enemyPrefabs)
+        {
+            _enemies.Add(enemy.GetComponent<EnemyInfoHolder>().EType, enemy);
+        }
+        Debug.Log($"Created an menu with {_enemies.Count} enemies");
+    }
 
     public List<GameObject> CreateRandomMenuFromBudget(
         int totalBudget, bool isAsteroidSector, bool isNebulaSector)
@@ -14,9 +34,9 @@ public class EnemyLibrary : MonoBehaviour
         // Given a budget, create a random list of enemies for a particular level.
         // No constraints on which enemies are allowed for this (ie, no nebula-only restrictions)
 
-        if (_enemyMenu.Count > 0)
+        if (_enemies.Count > 0)
         {
-            menu.Add(_enemyMenu[0].gameObject);
+            menu.Add(_enemies[0].gameObject);
         }
         else
         {

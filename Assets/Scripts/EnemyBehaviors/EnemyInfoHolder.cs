@@ -5,10 +5,18 @@ using Sirenix.OdinInspector;
 
 public class EnemyInfoHolder : MonoBehaviour
 {
-    [Tooltip("Threat Score is used by the Enemy Factory to determine how many enemies to create upon jumping to a new sector.")]
-    [Range(0,10)]
-    [ShowInInspector] public int ThreatScore = 1;
+    public enum EnemyType { Unassigned0, Trundler1, Warper2, Hammer3, Maker4, Mite5,
+        Stalker6, Fencer7, Rocker8, Scrapper9}
 
-    [ShowInInspector] public bool LivesAmongAsteroidsOnly = false;
-    [ShowInInspector] public bool LivesInNebulaOnly = false;
+
+    //state
+
+    [Tooltip("Threat Score is used by the Enemy Factory to determine how many enemies to create upon jumping to a new sector.")]
+    [Range(0, 10)]
+    [ShowInInspector] readonly public int ThreatScore = 1;
+
+    [ShowInInspector] readonly public EnemyType EType = EnemyType.Unassigned0;
+    [ShowInInspector] readonly public bool LivesAmongAsteroidsOnly = false;
+    [ShowInInspector] readonly public bool LivesInNebulaOnly = false;
+
 }
