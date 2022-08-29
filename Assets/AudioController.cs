@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     [SerializeField] AudioSource _playerAudioSource = null;
+    [SerializeField] AudioSource _remoteAudioSource = null;
 
     public void PlayPlayerSound(AudioClip playerClip)
     {
@@ -13,6 +14,7 @@ public class AudioController : MonoBehaviour
 
     public void PlayRemoteSound(AudioClip remoteClip, Vector2 soundPosition)
     {
-        AudioSource.PlayClipAtPoint(remoteClip, soundPosition);
+        _remoteAudioSource.transform.position = soundPosition;
+        _remoteAudioSource.PlayOneShot(remoteClip);
     }
 }
