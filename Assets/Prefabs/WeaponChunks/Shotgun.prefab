@@ -220,7 +220,7 @@ MonoBehaviour:
   _normalDamage: 0.25
   _shieldBonusDamage: 0
   _ionDamage: 0
-  _knockBackAmount: 0
+  _knockBackAmount: 1
   _scrapBonus: 0
   _activationCost: 0.5
   _sustainCostRate: 0

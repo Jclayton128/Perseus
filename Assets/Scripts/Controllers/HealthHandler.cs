@@ -138,12 +138,15 @@ public class HealthHandler : MonoBehaviour
 
         if (incomingDamage.NormalDamage > 0 || incomingDamage.ShieldBonusDamage > 0)
         {
+            float carryoverHullDamage = incomingDamage.NormalDamage - 
+                    Mathf.Clamp(ShieldPoints - incomingDamage.ShieldBonusDamage, 0 , 999);
+
             float shieldDamage = incomingDamage.NormalDamage + incomingDamage.ShieldBonusDamage;
             ReceiveShieldDamage(shieldDamage, impactPosition, impactHeading);
-            float hullDamage = incomingDamage.NormalDamage - ShieldPoints;
-            if (hullDamage > 0)
+            
+            if (carryoverHullDamage > 0)
             {
-                ReceiveHullDamage(hullDamage, incomingDamage.ScrapBonus, impactPosition, impactHeading);
+                ReceiveHullDamage(carryoverHullDamage, incomingDamage.ScrapBonus, impactPosition, impactHeading);
             }
         }
 
@@ -158,7 +161,7 @@ public class HealthHandler : MonoBehaviour
     {
         ShieldPoints -= shieldDamage;
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
-        int amount = Mathf.FloorToInt(damageDone);
+        int amount = Mathf.RoundToInt(damageDone);
         _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
         
         if (_movement.IsPlayer)
