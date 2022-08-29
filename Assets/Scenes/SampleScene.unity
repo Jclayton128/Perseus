@@ -7466,6 +7466,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 752881962}
     m_Modifications:
+    - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
+      propertyPath: _timeBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3092739481744609522, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
       propertyPath: m_RootOrder
       value: 1

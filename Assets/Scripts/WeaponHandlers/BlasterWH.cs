@@ -11,19 +11,19 @@ public class BlasterWH : WeaponHandler
     [SerializeField] float _shotSpeed = 5f;
 
     //state
-
-    bool _isFiring;
-    float _timeOfNextShot;
-    float _timeToToggleModes;
+    [Header("State")]
+    [SerializeField] bool _isFiring = false;
+    [SerializeField] float _timeOfNextShot = 0;
+    [SerializeField] float _timeToToggleModes = 0;
 
     protected override void InitializeWeaponSpecifics()
     {
-        _connectedWID?.UpdateUI("hey!");
+        //_connectedWID?.UpdateUI("hey!");
     }
 
     public override void Activate()
     {
-        if (Time.time > _timeToToggleModes)
+        if (Time.time >= _timeToToggleModes)
         {
             _timeOfNextShot = Time.time + _minModeToggle;
             _timeToToggleModes = Time.time + _minModeToggle;
@@ -32,8 +32,6 @@ public class BlasterWH : WeaponHandler
 
             if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomActivationClip());
         }
-
-
     }
 
     public override void Deactivate()
