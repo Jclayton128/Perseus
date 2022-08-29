@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 
-public class Health : MonoBehaviour
+public class HealthHandler : MonoBehaviour
 {
     //references
     ActorMovement _movement;

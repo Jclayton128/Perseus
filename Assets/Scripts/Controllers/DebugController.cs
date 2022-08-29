@@ -11,6 +11,8 @@ public class DebugController : MonoBehaviour
     SystemWeaponLibrary _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
 
+    [SerializeField] GameObject[] _subpanels = null;
+
     [SerializeField] Toggle[] _systemToggles_Engine = null;
     [SerializeField] Toggle[] _systemToggles_Cockpit = null;
     [SerializeField] Toggle[] _systemToggles_Tail = null;
@@ -22,7 +24,11 @@ public class DebugController : MonoBehaviour
     [SerializeField] Toggle[] _weaponToggles = null;
 
     //Dictionary<int, bool> _systemToggleStatus = new Dictionary<int, bool>();
-    //Dictionary<int, bool> _weaponToggleStatus = new Dictionary<int, bool>();    
+    //Dictionary<int, bool> _weaponToggleStatus = new Dictionary<int, bool>();
+
+    //State
+    int _currentDebugPanel = -1;
+
 
     private void Awake()
     {
@@ -35,6 +41,28 @@ public class DebugController : MonoBehaviour
     {
         _playerSystemsHandler = _gameController.GetPlayerGO().GetComponent<PlayerSystemHandler>();
         SetupToggleLabels();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            _currentDebugPanel++;
+            if (_currentDebugPanel >= _subpanels.Length)
+            {
+                _currentDebugPanel = -1;
+            }
+
+            foreach (var panel in _subpanels)
+            {
+                panel.SetActive(false);
+            }
+
+            if (_currentDebugPanel >= 0)
+            {
+                _subpanels[_currentDebugPanel].SetActive(true);
+            }
+        }
     }
 
     private void SetupToggleLabels()

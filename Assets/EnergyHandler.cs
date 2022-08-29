@@ -7,7 +7,7 @@ public class EnergyHandler : MonoBehaviour
     ActorMovement _movement;
     UI_Controller _uicontroller;
     AdjustableImageBar _energyImageBar;
-    Health _health;
+    HealthHandler _health;
 
     [SerializeField] float _maxEnergyPoints = 30f;
     [SerializeField] float _energyGainRate = 1f;
@@ -17,7 +17,7 @@ public class EnergyHandler : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<ActorMovement>();
-        _health = GetComponent<Health>();
+        _health = GetComponent<HealthHandler>();
 
         if (_movement == null || _health == null)
         {

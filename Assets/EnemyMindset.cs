@@ -6,14 +6,14 @@ public class EnemyMindset : MonoBehaviour
 {
     ActorMovement _movement;
     EnergyHandler _energyHandler;
-    Health _health;
+    HealthHandler _health;
     WeaponHandler _weaponHandler;
 
     private void Awake()
     {
        _movement = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
-        _health = GetComponent<Health>();
+        _health = GetComponent<HealthHandler>();
 
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         _weaponHandler.Initialize(_energyHandler, false, null);
