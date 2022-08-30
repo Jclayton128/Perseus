@@ -45,4 +45,9 @@ public class EnemyLibrary : MonoBehaviour
 
         return menu;
     }
+
+    public GameObject GetEnemyOfType(EnemyInfoHolder.EnemyType EnemyType)
+    {
+        return _enemies[EnemyType];
+    }
 }

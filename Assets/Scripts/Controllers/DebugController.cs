@@ -10,6 +10,7 @@ public class DebugController : MonoBehaviour
     GameController _gameController;
     SystemWeaponLibrary _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
+    LevelController _levelController;
 
     [SerializeField] GameObject[] _subpanels = null;
 
@@ -33,6 +34,7 @@ public class DebugController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _levelController = GetComponent<LevelController>();
         _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
 
     }
@@ -140,6 +142,7 @@ public class DebugController : MonoBehaviour
         }
     }
 
+    #region Ship Changes
     public void HandleMoreThrust()
     {
         if (_playerPH == null) 
@@ -186,11 +189,14 @@ public class DebugController : MonoBehaviour
         _playerPH.ModifyTurnRate(20f);
     }
 
+#endregion
+
     public void HandleSpawnRandomSystem()
     {
         _systemsLibrary.SpawnUniqueRandomSystemCrate(_playerSystemsHandler.GetSystemsOnBoard());
     }
 
+    #region System Toggles
     public void HandleSystemToggle_Engine(int index)
     {
         if (_systemToggles_Engine[index].isOn)
@@ -297,7 +303,9 @@ public class DebugController : MonoBehaviour
         }
     }
 
+    #endregion
 
+    #region Weapon Toggles
     public void HandleWeaponToggle(int index)
     { 
         if (_weaponToggles[index].isOn)
@@ -314,6 +322,17 @@ public class DebugController : MonoBehaviour
                 GetComponent<WeaponHandler>().WeaponType);
         }
     }
+
+    #endregion
+
+    #region Level Tools
+
+    public void SpawnEnemy_Debug(int enemyIndex)
+    {
+        _levelController.SpawnEnemiesInNewSector_Debug();
+    }
+
+    #endregion
 
 
 }

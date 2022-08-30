@@ -111,6 +111,15 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    public void SpawnSingleLevelEnemy(int index)
+    {
+        GameObject enemy = _enemyLibrary.GetEnemyOfType((EnemyInfoHolder.EnemyType)index);
+        Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
+        Quaternion rot = Quaternion.LookRotation(pos, Vector3.forward);
+        GameObject newEnemy = Instantiate(enemy, pos, rot);
+        RegisterEnemy(newEnemy);
+    }
+
     #endregion
 
     #region Clearing Level
