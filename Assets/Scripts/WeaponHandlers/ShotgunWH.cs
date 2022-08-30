@@ -65,14 +65,7 @@ public class ShotgunWH : WeaponHandler
             pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
         }
 
-        if (_isPlayer)
-        {
-            _audioCon.PlayPlayerSound(GetRandomFireClip());
-        }
-        else
-        {
-            _audioCon.PlayRemoteSound(GetRandomFireClip(), transform.position);
-        }
+        _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
         _chargeLevel = 0;
         UpdateUI();

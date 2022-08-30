@@ -30,7 +30,7 @@ public class BlasterWH : WeaponHandler
             _isFiring = true;
             _connectedWID?.UpdateUI("warming");
 
-            if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomActivationClip());
+            if (_isPlayer) _hostAudioSource.PlayOneShot(GetRandomActivationClip());
         }
     }
 
@@ -38,7 +38,7 @@ public class BlasterWH : WeaponHandler
     {
         if (Time.time > _timeToToggleModes && _isFiring)
         {
-            if (_isPlayer) _audioCon.PlayPlayerSound(GetRandomDeactivationClip());
+            if (_isPlayer) _hostAudioSource.PlayOneShot(GetRandomDeactivationClip());
             _connectedWID?.UpdateUI("cooling");
             _timeToToggleModes = Time.time + _minModeToggle;
 
@@ -72,16 +72,8 @@ public class BlasterWH : WeaponHandler
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
-        
-        if (_isPlayer)
-        {
-            _audioCon.PlayPlayerSound(GetRandomFireClip());
-        }
-        else
-        {
-            _audioCon.PlayRemoteSound(GetRandomFireClip(), transform.position);
-        }
-
+ 
+        _hostAudioSource.PlayOneShot(GetRandomFireClip());              
 
         _connectedWID?.UpdateUI("firing");
     }

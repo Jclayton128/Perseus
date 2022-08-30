@@ -39,6 +39,7 @@ public class ScrapController : MonoBehaviour
             {
                 newScrap = _pooledScraps.Dequeue();
                 newScrap.gameObject.SetActive(true);
+                newScrap.transform.position = impactPosition;
             }
 
             float lifetime = GetRandomScrapLifetime();

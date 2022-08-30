@@ -8,7 +8,7 @@ public abstract class WeaponHandler : MonoBehaviour
 {
     protected PoolController _poolCon;
     protected InputController _inputCon;
-    protected AudioController _audioCon;
+    protected AudioSource _hostAudioSource;
     protected EnergyHandler _hostEnergyHandler;
     protected Rigidbody2D _rb;
 
@@ -60,7 +60,8 @@ public abstract class WeaponHandler : MonoBehaviour
         WeaponIconDriver wid)
     {
         _inputCon = FindObjectOfType<InputController>();
-        _audioCon = _inputCon.GetComponent<AudioController>();
+        
+        _hostAudioSource = GetComponentInParent<AudioSource>();
         _rb = GetComponentInParent<Rigidbody2D>();
         _poolCon = _inputCon.GetComponent<PoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;

@@ -48,6 +48,8 @@ public class HealthHandler : MonoBehaviour
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float IonFactor = 0;
 
+    int _scrapValue;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -60,6 +62,7 @@ public class HealthHandler : MonoBehaviour
 
         HullPoints = _maxHullPoints;
         ShieldPoints = _maxShieldPoints;
+        _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
         if (_movement.IsPlayer)
         {
@@ -91,7 +94,12 @@ public class HealthHandler : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Dead enemy!");
+        if (!_movement.IsPlayer)
+        {
+            Vector2 dir = UnityEngine.Random.onUnitSphere;
+            _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
+        }
+
         Destroy(gameObject);
     }
 
@@ -179,31 +187,12 @@ public class HealthHandler : MonoBehaviour
     {
 
         HullPoints -= normalDamage;
-        float damageReceived;
-
-        if (HullPoints < 0)
-        {
-            //A high-damage shot against something with little health left should not create lots of scrap
-            damageReceived = normalDamage + scrapBonus + HullPoints; //Decrease damage received by negative Hull Points
-        }
-        else
-        {
-            damageReceived = normalDamage + scrapBonus;
-
-        }
-
+        _scrapValue += Mathf.RoundToInt(scrapBonus);
+        
         if (_movement.IsPlayer)
         {
             _hullBar.SetFactor(HullPoints / _maxHullPoints);
         }
-
-        if (!_movement.IsPlayer)
-        {
-            int scrapToMake = Mathf.RoundToInt((damageReceived));
-
-            _scrapController.SpawnScraps(scrapToMake, ((Vector2)transform.position + impactPosition)/2f, impactHeading);
-        }
-
     }
 
     private void ReceiveIonDamage(DamagePack incomingDamage)
