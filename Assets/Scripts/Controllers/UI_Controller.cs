@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 using System;
+using DG.Tweening;
 
 public class UI_Controller : MonoBehaviour
 {
@@ -36,28 +37,46 @@ public class UI_Controller : MonoBehaviour
 
     [SerializeField] RadarScreen _radarScreen = null;
 
-    [FoldoutGroup("Scrap & Level")]
+    [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] Image _scrapBarFill = null;
 
-    [FoldoutGroup("Scrap & Level")]
+    [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] TextMeshProUGUI _scrapAmountTMP = null;
 
-    [FoldoutGroup("Scrap & Level")]
+    [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] TextMeshProUGUI _levelTMP = null;
+
+    [FoldoutGroup("Scrap & Upgrade Points")]
+    [SerializeField] TextMeshProUGUI _tabTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Image _leftUpgradeWing = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Image _rightUpgradeWing = null;
+
     #endregion
 
     public enum Context {None, Start, Core, End };
 
     //settings
-    [FoldoutGroup("Scrap & Level")]
+    [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] float _minScrapFactor = 0.13f;
 
-    [FoldoutGroup("Scrap & Level")]
+    [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] float _maxScrapFactor = 0.87f;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] float _upgradeWingDeployTime = 0.7f;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] float _upgradeWingTraverseDistance = 10f;
 
 
     //state
     Image _currentActiveSecondary;
+    Tween _upgradeWingsTween_left;
+    Tween _upgradeWingsTween_right;
 
     #region Initialization
     private void Awake()
@@ -91,7 +110,7 @@ public class UI_Controller : MonoBehaviour
 
     #endregion
 
-    #region Scrap and Level
+    #region Scrap and Upgrade Points
 
     public void ModifyScrapAmount(float scrapFillFactor, int totalScrapAmount)
     {
@@ -104,10 +123,42 @@ public class UI_Controller : MonoBehaviour
         _scrapBarFill.fillAmount = Mathf.Lerp(_minScrapFactor, _maxScrapFactor, scrapFillFactor);
     }
 
-    public void ModifyLevel(int newLevel)
+    public void ModifyUpgradePointsAvailable(int newLevel)
     {
         _levelTMP.text = newLevel.ToString();
     }
+
+    public void ShowHideTAB(bool shouldShow)
+    {
+        _tabTMP.text = (shouldShow) ? "TAB" : "";
+    }
+
+    #endregion
+
+    #region Upgrade Menu
+
+    public void DeployUpgradeMenuWings()
+    {
+        _upgradeWingsTween_left.Kill();
+        _upgradeWingsTween_right.Kill();
+
+        _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad) ;
+        _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+    }
+    
+    public void RetractUpgradeMenuWings()
+    {
+        _upgradeWingsTween_left.Kill();
+        _upgradeWingsTween_right.Kill();
+
+        _leftUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+        _rightUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+    }
+
 
     #endregion
 

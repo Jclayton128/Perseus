@@ -13,6 +13,8 @@ public class InputController : MonoBehaviour
     public Action<int> OnScroll;
     public Action<int> OnMouseDown;
     public Action<int> OnMouseUp;
+    public Action OnUpgradeMenuToggled;
+
     Ray ray;
     float distance;
     Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 0));
@@ -83,6 +85,11 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S))
         {
             OnDecelEnd?.Invoke();
+        }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            Debug.Log("Tab");
+            OnUpgradeMenuToggled?.Invoke();
         }
     }
 
