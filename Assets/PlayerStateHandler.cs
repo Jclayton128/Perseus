@@ -47,12 +47,12 @@ public class PlayerStateHandler : MonoBehaviour
 
             if (_isUpgradeMenuDeployed)
             {
-                _uiController.DeployUpgradeMenuWings();
+                _uiController.DeployUpgradeMenu();
                 _gameController.PauseGame(0.7f);
             }
             else
             {
-                _uiController.RetractUpgradeMenuWings();
+                _uiController.RetractUpgradeMenu();
                 _gameController.UnpauseGame();
             }
 

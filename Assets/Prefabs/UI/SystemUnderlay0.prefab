@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2345, y: -6.2378}
+  m_AnchoredPosition: {x: 0.2345, y: 0.4}
   m_SizeDelta: {x: 89.8036, y: 79.6842}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2820337555749949180
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3510556027661328378}
   - component: {fileID: 5937254177369506263}
   - component: {fileID: 6275825446707516200}
+  - component: {fileID: 2514860901157339216}
   m_Layer: 5
   m_Name: SystemUnderlay0
   m_TagString: Untagged
@@ -197,6 +198,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2514860901157339216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116100979910186730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5313bc5cbf107784eb966236910068bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deploysDown: 1
 --- !u!1001 &1503408369501541691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,11 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_text
-      value: +
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontSize
-      value: 63.6
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontColor.b

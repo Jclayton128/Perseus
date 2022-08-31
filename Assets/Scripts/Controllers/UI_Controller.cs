@@ -55,6 +55,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] Image _rightUpgradeWing = null;
 
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] SystemSelectorDriver[] _systemSelectors = null;
+
     #endregion
 
     public enum Context {None, Start, Core, End };
@@ -70,7 +73,7 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] float _upgradeWingDeployTime = 0.7f;
 
     [FoldoutGroup("Upgrade Menu")]
-    [SerializeField] float _upgradeWingTraverseDistance = 10f;
+    [SerializeField] float _upgradeWingTraverseDistance;
 
 
     //state
@@ -137,7 +140,7 @@ public class UI_Controller : MonoBehaviour
 
     #region Upgrade Menu
 
-    public void DeployUpgradeMenuWings()
+    public void DeployUpgradeMenu()
     {
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
@@ -146,9 +149,11 @@ public class UI_Controller : MonoBehaviour
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+
+        DeploySelectors();
     }
     
-    public void RetractUpgradeMenuWings()
+    public void RetractUpgradeMenu()
     {
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
@@ -157,6 +162,24 @@ public class UI_Controller : MonoBehaviour
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _rightUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+
+        RetractSelectors();
+    }
+
+    private void DeploySelectors()
+    {
+        foreach (SystemSelectorDriver driver in _systemSelectors)
+        {
+            driver.DeploySelector();
+        }
+    }
+
+    private void RetractSelectors()
+    {
+        foreach (SystemSelectorDriver driver in _systemSelectors)
+        {
+            driver.RetractSelector();
+        }
     }
 
 
