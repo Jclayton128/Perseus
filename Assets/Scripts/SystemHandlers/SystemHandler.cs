@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class SystemHandler : MonoBehaviour
+public abstract class SystemHandler : MonoBehaviour, IUpgradeable
 {
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
     [SerializeField] protected Sprite _icon = null;
 
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), HideLabel]
+    [SerializeField] protected string _name = "default name";
 
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"), Multiline(3), HideLabel]
     [SerializeField] protected string _description = "default description";
+
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), Multiline(3), HideLabel]
+    [SerializeField] protected string _upgradeDescription = "upgrade description";
 
     //state
     public SystemWeaponLibrary.SystemType SystemType;
@@ -45,7 +52,7 @@ public abstract class SystemHandler : MonoBehaviour
         //Undo all the changes to ship here?
     }
 
-    public bool CheckIfUpgradeable()
+    public bool CheckIfHasRemainingUpgrades()
     {
         if (_maxUpgradeLevel <= 0)
         {
@@ -62,7 +69,7 @@ public abstract class SystemHandler : MonoBehaviour
         }
     }
 
-    public virtual void Upgrade()
+    public void Upgrade()
     {
         if (CurrentUpgradeLevel >= _maxUpgradeLevel)
         {
@@ -71,9 +78,36 @@ public abstract class SystemHandler : MonoBehaviour
         }
 
         CurrentUpgradeLevel++;
+        _connectedID.ModifySystemLevel(CurrentUpgradeLevel);
+        ImplementSystemUpgrade();
     }
+
+    public abstract void ImplementSystemUpgrade();
 
     public abstract object GetUIStatus();
 
+    public (Sprite, string, string, string, int) GetUpgradeDetails()
+    {
+        (Sprite, string, string, string, int) details;
+        details.Item1 = _icon;
+        details.Item2 = _name;
+        details.Item3 = _description;
+        details.Item4 = _upgradeDescription;
 
+        if (CurrentUpgradeLevel >= _maxUpgradeLevel)
+        {
+            details.Item5 = CurrentUpgradeLevel;
+        }
+        else
+        {
+            details.Item5 = -1;
+        }
+
+        return details;
+    }
+
+    public int GetUpgradeCost()
+    {
+        return CurrentUpgradeLevel;
+    }
 }

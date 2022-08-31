@@ -14,13 +14,14 @@ public class ShieldCoreSH : SystemHandler
         base.DeintegrateSystem();
     }
 
-    public override void Upgrade()
-    {
-        base.Upgrade();
-    }
-
+   
     public override object GetUIStatus()
     {
         return null;
+    }
+
+    public override void ImplementSystemUpgrade()
+    {
+        throw new System.NotImplementedException();
     }
 }

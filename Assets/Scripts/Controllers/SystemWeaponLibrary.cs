@@ -105,6 +105,11 @@ public class SystemWeaponLibrary : MonoBehaviour
         }
     }
 
+    public WeaponHandler GetWeaponHandler(WeaponType weaponType)
+    {
+        return _weapons[weaponType];
+    }
+
     public void SpawnUniqueRandomSystemCrate(List<SystemHandler> systemsOnBoard)
     {
         List<SystemHandler> possibleSystems = new List<SystemHandler>();

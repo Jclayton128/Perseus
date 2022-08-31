@@ -235,7 +235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: cfcebd1e866ebf44bb04173487e613f6, type: 3}
-  _description: default description
+  _name: Blaster!
+  _description: This is the description of the standard blaster.
+  _upgradeDescription: Upgrading makes it better and cheaper.
   WeaponType: 0
   _projectileType: 0
   _normalDamage: 2
@@ -259,7 +261,7 @@ MonoBehaviour:
   _deactivationSounds:
   - {fileID: 8300000, guid: e8aabcd24e3b50c4a913c7e67d7530b5, type: 3}
   IsSecondary: 0
-  _maxUpgradeLevel: 1
+  _maxUpgradeLevel: 5
   _minModeToggle: 0.75
   _timeBetweenShots: 0.125
   _shotLifetime: 1

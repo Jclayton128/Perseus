@@ -214,7 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: fd1f06ee5a568d646be484b43bc72919, type: 3}
-  _description: default description
+  _name: Shotgun
+  _description: Shotgun description
+  _upgradeDescription: Upgrading makes it more shotgun!
   WeaponType: 3
   _projectileType: 0
   _normalDamage: 0.25

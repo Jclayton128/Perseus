@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class WeaponHandler : MonoBehaviour
+public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
 {
     protected PoolController _poolCon;
     protected InputController _inputCon;
@@ -18,8 +18,16 @@ public abstract class WeaponHandler : MonoBehaviour
     [SerializeField] protected Sprite _icon = null;
 
     //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), HideLabel]
+    [SerializeField] protected string _name = "default name";
+
+    //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"),Multiline(3), HideLabel]
     [SerializeField] protected string _description = "default description";
+
+    //[FoldoutGroup("Brochure")]
+    [FoldoutGroup("Brochure"), Multiline(3), HideLabel]
+    [SerializeField] protected string _upgradeDescription = "upgrade description";
 
     public SystemWeaponLibrary.WeaponType WeaponType;
     [SerializeField] protected ProjectileBrain.PType _projectileType;
@@ -48,12 +56,12 @@ public abstract class WeaponHandler : MonoBehaviour
     [FoldoutGroup("Audio")]
     [SerializeField] protected AudioClip[] _deactivationSounds = null;
 
-
+    PlayerStateHandler _playerStateHandler;
     protected Transform _muzzle;
     public bool IsSecondary = false;
     protected bool _isPlayer;
     protected WeaponIconDriver _connectedWID;
-    [SerializeField] protected int _maxUpgradeLevel = 1;
+    [SerializeField] protected int _maxUpgradeLevel;
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
 
@@ -69,6 +77,7 @@ public abstract class WeaponHandler : MonoBehaviour
 
         if (_isPlayer)
         {
+
             _playerAudioSource = _inputCon.GetComponent<AudioController>();
         }
         else
@@ -78,6 +87,27 @@ public abstract class WeaponHandler : MonoBehaviour
 
         _connectedWID = wid;
         InitializeWeaponSpecifics();
+    }
+
+    public (Sprite, string, string, string, int) GetUpgradeDetails()
+    {
+        (Sprite, string, string, string, int) details;
+        details.Item1 = _icon;
+        details.Item2 = _name;
+        details.Item3 = _description;
+        details.Item4 = _upgradeDescription;
+
+        if (CurrentUpgradeLevel < _maxUpgradeLevel)
+        {
+            details.Item5 = CurrentUpgradeLevel;
+        }
+        else
+        {
+            //Debug.Log($"{WeaponType} can't be upgraded. At level {CurrentUpgradeLevel} of {_maxUpgradeLevel}");
+            details.Item5 = -1;
+        }       
+
+        return details;
     }
 
     #region Universal Weapon Methods
@@ -118,15 +148,19 @@ public abstract class WeaponHandler : MonoBehaviour
         return _icon;
     }
 
+    public int GetUpgradeCost()
+    {
+        return CurrentUpgradeLevel;
+    }
 
-    public bool CheckIfUpgradeable()
+    public bool CheckIfHasRemainingUpgrades()
     {
         if (_maxUpgradeLevel <= 0)
         {
             Debug.Log("Invalid upgrade level");
             return false;
         }
-        if (CurrentUpgradeLevel == _maxUpgradeLevel)
+        if (CurrentUpgradeLevel >= _maxUpgradeLevel)
         {
             return false;
         }
@@ -136,7 +170,7 @@ public abstract class WeaponHandler : MonoBehaviour
         }
     }
 
-    public virtual void Upgrade()
+    public void Upgrade()
     {
         if (CurrentUpgradeLevel >= _maxUpgradeLevel)
         {
@@ -144,8 +178,10 @@ public abstract class WeaponHandler : MonoBehaviour
             return;
         }
         CurrentUpgradeLevel++;
+        _connectedWID.ModifySystemLevel(CurrentUpgradeLevel);
         ImplementWeaponUpgrade();
     }
+
 
     #region Sound Helpers
     protected AudioClip GetRandomActivationClip()

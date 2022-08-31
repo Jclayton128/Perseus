@@ -90,6 +90,6 @@ public class BlasterWH : WeaponHandler
 
     public override object GetUIStatus()
     {
-        return "blaster";
+        return "wait";
     }
 }

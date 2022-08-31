@@ -14,12 +14,12 @@ public class IonEngineSH : SystemHandler
         base.DeintegrateSystem();
     }
 
-    public override void Upgrade()
+    public override object GetUIStatus()
     {
-        base.Upgrade();
+        throw new System.NotImplementedException();
     }
 
-    public override object GetUIStatus()
+    public override void ImplementSystemUpgrade()
     {
         throw new System.NotImplementedException();
     }

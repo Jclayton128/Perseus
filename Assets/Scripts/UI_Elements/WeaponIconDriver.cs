@@ -7,12 +7,14 @@ using TMPro;
 public class WeaponIconDriver : SystemIconDriver
 {
     [SerializeField] Image _hintIcon;
+    WeaponHandler _heldWeapon;
 
     public SystemWeaponLibrary.WeaponType WeaponType { get; private set; }
 
     public void Initialize(Sprite primary, Sprite secondary)
     {
         base.Initialize();
+        
         DehighlightAsActive();
     }
 
@@ -36,7 +38,7 @@ public class WeaponIconDriver : SystemIconDriver
         }
         _levelTMP.text = wh.CurrentUpgradeLevel.ToString();
         WeaponType = wh.WeaponType;
-
+        _heldWeapon = wh;
         SetupUIType(wh.GetUIStatus());
     }
 
@@ -48,5 +50,16 @@ public class WeaponIconDriver : SystemIconDriver
     public void DehighlightAsActive()
     {
         _hintIcon.enabled = false;
+    }
+    public override void PushHeldSystemWeaponAsSelection()
+    {
+        if (_heldWeapon)
+        {
+            _uiController.UpdateSelection(_heldWeapon);
+        }
+        else
+        {
+            _uiController.ClearSelection();
+        }
     }
 }

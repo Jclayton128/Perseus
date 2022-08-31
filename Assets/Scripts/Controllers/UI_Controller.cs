@@ -58,7 +58,27 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] SystemSelectorDriver[] _systemSelectors = null;
 
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Image _selectionImage = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _selectionNameTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _selectionDescTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _selectionUpgradeDescTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _selectionUpgradeCostTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Button _selectionUpgradeButton = null;
+
     #endregion
+
+    PlayerStateHandler _playerStateHandler;
 
     public enum Context {None, Start, Core, End };
 
@@ -76,7 +96,9 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] float _upgradeWingTraverseDistance;
 
 
+
     //state
+    IUpgradeable _currentUpgradeableSelection;
     Image _currentActiveSecondary;
     Tween _upgradeWingsTween_left;
     Tween _upgradeWingsTween_right;
@@ -86,6 +108,13 @@ public class UI_Controller : MonoBehaviour
     {
         InitializeSystemWeaponIcons();
         InitializeScrapLevelPanel();
+    }
+
+    private void Start()
+    {
+        //TODO this should be pushed to it once the player has picked his ship...
+        _playerStateHandler = FindObjectOfType<PlayerStateHandler>();
+        ClearSelection();
     }
 
     private void InitializeScrapLevelPanel()
@@ -150,6 +179,8 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
+        CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
+
         DeploySelectors();
     }
     
@@ -182,6 +213,65 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
+    public void ClearSelection()
+    {
+        _currentUpgradeableSelection = null;
+        _selectionUpgradeButton.interactable = false;
+        _selectionImage.color = Color.clear;
+        _selectionImage.sprite = null;
+        _selectionNameTMP.text = "-";
+        _selectionDescTMP.text = null;
+        _selectionUpgradeDescTMP.text = null;
+        _selectionUpgradeCostTMP.text = "-";
+    }
+
+    public void UpdateSelection(IUpgradeable upgradeableThing)
+    {
+        _currentUpgradeableSelection = upgradeableThing;
+        (Sprite, string, string, string, int) selectionInfo = upgradeableThing.GetUpgradeDetails();
+
+        _selectionUpgradeButton.interactable = CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
+
+
+        _selectionImage.color = Color.white;
+        _selectionImage.sprite = selectionInfo.Item1;
+        _selectionNameTMP.text = selectionInfo.Item2;
+        _selectionDescTMP.text = selectionInfo.Item3;
+        _selectionUpgradeDescTMP.text = selectionInfo.Item4;
+        if (selectionInfo.Item5 < 0)
+        {
+            _selectionUpgradeCostTMP.text = "-";
+        }
+        else
+        {
+            _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
+        }
+     
+    }
+
+    private bool CheckIfUpgradeButtonShouldBeInteractable(IUpgradeable currentUpgradeableSelection)
+    {
+        if (currentUpgradeableSelection == null) return false;
+
+        bool hasMoreUpgradesAvailable = _currentUpgradeableSelection.CheckIfHasRemainingUpgrades();
+        bool canAffordToUpgrade = _playerStateHandler.CheckUpgradePoints(_currentUpgradeableSelection.GetUpgradeCost());
+
+        if ( hasMoreUpgradesAvailable && canAffordToUpgrade )
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public void HandleSelectedUpgrade()
+    {
+        int currentSelectionUpgradeCost = _currentUpgradeableSelection.GetUpgradeCost();
+        _playerStateHandler.SpendUpgradePoints(currentSelectionUpgradeCost);
+        _currentUpgradeableSelection.Upgrade();
+        UpdateSelection(_currentUpgradeableSelection);
+        
+    }
+    
 
     #endregion
 

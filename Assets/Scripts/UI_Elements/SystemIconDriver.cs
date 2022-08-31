@@ -9,10 +9,12 @@ public class SystemIconDriver : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
+    protected UI_Controller _uiController;
 
     public SystemWeaponLibrary.SystemType System { get; private set; }
     public bool IsOccupied = false;// { get; protected set; } = false;
 
+    SystemHandler _heldSystem;
     [SerializeField] protected TextMeshProUGUI _parameterTMP = null;
     [SerializeField] protected Image _parameterImageBar = null;
 
@@ -22,6 +24,12 @@ public class SystemIconDriver : MonoBehaviour
         _systemIcon.color = Color.clear;
         _levelTMP.text = "";
         IsOccupied = false;
+        _uiController = FindObjectOfType<UI_Controller>();
+    }
+
+    public void ModifySystemLevel(int newLevel)
+    {
+        _levelTMP.text = newLevel.ToString();
     }
 
     protected void SetupUIType(object uiType)
@@ -57,6 +65,7 @@ public class SystemIconDriver : MonoBehaviour
 
     public void DisplayNewSystem(SystemHandler sh)
     {
+        _heldSystem = sh;
         System = sh.SystemType;
         _systemIcon.sprite = sh.GetIcon();
         if (sh.GetIcon() != null)
@@ -94,6 +103,20 @@ public class SystemIconDriver : MonoBehaviour
     {
         _parameterImageBar.fillAmount = factor;
         _parameterImageBar.color = color;
+    }
+
+
+    public virtual void PushHeldSystemWeaponAsSelection()
+    {
+        if (_heldSystem)
+        {
+            _uiController.UpdateSelection(_heldSystem);
+        }
+        else
+        {
+            _uiController.ClearSelection();
+        }
+
     }
 
 }

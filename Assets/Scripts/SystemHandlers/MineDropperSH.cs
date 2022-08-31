@@ -14,12 +14,13 @@ public class MineDropperSH : SystemHandler
         base.DeintegrateSystem();
     }
 
-    public override void Upgrade()
-    {
-        base.Upgrade();
-    }
 
     public override object GetUIStatus()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ImplementSystemUpgrade()
     {
         throw new System.NotImplementedException();
     }
