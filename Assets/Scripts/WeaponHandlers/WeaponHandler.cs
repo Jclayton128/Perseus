@@ -9,6 +9,7 @@ public abstract class WeaponHandler : MonoBehaviour
     protected PoolController _poolCon;
     protected InputController _inputCon;
     protected AudioSource _hostAudioSource;
+    protected AudioController _playerAudioSource;
     protected EnergyHandler _hostEnergyHandler;
     protected Rigidbody2D _rb;
 
@@ -60,13 +61,21 @@ public abstract class WeaponHandler : MonoBehaviour
         WeaponIconDriver wid)
     {
         _inputCon = FindObjectOfType<InputController>();
-        
-        _hostAudioSource = GetComponentInParent<AudioSource>();
         _rb = GetComponentInParent<Rigidbody2D>();
         _poolCon = _inputCon.GetComponent<PoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
         _isPlayer = isPlayer;
+
+        if (_isPlayer)
+        {
+            _playerAudioSource = _inputCon.GetComponent<AudioController>();
+        }
+        else
+        {
+            _hostAudioSource = GetComponentInParent<AudioSource>();
+        }
+
         _connectedWID = wid;
         InitializeWeaponSpecifics();
     }
@@ -76,9 +85,19 @@ public abstract class WeaponHandler : MonoBehaviour
 
     protected abstract void InitializeWeaponSpecifics();
 
-    public abstract void Activate();
+    public void Activate()
+    {
+        if (!GameController.IsPaused) ActivateInternal();
+    }
 
-    public abstract void Deactivate();
+    public void Deactivate()
+    {
+        if (!GameController.IsPaused) DeactivateInternal(true);
+        else DeactivateInternal(false);
+    }
+    protected abstract void ActivateInternal();
+
+    protected abstract void DeactivateInternal(bool wasPausedDuringDeactivationAttempt);
 
     protected abstract void ImplementWeaponUpgrade();
 

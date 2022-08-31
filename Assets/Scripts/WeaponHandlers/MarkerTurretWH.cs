@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MarkerTurretWH : WeaponHandler
 {
-    public override void Activate()
+    protected override void ActivateInternal()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void Deactivate()
+    protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
     {
         throw new System.NotImplementedException();
     }

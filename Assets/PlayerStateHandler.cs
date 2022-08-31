@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStateHandler : MonoBehaviour
 {
     UI_Controller _uiController;
+    GameController _gameController;
     InputController _inputController;
 
     //Settings
@@ -32,18 +33,30 @@ public class PlayerStateHandler : MonoBehaviour
 
         _inputController = _uiController.GetComponent<InputController>();
         _inputController.OnUpgradeMenuToggled += ToggleUpgradeMenu;
+
+        _gameController = _uiController.GetComponent<GameController>();
         _scrapNeededForNextUpgradeLevel = _scrapsPerLevelMod;
     }
 
     private void ToggleUpgradeMenu()
     {
-        if (Time.time > _timeForNextPossibleUpgradeMenuToggle)
+        if (Time.unscaledTime > _timeForNextPossibleUpgradeMenuToggle)
         {
             _isUpgradeMenuDeployed = !_isUpgradeMenuDeployed;
-            _timeForNextPossibleUpgradeMenuToggle = Time.time + _timeBetweenUpgradeMenuToggles;
+            _timeForNextPossibleUpgradeMenuToggle = Time.unscaledTime + _timeBetweenUpgradeMenuToggles;
 
-            if (_isUpgradeMenuDeployed) _uiController.DeployUpgradeMenuWings();
-            else _uiController.RetractUpgradeMenuWings();
+            if (_isUpgradeMenuDeployed)
+            {
+                _uiController.DeployUpgradeMenuWings();
+                _gameController.PauseGame(0.7f);
+            }
+            else
+            {
+                _uiController.RetractUpgradeMenuWings();
+                _gameController.UnpauseGame();
+            }
+
+
         }
     }
 

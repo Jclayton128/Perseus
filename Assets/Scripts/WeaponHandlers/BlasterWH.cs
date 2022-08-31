@@ -21,7 +21,7 @@ public class BlasterWH : WeaponHandler
         //_connectedWID?.UpdateUI("hey!");
     }
 
-    public override void Activate()
+    protected override void ActivateInternal()
     {
         if (Time.time >= _timeToToggleModes)
         {
@@ -30,15 +30,19 @@ public class BlasterWH : WeaponHandler
             _isFiring = true;
             _connectedWID?.UpdateUI("warming");
 
-            if (_isPlayer) _hostAudioSource.PlayOneShot(GetRandomActivationClip());
+            if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+            else _hostAudioSource.PlayOneShot(GetRandomActivationClip());
         }
     }
 
-    public override void Deactivate()
+    protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
     {
         if (Time.time > _timeToToggleModes && _isFiring)
         {
-            if (_isPlayer) _hostAudioSource.PlayOneShot(GetRandomDeactivationClip());
+            if (_isPlayer && !wasPausedDuringDeactivationAttempt)
+            {
+                _playerAudioSource.PlayGameplayClipForPlayer(GetRandomDeactivationClip());
+            }
             _connectedWID?.UpdateUI("cooling");
             _timeToToggleModes = Time.time + _minModeToggle;
 
@@ -59,7 +63,7 @@ public class BlasterWH : WeaponHandler
             else
             {
                 //TODO audio sound of insufficient energy to fire
-                Deactivate();
+                DeactivateInternal(false);
             }
             _timeOfNextShot = Time.time + _timeBetweenShots;
         }       
@@ -72,8 +76,9 @@ public class BlasterWH : WeaponHandler
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
- 
-        _hostAudioSource.PlayOneShot(GetRandomFireClip());              
+
+        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
         _connectedWID?.UpdateUI("firing");
     }

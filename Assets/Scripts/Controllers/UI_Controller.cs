@@ -143,9 +143,9 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right.Kill();
 
         _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad) ;
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
     }
     
     public void RetractUpgradeMenuWings()
@@ -154,9 +154,9 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right.Kill();
 
         _leftUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _rightUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad);
+            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
     }
 
 

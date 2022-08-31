@@ -4,9 +4,26 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] AudioSource _playerAudioSource = null;
+    
+    AudioSource _playerAudioSource;
 
+    private void Awake()
+    {
+        _playerAudioSource = Camera.main.GetComponent<AudioSource>();
+    }
 
+    public void PlayGameplayClipForPlayer(AudioClip clip)
+    {
+        if (GameController.IsPaused == false)
+        {
+            _playerAudioSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.Log("Can't play gameplay clips while paused");
+        }
+
+    }
 
 
 }

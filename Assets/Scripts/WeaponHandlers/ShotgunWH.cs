@@ -34,7 +34,7 @@ public class ShotgunWH : WeaponHandler
         _connectedWID?.UpdateUI(_chargeLevel / _maxCharge, _chargeColor);
     }
 
-    public override void Activate()
+    protected override void ActivateInternal()
     {
         if (_chargeLevel < 3) return;
         float cost = _chargeLevel * _activationCost;
@@ -65,13 +65,14 @@ public class ShotgunWH : WeaponHandler
             pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
         }
 
-        _hostAudioSource.PlayOneShot(GetRandomFireClip());
+        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
         _chargeLevel = 0;
         UpdateUI();
     }
 
-    public override void Deactivate()
+    protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
     {
         
     }
