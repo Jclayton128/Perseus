@@ -7,9 +7,16 @@ using DG.Tweening;
 public class GameController : MonoBehaviour
 {
     CameraController _camCon;
+    UI_Controller _uiController;
 
     //state
     GameObject _player;
+
+    public GameObject Player
+    {
+        get => _player;
+    }
+
     Tween _pauseTween;
 
     public static bool IsPaused { get; private set; } = false;
@@ -17,6 +24,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _camCon = GetComponent<CameraController>();
+        _uiController = GetComponent<UI_Controller>();
     }
 
     public void RegisterPlayer(GameObject player)
@@ -27,17 +35,25 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        SetupGame();
+        _uiController.InstantDeployMetaMenu();
+        PauseGame(1.2f);
     }
 
-    private void SetupGame()
+    [ContextMenu("Setup New Game")]
+    private void SetupNewGame()
     {
+        //Spawn Player
+        //Retract Meta Menu
+        //Create First Level
+
+        _uiController.RetractMetaMenu();
+        UnpauseGame();
         _camCon.FocusCameraOnTarget(_player.transform);
     }
 
-    public GameObject GetPlayerGO()
+    public void EndGameOnPlayerDeath()
     {
-        return _player;
+        _player = null;
     }
 
     #region Time Scale

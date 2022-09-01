@@ -111,6 +111,12 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
     }
 
     #region Universal Weapon Methods
+
+    /// <summary>
+    /// Returning a string sets up the Icon Driver to show a string. Float: Charge Bar. Int: 
+    /// Series of pips for discrete counts of things.
+    /// </summary>
+    /// <returns></returns>
     public abstract object GetUIStatus();
 
     protected abstract void InitializeWeaponSpecifics();
@@ -122,7 +128,7 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
 
     public void Deactivate()
     {
-        if (!GameController.IsPaused) DeactivateInternal(true);
+        if (GameController.IsPaused) DeactivateInternal(true);
         else DeactivateInternal(false);
     }
     protected abstract void ActivateInternal();

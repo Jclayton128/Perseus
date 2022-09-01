@@ -31,7 +31,7 @@ public class BlasterWH : WeaponHandler
             _timeOfNextShot = Time.time + _minModeToggle;
             _timeToToggleModes = Time.time + _minModeToggle;
             _isFiring = true;
-            _connectedWID?.UpdateUI("warming");
+            _connectedWID?.UpdateUI("RDY");
 
             if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
             else _hostAudioSource.PlayOneShot(GetRandomActivationClip());
@@ -46,7 +46,7 @@ public class BlasterWH : WeaponHandler
             {
                 _playerAudioSource.PlayGameplayClipForPlayer(GetRandomDeactivationClip());
             }
-            _connectedWID?.UpdateUI("cooling");
+            _connectedWID?.UpdateUI("COOL");
             _timeToToggleModes = Time.time + _minModeToggle;
 
         }
@@ -78,12 +78,12 @@ public class BlasterWH : WeaponHandler
         ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
-        pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
+        pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + (pb.transform.up * _shotSpeed);
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
-        _connectedWID?.UpdateUI("firing");
+        _connectedWID?.UpdateUI("FIRE");
     }
 
     protected override void ImplementWeaponUpgrade()
@@ -94,6 +94,6 @@ public class BlasterWH : WeaponHandler
 
     public override object GetUIStatus()
     {
-        return "wait";
+        return "INIT";
     }
 }

@@ -38,6 +38,8 @@ public class PlayerStateHandler : MonoBehaviour
         _scrapNeededForNextUpgradeLevel = _scrapsPerLevelMod;
     }
 
+ 
+
     private void ToggleUpgradeMenu()
     {
         if (Time.unscaledTime > _timeForNextPossibleUpgradeMenuToggle)
@@ -69,6 +71,24 @@ public class PlayerStateHandler : MonoBehaviour
         {
             _scrapCollected = 0;
             _currentUpgradePoints++;
+            _uiController.ShowHideTAB(true);
+            _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
+            _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
+        }
+
+        _scrapFactor = (float)_scrapCollected / (float)_scrapNeededForNextUpgradeLevel;
+        _uiController.ModifyScrapAmount(_scrapFactor, _scrapCollected);
+    }
+
+    public void GainScrap(int amountToGain)
+    {
+        _scrapCollected += amountToGain;
+        if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
+        {
+            int overage = _scrapCollected - _scrapNeededForNextUpgradeLevel;
+            _currentUpgradePoints++;
+            _scrapCollected = overage;
+            
             _uiController.ShowHideTAB(true);
             _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
             _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;

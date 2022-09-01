@@ -127,7 +127,7 @@ public class SystemWeaponLibrary : MonoBehaviour
         go.GetComponent<SystemCrateHandler>().Initialize();
 
         Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
-        go.transform.position = _gameCon.GetPlayerGO().transform.position + offset;
+        go.transform.position = _gameCon.Player.transform.position + offset;
     }
 
 }

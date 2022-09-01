@@ -10,6 +10,7 @@ public class DebugController : MonoBehaviour
     GameController _gameController;
     SystemWeaponLibrary _systemsLibrary;
     PlayerSystemHandler _playerSystemsHandler;
+    PlayerStateHandler _playerStateHandler;
     LevelController _levelController;
 
     [SerializeField] GameObject[] _subpanels = null;
@@ -41,7 +42,8 @@ public class DebugController : MonoBehaviour
 
     private void Start()
     {
-        _playerSystemsHandler = _gameController.GetPlayerGO().GetComponent<PlayerSystemHandler>();
+        _playerSystemsHandler = _gameController.Player.GetComponent<PlayerSystemHandler>();
+        _playerStateHandler = _playerSystemsHandler.GetComponent<PlayerStateHandler>();
         SetupToggleLabels();
     }
 
@@ -146,7 +148,7 @@ public class DebugController : MonoBehaviour
     public void HandleMoreThrust()
     {
         if (_playerPH == null) 
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyThrust(20f);
 
@@ -154,7 +156,7 @@ public class DebugController : MonoBehaviour
     public void HandleLessThrust()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyThrust(-20f);
 
@@ -162,7 +164,7 @@ public class DebugController : MonoBehaviour
     public void HandleMoreMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyMass(2f);
 
@@ -170,23 +172,28 @@ public class DebugController : MonoBehaviour
     public void HandleLessMass()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyMass(-2f);
     }
     public void HandleMoreTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyTurnRate(20f);
     }
     public void HandleLessTurnRate()
     {
         if (_playerPH == null)
-            _playerPH = _gameController.GetPlayerGO().GetComponent<ActorMovement>();
+            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
         _playerPH.ModifyTurnRate(20f);
+    }
+
+    public void HandleGainScrap()
+    {
+        _playerStateHandler.GainScrap(10);
     }
 
 #endregion

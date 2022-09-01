@@ -10,6 +10,14 @@ using DG.Tweening;
 public class UI_Controller : MonoBehaviour
 {
     #region Scene References
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] Image _topMetaWing = null;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] Image _bottomMetaWing = null;
+
+
     [FoldoutGroup("Systems & Weapons")]
     [SerializeField] SystemIconDriver[] _systemIcons = null;
 
@@ -80,7 +88,7 @@ public class UI_Controller : MonoBehaviour
 
     PlayerStateHandler _playerStateHandler;
 
-    public enum Context {None, Start, Core, End };
+    public enum Context { None, Start, Core, End };
 
     //settings
     [FoldoutGroup("Scrap & Upgrade Points")]
@@ -90,10 +98,16 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] float _maxScrapFactor = 0.87f;
 
     [FoldoutGroup("Upgrade Menu")]
-    [SerializeField] float _upgradeWingDeployTime = 0.7f;
+    [SerializeField] float _upgradeMenuDeployTime;  //.7f is nice.
 
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] float _upgradeWingTraverseDistance;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] float _metaMenuTraverseDistance;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] float _metaMenuDeployTime = 1.2f;
 
 
 
@@ -102,6 +116,8 @@ public class UI_Controller : MonoBehaviour
     Image _currentActiveSecondary;
     Tween _upgradeWingsTween_left;
     Tween _upgradeWingsTween_right;
+    Tween _topMetaTween;
+    Tween _bottomMetaTween;
 
     #region Initialization
     private void Awake()
@@ -142,6 +158,42 @@ public class UI_Controller : MonoBehaviour
 
     #endregion
 
+    #region Meta Menu
+
+    [ContextMenu("Deploy Meta Menu")]
+    public void DeployMetaMenu()
+    {
+        _topMetaTween.Kill();
+        _bottomMetaTween.Kill();
+
+        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(-_metaMenuTraverseDistance,
+            _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(_metaMenuTraverseDistance,
+            _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+
+    }
+
+    [ContextMenu("Retract Meta Menu")]
+    public void RetractMetaMenu()
+    {
+        _topMetaTween.Kill();
+        _bottomMetaTween.Kill();
+
+        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(_metaMenuTraverseDistance,
+            _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(-_metaMenuTraverseDistance,
+            _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+
+    }
+
+    public void InstantDeployMetaMenu()
+    {
+        _topMetaWing.rectTransform.anchoredPosition = new Vector2(0, -_metaMenuTraverseDistance);
+        _bottomMetaWing.rectTransform.anchoredPosition = new Vector2(0, _metaMenuTraverseDistance);
+    }
+
+    #endregion
+
     #region Scrap and Upgrade Points
 
     public void ModifyScrapAmount(float scrapFillFactor, int totalScrapAmount)
@@ -169,30 +221,32 @@ public class UI_Controller : MonoBehaviour
 
     #region Upgrade Menu
 
+    [ContextMenu("Deploy Upgrade Menu")]
     public void DeployUpgradeMenu()
     {
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
         _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         _selectionUpgradeButton.interactable = CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
 
         DeploySelectors();
     }
-    
+
+    [ContextMenu("Retract Upgrade Menu")]
     public void RetractUpgradeMenu()
     {
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
         _leftUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _rightUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
-            _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         RetractSelectors();
     }
