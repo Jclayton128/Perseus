@@ -16,4 +16,5 @@ public class CameraController : MonoBehaviour
     {
         _cvc.Follow = target;
     }
+
 }

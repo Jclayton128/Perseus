@@ -33,8 +33,6 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnAccelEnd += HandleStopAccelerating;
             _inputCon.OnDecelBegin += HandleBeginDecelerating;
             _inputCon.OnDecelEnd += HandleStopDecelerating;
-
-            _inputCon.GetComponent<GameController>().RegisterPlayer(this.gameObject);
         }
         
     }

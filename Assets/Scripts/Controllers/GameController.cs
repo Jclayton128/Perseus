@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour
 {
     CameraController _camCon;
     UI_Controller _uiController;
+    PlayerShipLibrary _playerShipLibrary;
+
+    public Action<GameObject> OnPlayerSpawned;
 
     //state
     GameObject _player;
@@ -25,13 +28,8 @@ public class GameController : MonoBehaviour
     {
         _camCon = GetComponent<CameraController>();
         _uiController = GetComponent<UI_Controller>();
+        _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
     }
-
-    public void RegisterPlayer(GameObject player)
-    {
-        _player = player;
-    }
-
 
     void Start()
     {
@@ -39,21 +37,38 @@ public class GameController : MonoBehaviour
         PauseGame(1.2f);
     }
 
-    [ContextMenu("Setup New Game")]
-    private void SetupNewGame()
+
+    public void SetupNewGame()
     {
         //Spawn Player
         //Retract Meta Menu
         //Create First Level
+        GameObject playerPrefab = _playerShipLibrary.GetSelectedPlayerShipPrefab();
+        _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        OnPlayerSpawned?.Invoke(_player);
 
         _uiController.RetractMetaMenu();
         UnpauseGame();
+        
+        //TODO snap the camera to something interesting?
         _camCon.FocusCameraOnTarget(_player.transform);
+    }
+
+    public void EndGameOnPlayerChoice()
+    {
+        _player = null;
+        Destroy(_player);
+        _camCon.FocusCameraOnTarget(null);
+        _uiController.DeployMetaMenu();
+        PauseGame(1.2f);
     }
 
     public void EndGameOnPlayerDeath()
     {
         _player = null;
+        _camCon.FocusCameraOnTarget(null);
+        _uiController.DeployMetaMenu();
+        PauseGame(1.2f);
     }
 
     #region Time Scale

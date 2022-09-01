@@ -46,7 +46,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 35
 --- !u!1 &860607863346863821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1146,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8489365244245804194, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+--- !u!4 &2148845601266606514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4974917334998511879, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+  m_PrefabInstance: {fileID: 6401954029406834869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9089745778583505210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
@@ -1154,11 +1159,6 @@ GameObject:
 --- !u!58 &7315198137112853190 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: -4801819376047543693, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
-  m_PrefabInstance: {fileID: 6401954029406834869}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2148845601266606514 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4974917334998511879, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
   m_PrefabInstance: {fileID: 6401954029406834869}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &-3081601235201472098
@@ -1190,7 +1190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e73a52520649364aa09105557716ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isUpgradeMenuDeployed: 0
 --- !u!114 &2074364254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1244,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxEnergyPoints: 30
   _energyGainRate: 1
+--- !u!114 &3710267741437525808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089745778583505210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd4080569877bc499d82fd47fecb19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: aff460842c401564089bb54046e95bd9, type: 3}
+  _name: default ship name
+  _description: default ship description
 --- !u!114 &4691011983045253245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,6 +1273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHullPoints: 20
   _maxShieldPoints: 10
-  _shieldHealRate: 0
+  _shieldHealRate: 1
   _ionHealRate: 0.1
   IonFactor: 0

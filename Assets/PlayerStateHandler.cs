@@ -18,7 +18,7 @@ public class PlayerStateHandler : MonoBehaviour
     int _scrapNeededForNextUpgradeLevel;
     float _scrapFactor = 0;
     float _timeForNextPossibleUpgradeMenuToggle = -1;
-    public bool _isUpgradeMenuDeployed = true;
+    bool _isUpgradeMenuDeployed = true;
 
 
     private void Awake()

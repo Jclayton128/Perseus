@@ -35,16 +35,17 @@ public class DebugController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         _levelController = GetComponent<LevelController>();
         _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
-
+        SetupToggleLabels();
     }
 
-    private void Start()
+
+    private void ReactToPlayerSpawning(GameObject player)
     {
-        _playerSystemsHandler = _gameController.Player.GetComponent<PlayerSystemHandler>();
+        _playerSystemsHandler = player.GetComponent<PlayerSystemHandler>();
         _playerStateHandler = _playerSystemsHandler.GetComponent<PlayerStateHandler>();
-        SetupToggleLabels();
     }
 
     private void Update()

@@ -84,9 +84,23 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] Button _selectionUpgradeButton = null;
 
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] TextMeshProUGUI _shipChoiceName = null;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] TextMeshProUGUI _shipChoiceDescription = null;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] Image _shipChoiceImage = null;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] Image[] _shipChoiceOptionImages = null;
+
     #endregion
 
     PlayerStateHandler _playerStateHandler;
+    GameController _gameController;
+    PlayerShipLibrary _playerShipLibrary;
 
     public enum Context { None, Start, Core, End };
 
@@ -122,8 +136,11 @@ public class UI_Controller : MonoBehaviour
     #region Initialization
     private void Awake()
     {
+        _gameController = GetComponent<GameController>();
+        _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
         InitializeSystemWeaponIcons();
         InitializeScrapLevelPanel();
+        InitializeShipSelection();
     }
 
     private void Start()
@@ -153,6 +170,38 @@ public class UI_Controller : MonoBehaviour
         foreach (var wid in _secondaryWeaponIcons)
         {
             wid.Initialize(_primaryFireHintSprite, _secondaryFireHintSprite);
+        }
+    }
+
+    private void InitializeShipSelection()
+    {
+        foreach (var image in _shipChoiceOptionImages)
+        {
+            image.GetComponentInParent<Button>().interactable = false;
+            image.color = Color.clear;
+        }
+
+        _shipChoiceImage.color = Color.clear;
+        _shipChoiceName.text = "";
+        _shipChoiceDescription.text = "";
+        
+
+        if (_playerShipLibrary.GetPlayerShipCount() > _shipChoiceOptionImages.Length)
+        {
+            Debug.LogError("More player ship options than places to display them!");
+        }
+
+        for (int i = 0; i < _playerShipLibrary.GetPlayerShipCount(); i++)
+        {
+            Sprite sprite = _playerShipLibrary.GetPlayerShipDetails(i).Item1;
+            if (sprite != null)
+            {
+                _shipChoiceOptionImages[i].sprite = sprite;
+                _shipChoiceOptionImages[i].color = Color.white;
+                _shipChoiceOptionImages[i].GetComponentInParent<Button>().interactable = true;
+                _shipChoiceImage.color = Color.white;
+            }
+
         }
     }
 
@@ -190,6 +239,26 @@ public class UI_Controller : MonoBehaviour
     {
         _topMetaWing.rectTransform.anchoredPosition = new Vector2(0, -_metaMenuTraverseDistance);
         _bottomMetaWing.rectTransform.anchoredPosition = new Vector2(0, _metaMenuTraverseDistance);
+    }
+
+    public void HandleStartNewGamePress()
+    {
+        _gameController.SetupNewGame();
+    }
+
+    public void HandleExitToMenuPress()
+    {
+        _gameController.EndGameOnPlayerChoice();
+    }
+
+    public void HandleSelectShip(int index)
+    {
+        (Sprite, string, string) details = _playerShipLibrary.GetPlayerShipDetails(index);
+        _shipChoiceImage.sprite = details.Item1;
+        _shipChoiceName.text = details.Item2;
+        _shipChoiceDescription.text = details.Item3;
+
+        _playerShipLibrary.UpdateSelectedPlayerShip(index);
     }
 
     #endregion
