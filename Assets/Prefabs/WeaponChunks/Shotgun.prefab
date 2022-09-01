@@ -219,10 +219,10 @@ MonoBehaviour:
   _upgradeDescription: Upgrading makes it more shotgun!
   WeaponType: 3
   _projectileType: 0
-  _normalDamage: 0.25
+  _normalDamage: 2
   _shieldBonusDamage: 0
   _ionDamage: 0
-  _knockBackAmount: 1
+  _knockBackAmount: 0.25
   _scrapBonus: 0
   _activationCost: 0.5
   _sustainCostRate: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aea8400b3045acc49babc32e86280e7f, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
-  _maxUpgradeLevel: 1
+  _maxUpgradeLevel: 5
   _degreeSpread: 30
   _chargeRate: 3.3
   _shotLifetime: 0.6

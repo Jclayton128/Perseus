@@ -179,7 +179,7 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
             _upgradeWingDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
+        _selectionUpgradeButton.interactable = CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
 
         DeploySelectors();
     }

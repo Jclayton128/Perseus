@@ -9,7 +9,7 @@ public class PlayerStateHandler : MonoBehaviour
     InputController _inputController;
 
     //Settings
-    int _scrapsPerLevelMod = 15;
+    int _scrapsPerLevelMod = 2; //15;
     float _timeBetweenUpgradeMenuToggles = 0.9f; // Should be the same as the time to deploy the menu
 
     //State

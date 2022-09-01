@@ -9,7 +9,7 @@ public class ShotgunWH : WeaponHandler
     [SerializeField] float _degreeSpread = 30f;
 
     [SerializeField] float _chargeRate = 3.3f; // units per second;
-    float _maxCharge = 10f;
+    float _maxCharge = 5f;
 
     [SerializeField] float _shotLifetime = 0.6f;
     [SerializeField] float _shotSpeed = 10f;
@@ -84,7 +84,9 @@ public class ShotgunWH : WeaponHandler
 
     protected override void ImplementWeaponUpgrade()
     {
-        throw new System.NotImplementedException();
+        _maxCharge += 2;
+        _shotLifetime *= 1.2f;
+        _activationCost *= .9f;
     }
 
     protected override void InitializeWeaponSpecifics()

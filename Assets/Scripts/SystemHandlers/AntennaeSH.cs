@@ -20,6 +20,6 @@ public class AntennaeSH : SystemHandler
 
     public override void ImplementSystemUpgrade()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

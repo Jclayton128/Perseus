@@ -263,7 +263,7 @@ MonoBehaviour:
   IsSecondary: 0
   _maxUpgradeLevel: 5
   _minModeToggle: 0.75
-  _timeBetweenShots: 0.125
+  _timeBetweenShots: 0.25
   _shotLifetime: 1
   _shotSpeed: 10
   _isFiring: 0

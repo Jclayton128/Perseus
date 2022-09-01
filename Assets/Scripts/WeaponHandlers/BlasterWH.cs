@@ -6,9 +6,12 @@ public class BlasterWH : WeaponHandler
 {
     //settings
     [SerializeField] float _minModeToggle = 0.75f;
-    [SerializeField] float _timeBetweenShots = 0.125f;
+    [SerializeField] float _timeBetweenShots = 0.25f;
     [SerializeField] float _shotLifetime = 2f;
     [SerializeField] float _shotSpeed = 5f;
+
+    float _fireRateDecreaseOnUpgrade = 0.8f;
+    float _cheapeningOnUpgrade = 0.8f;
 
     //state
     [Header("State")]
@@ -85,7 +88,8 @@ public class BlasterWH : WeaponHandler
 
     protected override void ImplementWeaponUpgrade()
     {
-
+        _activationCost *= _cheapeningOnUpgrade;
+        _timeBetweenShots *= _fireRateDecreaseOnUpgrade;
     }
 
     public override object GetUIStatus()

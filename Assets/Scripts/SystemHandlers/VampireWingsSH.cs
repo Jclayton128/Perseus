@@ -16,11 +16,11 @@ public class VampireWingsSH : SystemHandler
 
     public override object GetUIStatus()
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 
     public override void ImplementSystemUpgrade()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

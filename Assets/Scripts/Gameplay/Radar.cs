@@ -133,7 +133,7 @@ public class Radar : MonoBehaviour
         double dist_normalized = dist / _radarRange;
 
         ///complicate dbit o comment?
-        double intensity = target.RadarProfile / Math.Pow(dist_normalized,1.5) * _signalFudge;
+        double intensity = target.RadarProfile / Math.Pow(dist_normalized,2f) * _signalFudge;
         return (float)intensity;
 
     }

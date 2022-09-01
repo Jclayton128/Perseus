@@ -95,6 +95,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     private void GainWeapon(GameObject newWeapon)
     {
+        if (newWeapon == null) return;
         GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
         WeaponIconDriver wid = _UICon.IntegrateNewWeapon(wh);
@@ -121,6 +122,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     private void GainSystem(GameObject newSystem)
     {
+        if (newSystem == null) return;
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
         if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
@@ -156,12 +158,12 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
-                priweap.Activate();
+                priweap?.Activate();
             }
         }
         if (priOrSec == 1) // Active Secondary Weapon
         {
-            ActiveWeapon.Activate();
+            ActiveWeapon?.Activate();
         }
     }
 
@@ -171,12 +173,12 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
-                priweap.Deactivate();
+                priweap?.Deactivate();
             }
         }
         if (priOrSec == 1) // Active Secondary Weapon
         {
-            ActiveWeapon.Deactivate();
+            ActiveWeapon?.Deactivate();
         }
     }
 
@@ -216,7 +218,9 @@ public class PlayerSystemHandler : MonoBehaviour
 
     public void RemoveWeapon(SystemWeaponLibrary.WeaponType weaponType)
     {
-        WeaponHandler removedWeapon = _weaponsOnBoard[weaponType].GetComponent<WeaponHandler>();
+        WeaponHandler removedWeapon = _weaponsOnBoard[weaponType]?.GetComponent<WeaponHandler>();
+
+        if (removedWeapon == null) return;
         if (removedWeapon.IsSecondary)
         {
             _secondaryWeaponsOnBoard.Remove(removedWeapon);
@@ -257,8 +261,11 @@ public class PlayerSystemHandler : MonoBehaviour
 
     public void RemoveSystem(SystemWeaponLibrary.SystemLocation location, int index)
     {
-        SystemHandler systemToRemove = _syslib.GetSystem(location, index).GetComponent<SystemHandler>();
-        
+
+        SystemHandler systemToRemove = _syslib.GetSystem(location, index)?.GetComponent<SystemHandler>();
+
+        if (systemToRemove == null) return; 
+
         _systemsOnBoard.Remove(systemToRemove);
         if (_systemsOnBoardByLocation.ContainsKey(location))
         {

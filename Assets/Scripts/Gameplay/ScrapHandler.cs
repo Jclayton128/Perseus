@@ -27,8 +27,10 @@ public class ScrapHandler : MonoBehaviour
 
     public void Setup(float lifetime, Sprite sprite, float initialAngularVelocity, Vector2 driftVector)
     {
+        _visualTween.Kill();
         _lifetimeRemaining = lifetime;
         _spriteRenderer.sprite = sprite;
+        _spriteRenderer.color = Color.white;
         _rb.angularVelocity = initialAngularVelocity;
         _rb.velocity = driftVector;
     }
