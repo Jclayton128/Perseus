@@ -47,6 +47,6 @@ public class PlayerShipLibrary : MonoBehaviour
 
     public GameObject GetSelectedPlayerShipPrefab()
     {
-        return _currentlySelectedPlayerShip.gameObject;
+        return _currentlySelectedPlayerShip?.gameObject;
     }
 }

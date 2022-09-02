@@ -183,7 +183,7 @@ public class UI_Controller : MonoBehaviour
 
         _shipChoiceImage.color = Color.clear;
         _shipChoiceName.text = "";
-        _shipChoiceDescription.text = "";
+        _shipChoiceDescription.text = "Select your ship from below.";
         
 
         if (_playerShipLibrary.GetPlayerShipCount() > _shipChoiceOptionImages.Length)
@@ -199,7 +199,6 @@ public class UI_Controller : MonoBehaviour
                 _shipChoiceOptionImages[i].sprite = sprite;
                 _shipChoiceOptionImages[i].color = Color.white;
                 _shipChoiceOptionImages[i].GetComponentInParent<Button>().interactable = true;
-                _shipChoiceImage.color = Color.white;
             }
 
         }
@@ -209,7 +208,6 @@ public class UI_Controller : MonoBehaviour
 
     #region Meta Menu
 
-    [ContextMenu("Deploy Meta Menu")]
     public void DeployMetaMenu()
     {
         _topMetaTween.Kill();
@@ -222,9 +220,10 @@ public class UI_Controller : MonoBehaviour
 
     }
 
-    [ContextMenu("Retract Meta Menu")]
     public void RetractMetaMenu()
     {
+        _shipChoiceImage.color = Color.clear;
+
         _topMetaTween.Kill();
         _bottomMetaTween.Kill();
 
@@ -259,6 +258,11 @@ public class UI_Controller : MonoBehaviour
         _shipChoiceDescription.text = details.Item3;
 
         _playerShipLibrary.UpdateSelectedPlayerShip(index);
+    }
+
+    public void FlashShipSelectionDescription()
+    {
+        _shipChoiceDescription.rectTransform.DOLocalJump(Vector2.up, 14f, 1, 0.7f).SetUpdate(true);
     }
 
     #endregion

@@ -44,6 +44,12 @@ public class GameController : MonoBehaviour
         //Retract Meta Menu
         //Create First Level
         GameObject playerPrefab = _playerShipLibrary.GetSelectedPlayerShipPrefab();
+
+        if (playerPrefab == null)
+        {
+            _uiController.FlashShipSelectionDescription();
+            return;
+        }
         _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         OnPlayerSpawned?.Invoke(_player);
 

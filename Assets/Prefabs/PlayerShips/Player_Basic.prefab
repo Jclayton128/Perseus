@@ -1257,8 +1257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: aff460842c401564089bb54046e95bd9, type: 3}
-  _name: default ship name
-  _description: default ship description
+  _name: Fighter
+  _description: Armed with a repeating blaster and heavy hull, the Fighter is well-equipped
+    for the short range fight.
 --- !u!114 &4691011983045253245
 MonoBehaviour:
   m_ObjectHideFlags: 0
