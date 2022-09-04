@@ -8,7 +8,15 @@ public interface IUpgradeable
 
     public bool CheckIfHasRemainingUpgrades();
 
+    public bool CheckIfInstalled();
+
+
+    public bool CheckIfScrappable();
+
+
     public int GetUpgradeCost();
+
+    public int GetScrapRefundAmount();
 
     public (Sprite, string, string, string, int) GetUpgradeDetails();
 }

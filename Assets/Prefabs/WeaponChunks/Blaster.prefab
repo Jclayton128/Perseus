@@ -262,6 +262,7 @@ MonoBehaviour:
   _deactivationSounds:
   - {fileID: 8300000, guid: e8aabcd24e3b50c4a913c7e67d7530b5, type: 3}
   IsSecondary: 0
+  _isPermanent: 1
   _maxUpgradeLevel: 5
   _minModeToggle: 0.75
   _timeBetweenShots: 0.25

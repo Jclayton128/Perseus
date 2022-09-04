@@ -84,6 +84,19 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] Button _selectionUpgradeButton = null;
 
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Button _installButton = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _installTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] Button _scrapButton = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _scrapRefundTMP = null;
+
+
     [FoldoutGroup("Meta Menu")]
     [SerializeField] TextMeshProUGUI _shipChoiceName = null;
 
@@ -138,25 +151,17 @@ public class UI_Controller : MonoBehaviour
     {
         _gameController = GetComponent<GameController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
+        _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         InitializeSystemWeaponIcons();
-        InitializeScrapLevelPanel();
         InitializeShipSelection();
     }
 
-    private void Start()
+    private void ReactToPlayerSpawning(GameObject player)
     {
-        //TODO this should be pushed to it once the player has picked his ship...
-        _playerStateHandler = FindObjectOfType<PlayerStateHandler>();
+        _playerStateHandler = player.GetComponent<PlayerStateHandler>();
         ClearSelection();
     }
 
-    private void InitializeScrapLevelPanel()
-    {
-        // This initialization is now handled by the Player Scrap Handler
-
-        //ModifyScrapAmount(0, 0);
-        //ModifyLevel(0);
-    }
 
     private void InitializeSystemWeaponIcons()
     {
@@ -200,8 +205,8 @@ public class UI_Controller : MonoBehaviour
                 _shipChoiceOptionImages[i].color = Color.white;
                 _shipChoiceOptionImages[i].GetComponentInParent<Button>().interactable = true;
             }
-
         }
+
     }
 
     #endregion
@@ -294,9 +299,9 @@ public class UI_Controller : MonoBehaviour
 
     #region Upgrade Menu
 
-    [ContextMenu("Deploy Upgrade Menu")]
     public void DeployUpgradeMenu()
     {
+        _currentUpgradeableSelection = null;
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
@@ -305,12 +310,16 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        _selectionUpgradeButton.interactable = CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
+        _selectionUpgradeButton.interactable = false;
+        _installButton.interactable = false;
+        _installTMP.text = "-";
+        _scrapButton.interactable = false;
+        _scrapRefundTMP.text = "-";
 
         DeploySelectors();
     }
 
-    [ContextMenu("Retract Upgrade Menu")]
+
     public void RetractUpgradeMenu()
     {
         _upgradeWingsTween_left.Kill();
@@ -359,7 +368,6 @@ public class UI_Controller : MonoBehaviour
 
         _selectionUpgradeButton.interactable = CheckIfUpgradeButtonShouldBeInteractable(_currentUpgradeableSelection);
 
-
         _selectionImage.color = Color.white;
         _selectionImage.sprite = selectionInfo.Item1;
         _selectionNameTMP.text = selectionInfo.Item2;
@@ -373,7 +381,17 @@ public class UI_Controller : MonoBehaviour
         {
             _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
         }
-     
+
+        bool isInstalled = _currentUpgradeableSelection.CheckIfInstalled();
+        bool isScrappable = _currentUpgradeableSelection.CheckIfScrappable();
+
+        _installButton.interactable = !isInstalled;
+        _installTMP.text = (isInstalled) ? "-" : "1";
+
+        _scrapButton.interactable = isScrappable;
+        string amount = _currentUpgradeableSelection.GetScrapRefundAmount().ToString();
+        _scrapRefundTMP.text = (isScrappable) ? amount : "-";
+
     }
 
     private bool CheckIfUpgradeButtonShouldBeInteractable(IUpgradeable currentUpgradeableSelection)
@@ -389,6 +407,7 @@ public class UI_Controller : MonoBehaviour
         }
         else return false;
     }
+
 
     public void HandleSelectedUpgrade()
     {

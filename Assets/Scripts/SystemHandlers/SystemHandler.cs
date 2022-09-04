@@ -27,6 +27,10 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
     
     protected SystemIconDriver _connectedID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
+    protected bool _isInstalled  = false;
+    
+    [Tooltip("If true, this system can never be scrapped from player build")]
+    [SerializeField] protected bool _isPermanent = true;
 
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
@@ -44,12 +48,14 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
     {
         _connectedID = connectedSID;
         //Do all the changes to ship here?
+        _isInstalled = true;
     }
 
     public virtual void DeintegrateSystem()
     {
         _connectedID.ClearUIIcon();
         //Undo all the changes to ship here?
+        _isInstalled = false;
     }
 
     public bool CheckIfHasRemainingUpgrades()
@@ -109,5 +115,24 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
     public int GetUpgradeCost()
     {
         return CurrentUpgradeLevel;
+    }
+
+    public bool CheckIfInstalled()
+    {
+        return _isInstalled;
+    }
+
+    public int GetScrapRefundAmount()
+    {
+        return Mathf.RoundToInt(CurrentUpgradeLevel / 2f);
+    }
+
+    public bool CheckIfScrappable()
+    {
+        if (_isInstalled && !_isPermanent)
+        {
+            return true;
+        }
+        else return false;
     }
 }

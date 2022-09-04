@@ -59,10 +59,17 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
     PlayerStateHandler _playerStateHandler;
     protected Transform _muzzle;
     public bool IsSecondary = false;
+
+    [Tooltip("If true, this weapon can never be scrapped.")]
+    [SerializeField] protected bool _isPermanent = false;
+
     protected bool _isPlayer;
     protected WeaponIconDriver _connectedWID;
     [SerializeField] protected int _maxUpgradeLevel;
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
+    protected bool _isInstalled = false;
+
+
 
 
     public void Initialize(EnergyHandler hostEnergyHandler, bool isPlayer,
@@ -74,6 +81,8 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
         _isPlayer = isPlayer;
+
+        _isInstalled = true;
 
         if (_isPlayer)
         {
@@ -188,7 +197,6 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         ImplementWeaponUpgrade();
     }
 
-
     #region Sound Helpers
     protected AudioClip GetRandomActivationClip()
     {
@@ -210,6 +218,26 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         int rand = UnityEngine.Random.Range(0, _deactivationSounds.Length);
         return _deactivationSounds[rand];
     }
+
+    public int GetScrapRefundAmount()
+    {
+        return Mathf.RoundToInt(CurrentUpgradeLevel / 2f);
+    }
+
+    public bool CheckIfScrappable()
+    {
+        if (_isInstalled && !_isPermanent)
+        {
+            return true;
+        }
+        else return false;
+    }
+    public bool CheckIfInstalled()
+    {
+        return _isInstalled;
+    }
+
+
 
     #endregion
 
