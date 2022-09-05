@@ -27,6 +27,8 @@ public class ShieldCoreSH : SystemHandler
         return null;
     }
 
+    
+
     protected override void ImplementSystemUpgrade()
     {
         _playerHealth.AdjustShieldHealRate(_shieldHealRateAdditionPerLevel);

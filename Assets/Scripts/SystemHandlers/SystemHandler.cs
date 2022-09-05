@@ -26,7 +26,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     public SystemWeaponLibrary.SystemLocation SystemLocation;
     
     protected SystemIconDriver _connectedID;
-    [SerializeField] protected int _maxUpgradeLevel = 1;
+    [SerializeField] protected int _maxUpgradeLevel = 5;
     public bool IsInstalled { get; private set; } = false;
 
     [Tooltip("If true, this system can never be scrapped from player build")]
@@ -164,8 +164,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     public virtual void IntegrateSystem(SystemIconDriver connectedSID)
     {
         _connectedID = connectedSID;
-        //Do all the level 1 changes to ship here?
-        Debug.Log("adding system-specific level 1 changes here");
+        //Do all the level 1 changes to ship here
         IsInstalled = true;
     }
 
@@ -175,8 +174,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     public virtual void DeintegrateSystem()
     {
         _connectedID.ClearUIIcon();
-        //Undo all the level 1 upgrades here?
-        Debug.Log("removing system-specific level 1 changes here");
+        //Undo all the level 1 upgrades here
         IsInstalled = false;
     }
 
@@ -185,6 +183,12 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
     protected abstract void ImplementSystemDowngrade();
 
+    /// <summary>
+    /// Sets up the associated Icon Driver for a system or weapon. Returning a string sets it up for 
+    /// short texts. A Float sets it up for a charge bar. An Int sets up a charge-based UI 
+    /// (ie, 3 of 6 remaining). A null sets it up to be blank.
+    /// </summary>
+    /// <returns></returns>
     public abstract object GetUIStatus();
 
     

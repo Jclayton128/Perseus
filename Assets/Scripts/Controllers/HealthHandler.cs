@@ -13,8 +13,6 @@ public class HealthHandler : MonoBehaviour
     ScrapController _scrapController;
     Rigidbody2D _rb;
     UI_Controller _UIController;
-    AdjustableImageBar _shieldBar;
-    AdjustableImageBar _hullBar;
 
     #endregion
 
@@ -66,8 +64,6 @@ public class HealthHandler : MonoBehaviour
         _particleController = FindObjectOfType<ParticleController>();
         _scrapController = _particleController.GetComponent<ScrapController>();
         _UIController = _particleController.GetComponent<UI_Controller>();
-        _shieldBar = _UIController.GetShieldBar();
-        _hullBar = _UIController.GetHullBar();
 
         HullPoints = _maxHullPoints;
         ShieldPoints = _maxShieldPoints;
@@ -75,8 +71,8 @@ public class HealthHandler : MonoBehaviour
 
         if (_movement.IsPlayer)
         {
-            _hullBar.SetFactor(HullPoints / _maxHullPoints);
-            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
+            _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
         }
 
         _ionizationPointsAbsorbed = 0;
@@ -120,7 +116,7 @@ public class HealthHandler : MonoBehaviour
 
         if (_movement.IsPlayer)
         {
-            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
         }
     }
 
@@ -187,7 +183,7 @@ public class HealthHandler : MonoBehaviour
         
         if (_movement.IsPlayer)
         {
-            _shieldBar.SetFactor(ShieldPoints / _maxShieldPoints);
+            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
         }
 
     }
@@ -200,7 +196,7 @@ public class HealthHandler : MonoBehaviour
         
         if (_movement.IsPlayer)
         {
-            _hullBar.SetFactor(HullPoints / _maxHullPoints);
+            _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
         }
     }
 
@@ -222,14 +218,34 @@ public class HealthHandler : MonoBehaviour
 
     #region System Modifications
 
+    /// <summary>
+    /// Adds to the per-second shield regeneration/heal rate. Clamped to range of 0-99 (can't go negative).
+    /// </summary>
+    /// <param name="shieldHealRateAddition"></param>
     public void AdjustShieldHealRate(float shieldHealRateAddition)
     {
         _shieldHealRate += shieldHealRateAddition;
+        _shieldHealRate = Mathf.Clamp(_shieldHealRate, 0, 99);
     }
 
+    /// <summary>
+    /// Adds to the maximum shield amount. Clamped to range of 0-999 (can't go negative);
+    /// </summary>
+    /// <param name="shieldMaxAddition"></param>
     public void AdjustShieldMaximum(float shieldMaxAddition)
     {
         _maxShieldPoints += shieldMaxAddition;
+        _maxShieldPoints = Mathf.Clamp(_maxShieldPoints, 0, 999);
+        _UIController?.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
+    }
+
+    #endregion
+
+    #region Public Gets
+
+    public float GetShieldHealRate()
+    {
+        return _shieldHealRate;
     }
 
     #endregion

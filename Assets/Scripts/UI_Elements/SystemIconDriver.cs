@@ -61,6 +61,12 @@ public class SystemIconDriver : MonoBehaviour
             return;
         }
 
+        if (uiType is Vector2Int)
+        {
+            //TODO implement a discrete set of pips to show charges remaining of something
+            //This would be used for the Mega Revolver weapon (ie, 3 shots total, 1 left).
+        }
+
     }
 
     public void DisplayNewSystem(SystemHandler sh)

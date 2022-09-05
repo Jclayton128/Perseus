@@ -639,6 +639,21 @@ public class UI_Controller : MonoBehaviour
 
     #region SHEI Updates
 
+    public void UpdateShieldBar(float currentValue, float maxValue)
+    {
+        _shieldBar.SetFactor(currentValue / maxValue);
+    }
+
+    public void UpdateHullBar(float currentValue, float maxValue)
+    {
+        _hullBar.SetFactor(currentValue / maxValue);
+    }
+
+
+    public AdjustableImageBar GetEnergyBar()
+    {
+        return _energyBar;
+    }
 
     #endregion
 
@@ -658,20 +673,7 @@ public class UI_Controller : MonoBehaviour
         return _radarScreen;
     }
 
-    public AdjustableImageBar GetShieldBar()
-    {
-        return _shieldBar;
-    }
-
-    public AdjustableImageBar GetHullBar()
-    {
-        return _hullBar;
-    }
-
-    public AdjustableImageBar GetEnergyBar()
-    {
-        return _energyBar;
-    }
+    
 
     #endregion
 }
