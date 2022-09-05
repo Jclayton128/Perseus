@@ -157,6 +157,10 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     }
     #endregion;
 
+    /// <summary>
+    /// Contains all the logic for the initial install of a system (ie, going from nothing to level 1)
+    /// </summary>
+    /// <param name="connectedSID"></param>
     public virtual void IntegrateSystem(SystemIconDriver connectedSID)
     {
         _connectedID = connectedSID;
@@ -165,6 +169,9 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         IsInstalled = true;
     }
 
+    /// <summary>
+    /// Contains all the logic for the last de-install of a system (ie, removing all traces after a Scrap System action)
+    /// </summary>
     public virtual void DeintegrateSystem()
     {
         _connectedID.ClearUIIcon();

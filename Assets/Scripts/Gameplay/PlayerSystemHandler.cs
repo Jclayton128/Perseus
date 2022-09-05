@@ -151,7 +151,7 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         if (newSystem == null) return;
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
-        SystemHandler sh = newSystem.GetComponent<SystemHandler>();
+        SystemHandler sh = go.GetComponent<SystemHandler>();
        
         _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
         SystemIconDriver sid = _UICon.IntegrateNewSystem(sh);

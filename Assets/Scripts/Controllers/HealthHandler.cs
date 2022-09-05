@@ -6,6 +6,7 @@ using System;
 
 public class HealthHandler : MonoBehaviour
 {
+    #region References
     //references
     ActorMovement _movement;
     ParticleController _particleController;
@@ -15,10 +16,13 @@ public class HealthHandler : MonoBehaviour
     AdjustableImageBar _shieldBar;
     AdjustableImageBar _hullBar;
 
+    #endregion
+
     //global settings
     //[SerializeField] [Range(0,10)] float _particlesPerPointOfShieldDamage = 1f; //Amount of particles created per point of shield damage
     //[SerializeField] [Range(0, 10)] float _scrapsPerPointOfNormalDamage = 1f; //Amount of scrap peeled off per point of hull damage.
 
+    #region Instance Settings
     //instance settings
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maximum (and starting) Hull Points")]
@@ -36,6 +40,9 @@ public class HealthHandler : MonoBehaviour
     [Tooltip("Points of ionization healed per second. Max Ionization Amount is equal to total Hull Points.")]
     [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
 
+    #endregion;
+
+    #region State
     //state
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float HullPoints { get; protected set; } = 1;
@@ -49,6 +56,8 @@ public class HealthHandler : MonoBehaviour
     [ShowInInspector] public float IonFactor = 0;
 
     int _scrapValue;
+
+    #endregion
 
     private void Awake()
     {
@@ -207,6 +216,20 @@ public class HealthHandler : MonoBehaviour
         {
             _rb.AddForce(knockbackAmount * impactHeading, ForceMode2D.Impulse);
         }
+    }
+
+    #endregion
+
+    #region System Modifications
+
+    public void AdjustShieldHealRate(float shieldHealRateAddition)
+    {
+        _shieldHealRate += shieldHealRateAddition;
+    }
+
+    public void AdjustShieldMaximum(float shieldMaxAddition)
+    {
+        _maxShieldPoints += shieldMaxAddition;
     }
 
     #endregion

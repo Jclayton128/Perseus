@@ -637,6 +637,11 @@ public class UI_Controller : MonoBehaviour
 
     #endregion
 
+    #region SHEI Updates
+
+
+    #endregion
+
     #region Public Gets
     public int GetMaxSystems()
     {
