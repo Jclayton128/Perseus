@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class SystemHandler : MonoBehaviour, IUpgradeable
+public abstract class SystemHandler : MonoBehaviour, IInstallable
 {
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
@@ -34,7 +34,7 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
 
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
-
+    #region Interface Compliance
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -44,18 +44,18 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
         return _icon;
     }
 
-    public virtual void IntegrateSystem(SystemIconDriver connectedSID)
+    public string GetName()
     {
-        _connectedID = connectedSID;
-        //Do all the changes to ship here?
-        _isInstalled = true;
+        return _name;
+    }
+    public SystemWeaponLibrary.WeaponType GetWeaponType()
+    {
+        return SystemWeaponLibrary.WeaponType.None;
     }
 
-    public virtual void DeintegrateSystem()
+    public SystemWeaponLibrary.SystemType GetSystemType()
     {
-        _connectedID.ClearUIIcon();
-        //Undo all the changes to ship here?
-        _isInstalled = false;
+        return SystemType;
     }
 
     public bool CheckIfHasRemainingUpgrades()
@@ -74,7 +74,9 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
             return true;
         }
     }
-
+    /// <summary>
+    /// This is used to apply a Level 2 and up bonus to an already-installed system.
+    /// </summary>
     public void Upgrade()
     {
         if (CurrentUpgradeLevel >= _maxUpgradeLevel)
@@ -88,9 +90,18 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
         ImplementSystemUpgrade();
     }
 
-    public abstract void ImplementSystemUpgrade();
+    /// <summary>
+    /// This is used to remove all Level 2 and up incremental bonuses provided by a system.
+    /// </summary>
+    private void Downgrade()
+    {
+        for (int i = CurrentUpgradeLevel; i > 1; i--)
+        {
+            CurrentUpgradeLevel--;
+            ImplementSystemDowngrade();
+        }
 
-    public abstract object GetUIStatus();
+    }
 
     public (Sprite, string, string, string, int) GetUpgradeDetails()
     {
@@ -117,9 +128,9 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
         return CurrentUpgradeLevel;
     }
 
-    public bool CheckIfInstalled()
+    public bool CheckIfInstallable()
     {
-        return _isInstalled;
+        return !_isInstalled;
     }
 
     public int GetScrapRefundAmount()
@@ -135,4 +146,35 @@ public abstract class SystemHandler : MonoBehaviour, IUpgradeable
         }
         else return false;
     }
+
+    public void Scrap()
+    {
+        Downgrade();
+        DeintegrateSystem();
+        Destroy(gameObject);
+    }
+    #endregion;
+
+    public virtual void IntegrateSystem(SystemIconDriver connectedSID)
+    {
+        _connectedID = connectedSID;
+        //Do all the level 1 changes to ship here?
+        _isInstalled = true;
+    }
+
+    public virtual void DeintegrateSystem()
+    {
+        _connectedID.ClearUIIcon();
+        //Undo all the level 1 upgrades here?
+        _isInstalled = false;
+    }
+
+
+    protected abstract void ImplementSystemUpgrade();
+
+    protected abstract void ImplementSystemDowngrade();
+
+    public abstract object GetUIStatus();
+
+    
 }

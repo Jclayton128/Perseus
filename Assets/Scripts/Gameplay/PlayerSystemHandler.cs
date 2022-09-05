@@ -12,6 +12,7 @@ public class PlayerSystemHandler : MonoBehaviour
     ActorMovement _playerHandler;
     EnergyHandler _energyHandler;
     UI_Controller _UICon;
+    CrateScanner _crateScanner;
 
     //These are used to check for overlap between two weapons or two systems.
     Dictionary<SystemWeaponLibrary.WeaponType, GameObject> _weaponsOnBoard =
@@ -30,6 +31,7 @@ public class PlayerSystemHandler : MonoBehaviour
     [SerializeField] List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
     {
+        _crateScanner = GetComponent<CrateScanner>();
         _syslib = FindObjectOfType<SystemWeaponLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
         _inputCon = _UICon.GetComponent<InputController>();
@@ -68,38 +70,47 @@ public class PlayerSystemHandler : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    #region System/Weapon Count Checks
+
+    public bool CheckIfCanGainWeapon(WeaponHandler wh)
     {
-        SystemCrateHandler sch;
-        if (collision.gameObject.TryGetComponent<SystemCrateHandler>(out sch))
+        if (_weaponsOnBoard.Count >= _maxWeapons)
         {
-
-            if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
-            {
-                if (_systemsOnBoardByLocation.Count >= _maxSystems)
-                {
-                    Debug.Log("unable to hold any more systems");
-                    return;
-                }
-                GainSystem(sch.SystemInCrate);
-            }
-
-            if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
-            {
-                if (_weaponsOnBoard.Count >= _maxWeapons)
-                {
-                    Debug.Log("unable to hold any more weapons");
-                    return;
-                }
-                GainWeapon(sch.WeaponInCrate);
-            }
-
-            Destroy(collision.gameObject);
+            Debug.LogError("unable to hold any more weapons");
+            return false;
         }
 
+        if (_secondaryWeaponsOnBoard.Contains(wh))
+        {
+            Debug.LogError("Unable to hold multiples of the same weapon");
+        }
+
+        return true;
     }
 
-    private void GainWeapon(SystemWeaponLibrary.WeaponType weaponType)
+    public bool CheckIfCanGainSystem(SystemHandler sh)
+    {
+        if (_systemsOnBoardByLocation.Count >= _maxSystems)
+        {
+            Debug.LogError("unable to hold any more systems");
+            return false;
+        }
+
+        if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
+        {
+            Debug.LogError($"Ship already contains a system in {sh.SystemLocation}");
+            return false;
+        }        
+        
+        return true;        
+    }
+
+    #endregion
+
+    #region System Gain/Loss
+    
+
+    public void GainWeapon(SystemWeaponLibrary.WeaponType weaponType)
     {
         GainWeapon(_syslib.GetWeapon(weaponType));
     }
@@ -128,10 +139,10 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             _primaryWeaponsOnBoard.Add(wh);
         }
-
+        _crateScanner.DestroyScannedCrateAfterInstall();
     }
 
-    private void GainSystem(SystemWeaponLibrary.SystemType systemType)
+    public void GainSystem(SystemWeaponLibrary.SystemType systemType)
     {
         GainSystem(_syslib.GetSystem(systemType));
     }
@@ -141,23 +152,118 @@ public class PlayerSystemHandler : MonoBehaviour
         if (newSystem == null) return;
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = newSystem.GetComponent<SystemHandler>();
-        if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
-        {
-            Debug.Log($"Error - ship already contains a system in {sh.SystemLocation}");
-            return;
-        }
+       
         _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
         SystemIconDriver sid = _UICon.IntegrateNewSystem(sh);
         sh.IntegrateSystem(sid);
         _systemsOnBoard.Add(sh);
-        
+        _crateScanner.DestroyScannedCrateAfterInstall();
 
     }
 
-    public List<SystemHandler> GetSystemsOnBoard()
+    public void RemoveWeapon(SystemWeaponLibrary.WeaponType weaponType)
     {
-        return _systemsOnBoard;
+        WeaponHandler removedWeapon = _weaponsOnBoard[weaponType]?.GetComponent<WeaponHandler>();
+
+        if (removedWeapon == null) return;
+        if (removedWeapon.IsSecondary)
+        {
+            _secondaryWeaponsOnBoard.Remove(removedWeapon);
+
+            //UI: clear all secondary weapon icons
+            _UICon.ClearAllSecondaryWeaponSlots();
+
+            //foreach secondary weapon, reintegrate
+            foreach (var secondaryWeapon in _secondaryWeaponsOnBoard)
+            {
+                WeaponIconDriver newWID = _UICon.IntegrateNewWeapon(secondaryWeapon);
+                secondaryWeapon.UpdateWeaponIconDriver(newWID);
+            }
+
+            //reselect an active weapon
+
+            if (weaponType == ActiveWeapon.WeaponType)
+            {
+                if (_secondaryWeaponsOnBoard.Count > 0)
+                {
+                    //Decrement the active weapon index
+                    _activeWeaponIndex--;
+                    _activeWeaponIndex = Mathf.Clamp(_activeWeaponIndex, 0, _secondaryWeaponsOnBoard.Count - 1);
+
+                    //Update the active weapon, and the highlighted icon
+
+                    ActiveWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
+                    _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveWeapon));
+                }
+                else ActiveWeapon = null;
+
+                
+            }
+        }
+        else
+        {
+            _primaryWeaponsOnBoard.Remove(removedWeapon);
+            _UICon.ClearPrimaryWeaponSlot();
+        }
+
+        Destroy(_weaponsOnBoard[weaponType]);
+        _weaponsOnBoard.Remove(weaponType);
+
     }
+
+    public void RemoveSystem(SystemWeaponLibrary.SystemLocation location, int index)
+    {
+
+        SystemHandler systemToRemove = _syslib.GetSystem(location, index)?.GetComponent<SystemHandler>();
+
+        if (systemToRemove == null) return;
+
+        _systemsOnBoard.Remove(systemToRemove);
+        if (_systemsOnBoardByLocation.ContainsKey(location))
+        {
+            Destroy(_systemsOnBoardByLocation[location]);
+            _systemsOnBoardByLocation.Remove(location);
+        }
+
+        _UICon.ClearAllSystemSlots();
+        foreach (var system in _systemsOnBoard)
+        {
+            SystemIconDriver sid = _UICon.IntegrateNewSystem(system);
+            system.IntegrateSystem(sid);
+        }
+
+    }
+
+    public void RemoveSystem(SystemWeaponLibrary.SystemType removedSystemType)
+    {
+        SystemHandler systemHandlerToRemove = null;
+        foreach (var sh in _systemsOnBoard)
+        {
+            if (sh.SystemType == removedSystemType)
+            {
+                systemHandlerToRemove = sh;
+                break;
+            }
+        }
+
+        _systemsOnBoard.Remove(systemHandlerToRemove);
+        if (_systemsOnBoardByLocation.ContainsKey(systemHandlerToRemove.SystemLocation))
+        {
+            Destroy(_systemsOnBoardByLocation[systemHandlerToRemove.SystemLocation]);
+            _systemsOnBoardByLocation.Remove(systemHandlerToRemove.SystemLocation);
+        }
+
+        _UICon.ClearAllSystemSlots();
+        foreach (var system in _systemsOnBoard)
+        {
+            SystemIconDriver sid = _UICon.IntegrateNewSystem(system);
+            system.IntegrateSystem(sid);
+        }
+    }
+
+    #endregion
+
+    #region Input Responses
 
     private void ScrollThroughActiveWeapons(int direction)
     {
@@ -198,6 +304,8 @@ public class PlayerSystemHandler : MonoBehaviour
         }
     }
 
+    #endregion
+
     #region Debug tools
     public bool Debug_TryGainWeapon(int indexInLibrary)
     {
@@ -232,71 +340,31 @@ public class PlayerSystemHandler : MonoBehaviour
         return true;
     }
 
-    public void RemoveWeapon(SystemWeaponLibrary.WeaponType weaponType)
-    {
-        WeaponHandler removedWeapon = _weaponsOnBoard[weaponType]?.GetComponent<WeaponHandler>();
-
-        if (removedWeapon == null) return;
-        if (removedWeapon.IsSecondary)
-        {
-            _secondaryWeaponsOnBoard.Remove(removedWeapon);
-
-            //UI: clear all secondary weapon icons
-            _UICon.ClearAllSecondaryWeaponSlots();
-
-            //foreach secondary weapon, reintegrate
-            foreach (var secondaryWeapon in _secondaryWeaponsOnBoard)
-            {
-                WeaponIconDriver newWID = _UICon.IntegrateNewWeapon(secondaryWeapon);
-                secondaryWeapon.UpdateWeaponIconDriver(newWID);
-            }
-
-            //reselect an active weapon
-
-            if (weaponType == ActiveWeapon.WeaponType)
-            {
-                //Decrement the active weapon index
-                _activeWeaponIndex--;
-                _activeWeaponIndex = Mathf.Clamp(_activeWeaponIndex, 0, _secondaryWeaponsOnBoard.Count - 1);
-
-                //Update the active weapon, and the highlighted icon
-                ActiveWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
-                _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveWeapon));
-            }
-        }
-        else
-        {
-            _primaryWeaponsOnBoard.Remove(removedWeapon);
-            _UICon.ClearPrimaryWeaponSlot();
-        }
-
-        Destroy(_weaponsOnBoard[weaponType]);
-        _weaponsOnBoard.Remove(weaponType);
-
-    }
-
-    public void RemoveSystem(SystemWeaponLibrary.SystemLocation location, int index)
-    {
-
-        SystemHandler systemToRemove = _syslib.GetSystem(location, index)?.GetComponent<SystemHandler>();
-
-        if (systemToRemove == null) return; 
-
-        _systemsOnBoard.Remove(systemToRemove);
-        if (_systemsOnBoardByLocation.ContainsKey(location))
-        {
-            Destroy(_systemsOnBoardByLocation[location]);
-            _systemsOnBoardByLocation.Remove(location);
-        }
-
-        _UICon.ClearAllSystemSlots();
-        foreach (var system in _systemsOnBoard)
-        {
-            SystemIconDriver sid = _UICon.IntegrateNewSystem(system);
-            system.IntegrateSystem(sid);
-        }
-
-    }
+    
 
     #endregion
+
+    public List<SystemWeaponLibrary.SystemType> GetSystemTypesOnBoard()
+    {
+        List<SystemWeaponLibrary.SystemType> systemTypes = new List<SystemWeaponLibrary.SystemType>();
+
+        foreach (SystemHandler sh in _systemsOnBoard)
+        {
+            systemTypes.Add(sh.SystemType);
+        }
+
+        return systemTypes;
+    }
+
+    public List<SystemWeaponLibrary.WeaponType> GetSecondaryWeaponTypesOnBoard()
+    {
+        List<SystemWeaponLibrary.WeaponType> weaponTypes = new List<SystemWeaponLibrary.WeaponType>();
+
+        foreach (WeaponHandler wh in _secondaryWeaponsOnBoard)
+        {
+            weaponTypes.Add(wh.WeaponType);
+        }
+
+        return weaponTypes;
+    }
 }

@@ -20,8 +20,12 @@ public class Cockpit2SH : SystemHandler
         return null;
     }
 
-    public override void ImplementSystemUpgrade()
+    protected override void ImplementSystemUpgrade()
     {
         
+    }
+    protected override void ImplementSystemDowngrade()
+    {
+
     }
 }

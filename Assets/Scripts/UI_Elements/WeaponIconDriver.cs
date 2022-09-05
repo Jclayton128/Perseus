@@ -62,4 +62,9 @@ public class WeaponIconDriver : SystemIconDriver
             _uiController.ClearSelection();
         }
     }
+    public override void ClearUIIcon()
+    {
+        base.ClearUIIcon();
+        _hintIcon.enabled = false;
+    }
 }

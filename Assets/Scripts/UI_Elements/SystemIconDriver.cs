@@ -78,7 +78,7 @@ public class SystemIconDriver : MonoBehaviour
         SetupUIType(sh.GetUIStatus());
     }
 
-    public void ClearUIIcon()
+    public virtual void ClearUIIcon()
     {
         System = SystemWeaponLibrary.SystemType.None;
         _systemIcon.sprite = null;

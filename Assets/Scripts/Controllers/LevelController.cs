@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour
     SystemWeaponLibrary _systemWeaponLibrary;
     EnemyLibrary _enemyLibrary;
     LevelLibrary _levelLibrary;
+    PlayerSystemHandler _playerSystemHandler;
     CircleEdgeCollider2D _arenaEdgeCollider;
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
@@ -34,6 +35,7 @@ public class LevelController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _gameController.OnPlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
         _systemWeaponLibrary = _levelLibrary.GetComponent<SystemWeaponLibrary>();   
@@ -55,6 +57,10 @@ public class LevelController : MonoBehaviour
         // Populate Enemies according threat budget, add to list
     }
 
+    private void ReactToPlayerSpawned(GameObject player)
+    {
+        _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
+    }
 
     #region Registers
     private void RegisterEnemy(GameObject enemy)
@@ -144,26 +150,42 @@ public class LevelController : MonoBehaviour
 
     #region Crate Spawning
 
-    [ContextMenu("spawn crate near player")]
+    [ContextMenu("Spawn Weapon Crate Near Player")]
     public void SpawnRandomWeaponCrateNearPlayer()
     {
-        //List<SystemHandler> possibleSystems = new List<SystemHandler>();
-        //foreach (var system in _allSystems)
-        //{
-        //    if (!systemsOnBoard.Contains(system))
-        //    {
-        //        possibleSystems.Add(system);
-        //    }
-        //}
-        //int rand = UnityEngine.Random.Range(0, possibleSystems.Count);
+     
+        List<SystemWeaponLibrary.WeaponType> weaponsAlreadyInstalled =
+            _playerSystemHandler.GetSecondaryWeaponTypesOnBoard();
 
-        SystemWeaponLibrary.WeaponType weaponInCrate = SystemWeaponLibrary.WeaponType.PArcherTurret1;
+        SystemWeaponLibrary.WeaponType weaponInCrate =
+            _systemWeaponLibrary.GetRandomUninstalledSecondaryWeaponType(weaponsAlreadyInstalled);
 
         GameObject go = Instantiate(_cratePrefab);
         Sprite icon = _systemWeaponLibrary.GetIcon(weaponInCrate);
-        go.GetComponent<SystemCrateHandler>().Initialize(icon, weaponInCrate, SystemWeaponLibrary.SystemType.None);
+        string crateName = _systemWeaponLibrary.GetName(weaponInCrate);
+        go.GetComponent<SystemCrateHandler>().Initialize(
+            icon, weaponInCrate, SystemWeaponLibrary.SystemType.None, crateName);
 
-        Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+        go.transform.position = _gameController.Player.transform.position + offset;
+    }
+
+    [ContextMenu("Spawn System Crate Near Player")]
+    public void SpawnRandomSystemCrateNearPlayer()
+    {
+        List<SystemWeaponLibrary.SystemType> systemsAlreadyInstalled =
+            _playerSystemHandler.GetSystemTypesOnBoard();
+
+        SystemWeaponLibrary.SystemType systemInCrate =
+            _systemWeaponLibrary.GetRandomUninstalledSystemType(systemsAlreadyInstalled);
+
+        GameObject go = Instantiate(_cratePrefab);
+        Sprite icon = _systemWeaponLibrary.GetIcon(systemInCrate);
+        string crateName = _systemWeaponLibrary.GetName(systemInCrate);
+        go.GetComponent<SystemCrateHandler>().Initialize(icon, 
+            SystemWeaponLibrary.WeaponType.None, systemInCrate, crateName);
+
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
         go.transform.position = _gameController.Player.transform.position + offset;
     }
 

@@ -19,8 +19,12 @@ public class StealthCockpitSH : SystemHandler
         return null;
     }
 
-    public override void ImplementSystemUpgrade()
+    protected override void ImplementSystemUpgrade()
     {
         
+    }
+    protected override void ImplementSystemDowngrade()
+    {
+
     }
 }

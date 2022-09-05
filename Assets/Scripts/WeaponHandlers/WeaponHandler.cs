@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
+public abstract class WeaponHandler : MonoBehaviour, IInstallable
 {
     protected PoolController _poolCon;
     protected InputController _inputCon;
@@ -69,9 +69,6 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
     protected bool _isInstalled = false;
 
-
-
-
     public void Initialize(EnergyHandler hostEnergyHandler, bool isPlayer,
         WeaponIconDriver wid)
     {
@@ -98,6 +95,7 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         InitializeWeaponSpecifics();
     }
 
+    #region Interface Compliance
     public (Sprite, string, string, string, int) GetUpgradeDetails()
     {
         (Sprite, string, string, string, int) details;
@@ -119,41 +117,6 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         return details;
     }
 
-    #region Universal Weapon Methods
-
-    /// <summary>
-    /// Returning a string sets up the Icon Driver to show a string. Float: Charge Bar. Int: 
-    /// Series of pips for discrete counts of things.
-    /// </summary>
-    /// <returns></returns>
-    public abstract object GetUIStatus();
-
-    protected abstract void InitializeWeaponSpecifics();
-
-    public void Activate()
-    {
-        if (!GameController.IsPaused) ActivateInternal();
-    }
-
-    public void Deactivate()
-    {
-        if (GameController.IsPaused) DeactivateInternal(true);
-        else DeactivateInternal(false);
-    }
-    protected abstract void ActivateInternal();
-
-    protected abstract void DeactivateInternal(bool wasPausedDuringDeactivationAttempt);
-
-    protected abstract void ImplementWeaponUpgrade();
-
-    #endregion
-
-
-    public void UpdateWeaponIconDriver(WeaponIconDriver newWID)
-    {
-        _connectedWID = newWID;
-    }
-
     public Sprite GetIcon()
     {
         if (_icon == null)
@@ -161,6 +124,11 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
             _icon = GetComponent<SpriteRenderer>().sprite;
         }
         return _icon;
+    }
+
+    public string GetName()
+    {
+        return _name;
     }
 
     public int GetUpgradeCost()
@@ -197,6 +165,79 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         ImplementWeaponUpgrade();
     }
 
+    public void Scrap()
+    {
+        _connectedWID.ClearUIIcon();
+        Destroy(gameObject);
+    }
+    public int GetScrapRefundAmount()
+    {
+        return Mathf.RoundToInt(CurrentUpgradeLevel / 2f);
+    }
+
+    public bool CheckIfScrappable()
+    {
+        if (_isInstalled && !_isPermanent)
+        {
+            return true;
+        }
+        else return false;
+    }
+    public bool CheckIfInstallable()
+    {
+        return !_isInstalled;
+    }
+
+    public SystemWeaponLibrary.WeaponType GetWeaponType()
+    {
+        return WeaponType;
+    }
+
+    public SystemWeaponLibrary.SystemType GetSystemType()
+    {
+        return SystemWeaponLibrary.SystemType.None;
+    }
+
+
+    #endregion
+
+    #region Universal Weapon Methods
+
+    /// <summary>
+    /// Returning a string sets up the Icon Driver to show a string. Float: Charge Bar. Int: 
+    /// Series of pips for discrete counts of things.
+    /// </summary>
+    /// <returns></returns>
+    public abstract object GetUIStatus();
+
+    protected abstract void InitializeWeaponSpecifics();
+
+    public void Activate()
+    {
+        if (!GameController.IsPaused) ActivateInternal();
+    }
+
+    public void Deactivate()
+    {
+        if (GameController.IsPaused) DeactivateInternal(true);
+        else DeactivateInternal(false);
+    }
+    protected abstract void ActivateInternal();
+
+    protected abstract void DeactivateInternal(bool wasPausedDuringDeactivationAttempt);
+
+    protected abstract void ImplementWeaponUpgrade();
+
+    #endregion
+
+
+    public void UpdateWeaponIconDriver(WeaponIconDriver newWID)
+    {
+        _connectedWID = newWID;
+    }
+
+    
+
     #region Sound Helpers
     protected AudioClip GetRandomActivationClip()
     {
@@ -219,23 +260,6 @@ public abstract class WeaponHandler : MonoBehaviour, IUpgradeable
         return _deactivationSounds[rand];
     }
 
-    public int GetScrapRefundAmount()
-    {
-        return Mathf.RoundToInt(CurrentUpgradeLevel / 2f);
-    }
-
-    public bool CheckIfScrappable()
-    {
-        if (_isInstalled && !_isPermanent)
-        {
-            return true;
-        }
-        else return false;
-    }
-    public bool CheckIfInstalled()
-    {
-        return _isInstalled;
-    }
 
 
 

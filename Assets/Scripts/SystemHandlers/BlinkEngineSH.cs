@@ -19,8 +19,12 @@ public class BlinkEngineSH : SystemHandler
         return null;
     }
 
-    public override void ImplementSystemUpgrade()
+    protected override void ImplementSystemUpgrade()
     {
-        throw new System.NotImplementedException();
+
+    }
+    protected override void ImplementSystemDowngrade()
+    {
+
     }
 }

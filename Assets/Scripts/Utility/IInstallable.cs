@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IUpgradeable
+public interface IInstallable
 {
     public void Upgrade();
 
+    public void Scrap();
+
     public bool CheckIfHasRemainingUpgrades();
 
-    public bool CheckIfInstalled();
+    public bool CheckIfInstallable();
 
 
     public bool CheckIfScrappable();
@@ -19,4 +21,9 @@ public interface IUpgradeable
     public int GetScrapRefundAmount();
 
     public (Sprite, string, string, string, int) GetUpgradeDetails();
+
+    public SystemWeaponLibrary.WeaponType GetWeaponType();
+
+    public SystemWeaponLibrary.SystemType GetSystemType();
+
 }

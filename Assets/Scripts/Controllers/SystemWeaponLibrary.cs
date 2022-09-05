@@ -85,6 +85,11 @@ public class SystemWeaponLibrary : MonoBehaviour
         return _allSystemsByLocation[location][index].gameObject;
     }
 
+    public SystemHandler GetSystemHandler(SystemType systemType)
+    {
+        return _systems[systemType];
+    }
+
     public GameObject GetWeapon(int indexInLibrary)
     {
         if(indexInLibrary >= _allWeapons.Length) return null;
@@ -114,11 +119,51 @@ public class SystemWeaponLibrary : MonoBehaviour
         return _weapons[weaponType].GetIcon();
     }
 
+    public string GetName(WeaponType weaponType)
+    {
+        return _weapons[weaponType].GetName();
+    }
+
     public Sprite GetIcon(SystemType systemType)
     {
         return _systems[systemType].GetIcon();
     }
 
-   
+    public string GetName(SystemType systemType)
+    {
+        return _systems[systemType].GetName();
+    }
+
+    public WeaponType GetRandomUninstalledSecondaryWeaponType(List<WeaponType> installedWeaponTypes)
+    {
+        List<WeaponType> uninstalledWeaponTypes = new List<WeaponType>();
+
+        foreach (var wh in _allWeapons)
+        {
+            if (!installedWeaponTypes.Contains(wh.WeaponType) && wh.IsSecondary)
+            {
+                uninstalledWeaponTypes.Add(wh.WeaponType);
+            }
+        }
+
+        int rand = UnityEngine.Random.Range(0, uninstalledWeaponTypes.Count);
+        return uninstalledWeaponTypes[rand];
+    }
+
+    public SystemType GetRandomUninstalledSystemType(List<SystemType> installedSystemTypes)
+    {
+        List<SystemType> uninstalledSystemTypes = new List<SystemType>();
+
+        foreach (var sh in _allSystems)
+        {
+            if (!installedSystemTypes.Contains(sh.SystemType))
+            {
+                uninstalledSystemTypes.Add(sh.SystemType);
+            }
+        }
+
+        int rand = UnityEngine.Random.Range(0, uninstalledSystemTypes.Count);
+        return uninstalledSystemTypes[rand];
+    }
 
 }

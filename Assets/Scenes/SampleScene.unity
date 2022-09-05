@@ -813,7 +813,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 150470201448382567, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_Name
-      value: TextField_UI
+      value: CrateScannerNameTMP
       objectReference: {fileID: 0}
     - target: {fileID: 2755406494332104044, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_Pivot.x
@@ -8655,7 +8655,7 @@ GameObject:
   - component: {fileID: 259965613}
   - component: {fileID: 259965612}
   m_Layer: 5
-  m_Name: FloatingSystemIcon
+  m_Name: CrateScannerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14650,7 +14650,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2102641478}
         m_TargetAssemblyTypeName: UI_Controller, Assembly-CSharp
-        m_MethodName: HandleSelectedUpgrade
+        m_MethodName: HandleSelectedInstall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17340,9 +17340,6 @@ MonoBehaviour:
   _allWeapons:
   - {fileID: 373910325916342289, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
   - {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
-  - {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
-  - {fileID: -3401993238952020647, guid: 3303187da1d4e8240bfce9955fb90b9b, type: 3}
-  - {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
   - {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
 --- !u!4 &973215305
 Transform:
@@ -33288,6 +33285,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatingSystemUnderlay
       objectReference: {fileID: 0}
+    - target: {fileID: 7460435179650360551, guid: ce888a07bcd04794786f7ca7fb3e9c38, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2102641478}
+    - target: {fileID: 7460435179650360551, guid: ce888a07bcd04794786f7ca7fb3e9c38, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCrateScanSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460435179650360551, guid: ce888a07bcd04794786f7ca7fb3e9c38, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_Controller, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce888a07bcd04794786f7ca7fb3e9c38, type: 3}
 --- !u!114 &1782225553 stripped
@@ -33611,7 +33620,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2102641478}
         m_TargetAssemblyTypeName: UI_Controller, Assembly-CSharp
-        m_MethodName: HandleSelectedUpgrade
+        m_MethodName: HandleSelectedScrap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34461,6 +34470,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6946714947010698771, guid: 253f59daf44a7274a891662ddd8a2954, type: 3}
   m_PrefabInstance: {fileID: 1861411272}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1871992573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
+  m_PrefabInstance: {fileID: 32923148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1899475847
 GameObject:
   m_ObjectHideFlags: 0
@@ -37550,6 +37570,8 @@ MonoBehaviour:
   _shieldBar: {fileID: 1683887379}
   _hullBar: {fileID: 2128241272}
   _energyBar: {fileID: 2133817800}
+  _crateScanImage: {fileID: 259965612}
+  _crateScanTMP: {fileID: 1871992573}
   _radarScreen: {fileID: 1800038649}
   _scrapBarFill: {fileID: 2139232946}
   _scrapAmountTMP: {fileID: 2452395716879297875}
@@ -37566,7 +37588,7 @@ MonoBehaviour:
   - {fileID: 1130360487}
   - {fileID: 863510032}
   - {fileID: 1409597721}
-  - {fileID: 1782225553}
+  _crateScannerSelector: {fileID: 1782225553}
   _selectionImage: {fileID: 1626485580}
   _selectionNameTMP: {fileID: 993760438}
   _selectionDescTMP: {fileID: 2022827572}

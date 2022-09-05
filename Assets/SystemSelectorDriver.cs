@@ -42,9 +42,24 @@ public class SystemSelectorDriver : MonoBehaviour
         }
     }
 
+    public void RetractSelectorWhilePaused()
+    {
+        if (!_deploysDown)
+        {
+            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+        }
+        else
+        {
+            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true);
+        }
+    }
+
     public void HandleSelect()
     {
-        _associatedIconDriver.PushHeldSystemWeaponAsSelection();
+        if (_associatedIconDriver)
+        {
+            _associatedIconDriver.PushHeldSystemWeaponAsSelection();
+        }
     }
 
 }

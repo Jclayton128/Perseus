@@ -88,7 +88,6 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            Debug.Log("Tab");
             OnUpgradeMenuToggled?.Invoke();
         }
     }

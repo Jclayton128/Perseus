@@ -20,8 +20,12 @@ public class ShieldCoreSH : SystemHandler
         return null;
     }
 
-    public override void ImplementSystemUpgrade()
+    protected override void ImplementSystemUpgrade()
     {
-        throw new System.NotImplementedException();
+
+    }
+    protected override void ImplementSystemDowngrade()
+    {
+
     }
 }

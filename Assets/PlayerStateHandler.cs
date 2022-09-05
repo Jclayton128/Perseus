@@ -112,4 +112,9 @@ public class PlayerStateHandler : MonoBehaviour
         bool pointsLeft = (_currentUpgradePoints > 0) ? true : false;
         _uiController.ShowHideTAB(pointsLeft);
     }
+
+    public void GainUpgradePoints(int gain)
+    {
+        SpendUpgradePoints(-gain);
+    }
 }

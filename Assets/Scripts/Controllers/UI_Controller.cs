@@ -42,6 +42,12 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("SHEI")]
     [SerializeField] AdjustableImageBar _energyBar = null;
 
+    [FoldoutGroup("CrateScan")]
+    [SerializeField] Image _crateScanImage = null;
+
+    [FoldoutGroup("CrateScan")]
+    [SerializeField] TextMeshProUGUI _crateScanTMP = null;
+
 
     [SerializeField] RadarScreen _radarScreen = null;
 
@@ -65,6 +71,9 @@ public class UI_Controller : MonoBehaviour
 
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] SystemSelectorDriver[] _systemSelectors = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] SystemSelectorDriver _crateScannerSelector = null;
 
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] Image _selectionImage = null;
@@ -112,6 +121,7 @@ public class UI_Controller : MonoBehaviour
     #endregion
 
     PlayerStateHandler _playerStateHandler;
+    PlayerSystemHandler _playerSystemHandler;
     GameController _gameController;
     PlayerShipLibrary _playerShipLibrary;
 
@@ -139,7 +149,8 @@ public class UI_Controller : MonoBehaviour
 
 
     //state
-    IUpgradeable _currentUpgradeableSelection;
+    IInstallable _currentUpgradeableSelection;
+    IInstallable _crateScannerThing;
     Image _currentActiveSecondary;
     Tween _upgradeWingsTween_left;
     Tween _upgradeWingsTween_right;
@@ -154,11 +165,13 @@ public class UI_Controller : MonoBehaviour
         _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         InitializeSystemWeaponIcons();
         InitializeShipSelection();
+        InitializeCrateScan();
     }
 
     private void ReactToPlayerSpawning(GameObject player)
     {
         _playerStateHandler = player.GetComponent<PlayerStateHandler>();
+        _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
         ClearSelection();
     }
 
@@ -207,6 +220,12 @@ public class UI_Controller : MonoBehaviour
             }
         }
 
+    }
+
+    private void InitializeCrateScan()
+    {
+        _crateScanImage.color = Color.clear;
+        _crateScanTMP.text = "";
     }
 
     #endregion
@@ -310,12 +329,7 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        _selectionUpgradeButton.interactable = false;
-        _installButton.interactable = false;
-        _installTMP.text = "-";
-        _scrapButton.interactable = false;
-        _scrapRefundTMP.text = "-";
-
+        ClearSelection();
         DeploySelectors();
     }
 
@@ -339,6 +353,10 @@ public class UI_Controller : MonoBehaviour
         {
             driver.DeploySelector();
         }
+        if (_crateScannerThing != null)
+        {
+            _crateScannerSelector.DeploySelector();
+        }
     }
 
     private void RetractSelectors()
@@ -347,6 +365,14 @@ public class UI_Controller : MonoBehaviour
         {
             driver.RetractSelector();
         }
+       
+        _crateScannerSelector.RetractSelector();
+        
+    }
+
+    private void RetractScannedCrateSelector()
+    {
+        _crateScannerSelector.RetractSelectorWhilePaused();
     }
 
     public void ClearSelection()
@@ -359,9 +385,17 @@ public class UI_Controller : MonoBehaviour
         _selectionDescTMP.text = null;
         _selectionUpgradeDescTMP.text = null;
         _selectionUpgradeCostTMP.text = "-";
+
+
+        _installButton.interactable = false;
+        _installTMP.text = "-";
+
+        _scrapButton.interactable = false;
+        _scrapRefundTMP.text = "-";
+
     }
 
-    public void UpdateSelection(IUpgradeable upgradeableThing)
+    public void UpdateSelection(IInstallable upgradeableThing)
     {
         _currentUpgradeableSelection = upgradeableThing;
         (Sprite, string, string, string, int) selectionInfo = upgradeableThing.GetUpgradeDetails();
@@ -382,11 +416,12 @@ public class UI_Controller : MonoBehaviour
             _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
         }
 
-        bool isInstalled = _currentUpgradeableSelection.CheckIfInstalled();
+        bool isInstallable = _currentUpgradeableSelection.CheckIfInstallable();
+        bool canAffordInstall = _playerStateHandler.CheckUpgradePoints(1); //Installing costs 1 point
         bool isScrappable = _currentUpgradeableSelection.CheckIfScrappable();
 
-        _installButton.interactable = !isInstalled;
-        _installTMP.text = (isInstalled) ? "-" : "1";
+        _installButton.interactable = (isInstallable && canAffordInstall);
+        _installTMP.text = (isInstallable) ? "1" : "-";
 
         _scrapButton.interactable = isScrappable;
         string amount = _currentUpgradeableSelection.GetScrapRefundAmount().ToString();
@@ -394,7 +429,7 @@ public class UI_Controller : MonoBehaviour
 
     }
 
-    private bool CheckIfUpgradeButtonShouldBeInteractable(IUpgradeable currentUpgradeableSelection)
+    private bool CheckIfUpgradeButtonShouldBeInteractable(IInstallable currentUpgradeableSelection)
     {
         if (currentUpgradeableSelection == null) return false;
 
@@ -417,7 +452,73 @@ public class UI_Controller : MonoBehaviour
         UpdateSelection(_currentUpgradeableSelection);
         
     }
-    
+
+    public void HandleSelectedInstall()
+    {
+        if (_currentUpgradeableSelection.GetWeaponType() != SystemWeaponLibrary.WeaponType.None)
+        {
+            _playerSystemHandler.GainWeapon(_currentUpgradeableSelection.GetWeaponType());
+        }
+
+        if (_currentUpgradeableSelection.GetSystemType() != SystemWeaponLibrary.SystemType.None)
+        {
+            _playerSystemHandler.GainSystem(_currentUpgradeableSelection.GetSystemType());
+        }
+
+        //TODO play install audio
+
+        RetractScannedCrateSelector();
+        ClearCrateScan();
+        ClearSelection();
+    }
+
+    public void HandleSelectedScrap()
+    {
+        _currentUpgradeableSelection.Scrap();
+        _playerStateHandler.GainUpgradePoints(_currentUpgradeableSelection.GetScrapRefundAmount());
+
+        if (_currentUpgradeableSelection.GetWeaponType() != SystemWeaponLibrary.WeaponType.None)
+        {
+            _playerSystemHandler.RemoveWeapon(_currentUpgradeableSelection.GetWeaponType());
+        }
+
+        if (_currentUpgradeableSelection.GetSystemType() != SystemWeaponLibrary.SystemType.None)
+        {
+            _playerSystemHandler.RemoveSystem(_currentUpgradeableSelection.GetSystemType());
+        }
+
+        ClearSelection();
+
+        //TODO play scrap system audio
+    }
+
+    #endregion
+
+    #region Crate Scan
+
+    public void UpdateCrateScan(Sprite icon, string crateName)
+    {
+        _crateScanImage.color = Color.white;
+        _crateScanImage.sprite = icon;
+        _crateScanTMP.text = crateName;
+    }
+
+    public void UpdateCrateScannerSelectable(IInstallable crate)
+    {
+        _crateScannerThing = crate;
+    }
+
+    //This should be called by the special Crate Scan Selector
+    public void HandleCrateScanSelection()
+    {
+        UpdateSelection(_crateScannerThing);
+    }
+
+    public void ClearCrateScan()
+    {
+        InitializeCrateScan();
+        _crateScannerThing = null;
+    }
 
     #endregion
 

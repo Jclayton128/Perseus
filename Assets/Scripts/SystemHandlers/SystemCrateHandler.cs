@@ -1,23 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class SystemCrateHandler : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _iconSprite = null;
-
-    public SystemWeaponLibrary.WeaponType WeaponInCrate { get; private set; } =
+    string _crateName;
+    [ShowInInspector] public SystemWeaponLibrary.WeaponType WeaponInCrate { get; private set; } =
         SystemWeaponLibrary.WeaponType.None;
 
-    public SystemWeaponLibrary.SystemType SystemInCrate { get; private set; } =
+    [ShowInInspector] public SystemWeaponLibrary.SystemType SystemInCrate { get; private set; } =
     SystemWeaponLibrary.SystemType.None;
 
     public void Initialize(Sprite icon, SystemWeaponLibrary.WeaponType weaponInCrate,
-        SystemWeaponLibrary.SystemType systemInCrate)
+        SystemWeaponLibrary.SystemType systemInCrate, string crateName)
     {
         _iconSprite.sprite = icon;
         WeaponInCrate = weaponInCrate;
         SystemInCrate = systemInCrate;
+        _crateName = crateName;
     }
+
+    public (Sprite, string) GetCrateDetails()
+    {
+        (Sprite, string) details;
+
+        details.Item1 = _iconSprite.sprite;
+        details.Item2 = _crateName;
+
+        return details;
+    }
+
 
 }
