@@ -201,7 +201,7 @@ public class DebugController : MonoBehaviour
 
     public void HandleSpawnRandomSystem()
     {
-        _systemsLibrary.SpawnUniqueRandomSystemCrate(_playerSystemsHandler.GetSystemsOnBoard());
+        Debug.LogError("doesn't do anything");
     }
 
     #region System Toggles

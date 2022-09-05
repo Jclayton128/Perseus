@@ -73,24 +73,35 @@ public class PlayerSystemHandler : MonoBehaviour
         SystemCrateHandler sch;
         if (collision.gameObject.TryGetComponent<SystemCrateHandler>(out sch))
         {
-            if (_systemsOnBoardByLocation.Count >= _maxSystems)
+
+            if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
             {
-                Debug.Log("unable to hold any more systems");
-                return;
+                if (_systemsOnBoardByLocation.Count >= _maxSystems)
+                {
+                    Debug.Log("unable to hold any more systems");
+                    return;
+                }
+                GainSystem(sch.SystemInCrate);
             }
 
-            if (sch.GetComponent<SystemHandler>())
+            if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
             {
-                GainSystem(sch.SystemOrWeaponChunk);
-            }
-            if (sch.GetComponent<WeaponHandler>())
-            {
-                GainWeapon(sch.SystemOrWeaponChunk);
+                if (_weaponsOnBoard.Count >= _maxWeapons)
+                {
+                    Debug.Log("unable to hold any more weapons");
+                    return;
+                }
+                GainWeapon(sch.WeaponInCrate);
             }
 
             Destroy(collision.gameObject);
         }
 
+    }
+
+    private void GainWeapon(SystemWeaponLibrary.WeaponType weaponType)
+    {
+        GainWeapon(_syslib.GetWeapon(weaponType));
     }
 
     private void GainWeapon(GameObject newWeapon)
@@ -118,6 +129,11 @@ public class PlayerSystemHandler : MonoBehaviour
             _primaryWeaponsOnBoard.Add(wh);
         }
 
+    }
+
+    private void GainSystem(SystemWeaponLibrary.SystemType systemType)
+    {
+        GainSystem(_syslib.GetSystem(systemType));
     }
 
     private void GainSystem(GameObject newSystem)

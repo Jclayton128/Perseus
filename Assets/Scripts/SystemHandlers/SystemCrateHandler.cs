@@ -5,16 +5,19 @@ using UnityEngine;
 public class SystemCrateHandler : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _iconSprite = null;
-    public GameObject SystemOrWeaponChunk;
 
-    private void Start()
-    {
-        Initialize();
-    }
+    public SystemWeaponLibrary.WeaponType WeaponInCrate { get; private set; } =
+        SystemWeaponLibrary.WeaponType.None;
 
-    public void Initialize()
+    public SystemWeaponLibrary.SystemType SystemInCrate { get; private set; } =
+    SystemWeaponLibrary.SystemType.None;
+
+    public void Initialize(Sprite icon, SystemWeaponLibrary.WeaponType weaponInCrate,
+        SystemWeaponLibrary.SystemType systemInCrate)
     {
-        _iconSprite.sprite = SystemOrWeaponChunk.GetComponent<SystemHandler>().GetIcon();
+        _iconSprite.sprite = icon;
+        WeaponInCrate = weaponInCrate;
+        SystemInCrate = systemInCrate;
     }
 
 }

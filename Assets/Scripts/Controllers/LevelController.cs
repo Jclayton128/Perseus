@@ -5,6 +5,8 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     //Refs
+    GameController _gameController;
+    SystemWeaponLibrary _systemWeaponLibrary;
     EnemyLibrary _enemyLibrary;
     LevelLibrary _levelLibrary;
     CircleEdgeCollider2D _arenaEdgeCollider;
@@ -13,6 +15,7 @@ public class LevelController : MonoBehaviour
 
     //settings 
     int _startingThreatBudget = 2;
+    [SerializeField] GameObject _cratePrefab = null;
 
     //state
     public Level _currentLevel;
@@ -23,14 +26,17 @@ public class LevelController : MonoBehaviour
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     GameObject _wormholeOnLevel;
+    GameObject _crateOnLevel;
 
     public float ArenaRadius { get; private set; }
 
 
     private void Awake()
     {
+        _gameController = GetComponent<GameController>();
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
+        _systemWeaponLibrary = _levelLibrary.GetComponent<SystemWeaponLibrary>();   
 
         CurrentThreatBudget = _startingThreatBudget;
         CurrentLevelNumber = 1;
@@ -133,6 +139,34 @@ public class LevelController : MonoBehaviour
             _enemiesOnLevel.Remove(_enemiesOnLevel[i]);
         }
     }
+
+    #endregion
+
+    #region Crate Spawning
+
+    [ContextMenu("spawn crate near player")]
+    public void SpawnRandomWeaponCrateNearPlayer()
+    {
+        //List<SystemHandler> possibleSystems = new List<SystemHandler>();
+        //foreach (var system in _allSystems)
+        //{
+        //    if (!systemsOnBoard.Contains(system))
+        //    {
+        //        possibleSystems.Add(system);
+        //    }
+        //}
+        //int rand = UnityEngine.Random.Range(0, possibleSystems.Count);
+
+        SystemWeaponLibrary.WeaponType weaponInCrate = SystemWeaponLibrary.WeaponType.PArcherTurret1;
+
+        GameObject go = Instantiate(_cratePrefab);
+        Sprite icon = _systemWeaponLibrary.GetIcon(weaponInCrate);
+        go.GetComponent<SystemCrateHandler>().Initialize(icon, weaponInCrate, SystemWeaponLibrary.SystemType.None);
+
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
+        go.transform.position = _gameController.Player.transform.position + offset;
+    }
+
 
     #endregion
 

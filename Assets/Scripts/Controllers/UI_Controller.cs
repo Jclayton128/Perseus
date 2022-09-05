@@ -449,6 +449,7 @@ public class UI_Controller : MonoBehaviour
         return sid;
     }
 
+
     public void ClearAllSystemSlots()
     {
         foreach (var slot in _systemIcons)
@@ -459,7 +460,6 @@ public class UI_Controller : MonoBehaviour
 
     public void ClearSystemSlot(SystemWeaponLibrary.SystemType systemToRemove)
     {
-        Debug.Log($"trying to clear {systemToRemove}");
         foreach (var systemIcon in _systemIcons)
         {
             if (systemIcon.System == systemToRemove)

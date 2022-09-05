@@ -247,8 +247,7 @@ MonoBehaviour:
   _scrapBonus: 0
   _activationCost: 1
   _sustainCostRate: 0
-  _activationSounds:
-  - {fileID: 8300000, guid: 4e3cfd77b233da54e8fe46e217dff900, type: 3}
+  _activationSounds: []
   _firingSounds:
   - {fileID: 8300000, guid: e79339e3565d3ac4ab47eebc1bda559c, type: 3}
   - {fileID: 8300000, guid: d6778434b44b77b4db3a310fe5c43036, type: 3}

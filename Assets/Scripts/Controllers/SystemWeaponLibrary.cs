@@ -18,7 +18,7 @@ public class SystemWeaponLibrary : MonoBehaviour
         Player16, Player17, Player18, Player19,
         TrundlerBlaster20, Enemy21, Enemy22, Enemy23, Enemy24, Enemy25, Enemy26, Enemy27,
         Enemy28, Enemy29, Enemy30, Enemy31, Enemy32, Enemy33, Enemy34,
-        Enemy35, Enemy36, Enemy37, Enemy38, Enemy39
+        Enemy35, Enemy36, Enemy37, Enemy38, Enemy39, None
     }
 
     public enum SystemLocation {Engine, Cockpit, Tail, Wings, Hull, LeftInt, RightInt}
@@ -27,7 +27,6 @@ public class SystemWeaponLibrary : MonoBehaviour
     Dictionary<SystemLocation, List<SystemHandler>> _allSystemsByLocation = new Dictionary<SystemLocation, List<SystemHandler>>();
 
     [SerializeField] WeaponHandler[] _allWeapons = null;
-    [SerializeField] GameObject _cratePrefab = null;
     GameController _gameCon;
 
     //state
@@ -110,24 +109,16 @@ public class SystemWeaponLibrary : MonoBehaviour
         return _weapons[weaponType];
     }
 
-    public void SpawnUniqueRandomSystemCrate(List<SystemHandler> systemsOnBoard)
+    public Sprite GetIcon(WeaponType weaponType)
     {
-        List<SystemHandler> possibleSystems = new List<SystemHandler>();
-        foreach (var system in _allSystems)
-        {
-            if (!systemsOnBoard.Contains(system))
-            {
-                possibleSystems.Add(system);
-            }
-        }
-        int rand = UnityEngine.Random.Range(0, possibleSystems.Count);
-
-        GameObject go = Instantiate(_cratePrefab);
-        go.GetComponent<SystemCrateHandler>().SystemOrWeaponChunk = possibleSystems[rand].gameObject;
-        go.GetComponent<SystemCrateHandler>().Initialize();
-
-        Vector3 offset = (UnityEngine.Random.insideUnitCircle * 2.0f);
-        go.transform.position = _gameCon.Player.transform.position + offset;
+        return _weapons[weaponType].GetIcon();
     }
+
+    public Sprite GetIcon(SystemType systemType)
+    {
+        return _systems[systemType].GetIcon();
+    }
+
+   
 
 }
