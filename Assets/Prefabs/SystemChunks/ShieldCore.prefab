@@ -261,6 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 043b4c46ca852724a8e5d609b361c638, type: 3}
+  _name: default name
+  _description: default description
+  _upgradeDescription: upgrade description
   SystemType: 17
   SystemLocation: 5
-  _maxUpgradeLevel: 1
+  _maxUpgradeLevel: 5

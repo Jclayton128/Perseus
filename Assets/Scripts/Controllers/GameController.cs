@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     public static bool IsPaused { get; private set; } = false;
 
+    [SerializeField] bool _ispausedtattle;
+
     private void Awake()
     {
         _camCon = GetComponent<CameraController>();
@@ -38,6 +40,10 @@ public class GameController : MonoBehaviour
         PauseGame(1.2f);
     }
 
+    private void Update()
+    {
+        _ispausedtattle = IsPaused;
+    }
 
     public void SetupNewGame()
     {

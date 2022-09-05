@@ -14,7 +14,7 @@ public class SystemIconDriver : MonoBehaviour
     public SystemWeaponLibrary.SystemType System { get; private set; }
     public bool IsOccupied = false;// { get; protected set; } = false;
 
-    SystemHandler _heldSystem;
+    [SerializeField] SystemHandler _heldSystem;
     [SerializeField] protected TextMeshProUGUI _parameterTMP = null;
     [SerializeField] protected Image _parameterImageBar = null;
 

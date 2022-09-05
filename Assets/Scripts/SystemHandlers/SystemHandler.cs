@@ -27,13 +27,14 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     
     protected SystemIconDriver _connectedID;
     [SerializeField] protected int _maxUpgradeLevel = 1;
-    protected bool _isInstalled  = false;
-    
+    public bool IsInstalled { get; private set; } = false;
+
     [Tooltip("If true, this system can never be scrapped from player build")]
-    [SerializeField] protected bool _isPermanent = true;
+    protected readonly bool _isPermanent = false;
 
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
 
+ 
     #region Interface Compliance
     public Sprite GetIcon()
     {
@@ -62,7 +63,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         if (_maxUpgradeLevel <= 0)
         {
-            Debug.Log("Invalide upgrade level");
+            Debug.Log("Invalid upgrade level");
             return false;
         }
         if (CurrentUpgradeLevel == _maxUpgradeLevel)
@@ -87,6 +88,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
         CurrentUpgradeLevel++;
         _connectedID.ModifySystemLevel(CurrentUpgradeLevel);
+        Debug.Log($"Implementing system-specific upgrades for level {CurrentUpgradeLevel}");
         ImplementSystemUpgrade();
     }
 
@@ -97,8 +99,9 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         for (int i = CurrentUpgradeLevel; i > 1; i--)
         {
-            CurrentUpgradeLevel--;
+            Debug.Log($"Implementing system-specific downgrades for level {CurrentUpgradeLevel}");
             ImplementSystemDowngrade();
+            CurrentUpgradeLevel--;
         }
 
     }
@@ -111,7 +114,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         details.Item3 = _description;
         details.Item4 = _upgradeDescription;
 
-        if (CurrentUpgradeLevel >= _maxUpgradeLevel)
+        if (CurrentUpgradeLevel < _maxUpgradeLevel)
         {
             details.Item5 = CurrentUpgradeLevel;
         }
@@ -130,7 +133,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
     public bool CheckIfInstallable()
     {
-        return !_isInstalled;
+        return !IsInstalled;
     }
 
     public int GetScrapRefundAmount()
@@ -140,7 +143,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
     public bool CheckIfScrappable()
     {
-        if (_isInstalled && !_isPermanent)
+        if (IsInstalled && !_isPermanent)
         {
             return true;
         }
@@ -151,7 +154,6 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         Downgrade();
         DeintegrateSystem();
-        Destroy(gameObject);
     }
     #endregion;
 
@@ -159,14 +161,16 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         _connectedID = connectedSID;
         //Do all the level 1 changes to ship here?
-        _isInstalled = true;
+        Debug.Log("adding system-specific level 1 changes here");
+        IsInstalled = true;
     }
 
     public virtual void DeintegrateSystem()
     {
         _connectedID.ClearUIIcon();
         //Undo all the level 1 upgrades here?
-        _isInstalled = false;
+        Debug.Log("removing system-specific level 1 changes here");
+        IsInstalled = false;
     }
 
 

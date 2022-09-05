@@ -433,10 +433,11 @@ public class UI_Controller : MonoBehaviour
     {
         if (currentUpgradeableSelection == null) return false;
 
+        bool isInstalled = !_currentUpgradeableSelection.CheckIfInstallable();
         bool hasMoreUpgradesAvailable = _currentUpgradeableSelection.CheckIfHasRemainingUpgrades();
         bool canAffordToUpgrade = _playerStateHandler.CheckUpgradePoints(_currentUpgradeableSelection.GetUpgradeCost());
 
-        if ( hasMoreUpgradesAvailable && canAffordToUpgrade )
+        if (isInstalled && hasMoreUpgradesAvailable && canAffordToUpgrade )
         {
             return true;
         }
@@ -474,8 +475,9 @@ public class UI_Controller : MonoBehaviour
 
     public void HandleSelectedScrap()
     {
-        _currentUpgradeableSelection.Scrap();
         _playerStateHandler.GainUpgradePoints(_currentUpgradeableSelection.GetScrapRefundAmount());
+        _currentUpgradeableSelection.Scrap();
+        
 
         if (_currentUpgradeableSelection.GetWeaponType() != SystemWeaponLibrary.WeaponType.None)
         {
