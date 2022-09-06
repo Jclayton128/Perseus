@@ -188,6 +188,11 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         return !_isInstalled;
     }
 
+    public bool CheckIfInstalled()
+    {
+        return _isInstalled;
+    }
+
     public SystemWeaponLibrary.WeaponType GetWeaponType()
     {
         return WeaponType;

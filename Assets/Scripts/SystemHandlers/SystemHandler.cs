@@ -131,9 +131,18 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         return CurrentUpgradeLevel;
     }
 
+    public bool CheckIfInstalled()
+    {
+        return IsInstalled;
+    }
+
     public bool CheckIfInstallable()
     {
-        return !IsInstalled;
+        //TODO need to check if this system also competes with another System in the same location.
+        bool canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainSystem(this);
+        bool isInstallable = (canInstall && !IsInstalled);
+        
+        return isInstallable;
     }
 
     public int GetScrapRefundAmount()

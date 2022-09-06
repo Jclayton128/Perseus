@@ -433,7 +433,7 @@ public class UI_Controller : MonoBehaviour
     {
         if (currentUpgradeableSelection == null) return false;
 
-        bool isInstalled = !_currentUpgradeableSelection.CheckIfInstallable();
+        bool isInstalled = _currentUpgradeableSelection.CheckIfInstalled();
         bool hasMoreUpgradesAvailable = _currentUpgradeableSelection.CheckIfHasRemainingUpgrades();
         bool canAffordToUpgrade = _playerStateHandler.CheckUpgradePoints(_currentUpgradeableSelection.GetUpgradeCost());
 

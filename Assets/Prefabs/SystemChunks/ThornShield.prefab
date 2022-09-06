@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: e0dd5800a3c129245bd5a169e83fb055, type: 3}
-  _name: default name
+  _name: Thorn Hull
   _description: default description
   _upgradeDescription: upgrade description
   SystemType: 13

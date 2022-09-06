@@ -12,6 +12,7 @@ public interface IInstallable
 
     public bool CheckIfInstallable();
 
+    public bool CheckIfInstalled();
 
     public bool CheckIfScrappable();
 

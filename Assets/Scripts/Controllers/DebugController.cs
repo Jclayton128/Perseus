@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DebugController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class DebugController : MonoBehaviour
     [SerializeField] Toggle[] _systemToggles_LeftInt = null;
     [SerializeField] Toggle[] _systemToggles_RightInt = null;
 
+    [SerializeField] TextMeshProUGUI[] _spawnCrateButtonLabels = null;
+
     [SerializeField] Toggle[] _weaponToggles = null;
 
     //Dictionary<int, bool> _systemToggleStatus = new Dictionary<int, bool>();
@@ -39,6 +42,7 @@ public class DebugController : MonoBehaviour
         _levelController = GetComponent<LevelController>();
         _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
         SetupToggleLabels();
+        SetupSpawnCrateLabels();
     }
 
 
@@ -145,6 +149,16 @@ public class DebugController : MonoBehaviour
         }
     }
 
+    private void SetupSpawnCrateLabels()
+    {
+        SystemHandler[] allSystems = _systemsLibrary.GetAllSystemHandlers_Debug();
+        for (int i = 0; i < _spawnCrateButtonLabels.Length; i++)
+        {
+            if (i >= allSystems.Length) break;
+            _spawnCrateButtonLabels[i].text = allSystems[i].GetName();
+        }
+    }
+
     #region Ship Changes
     public void HandleMoreThrust()
     {
@@ -204,6 +218,13 @@ public class DebugController : MonoBehaviour
         Debug.LogError("doesn't do anything");
     }
 
+    public void SpawnSystemByIndex(int index)
+    {
+        SystemHandler[] allsystems = _systemsLibrary.GetAllSystemHandlers_Debug();
+        SystemHandler sh = allsystems[index];
+        _levelController.SpawnSpecificSystemCrateNearPlayer(sh.SystemType);
+    }
+    
     #region System Toggles
     public void HandleSystemToggle_Engine(int index)
     {

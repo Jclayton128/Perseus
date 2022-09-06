@@ -150,6 +150,20 @@ public class LevelController : MonoBehaviour
 
     #region Crate Spawning
 
+    public void SpawnSpecificSystemCrateNearPlayer(SystemWeaponLibrary.SystemType systemType)
+    {
+        Destroy(_crateOnLevel);
+
+        GameObject go = Instantiate(_cratePrefab);
+        Sprite icon = _systemWeaponLibrary.GetIcon(systemType);
+        string crateName = _systemWeaponLibrary.GetName(systemType);
+        go.GetComponent<SystemCrateHandler>().Initialize(icon,
+            SystemWeaponLibrary.WeaponType.None, systemType, crateName);
+
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+        go.transform.position = _gameController.Player.transform.position + offset;
+    }
+
     [ContextMenu("Spawn Weapon Crate Near Player")]
     public void SpawnRandomWeaponCrateNearPlayer()
     {

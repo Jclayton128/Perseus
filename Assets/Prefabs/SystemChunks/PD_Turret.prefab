@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 5e8984065b032d3448c04ef20cd7a292, type: 3}
-  _name: default name
+  _name: PD Turret
   _description: default description
   _upgradeDescription: upgrade description
   SystemType: 7

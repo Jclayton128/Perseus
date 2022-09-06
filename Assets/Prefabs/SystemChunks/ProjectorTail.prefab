@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 8748ab583fa109e4299f7d15b3e08d15, type: 3}
-  _name: default name
+  _name: Projector Tail
   _description: default description
   _upgradeDescription: upgrade description
   SystemType: 9

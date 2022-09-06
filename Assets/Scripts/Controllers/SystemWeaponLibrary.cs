@@ -66,6 +66,11 @@ public class SystemWeaponLibrary : MonoBehaviour
 
     }
 
+    public SystemHandler[] GetAllSystemHandlers_Debug()
+    {
+        return _allSystems;
+    }
+
     public GameObject GetSystem(SystemType systype)
     {
         if (_systems.ContainsKey(systype))

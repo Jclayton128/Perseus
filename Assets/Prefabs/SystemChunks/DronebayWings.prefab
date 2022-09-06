@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1b947aeab9de1c945ab9c4489ded1870, type: 3}
-  _name: default name
+  _name: Dronebay Wings
   _description: default description
   _upgradeDescription: upgrade description
   SystemType: 10
