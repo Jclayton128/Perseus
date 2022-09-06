@@ -72,37 +72,52 @@ public class PlayerSystemHandler : MonoBehaviour
 
     #region System/Weapon Count Checks
 
-    public bool CheckIfCanGainWeapon(WeaponHandler wh)
+    public (bool, string) CheckIfCanGainWeapon(WeaponHandler wh)
     {
+        (bool, string) outcome;
         if (_weaponsOnBoard.Count >= _maxWeapons)
         {
             Debug.LogError("unable to hold any more weapons");
-            return false;
+            outcome.Item1 = false;
+            outcome.Item2 = "Max Weapons Reached";
+            return outcome;
         }
 
         if (_secondaryWeaponsOnBoard.Contains(wh))
         {
-            Debug.LogError("Unable to hold multiples of the same weapon");
+            outcome.Item1 = false;
+            outcome.Item2 = "No Duplicate Weapons";
+            return outcome;
         }
 
-        return true;
+        outcome.Item1 = true;
+        outcome.Item2 = "no error";
+        return outcome;
     }
 
-    public bool CheckIfCanGainSystem(SystemHandler sh)
+    public (bool,string) CheckIfCanGainSystem(SystemHandler sh)
     {
+        (bool, string) outcome;
+
         if (_systemsOnBoardByLocation.Count >= _maxSystems)
         {
             //Debug.LogError("unable to hold any more systems");
-            return false;
+            outcome.Item1 = false;
+            outcome.Item2 = "Max Systems Reached";
+            return outcome;
         }
 
         if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
         {
             //Debug.LogError($"Ship already contains a system in {sh.SystemLocation}");
-            return false;
-        }        
-        
-        return true;        
+            outcome.Item1 = false;
+            outcome.Item2 = "Already have a similar system";
+            return outcome;
+        }
+
+        outcome.Item1 = true;
+        outcome.Item2 = "no error";
+        return outcome;        
     }
 
     #endregion

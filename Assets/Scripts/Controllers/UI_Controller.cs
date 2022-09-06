@@ -105,6 +105,15 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Upgrade Menu")]
     [SerializeField] TextMeshProUGUI _scrapRefundTMP = null;
 
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _upgradeExplainerTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _scrapExplainerTMP = null;
+
+    [FoldoutGroup("Upgrade Menu")]
+    [SerializeField] TextMeshProUGUI _installExplainerTMP = null;
+
 
     [FoldoutGroup("Meta Menu")]
     [SerializeField] TextMeshProUGUI _shipChoiceName = null;
@@ -385,13 +394,16 @@ public class UI_Controller : MonoBehaviour
         _selectionDescTMP.text = null;
         _selectionUpgradeDescTMP.text = null;
         _selectionUpgradeCostTMP.text = "-";
-
+        _selectionUpgradeCostTMP.color = Color.white;
+        _upgradeExplainerTMP.text = "";
 
         _installButton.interactable = false;
         _installTMP.text = "-";
+        _installExplainerTMP.text = "";
 
         _scrapButton.interactable = false;
         _scrapRefundTMP.text = "-";
+        _scrapExplainerTMP.text = "";
 
     }
 
@@ -407,15 +419,19 @@ public class UI_Controller : MonoBehaviour
         _selectionNameTMP.text = selectionInfo.Item2;
         _selectionDescTMP.text = selectionInfo.Item3;
         _selectionUpgradeDescTMP.text = selectionInfo.Item4;
-        if (_currentUpgradeableSelection.CheckIfInstalled() && selectionInfo.Item5 < 0)
+
+        bool isInstalled = _currentUpgradeableSelection.CheckIfInstalled();
+        if (isInstalled && selectionInfo.Item5 < 0)
         {
             //Installed and no further levels to upgrade
             _selectionUpgradeCostTMP.text = "-";
+            _upgradeExplainerTMP.text = "No more Upgrades Allowed";
         }
-        else if (_currentUpgradeableSelection.CheckIfInstalled() == false)
+        else if (isInstalled == false)
         {
             //Not installed
             _selectionUpgradeCostTMP.text = "-";
+            _upgradeExplainerTMP.text = "";
         }
         else
         {
@@ -423,19 +439,32 @@ public class UI_Controller : MonoBehaviour
             _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
             bool canAffordUpgrade = _playerStateHandler.CheckUpgradePoints(selectionInfo.Item5);
             _selectionUpgradeCostTMP.color = (canAffordUpgrade) ? Color.white : Color.red;
+            _upgradeExplainerTMP.text = "";
         }
 
-        bool isInstallable = _currentUpgradeableSelection.CheckIfInstallable();
+        (bool,string) isInstallable = _currentUpgradeableSelection.CheckIfInstallable();
+        
+        if (isInstallable.Item1 == false  && !isInstalled)
+        {
+            _installExplainerTMP.text = isInstallable.Item2;
+        }
+        else
+        {
+            _installExplainerTMP.text = "";
+        }
+
+
         bool canAffordInstall = _playerStateHandler.CheckUpgradePoints(1); //Installing costs 1 point
         bool isScrappable = _currentUpgradeableSelection.CheckIfScrappable();
 
-        _installButton.interactable = (isInstallable && canAffordInstall);
-        _installTMP.text = (isInstallable) ? "1" : "-";
-        _installTMP.color = (canAffordInstall) ? Color.white : Color.red;
+        _installButton.interactable = (isInstallable.Item1 && canAffordInstall);
+        _installTMP.text = (isInstallable.Item1) ? "1" : "-";
+        _installTMP.color = (!canAffordInstall && isInstallable.Item1) ? Color.red : Color.white;
 
         _scrapButton.interactable = isScrappable;
         string amount = _currentUpgradeableSelection.GetScrapRefundAmount().ToString();
         _scrapRefundTMP.text = (isScrappable) ? amount : "-";
+        _scrapExplainerTMP.text = (!isScrappable && isInstalled) ? "Cannot Scrap Permanent System/Weapon" : "";
 
     }
 
@@ -477,7 +506,7 @@ public class UI_Controller : MonoBehaviour
         }
 
         //TODO play install audio
-
+        _playerStateHandler.SpendUpgradePoints(1);
         RetractScannedCrateSelector();
         ClearCrateScan();
         ClearSelection();

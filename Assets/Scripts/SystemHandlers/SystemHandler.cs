@@ -21,6 +21,8 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     [FoldoutGroup("Brochure"), Multiline(3), HideLabel]
     [SerializeField] protected string _upgradeDescription = "upgrade description";
 
+ 
+
     //state
     public SystemWeaponLibrary.SystemType SystemType;
     public SystemWeaponLibrary.SystemLocation SystemLocation;
@@ -138,13 +140,14 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         return _isCurrentlyInstalled;
     }
 
-    public bool CheckIfInstallable()
+    public (bool,string) CheckIfInstallable()
     {
+        (bool, string) outcome;
         //TODO need to check if this system also competes with another System in the same location.
-        bool canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainSystem(this);
-        bool isInstallable = (canInstall && !_isCurrentlyInstalled);
-        
-        return isInstallable;
+        (bool,string) canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainSystem(this);
+        outcome.Item1 = (canInstall.Item1 && !_isCurrentlyInstalled);
+        outcome.Item2 = canInstall.Item2;
+        return outcome;
     }
 
     public int GetScrapRefundAmount()

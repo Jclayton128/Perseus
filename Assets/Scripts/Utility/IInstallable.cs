@@ -10,7 +10,7 @@ public interface IInstallable
 
     public bool CheckIfHasRemainingUpgrades();
 
-    public bool CheckIfInstallable();
+    public (bool,string) CheckIfInstallable();
 
     public bool CheckIfInstalled();
 
