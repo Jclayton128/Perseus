@@ -407,13 +407,22 @@ public class UI_Controller : MonoBehaviour
         _selectionNameTMP.text = selectionInfo.Item2;
         _selectionDescTMP.text = selectionInfo.Item3;
         _selectionUpgradeDescTMP.text = selectionInfo.Item4;
-        if (selectionInfo.Item5 < 0)
+        if (_currentUpgradeableSelection.CheckIfInstalled() && selectionInfo.Item5 < 0)
         {
+            //Installed and no further levels to upgrade
+            _selectionUpgradeCostTMP.text = "-";
+        }
+        else if (_currentUpgradeableSelection.CheckIfInstalled() == false)
+        {
+            //Not installed
             _selectionUpgradeCostTMP.text = "-";
         }
         else
         {
+            //Must be that installed and still has more upgrades possible
             _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
+            bool canAffordUpgrade = _playerStateHandler.CheckUpgradePoints(selectionInfo.Item5);
+            _selectionUpgradeCostTMP.color = (canAffordUpgrade) ? Color.white : Color.red;
         }
 
         bool isInstallable = _currentUpgradeableSelection.CheckIfInstallable();
@@ -422,6 +431,7 @@ public class UI_Controller : MonoBehaviour
 
         _installButton.interactable = (isInstallable && canAffordInstall);
         _installTMP.text = (isInstallable) ? "1" : "-";
+        _installTMP.color = (canAffordInstall) ? Color.white : Color.red;
 
         _scrapButton.interactable = isScrappable;
         string amount = _currentUpgradeableSelection.GetScrapRefundAmount().ToString();

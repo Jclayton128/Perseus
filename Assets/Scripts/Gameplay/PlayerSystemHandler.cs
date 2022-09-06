@@ -92,13 +92,13 @@ public class PlayerSystemHandler : MonoBehaviour
     {
         if (_systemsOnBoardByLocation.Count >= _maxSystems)
         {
-            Debug.LogError("unable to hold any more systems");
+            //Debug.LogError("unable to hold any more systems");
             return false;
         }
 
         if (_systemsOnBoardByLocation.ContainsKey(sh.SystemLocation))
         {
-            Debug.LogError($"Ship already contains a system in {sh.SystemLocation}");
+            //Debug.LogError($"Ship already contains a system in {sh.SystemLocation}");
             return false;
         }        
         
