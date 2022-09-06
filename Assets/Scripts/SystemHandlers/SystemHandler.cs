@@ -27,7 +27,9 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     
     protected SystemIconDriver _connectedID;
     [SerializeField] protected int _maxUpgradeLevel = 5;
-    public bool IsInstalled { get; private set; } = false;
+
+
+    bool _isCurrentlyInstalled = false;
 
     [Tooltip("If true, this system can never be scrapped from player build")]
     protected readonly bool _isPermanent = false;
@@ -133,14 +135,14 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
     public bool CheckIfInstalled()
     {
-        return IsInstalled;
+        return _isCurrentlyInstalled;
     }
 
     public bool CheckIfInstallable()
     {
         //TODO need to check if this system also competes with another System in the same location.
         bool canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainSystem(this);
-        bool isInstallable = (canInstall && !IsInstalled);
+        bool isInstallable = (canInstall && !_isCurrentlyInstalled);
         
         return isInstallable;
     }
@@ -152,7 +154,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
 
     public bool CheckIfScrappable()
     {
-        if (IsInstalled && !_isPermanent)
+        if (_isCurrentlyInstalled && !_isPermanent)
         {
             return true;
         }
@@ -174,7 +176,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         _connectedID = connectedSID;
         //Do all the level 1 changes to ship here
-        IsInstalled = true;
+        _isCurrentlyInstalled = true;
     }
 
     /// <summary>
@@ -184,7 +186,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     {
         _connectedID.ClearUIIcon();
         //Undo all the level 1 upgrades here
-        IsInstalled = false;
+        _isCurrentlyInstalled = false;
     }
 
 
