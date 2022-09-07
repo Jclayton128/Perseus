@@ -73,6 +73,7 @@ public class HealthHandler : MonoBehaviour
         {
             _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
             _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
+            _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
         }
 
         _ionizationPointsAbsorbed = 0;
@@ -226,6 +227,7 @@ public class HealthHandler : MonoBehaviour
     {
         _shieldHealRate += shieldHealRateAddition;
         _shieldHealRate = Mathf.Clamp(_shieldHealRate, 0, 99);
+        _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
     }
 
     /// <summary>

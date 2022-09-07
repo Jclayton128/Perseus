@@ -42,6 +42,12 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("SHEI")]
     [SerializeField] AdjustableImageBar _energyBar = null;
 
+    [FoldoutGroup("SHEI")]
+    [SerializeField] TextMeshProUGUI _energyRegenTMP = null;
+
+    [FoldoutGroup("SHEI")]
+    [SerializeField] TextMeshProUGUI _shieldRegenTMP = null;
+
     [FoldoutGroup("CrateScan")]
     [SerializeField] Image _crateScanImage = null;
 
@@ -688,10 +694,25 @@ public class UI_Controller : MonoBehaviour
         _hullBar.SetFactor(currentValue / maxValue);
     }
 
+    public void UpdateShieldRegenTMP(string amountAsString, Color color)
+    {
+        _shieldRegenTMP.text = amountAsString;
+        _shieldRegenTMP.color = color;
+    }
+
+    public void UpdateEnergyBar(float currentValue, float maxValue)
+    {
+        _energyBar.SetFactor(currentValue / maxValue);
+    }
 
     public AdjustableImageBar GetEnergyBar()
     {
         return _energyBar;
+    }
+    public void UpdateEnergyRegenTMP(string amountAsString, Color color)
+    {
+        _energyRegenTMP.text = amountAsString;
+        _energyRegenTMP.color = color;
     }
 
     #endregion

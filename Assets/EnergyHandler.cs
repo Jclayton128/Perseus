@@ -6,7 +6,6 @@ public class EnergyHandler : MonoBehaviour
 {
     ActorMovement _movement;
     UI_Controller _uicontroller;
-    AdjustableImageBar _energyImageBar;
     HealthHandler _health;
 
     [SerializeField] float _maxEnergyPoints = 30f;
@@ -26,7 +25,6 @@ public class EnergyHandler : MonoBehaviour
         }
 
         _uicontroller = FindObjectOfType<UI_Controller>();
-        _energyImageBar = _uicontroller.GetEnergyBar();
     }
 
     private void Start()
@@ -35,7 +33,8 @@ public class EnergyHandler : MonoBehaviour
         
         if (_movement.IsPlayer)
         {
-            _energyImageBar.SetFactor(CurrentEnergy / _maxEnergyPoints);   
+            _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
+            _uicontroller.UpdateEnergyRegenTMP(_energyGainRate.ToString("F1"), Color.white);
         }
     }
 
@@ -46,7 +45,7 @@ public class EnergyHandler : MonoBehaviour
 
         if (_movement.IsPlayer)
         {
-            _energyImageBar.SetFactor(CurrentEnergy / _maxEnergyPoints);
+            _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
         }
     }
 
