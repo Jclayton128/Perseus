@@ -7,7 +7,8 @@ public class Radar : MonoBehaviour
 {
     //init
     RadarScreen _rs;
-    Rigidbody2D _rb;
+    //Rigidbody2D _rb;
+    RadarProfileHandler _radarProfileHandler;
     UI_Controller _uiCon;
     [SerializeField] CircleCollider2D _radarDetector;
     Dictionary<int, float> _sectorIntensities = new Dictionary<int, float>();
@@ -23,16 +24,15 @@ public class Radar : MonoBehaviour
 
     //state
     float _timeSinceLastScan = 0;
-    public float SelfProfile { get; private set; } = 0; // Speed divided by stealth factor.
+    //public float SelfProfile { get; private set; } = 0; // Speed divided by stealth factor.
 
-    [Tooltip("Coefficient between speed and self profile. Higher = Stealthier @ top speed")]
-    float _stealthFactor = 20f;
 
     #region initial setup
     private void Awake()
     {
         _radarRange = _radarDetector.radius;
-        _rb = GetComponent<Rigidbody2D>();
+        //_rb = GetComponent<Rigidbody2D>();
+        _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
         _uiCon = FindObjectOfType<UI_Controller>();
         _rs = _uiCon.GetRadarScreen();
         PopulateSectorIntensitieswithZero();
@@ -65,7 +65,7 @@ public class Radar : MonoBehaviour
         InjectRandomNoiseToRandomSector();
         ClampIntensityLevelFloorToSelfNoiseInEachSector();
 
-        PushSectorIntensityToRadarScreen(); //TODO don't let this get called on AI-controlled tanks.
+        PushSectorIntensityToRadarScreen();
     }
 
     private void ResetSectorIntensityToZero()
@@ -133,18 +133,18 @@ public class Radar : MonoBehaviour
         double dist_normalized = dist / _radarRange;
 
         ///complicate dbit o comment?
-        double intensity = target.RadarProfile / Math.Pow(dist_normalized,2f) * _signalFudge;
+        double intensity = target.CurrentRadarProfile / Math.Pow(dist_normalized,2f) * _signalFudge;
         return (float)intensity;
 
     }
 
     private void ClampIntensityLevelFloorToSelfNoiseInEachSector()
     {
-        SelfProfile = _rb.velocity.magnitude/_stealthFactor;
-
+        //SelfProfile = _rb.velocity.magnitude / _stealthFactor;
+        float selfProfileFactor = _radarProfileHandler.CurrentRadarProfileFactor;
         for (int i = 0; i < 8; i++)
         {
-            _sectorIntensities[i] = Mathf.Clamp(_sectorIntensities[i], SelfProfile, 1);
+            _sectorIntensities[i] = Mathf.Clamp(_sectorIntensities[i], selfProfileFactor, 1);
         }
 
     }

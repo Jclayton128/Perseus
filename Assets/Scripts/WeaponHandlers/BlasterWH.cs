@@ -80,6 +80,8 @@ public class BlasterWH : WeaponHandler
             ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + (pb.transform.up * _shotSpeed);
 
+        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 

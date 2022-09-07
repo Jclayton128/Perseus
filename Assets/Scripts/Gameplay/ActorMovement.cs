@@ -8,6 +8,7 @@ public class ActorMovement : MonoBehaviour
     InputController _inputCon;
     Rigidbody2D _rb;
     [SerializeField] ParticleSystem[] _engineParticles = null;
+    RadarProfileHandler _radarProfileHandler;
 
     //settings
     float _turningForce = 300f;
@@ -23,6 +24,11 @@ public class ActorMovement : MonoBehaviour
     [SerializeField] float _mass;
     [SerializeField] float _turnRate;
 
+    /// <summary>
+    /// This much Profile is added to an actor's profile every second while thrusting.
+    /// </summary>
+    float _thrustProfileIncreaseRate = 15f; 
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -33,6 +39,7 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnAccelEnd += HandleStopAccelerating;
             _inputCon.OnDecelBegin += HandleBeginDecelerating;
             _inputCon.OnDecelEnd += HandleStopDecelerating;
+            _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
         }
         
     }
@@ -64,6 +71,7 @@ public class ActorMovement : MonoBehaviour
         if (ShouldAccelerate)
         {
             _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+            _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
         }
         if (ShouldDecelerate)
         {

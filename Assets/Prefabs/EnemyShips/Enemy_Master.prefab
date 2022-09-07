@@ -344,7 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939fc7628693af349a331699cbacdd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RadarProfile: 10
+  CurrentRadarProfile: 20
+  CurrentRadarProfileFactor: 0
+  _isStaticSized: 1
 --- !u!58 &2122025144
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -371,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
       propertyPath: _timeBetweenShots
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
+      propertyPath: _profileIncreaseOnActivation
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3092739481744609522, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
       propertyPath: m_RootOrder

@@ -13460,6 +13460,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &601328593 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
+  m_PrefabInstance: {fileID: 404348614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &607036609
 GameObject:
   m_ObjectHideFlags: 0
@@ -38154,6 +38165,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930399737}
   m_CullTransparentMesh: 1
+--- !u!114 &1939506929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
+  m_PrefabInstance: {fileID: 59288159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1941357962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41031,6 +41053,8 @@ MonoBehaviour:
   _shieldBar: {fileID: 1683887379}
   _hullBar: {fileID: 2128241272}
   _energyBar: {fileID: 2133817800}
+  _energyRegenTMP: {fileID: 1939506929}
+  _shieldRegenTMP: {fileID: 601328593}
   _crateScanImage: {fileID: 259965612}
   _crateScanTMP: {fileID: 1871992573}
   _radarScreen: {fileID: 1800038649}

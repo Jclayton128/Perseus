@@ -12,6 +12,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     protected AudioController _playerAudioSource;
     protected EnergyHandler _hostEnergyHandler;
     protected Rigidbody2D _rb;
+    protected RadarProfileHandler _hostRadarProfileHandler;
 
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
@@ -46,6 +47,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     [SerializeField] protected float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;
+    [SerializeField] protected float _profileIncreaseOnActivation = 1f;
 
     [FoldoutGroup("Audio")]
     [SerializeField] protected AudioClip[] _activationSounds = null;
@@ -77,6 +79,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         _poolCon = _inputCon.GetComponent<PoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
+        _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();
         _isPlayer = isPlayer;
 
         _isInstalled = true;
