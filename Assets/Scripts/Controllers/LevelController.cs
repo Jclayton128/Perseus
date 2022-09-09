@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
     LevelLibrary _levelLibrary;
     PlayerSystemHandler _playerSystemHandler;
     CircleEdgeCollider2D _arenaEdgeCollider;
+
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
 
@@ -26,7 +27,7 @@ public class LevelController : MonoBehaviour
     List<GameObject> _enemiesOnLevel = new List<GameObject>();
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
-    GameObject _wormholeOnLevel;
+    List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
     GameObject _crateOnLevel;
 
     public float ArenaRadius { get; private set; }
