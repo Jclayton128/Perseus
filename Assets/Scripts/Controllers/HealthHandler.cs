@@ -14,6 +14,8 @@ public class HealthHandler : MonoBehaviour
     Rigidbody2D _rb;
     UI_Controller _UIController;
 
+    public event System.Action<DamagePack> OnReceiveDamagePack = null;
+
     #endregion
 
     //global settings
@@ -139,6 +141,7 @@ public class HealthHandler : MonoBehaviour
         ProjectileBrain pb;
         if (weaponImpact.TryGetComponent<ProjectileBrain>(out pb))
         {
+            OnReceiveDamagePack?.Invoke(pb.DamagePack);
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
             pb.DecrementPenetrationOnImpact();
         }

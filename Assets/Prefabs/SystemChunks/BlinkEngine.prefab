@@ -91,7 +91,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: BlinkModule
+      value: BlinkEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Enabled
@@ -175,8 +175,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 8fe3b5fe0245a834f9fa3048ffe38423, type: 3}
   _name: Blink Engine
-  _description: default description
-  _upgradeDescription: upgrade description
+  _description: Auto-blinks the ship away from danger anytime the shield fails. Must
+    recharge between uses.
+  _upgradeDescription: Upgrading decreases the recharge time between uses.
   SystemType: 2
   SystemLocation: 0
   _maxUpgradeLevel: 5
+  _blinkInParticleFX: {fileID: 7094645671175686317, guid: 5b31552667e92d44cbf07016d1bf0be5, type: 3}
+  _blinkOutParticleFX: {fileID: 3928151047115107881, guid: 4e7530f49b5775d49b94990ab8ee164d, type: 3}
+  _rechargeRate: 0.1
+  _minBlinkRange: 2
+  _maxBlinkRange: 5
+  _rechargeRateAddition_Upgrade: 0.1

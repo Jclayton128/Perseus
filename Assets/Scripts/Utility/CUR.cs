@@ -40,6 +40,26 @@ public static class CUR : object
         return pos;
     }
 
+    static public Vector3 FindRandomBlinkWithinRangeBandAndWithinArena(Vector3 localCenter,
+        float minLocalDistance, float maxLocalDistance, Vector3 globalCenter, float maxGlobalDistance)
+    {
+        Vector3 point;
+        int breaker = 0;
+        do
+        {
+            breaker++;
+            float ang = Random.value * 360f;
+            float dist = Random.Range(minLocalDistance, maxLocalDistance);
+            point.x = localCenter.x + dist * Mathf.Sin(ang * Mathf.Deg2Rad);
+            point.y = localCenter.y + dist * Mathf.Cos(ang * Mathf.Deg2Rad);
+            point.z = localCenter.z;
+            if (breaker > 10) break;
+        }
+        while ((globalCenter - point).magnitude > maxGlobalDistance);
+
+        return point;
+    }
+
     #endregion
 
     #region Proximity Searches by Tag

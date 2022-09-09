@@ -11,6 +11,7 @@ public class PlayerSystemHandler : MonoBehaviour
     [SerializeField] SystemWeaponLibrary.WeaponType[] _startingWeapons = null;
     ActorMovement _playerHandler;
     EnergyHandler _energyHandler;
+    HealthHandler _healthHandler;
     UI_Controller _UICon;
     CrateScanner _crateScanner;
 
@@ -43,6 +44,8 @@ public class PlayerSystemHandler : MonoBehaviour
 
         _playerHandler = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
+        _healthHandler = GetComponent<HealthHandler>();
+        _healthHandler.OnReceiveDamagePack += CheckOnboardSystemsForReceivedDamageReaction;
 
     }
 
@@ -275,6 +278,24 @@ public class PlayerSystemHandler : MonoBehaviour
             system.IntegrateSystem(sid);
         }
     }
+
+    #endregion
+
+    #region Event Responses
+
+    private void CheckOnboardSystemsForReceivedDamageReaction(DamagePack incomingDamagePack)
+    {
+        foreach (SystemHandler sh in _systemsOnBoard)
+        {
+            if (sh is IDamageReflexable dr)
+            {
+                Debug.Log("found a damage reflex system");
+                bool didModifyDamage = dr.ModifyDamagePack(incomingDamagePack);
+                if (didModifyDamage) dr.ExecuteDamageReflex();
+            }
+        }
+    }
+
 
     #endregion
 
