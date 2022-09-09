@@ -289,7 +289,6 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             if (sh is IDamageReflexable dr)
             {
-                Debug.Log("found a damage reflex system");
                 bool didModifyDamage = dr.ModifyDamagePack(incomingDamagePack);
                 if (didModifyDamage) dr.ExecuteDamageReflex();
             }
