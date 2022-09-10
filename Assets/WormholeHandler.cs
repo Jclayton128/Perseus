@@ -8,11 +8,17 @@ public class WormholeHandler : MonoBehaviour
     [SerializeField] float _pullStrength = 2.0f;
 
     public Action<WormholeHandler> OnPlayerEnterWormhole; //Level Controller should hook into these
-    public Action<WormholeHandler> OnPlayerExitWormhole;    
+    public Action<WormholeHandler> OnPlayerExitWormhole;
 
     //state
+    public Level _associatedLevel;
     Rigidbody2D _playerRB;
     Vector2 _inwardDir;
+
+    public void Initialize(Level associatedLevel)
+    {
+        _associatedLevel = associatedLevel;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

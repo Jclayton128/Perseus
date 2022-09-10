@@ -17,7 +17,10 @@ public class LevelController : MonoBehaviour
 
     //settings 
     int _startingThreatBudget = 2;
+    float _minSeparationBetweenWormholes = 20f;
+    float _wormholeSelectionTime = 5f;
     [SerializeField] GameObject _cratePrefab = null;
+    [SerializeField] GameObject _wormholePrefab = null;
 
     //state
     public Level _currentLevel;
@@ -29,6 +32,9 @@ public class LevelController : MonoBehaviour
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
     GameObject _crateOnLevel;
+
+    WormholeHandler _selectedWormhole;
+    float _timeToSelectWormhole = Mathf.Infinity;
 
     public float ArenaRadius { get; private set; }
 
@@ -43,25 +49,70 @@ public class LevelController : MonoBehaviour
 
         CurrentThreatBudget = _startingThreatBudget;
         CurrentLevelNumber = 1;
-        LoadNewRandomLevel();
-    }
 
-    private void LoadNewRandomLevel()
-    {
-        _currentLevel = _levelLibrary.GetRandomLevel();
         _arenaEdgeCollider = FindObjectOfType<CircleEdgeCollider2D>();
         ArenaRadius = _arenaEdgeCollider.Radius;
-        
-        // Populate Asteroids and add to list
-        // Populate Nebulae and add to list
-        // Populate Wormhole and add to reference
-        // Populate Enemies according threat budget, add to list
+
     }
 
+    private void Start()
+    {
+
+    }
     private void ReactToPlayerSpawned(GameObject player)
     {
         _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
+        LoadNewRandomLevel();
     }
+
+    #region Flow
+
+    private void LoadNewRandomLevel()
+    {
+        ClearLevel();
+
+        _gameController.Player.transform.position = Vector3.zero;
+
+        _currentLevel = _levelLibrary.GetRandomLevel();
+        Debug.Log($"Entering new level: {_currentLevel.name} ");
+
+        SpawnWormholes(3);
+        SpawnEnemiesInNewSector_Debug();         // Populate Enemies according threat budget, add to list
+
+        if (_currentLevel.AsteroidAmount > 0)
+        {
+            // Populate Asteroids and add to list
+        }
+        if (_currentLevel.NebulaAmount > 0)
+        {
+
+            // Populate Nebulae and add to list
+        }
+
+    }
+
+    private void ReactToPlayerEnteringWormhole(WormholeHandler wh)
+    {
+        _selectedWormhole = wh;
+        _timeToSelectWormhole = Time.time + _wormholeSelectionTime;
+        Debug.Log("Player in wormhole");
+    }
+
+    private void Update()
+    {
+        if (_selectedWormhole && Time.time >= _timeToSelectWormhole)
+        {
+            LoadNewRandomLevel();
+        }
+    }
+
+    private void ReactToPlayerExitingWormhome(WormholeHandler wh)
+    {
+        _selectedWormhole = null;
+        //_timeToSelectWormhole = Mathf.Infinity;
+        Debug.Log("Player exits wormhole");
+    }
+    #endregion
 
     #region Registers
     private void RegisterEnemy(GameObject enemy)
@@ -103,7 +154,7 @@ public class LevelController : MonoBehaviour
 
     #endregion
 
-    #region Spawning Enemies
+    #region Spawning New Level Items
 
     [ContextMenu("SpawnRandomEnemies")]
     public void SpawnEnemiesInNewSector_Debug()
@@ -133,18 +184,57 @@ public class LevelController : MonoBehaviour
         RegisterEnemy(newEnemy);
     }
 
+    public void SpawnWormholes(int count)
+    {
+        List<Vector3> existingPoints = new List<Vector3>();
+        existingPoints.Add(Vector3.zero);
+
+        for (int i = 0; i < count; i++)
+        {
+            
+            Vector3 pos = CUR.GetRandomPosWithinArenaAwayFromOtherPoints(Vector3.zero, ArenaRadius,
+                existingPoints, _minSeparationBetweenWormholes);
+            WormholeHandler wh = Instantiate(_wormholePrefab, pos, Quaternion.identity).GetComponent<WormholeHandler>();
+            _wormholesOnLevel.Add(wh);
+            existingPoints.Add(wh.transform.position);
+            wh.Initialize(_levelLibrary.GetRandomLevel());
+            wh.OnPlayerEnterWormhole += ReactToPlayerEnteringWormhole;
+            wh.OnPlayerExitWormhole += ReactToPlayerExitingWormhome;
+        }
+        
+    }
+
     #endregion
 
     #region Clearing Level
 
+    private void ClearLevel()
+    {
+        ClearAllEnemiesFromLevel();
+        ClearAllWormholesFromLevel();
+        
+    }
+
+
     [ContextMenu("Clear All Enemies")]
-    public void ClearAllEnemiesFromLevel()
+    private void ClearAllEnemiesFromLevel()
     {
         for (int i = _enemiesOnLevel.Count - 1; i >= 0; i--)
         {
             Destroy(_enemiesOnLevel[i]);
             _enemiesOnLevel.Remove(_enemiesOnLevel[i]);
         }
+    }
+
+    public void ClearAllWormholesFromLevel()
+    {
+        for (int i = 0; i < _wormholesOnLevel.Count; i++)
+        {
+            _wormholesOnLevel[i].OnPlayerEnterWormhole -= ReactToPlayerEnteringWormhole;
+            _wormholesOnLevel[i].OnPlayerExitWormhole -= ReactToPlayerExitingWormhome;
+            Destroy(_wormholesOnLevel[i].gameObject);
+        }
+        _wormholesOnLevel.Clear();
     }
 
     #endregion
@@ -208,7 +298,6 @@ public class LevelController : MonoBehaviour
     #endregion
 
     #region Helpers
-
 
     #endregion
 

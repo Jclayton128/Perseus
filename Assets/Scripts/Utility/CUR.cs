@@ -60,6 +60,39 @@ public static class CUR : object
         return point;
     }
 
+    public static Vector3 GetRandomPosWithinArenaAwayFromOtherPoints(Vector3 arenaCenter, float arenaSize,
+        List<Vector3> otherPoints, float minSeparation)
+    {
+        Vector3 pos = Vector3.zero;
+
+        int breaker = 0;
+        do
+        {
+            pos = FindRandomPointWithinDistance(arenaCenter, arenaSize);
+            breaker++;
+            if (breaker > 10) break;
+        }
+        while (CheckIfPointsViolateMinSeparation(pos, otherPoints, minSeparation));
+
+        return pos;
+    }
+
+    private static bool CheckIfPointsViolateMinSeparation(Vector3 testPoint, List<Vector3> otherPoints, float minSeparation)
+    {
+        bool hasInsufficientSeparation = false;
+
+        for (int i = 0; i < otherPoints.Count; i++)
+        {
+            if ((testPoint - otherPoints[i]).magnitude < minSeparation)
+            {
+                hasInsufficientSeparation = true;
+                break;
+            }
+        }
+
+        return hasInsufficientSeparation;
+    }
+
     #endregion
 
     #region Proximity Searches by Tag
