@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SystemCrateHandler : MonoBehaviour
+public class SystemCrateHandler : MonoBehaviour, IScannable
 {
     [SerializeField] SpriteRenderer _iconSprite = null;
     string _crateName;
@@ -22,15 +22,42 @@ public class SystemCrateHandler : MonoBehaviour
         _crateName = crateName;
     }
 
-    public (Sprite, string) GetCrateDetails()
+    public string ScanName()
     {
-        (Sprite, string) details;
-
-        details.Item1 = _iconSprite.sprite;
-        details.Item2 = _crateName;
-
-        return details;
+        return _crateName;
     }
+
+    public Sprite ScanIcon()
+    {
+        return _iconSprite.sprite;
+    }
+
+    public SystemWeaponLibrary.SystemType ScanSystemType()
+    {
+        return SystemInCrate;
+    }
+
+    public SystemWeaponLibrary.WeaponType ScanWeaponType()
+    {
+        return WeaponInCrate;
+    }
+
+    public void DestroyScannable()
+    {
+        Destroy(gameObject);
+    }
+
+
+
+    //public (Sprite, string) GetCrateDetails()
+    //{
+    //    (Sprite, string) details;
+
+    //    details.Item1 = _iconSprite.sprite;
+    //    details.Item2 = _crateName;
+
+    //    return details;
+    //}
 
 
 }

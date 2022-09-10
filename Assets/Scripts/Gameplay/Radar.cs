@@ -13,6 +13,7 @@ public class Radar : MonoBehaviour
     [SerializeField] CircleCollider2D _radarDetector;
     Dictionary<int, float> _sectorIntensities = new Dictionary<int, float>();
     [SerializeField] List<RadarProfileHandler> _radarTargets = new List<RadarProfileHandler>(); 
+    
 
     //param
     [Header("parameter")]

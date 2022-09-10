@@ -35983,6 +35983,7 @@ MonoBehaviour:
   _currentLevel: {fileID: 0}
   CurrentLevelNumber: 0
   CurrentThreatBudget: 0
+  _filterColor: {r: 0.6890987, g: 0.28166604, b: 0.8679245, a: 1}
 --- !u!114 &2102641481
 MonoBehaviour:
   m_ObjectHideFlags: 0
