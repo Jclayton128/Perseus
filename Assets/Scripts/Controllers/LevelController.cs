@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class LevelController : MonoBehaviour
     PlayerSystemHandler _playerSystemHandler;
     CircleEdgeCollider2D _arenaEdgeCollider;
 
+    public Action<Level> OnWarpIntoNewLevel;
+
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
 
@@ -21,11 +25,14 @@ public class LevelController : MonoBehaviour
     float _wormholeSelectionTime = 5f;
     [SerializeField] GameObject _cratePrefab = null;
     [SerializeField] GameObject _wormholePrefab = null;
+    [SerializeField] SpriteRenderer _filterSR;
 
     //state
     public Level _currentLevel;
     public int CurrentLevelNumber;
     public int CurrentThreatBudget;
+    [SerializeField] Color _filterColor = Color.white;
+    Tween _filterTween;
 
     List<GameObject> _enemiesOnLevel = new List<GameObject>();
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
@@ -33,8 +40,8 @@ public class LevelController : MonoBehaviour
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
     GameObject _crateOnLevel;
 
-    WormholeHandler _selectedWormhole;
-    float _timeToSelectWormhole = Mathf.Infinity;
+    WormholeHandler _selectedWormhole = null;
+    float _timeToSelectWormhole = 0;
 
     public float ArenaRadius { get; private set; }
 
@@ -55,10 +62,7 @@ public class LevelController : MonoBehaviour
 
     }
 
-    private void Start()
-    {
 
-    }
     private void ReactToPlayerSpawned(GameObject player)
     {
         _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
@@ -70,12 +74,13 @@ public class LevelController : MonoBehaviour
     private void LoadNewRandomLevel()
     {
         ClearLevel();
+        WarpIntoNewLevel();
+        BuildNewLevel();
 
-        _gameController.Player.transform.position = Vector3.zero;
+    }
 
-        _currentLevel = _levelLibrary.GetRandomLevel();
-        Debug.Log($"Entering new level: {_currentLevel.name} ");
-
+    private void BuildNewLevel()
+    {
         SpawnWormholes(3);
         SpawnEnemiesInNewSector_Debug();         // Populate Enemies according threat budget, add to list
 
@@ -88,27 +93,53 @@ public class LevelController : MonoBehaviour
 
             // Populate Nebulae and add to list
         }
+    }
 
+    private void WarpIntoNewLevel()
+    {
+        _gameController.Player.transform.position = Vector3.zero;
+
+        _filterTween.Kill();
+        _filterTween = DOTween.To(() => _filterSR.color, x => _filterSR.color = x, Color.clear, 0.5f);
+
+        _currentLevel = _levelLibrary.GetRandomLevel();
+        Debug.Log($"Entering new level: {_currentLevel.name} ");
+        OnWarpIntoNewLevel?.Invoke(_currentLevel);
+        //Player should listen in to this^ to recharge energy, shields, and systems, and reduce profile
+
+        //TODO ripping audio sound for warp in;
     }
 
     private void ReactToPlayerEnteringWormhole(WormholeHandler wh)
     {
         _selectedWormhole = wh;
-        _timeToSelectWormhole = Time.time + _wormholeSelectionTime;
+        _timeToSelectWormhole = 0;
         Debug.Log("Player in wormhole");
     }
 
     private void Update()
     {
-        if (_selectedWormhole && Time.time >= _timeToSelectWormhole)
+        if (_selectedWormhole)
         {
-            LoadNewRandomLevel();
+            _timeToSelectWormhole += Time.deltaTime;
+            float factor = _timeToSelectWormhole / _wormholeSelectionTime;
+            _filterColor.a = factor;
+            _filterSR.color = _filterColor;
+            if (_timeToSelectWormhole > _wormholeSelectionTime)
+            {
+                LoadNewRandomLevel();
+            }
         }
+        
     }
 
     private void ReactToPlayerExitingWormhome(WormholeHandler wh)
     {
         _selectedWormhole = null;
+
+        _filterTween.Kill();
+        _filterTween = DOTween.To(() => _filterSR.color, x => _filterSR.color = x, Color.clear, 0.5f);
+
         //_timeToSelectWormhole = Mathf.Infinity;
         Debug.Log("Player exits wormhole");
     }

@@ -48,9 +48,9 @@ TagManager:
   - name: Actors
     uniqueID: 2592811543
     locked: 0
-  - name: Player
-    uniqueID: 2707312481
-    locked: 0
   - name: Weaponry
     uniqueID: 2975538757
+    locked: 0
+  - name: Player
+    uniqueID: 2707312481
     locked: 0
