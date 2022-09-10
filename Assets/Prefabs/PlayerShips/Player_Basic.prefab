@@ -116,7 +116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 41
   m_Sprite: {fileID: 21300000, guid: e0dd5800a3c129245bd5a169e83fb055, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -199,7 +199,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 977895394f6922b438069290a6f0b1cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -281,7 +281,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 41
   m_Sprite: {fileID: 21300000, guid: e0dd5800a3c129245bd5a169e83fb055, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -369,7 +369,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 26e5ed9c3e8f74c4e9b51f4398fdcb54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -581,7 +581,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 977895394f6922b438069290a6f0b1cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -663,7 +663,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 43
   m_Sprite: {fileID: 21300000, guid: 4309ed4a855892949aaee69378f67ba0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 4785034623933383614}
   - component: {fileID: 4173731307768127727}
   m_Layer: 19
-  m_Name: CrateDetector
+  m_Name: ScannerDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -722,7 +722,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 7
 --- !u!1 &8726474472827064114
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +792,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 5fb0e8b1e87dfee4a9b0b69fedcdbfbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1110,7 +1110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3002118628346171774, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3002118628346171774, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: m_SortingOrder
@@ -1409,4 +1409,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58cb409f160dd34187d2f6afa3a8cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crateDetectorCollider: {fileID: 0}
+  _scanReticlePrefab: {fileID: 1752788121067917300, guid: a248e3bbd2a57384d8ecf5531c6d29a9, type: 3}

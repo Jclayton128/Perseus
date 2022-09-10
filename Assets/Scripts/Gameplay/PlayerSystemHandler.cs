@@ -13,7 +13,7 @@ public class PlayerSystemHandler : MonoBehaviour
     EnergyHandler _energyHandler;
     HealthHandler _healthHandler;
     UI_Controller _UICon;
-    CrateScanner _crateScanner;
+    Scanner _crateScanner;
 
     //These are used to check for overlap between two weapons or two systems.
     Dictionary<SystemWeaponLibrary.WeaponType, GameObject> _weaponsOnBoard =
@@ -32,7 +32,7 @@ public class PlayerSystemHandler : MonoBehaviour
     [SerializeField] List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
     {
-        _crateScanner = GetComponent<CrateScanner>();
+        _crateScanner = GetComponent<Scanner>();
         _syslib = FindObjectOfType<SystemWeaponLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
         _inputCon = _UICon.GetComponent<InputController>();

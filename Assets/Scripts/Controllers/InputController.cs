@@ -14,6 +14,8 @@ public class InputController : MonoBehaviour
     public Action<int> OnMouseDown;
     public Action<int> OnMouseUp;
     public Action OnUpgradeMenuToggled;
+    public Action OnScanDecrement;
+    public Action OnScanIncrement;
 
     Ray ray;
     float distance;
@@ -90,6 +92,9 @@ public class InputController : MonoBehaviour
         {
             OnUpgradeMenuToggled?.Invoke();
         }
+        
+        if (Input.GetKeyDown(KeyCode.Q)) OnScanDecrement?.Invoke();
+        if (Input.GetKeyDown(KeyCode.E)) OnScanIncrement?.Invoke();
     }
 
     private void UpdateMouseInput()

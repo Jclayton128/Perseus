@@ -49,10 +49,14 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] TextMeshProUGUI _shieldRegenTMP = null;
 
     [FoldoutGroup("CrateScan")]
-    [SerializeField] Image _crateScanImage = null;
+    [SerializeField] Image _scanImage = null;
 
     [FoldoutGroup("CrateScan")]
-    [SerializeField] TextMeshProUGUI _crateScanTMP = null;
+    [SerializeField] TextMeshProUGUI _scanNameTMP = null;
+
+    [FoldoutGroup("CrateScan")]
+    [SerializeField] TextMeshProUGUI _scanCounterTMP = null;
+
 
 
     [SerializeField] RadarScreen _radarScreen = null;
@@ -180,7 +184,7 @@ public class UI_Controller : MonoBehaviour
         _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         InitializeSystemWeaponIcons();
         InitializeShipSelection();
-        InitializeCrateScan();
+        InitializeScanner();
     }
 
     private void ReactToPlayerSpawning(GameObject player)
@@ -237,10 +241,11 @@ public class UI_Controller : MonoBehaviour
 
     }
 
-    private void InitializeCrateScan()
+    private void InitializeScanner()
     {
-        _crateScanImage.color = Color.clear;
-        _crateScanTMP.text = "";
+        _scanImage.color = Color.clear;
+        _scanNameTMP.text = "";
+        _scanCounterTMP.text = "";
     }
 
     #endregion
@@ -543,11 +548,12 @@ public class UI_Controller : MonoBehaviour
 
     #region Crate Scan
 
-    public void UpdateCrateScan(Sprite icon, string crateName)
+    public void UpdateScanner(Sprite icon, string crateName, string counterStatus)
     {
-        _crateScanImage.color = Color.white;
-        _crateScanImage.sprite = icon;
-        _crateScanTMP.text = crateName;
+        _scanImage.color = Color.white;
+        _scanImage.sprite = icon;
+        _scanNameTMP.text = crateName;
+        _scanCounterTMP.text = counterStatus;
     }
 
     public void UpdateCrateScannerSelectable(IInstallable crate)
@@ -563,7 +569,7 @@ public class UI_Controller : MonoBehaviour
 
     public void ClearCrateScan()
     {
-        InitializeCrateScan();
+        InitializeScanner();
         _crateScannerThing = null;
     }
 

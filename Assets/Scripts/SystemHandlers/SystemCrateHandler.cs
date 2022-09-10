@@ -32,6 +32,11 @@ public class SystemCrateHandler : MonoBehaviour, IScannable
         return _iconSprite.sprite;
     }
 
+    public Transform GetScanTransform()
+    {
+        return transform;
+    }
+
     public SystemWeaponLibrary.SystemType ScanSystemType()
     {
         return SystemInCrate;

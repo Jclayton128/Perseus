@@ -14,5 +14,7 @@ public interface IScannable
 
     public void DestroyScannable();
 
+    public Transform GetScanTransform();
+
 
 }
