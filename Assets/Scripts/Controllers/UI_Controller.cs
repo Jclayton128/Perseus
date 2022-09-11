@@ -257,9 +257,11 @@ public class UI_Controller : MonoBehaviour
         _topMetaTween.Kill();
         _bottomMetaTween.Kill();
 
-        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(-_metaMenuTraverseDistance,
+        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(
+            _topMetaWing.rectTransform.anchoredPosition.y- _metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
-        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(_metaMenuTraverseDistance,
+        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(
+            _bottomMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
     }
@@ -271,17 +273,21 @@ public class UI_Controller : MonoBehaviour
         _topMetaTween.Kill();
         _bottomMetaTween.Kill();
 
-        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(_metaMenuTraverseDistance,
+        _topMetaTween = _topMetaWing.rectTransform.DOAnchorPosY(
+            _topMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
-        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(-_metaMenuTraverseDistance,
+        _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(
+            _bottomMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
     }
 
     public void InstantDeployMetaMenu()
     {
-        _topMetaWing.rectTransform.anchoredPosition = new Vector2(0, -_metaMenuTraverseDistance);
-        _bottomMetaWing.rectTransform.anchoredPosition = new Vector2(0, _metaMenuTraverseDistance);
+        _topMetaWing.rectTransform.anchoredPosition = new Vector2(0,
+            _topMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance);
+        _bottomMetaWing.rectTransform.anchoredPosition = new Vector2(0,
+            _bottomMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance);
     }
 
     public void HandleStartNewGamePress()
@@ -344,9 +350,11 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
-        _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
+        _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(
+            _leftUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
-        _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
+        _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(
+            _rightUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         ClearSelection();
@@ -359,9 +367,11 @@ public class UI_Controller : MonoBehaviour
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
-        _leftUpgradeWing.rectTransform.DOAnchorPosX(-_upgradeWingTraverseDistance,
+        _leftUpgradeWing.rectTransform.DOAnchorPosX(
+            _leftUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
-        _rightUpgradeWing.rectTransform.DOAnchorPosX(_upgradeWingTraverseDistance,
+        _rightUpgradeWing.rectTransform.DOAnchorPosX(
+            _rightUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         RetractSelectors();
