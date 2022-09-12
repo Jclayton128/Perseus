@@ -10,8 +10,11 @@ public class Radar : MonoBehaviour
     //Rigidbody2D _rb;
     RadarProfileHandler _radarProfileHandler;
     UI_Controller _uiCon;
-    [SerializeField] CircleCollider2D _radarDetector;
-    Dictionary<int, float> _sectorIntensities = new Dictionary<int, float>();
+    [SerializeField] CircleCollider2D _radarDetector = null;
+    int _sectorCount = 8;
+    float[] _actualIntensities;
+    float[] _depictedIntensities;
+    //Dictionary<int, float> _sectorIntensities = new Dictionary<int, float>();
     [SerializeField] List<RadarProfileHandler> _radarTargets = new List<RadarProfileHandler>(); 
     
 
@@ -22,39 +25,58 @@ public class Radar : MonoBehaviour
     float _radarRange;
     [SerializeField] float _signalFudge;  //0.05
     [SerializeField] float _maxRandomNoise; //0.1
+    [SerializeField] float _signalFadeRate = 0.5f; // how much intensity fades each second.
+    int _radarProfileLayer = 13;
 
     //state
-    float _timeSinceLastScan = 0;
+    float _timeForNextScan = 0;
     //public float SelfProfile { get; private set; } = 0; // Speed divided by stealth factor.
 
 
     #region initial setup
     private void Awake()
     {
+        _actualIntensities = new float[_sectorCount];
+        _depictedIntensities = new float[_sectorCount];
         _radarRange = _radarDetector.radius;
         //_rb = GetComponent<Rigidbody2D>();
         _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
         _uiCon = FindObjectOfType<UI_Controller>();
-        _rs = _uiCon.GetRadarScreen();
         PopulateSectorIntensitieswithZero();
     }   
 
     private void PopulateSectorIntensitieswithZero()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _sectorCount; i++)
         {
-            _sectorIntensities.Add(i, 0);
+            _actualIntensities[i] = 0;
+            _depictedIntensities[i] = 0;
+            //_sectorIntensities.Add(i, 0);
         }
     }
     #endregion
 
     void Update()
     {
-        _timeSinceLastScan += Time.deltaTime;
-        if (_timeSinceLastScan >= _timeBetweenScans)
+        if (Time.time >= _timeForNextScan)
         {
+            //DrainIntensityFromSectors();
             Scan();
-            _timeSinceLastScan = 0;
+            _timeForNextScan = Time.time + _timeBetweenScans;
+        }
+
+        MoveCurrentIntensityToActualIntensity();
+        PushSectorIntensityToRadarScreen();
+    }
+
+    private void DrainIntensityFromSectors()
+    {
+        for (int i = 0; i < _sectorCount; i++)
+        {
+            _actualIntensities[i] -= _signalFadeRate*_timeBetweenScans;
+            _actualIntensities[i] = Mathf.Clamp(_actualIntensities[i],
+                0, 100f);
+            //_sectorIntensities.Add(i, 0);
         }
     }
 
@@ -66,14 +88,13 @@ public class Radar : MonoBehaviour
         InjectRandomNoiseToRandomSector();
         ClampIntensityLevelFloorToSelfNoiseInEachSector();
 
-        PushSectorIntensityToRadarScreen();
     }
 
     private void ResetSectorIntensityToZero()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _sectorCount; i++)
         {
-            _sectorIntensities[i] = 0;
+            _actualIntensities[i] = 0;
         }
     }
 
@@ -83,7 +104,7 @@ public class Radar : MonoBehaviour
         {
             int sector = DetermineSector(target);
             float signalIntensity = DetermineSignalIntensity(target);
-            _sectorIntensities[sector] = _sectorIntensities[sector] + signalIntensity;
+            _actualIntensities[sector] += signalIntensity;
         }
 
     }
@@ -103,13 +124,13 @@ public class Radar : MonoBehaviour
         float approxSector = (signedAngFromNorth / 45);
         int sector = Mathf.RoundToInt(approxSector);
 
-        if (sector >= 8)
+        if (sector >= _sectorCount)
         {
             sector = 0;
         }
         if (sector < 0)
         {
-            sector = 7;
+            sector = _sectorCount-1;
         }
 
         return sector;
@@ -123,18 +144,29 @@ public class Radar : MonoBehaviour
     }
     private void InjectRandomNoiseToRandomSector()
     {
-        int randSector = UnityEngine.Random.Range(0, 7);
+        int randSector = UnityEngine.Random.Range(0, _sectorCount);
         float randNoise = UnityEngine.Random.Range(0, _maxRandomNoise);
-        _sectorIntensities[randSector] += randNoise;
+        _actualIntensities[randSector] += randNoise;
     }
     private float DetermineSignalIntensity(RadarProfileHandler target)
     {
         if (target == null) { return 0; }
         float dist = (target.transform.position - transform.position).magnitude;
-        double dist_normalized = dist / _radarRange;
+        double distanceFactor = 1 - (dist / _radarRange);
 
-        ///complicate dbit o comment?
-        double intensity = target.CurrentRadarProfile / Math.Pow(dist_normalized,2f) * _signalFudge;
+        ///intensity is strength / (dist); inverse linear function.
+        //ex: 100 profile at distanceFactor 0 should be 0.0;
+        //ex: 100 profile at distanceFactor 0.25 should be .75
+        //ex: 100 profile at distanceFactor 0.5 (and higher) should be 1.0;
+
+        //ex: 50 profile at distanceFactor 0.25 should be 0.25;
+        //ex: 50 profile at distanceFactor 0.5 should 0.5;
+        //ex: 50 profile at distanceFactor 0.75 should be .75
+
+        //ex: 10 profile at distanceFactor 0.5 should be 0.1;
+
+        //so, half distance should be true reflection of actual profile. closer increases signal.
+        double intensity = (target.CurrentRadarProfile / 50f) * (distanceFactor);
         return (float)intensity;
 
     }
@@ -143,24 +175,35 @@ public class Radar : MonoBehaviour
     {
         //SelfProfile = _rb.velocity.magnitude / _stealthFactor;
         float selfProfileFactor = _radarProfileHandler.CurrentRadarProfileFactor;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _sectorCount; i++)
         {
-            _sectorIntensities[i] = Mathf.Clamp(_sectorIntensities[i], selfProfileFactor, 1);
+            _actualIntensities[i] =
+                Mathf.Clamp(_actualIntensities[i], selfProfileFactor, 1);
         }
 
+    }
+
+    private void MoveCurrentIntensityToActualIntensity()
+    {
+        for (int i = 0; i < _actualIntensities.Length; i++)
+        {
+            _depictedIntensities[i] = Mathf.MoveTowards(_depictedIntensities[i],
+                _actualIntensities[i], _signalFadeRate * Time.deltaTime);
+        }
     }
 
     private void PushSectorIntensityToRadarScreen()
     {
-        for (int i = 0; i < _sectorIntensities.Count; i++)
-        {
-            _rs.AssignCurrentIntensityToEachSector(i, _sectorIntensities[i]);
-        }
+        _uiCon.UpdateRadar(_depictedIntensities);
+        //for (int i = 0; i < _sectorCount; i++)
+        //{
+        //    _rs.AssignCurrentIntensityToEachSector(i, _sectorIntensitiesAsArray[i]);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 13)
+        if (collision.gameObject.layer == _radarProfileLayer)
         {
             _radarTargets.Add(collision.GetComponent<RadarProfileHandler>());
         }
@@ -168,7 +211,7 @@ public class Radar : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 13)
+        if (collision.gameObject.layer == _radarProfileLayer)
         {
             RadarProfileHandler rph = collision.GetComponent<RadarProfileHandler>();
             if (_radarTargets.Contains(rph))

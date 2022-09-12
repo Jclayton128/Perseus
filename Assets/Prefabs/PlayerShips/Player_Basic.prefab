@@ -1324,10 +1324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radarDetector: {fileID: 1361761980}
   _radarTargets: []
-  _timeBetweenScans: 0.5
+  _timeBetweenScans: 0.3
   _radarAccuracy: 30
-  _signalFudge: 0.01125
+  _signalFudge: 0.01
   _maxRandomNoise: 0.1
+  _signalFadeRate: 0.3
 --- !u!114 &1449635983045557181
 MonoBehaviour:
   m_ObjectHideFlags: 0

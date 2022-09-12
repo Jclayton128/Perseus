@@ -58,9 +58,6 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] TextMeshProUGUI _scanCounterTMP = null;
 
 
-
-    [SerializeField] RadarScreen _radarScreen = null;
-
     [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] Image _scrapBarFill = null;
 
@@ -136,6 +133,9 @@ public class UI_Controller : MonoBehaviour
 
     [FoldoutGroup("Meta Menu")]
     [SerializeField] Image[] _shipChoiceOptionImages = null;
+
+    [FoldoutGroup("Radar")]
+    [SerializeField] RadarSector[] _radarSectors = null;
 
     #endregion
 
@@ -733,6 +733,23 @@ public class UI_Controller : MonoBehaviour
 
     #endregion
 
+    #region Radar
+
+    public void UpdateRadar(float[] intensities)
+    {
+        if (intensities.Length != _radarSectors.Length)
+        {
+            Debug.LogError("Count mismatch for radar sectors!");
+            return;
+        }
+        for (int i = 0; i < intensities.Length; i++)
+        {
+            _radarSectors[i].SetIntensityLevel(intensities[i]);
+        }
+    }
+
+    #endregion
+
     #region Public Gets
     public int GetMaxSystems()
     {
@@ -743,13 +760,7 @@ public class UI_Controller : MonoBehaviour
     {
         return _secondaryWeaponIcons.Length;
     }
-
-    public RadarScreen GetRadarScreen()
-    {
-        return _radarScreen;
-    }
-
-    
+   
 
     #endregion
 }
