@@ -119,7 +119,6 @@ public class Radar : MonoBehaviour
         }
 
         signedAngFromNorth = InjectRandomSignalSpread(signedAngFromNorth);
-        // signedAngFromNorth += GetRandomSignalSpread();
 
         float approxSector = (signedAngFromNorth / 45);
         int sector = Mathf.RoundToInt(approxSector);
