@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActorMovement : MonoBehaviour
 {
     InputController _inputCon;
+    EnergyHandler _hostEnergyHandler;
     Rigidbody2D _rb;
     [SerializeField] ParticleSystem[] _engineParticles = null;
     RadarProfileHandler _radarProfileHandler;
@@ -21,17 +22,23 @@ public class ActorMovement : MonoBehaviour
     public Vector3 DesiredSteering;
 
     [SerializeField] float _thrust;
-    [SerializeField] float _mass;
     [SerializeField] float _turnRate;
 
     /// <summary>
     /// This much Profile is added to an actor's profile every second while thrusting.
     /// </summary>
-    float _thrustProfileIncreaseRate = 15f; 
+    float _thrustProfileIncreaseRate = 15f;
+
+    /// <summary>
+    /// This is how much energy gets drained per second of thrusting. Normally zero;
+    /// </summary>
+    float _thrustEnergyCostRate = 0; 
+
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _hostEnergyHandler = GetComponent<EnergyHandler>();
         if (IsPlayer)
         {
             _inputCon = FindObjectOfType<InputController>();
@@ -40,6 +47,7 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnDecelBegin += HandleBeginDecelerating;
             _inputCon.OnDecelEnd += HandleStopDecelerating;
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
+            
         }
         
     }
@@ -70,12 +78,17 @@ public class ActorMovement : MonoBehaviour
     {
         if (ShouldAccelerate)
         {
-            _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
-            _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
+            if (_hostEnergyHandler.CheckEnergy(_thrustEnergyCostRate))
+            {
+                _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+                _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
+                _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate * Time.fixedDeltaTime);
+            }
+
         }
         if (ShouldDecelerate)
         {
-            _rb.drag = _thrust / _mass / 50f;
+            _rb.drag = _thrust / 100f;
         }
         if (!ShouldDecelerate)
         {
@@ -142,15 +155,25 @@ public class ActorMovement : MonoBehaviour
         _thrust += amountToAdd;
     }
 
-    public void ModifyMass(float amountToAdd)
-    {
-        _mass += amountToAdd;
-        _rb.mass = _mass;
-    }
+    //public void ModifyMass(float amountToAdd)
+    //{
+    //    _mass += amountToAdd;
+    //    _rb.mass = _mass;
+    //}
 
     public void ModifyTurnRate(float amountToAdd)
     {
         _turnRate += amountToAdd;
+    }
+
+    public void SetThrustEnergyCost(float newThrustCost)
+    {
+        _thrustEnergyCostRate = newThrustCost;
+    }
+
+    public void ModifyThrustEnergyCost(float amountToAdd)
+    {
+        _thrustEnergyCostRate += amountToAdd;
     }
 
     #endregion

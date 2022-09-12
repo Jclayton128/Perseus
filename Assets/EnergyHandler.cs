@@ -49,6 +49,11 @@ public class EnergyHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns TRUE if there is enough energy in reserve to cover the expense, else FALSE.
+    /// </summary>
+    /// <param name="prospectiveEnergyExpense"></param>
+    /// <returns></returns>
     public bool CheckEnergy(float prospectiveEnergyExpense)
     {
         if (CurrentEnergy < prospectiveEnergyExpense)

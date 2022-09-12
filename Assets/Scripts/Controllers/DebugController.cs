@@ -176,21 +176,21 @@ public class DebugController : MonoBehaviour
         _playerPH.ModifyThrust(-20f);
 
     }
-    public void HandleMoreMass()
-    {
-        if (_playerPH == null)
-            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
+    //public void HandleMoreMass()
+    //{
+    //    if (_playerPH == null)
+    //        _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
-        _playerPH.ModifyMass(2f);
+    //    _playerPH.ModifyMass(2f);
 
-    }
-    public void HandleLessMass()
-    {
-        if (_playerPH == null)
-            _playerPH = _gameController.Player.GetComponent<ActorMovement>();
+    //}
+    //public void HandleLessMass()
+    //{
+    //    if (_playerPH == null)
+    //        _playerPH = _gameController.Player.GetComponent<ActorMovement>();
 
-        _playerPH.ModifyMass(-2f);
-    }
+    //    _playerPH.ModifyMass(-2f);
+    //}
     public void HandleMoreTurnRate()
     {
         if (_playerPH == null)
