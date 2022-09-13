@@ -176,5 +176,22 @@ public class ActorMovement : MonoBehaviour
         _thrustEnergyCostRate += amountToAdd;
     }
 
+    public Color SwapParticleColor(Color newColor)
+    {
+        Color oldColor = Color.red;
+        foreach (var ep in _engineParticles)
+        {
+            ParticleSystem.MainModule main = ep.main;
+            oldColor = main.startColor.color;
+            main.startColor = newColor;
+        }
+        return oldColor;
+    }
+
+    public void ModifyThrustProfileIncreaseRate(float amountToAdd)
+    {
+        _thrustProfileIncreaseRate += amountToAdd;
+    }
+
     #endregion
 }
