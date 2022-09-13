@@ -72,6 +72,8 @@ public class ArcherTurretWH : WeaponHandler
             ProjectileBrain.DeathBehaviour.Fizzle, _chargeLevel*2f, -1, dp, Vector3.zero);
         pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + pb.transform.up * _shotSpeed;
 
+        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 

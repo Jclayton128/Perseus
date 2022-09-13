@@ -17,6 +17,7 @@ public class SystemIconDriver : MonoBehaviour
     [SerializeField] SystemHandler _heldSystem;
     [SerializeField] protected TextMeshProUGUI _parameterTMP = null;
     [SerializeField] protected Image _parameterImageBar = null;
+    [SerializeField] protected Image[] _parametersChargesImages = null;
 
     public virtual void Initialize()
     {
@@ -40,31 +41,60 @@ public class SystemIconDriver : MonoBehaviour
             _parameterImageBar.color = Color.white;
             _parameterTMP.gameObject.SetActive(false);
             _parameterTMP.text = "";
+            foreach (var im in _parametersChargesImages)
+            {
+                im.gameObject.SetActive(false);
+            }
             return;
         }
 
-        if (uiType is string)
+        if (uiType is string str)
         {
             _parameterImageBar.transform.parent.gameObject.SetActive(false);
             _parameterTMP.gameObject.SetActive(true);
-            _parameterTMP.text = (string)uiType;
+            _parameterTMP.text = str;
+            foreach (var im in _parametersChargesImages)
+            {
+                im.gameObject.SetActive(false);
+            }
             return;
         }
 
-        if (uiType is float)
+        if (uiType is float flt)
         {
             _parameterImageBar.transform.parent.gameObject.SetActive(true);
-            _parameterImageBar.fillAmount = (float)uiType;
-
+            _parameterImageBar.fillAmount = flt;
             _parameterTMP.gameObject.SetActive(false);
-
+            foreach (var im in _parametersChargesImages)
+            {
+                im.gameObject.SetActive(false);
+            }
             return;
         }
 
-        if (uiType is Vector2Int)
+        if (uiType is Vector2Int v2i)
         {
-            //TODO implement a discrete set of pips to show charges remaining of something
-            //This would be used for the Mega Revolver weapon (ie, 3 shots total, 1 left).
+            _parameterImageBar.transform.parent.gameObject.SetActive(false);
+            _parameterImageBar.color = Color.white;
+            _parameterTMP.gameObject.SetActive(false);
+            _parameterTMP.text = "";
+            if (v2i.y > _parametersChargesImages.Length)
+            {
+                Debug.LogError("More charges than UI space!");
+                return;
+            }
+
+            for (int i = 0; i < v2i.y; i++)
+            {
+                _parametersChargesImages[i].gameObject.SetActive(true);
+                _parametersChargesImages[i].color = Color.red;
+            }
+
+            for (int j = 0; j < v2i.x; j++)
+            {
+                _parametersChargesImages[j].color = Color.green;
+            }
+
         }
 
     }
@@ -109,6 +139,20 @@ public class SystemIconDriver : MonoBehaviour
     {
         _parameterImageBar.fillAmount = factor;
         _parameterImageBar.color = color;
+    }
+
+    public void UpdateUI(Vector2Int v2i)
+    {
+        for (int i = 0; i < v2i.y; i++)
+        {
+            _parametersChargesImages[i].gameObject.SetActive(true);
+            _parametersChargesImages[i].color = Color.red;
+        }
+
+        for (int j = 0; j < v2i.x; j++)
+        {
+            _parametersChargesImages[j].color = Color.green;
+        }
     }
 
 

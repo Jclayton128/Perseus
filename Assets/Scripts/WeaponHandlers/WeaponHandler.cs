@@ -217,8 +217,8 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     #region Universal Weapon Methods
 
     /// <summary>
-    /// Returning a string sets up the Icon Driver to show a string. Float: Charge Bar. Int: 
-    /// Series of pips for discrete counts of things.
+    /// Returning a string sets up the Icon Driver to show a string. Float: Charge Bar. Vec2Int: 
+    /// Series of pips for discrete counts of things (current/max).
     /// </summary>
     /// <returns></returns>
     public abstract object GetUIStatus();

@@ -25,6 +25,7 @@ public class DebugController : MonoBehaviour
     [SerializeField] Toggle[] _systemToggles_RightInt = null;
 
     [SerializeField] TextMeshProUGUI[] _spawnCrateButtonLabels = null;
+    [SerializeField] TextMeshProUGUI[] _spawnWeaponCrateButtonLabels = null;
 
     [SerializeField] Toggle[] _weaponToggles = null;
 
@@ -157,6 +158,13 @@ public class DebugController : MonoBehaviour
             if (i >= allSystems.Length) break;
             _spawnCrateButtonLabels[i].text = allSystems[i].GetName();
         }
+
+        WeaponHandler[] allWeapons = _systemsLibrary.GetAllWeaponHandlers_Debug();
+        for (int j = 0; j < _spawnWeaponCrateButtonLabels.Length; j++)
+        {
+            if (j >= allWeapons.Length) break;
+            _spawnWeaponCrateButtonLabels[j].text = allWeapons[j].GetName();
+        }
     }
 
     #region Ship Changes
@@ -222,135 +230,142 @@ public class DebugController : MonoBehaviour
     {
         SystemHandler[] allsystems = _systemsLibrary.GetAllSystemHandlers_Debug();
         SystemHandler sh = allsystems[index];
-        _levelController.SpawnSpecificSystemCrateNearPlayer(sh.SystemType);
+        _levelController.SpawnSpecificCrateNearPlayer(sh.SystemType);
+    }
+
+    public void SpawnWeaponByIndex(int index)
+    {
+        WeaponHandler[] allweapons = _systemsLibrary.GetAllWeaponHandlers_Debug();
+        WeaponHandler weapon = allweapons[index];
+        _levelController.SpawnSpecificCrateNearPlayer(weapon.WeaponType);
     }
     
     #region System Toggles
-    public void HandleSystemToggle_Engine(int index)
-    {
-        if (_systemToggles_Engine[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Engine, index))
-            {
-                _systemToggles_Engine[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Engine, index);
-        }
-    }
-    public void HandleSystemToggle_Cockpit(int index)
-    {
-        if (_systemToggles_Cockpit[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index))
-            {
-                _systemToggles_Cockpit[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index);
-        }
-    }
-    public void HandleSystemToggle_Tail(int index)
-    {
-        if (_systemToggles_Tail[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Tail, index))
-            {
-                _systemToggles_Tail[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Tail, index);
-        }
-    }
-    public void HandleSystemToggle_Wings(int index)
-    {
-        if (_systemToggles_Wings[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Wings, index))
-            {
-                _systemToggles_Wings[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Wings, index);
-        }
-    }
-    public void HandleSystemToggle_Hull(int index)
-    {
-        if (_systemToggles_Hull[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Hull, index))
-            {
-                _systemToggles_Hull[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Hull, index);
-        }
-    }
-    public void HandleSystemToggle_LeftInt(int index)
-    {
-        if (_systemToggles_LeftInt[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index))
-            {
-                _systemToggles_LeftInt[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index);
-        }
-    }
-    public void HandleSystemToggle_RightInt(int index)
-    {
-        if (_systemToggles_RightInt[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.RightInt, index))
-            {
-                _systemToggles_RightInt[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.RightInt, index);
-        }
-    }
+    //public void HandleSystemToggle_Engine(int index)
+    //{
+    //    if (_systemToggles_Engine[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Engine, index))
+    //        {
+    //            _systemToggles_Engine[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Engine, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_Cockpit(int index)
+    //{
+    //    if (_systemToggles_Cockpit[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index))
+    //        {
+    //            _systemToggles_Cockpit[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Cockpit, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_Tail(int index)
+    //{
+    //    if (_systemToggles_Tail[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Tail, index))
+    //        {
+    //            _systemToggles_Tail[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Tail, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_Wings(int index)
+    //{
+    //    if (_systemToggles_Wings[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Wings, index))
+    //        {
+    //            _systemToggles_Wings[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Wings, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_Hull(int index)
+    //{
+    //    if (_systemToggles_Hull[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.Hull, index))
+    //        {
+    //            _systemToggles_Hull[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.Hull, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_LeftInt(int index)
+    //{
+    //    if (_systemToggles_LeftInt[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index))
+    //        {
+    //            _systemToggles_LeftInt[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.LeftInt, index);
+    //    }
+    //}
+    //public void HandleSystemToggle_RightInt(int index)
+    //{
+    //    if (_systemToggles_RightInt[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainSystem(SystemWeaponLibrary.SystemLocation.RightInt, index))
+    //        {
+    //            _systemToggles_RightInt[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveSystem(SystemWeaponLibrary.SystemLocation.RightInt, index);
+    //    }
+    //}
 
     #endregion
 
     #region Weapon Toggles
-    public void HandleWeaponToggle(int index)
-    { 
-        if (_weaponToggles[index].isOn)
-        {
-            if (!_playerSystemsHandler.Debug_TryGainWeapon(index))
-            {
-                _weaponToggles[index].isOn = false;
-                return;
-            }
-        }
-        else
-        {
-            _playerSystemsHandler.RemoveWeapon(_systemsLibrary.GetWeapon(index).
-                GetComponent<WeaponHandler>().WeaponType);
-        }
-    }
+    //public void HandleWeaponToggle(int index)
+    //{ 
+    //    if (_weaponToggles[index].isOn)
+    //    {
+    //        if (!_playerSystemsHandler.Debug_TryGainWeapon(index))
+    //        {
+    //            _weaponToggles[index].isOn = false;
+    //            return;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _playerSystemsHandler.RemoveWeapon(_systemsLibrary.GetWeapon(index).
+    //            GetComponent<WeaponHandler>().WeaponType);
+    //    }
+    //}
 
     #endregion
 

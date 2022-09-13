@@ -272,7 +272,7 @@ public class LevelController : MonoBehaviour
 
     #region Crate Spawning
 
-    public void SpawnSpecificSystemCrateNearPlayer(SystemWeaponLibrary.SystemType systemType)
+    public void SpawnSpecificCrateNearPlayer(SystemWeaponLibrary.SystemType systemType)
     {
         Destroy(_crateOnLevel);
 
@@ -284,46 +284,64 @@ public class LevelController : MonoBehaviour
 
         Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
         go.transform.position = _gameController.Player.transform.position + offset;
+
+        _crateOnLevel = go;
     }
 
-    [ContextMenu("Spawn Weapon Crate Near Player")]
-    public void SpawnRandomWeaponCrateNearPlayer()
+    public void SpawnSpecificCrateNearPlayer(SystemWeaponLibrary.WeaponType weaponType)
     {
-     
-        List<SystemWeaponLibrary.WeaponType> weaponsAlreadyInstalled =
-            _playerSystemHandler.GetSecondaryWeaponTypesOnBoard();
-
-        SystemWeaponLibrary.WeaponType weaponInCrate =
-            _systemWeaponLibrary.GetRandomUninstalledSecondaryWeaponType(weaponsAlreadyInstalled);
+        Destroy(_crateOnLevel);
 
         GameObject go = Instantiate(_cratePrefab);
-        Sprite icon = _systemWeaponLibrary.GetIcon(weaponInCrate);
-        string crateName = _systemWeaponLibrary.GetName(weaponInCrate);
-        go.GetComponent<SystemCrateHandler>().Initialize(
-            icon, weaponInCrate, SystemWeaponLibrary.SystemType.None, crateName);
+        Sprite icon = _systemWeaponLibrary.GetIcon(weaponType);
+        string crateName = _systemWeaponLibrary.GetName(weaponType);
+        go.GetComponent<SystemCrateHandler>().Initialize(icon,
+            weaponType, SystemWeaponLibrary.SystemType.None, crateName);
 
         Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
         go.transform.position = _gameController.Player.transform.position + offset;
+
+        _crateOnLevel = go;
     }
 
-    [ContextMenu("Spawn System Crate Near Player")]
-    public void SpawnRandomSystemCrateNearPlayer()
-    {
-        List<SystemWeaponLibrary.SystemType> systemsAlreadyInstalled =
-            _playerSystemHandler.GetSystemTypesOnBoard();
+    //[ContextMenu("Spawn Weapon Crate Near Player")]
+    //public void SpawnRandomWeaponCrateNearPlayer()
+    //{
 
-        SystemWeaponLibrary.SystemType systemInCrate =
-            _systemWeaponLibrary.GetRandomUninstalledSystemType(systemsAlreadyInstalled);
+    //    List<SystemWeaponLibrary.WeaponType> weaponsAlreadyInstalled =
+    //        _playerSystemHandler.GetSecondaryWeaponTypesOnBoard();
 
-        GameObject go = Instantiate(_cratePrefab);
-        Sprite icon = _systemWeaponLibrary.GetIcon(systemInCrate);
-        string crateName = _systemWeaponLibrary.GetName(systemInCrate);
-        go.GetComponent<SystemCrateHandler>().Initialize(icon, 
-            SystemWeaponLibrary.WeaponType.None, systemInCrate, crateName);
+    //    SystemWeaponLibrary.WeaponType weaponInCrate =
+    //        _systemWeaponLibrary.GetRandomUninstalledSecondaryWeaponType(weaponsAlreadyInstalled);
 
-        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
-        go.transform.position = _gameController.Player.transform.position + offset;
-    }
+    //    GameObject go = Instantiate(_cratePrefab);
+    //    Sprite icon = _systemWeaponLibrary.GetIcon(weaponInCrate);
+    //    string crateName = _systemWeaponLibrary.GetName(weaponInCrate);
+    //    go.GetComponent<SystemCrateHandler>().Initialize(
+    //        icon, weaponInCrate, SystemWeaponLibrary.SystemType.None, crateName);
+
+    //    Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+    //    go.transform.position = _gameController.Player.transform.position + offset;
+    //}
+
+    //[ContextMenu("Spawn System Crate Near Player")]
+    //public void SpawnRandomSystemCrateNearPlayer()
+    //{
+    //    List<SystemWeaponLibrary.SystemType> systemsAlreadyInstalled =
+    //        _playerSystemHandler.GetSystemTypesOnBoard();
+
+    //    SystemWeaponLibrary.SystemType systemInCrate =
+    //        _systemWeaponLibrary.GetRandomUninstalledSystemType(systemsAlreadyInstalled);
+
+    //    GameObject go = Instantiate(_cratePrefab);
+    //    Sprite icon = _systemWeaponLibrary.GetIcon(systemInCrate);
+    //    string crateName = _systemWeaponLibrary.GetName(systemInCrate);
+    //    go.GetComponent<SystemCrateHandler>().Initialize(icon, 
+    //        SystemWeaponLibrary.WeaponType.None, systemInCrate, crateName);
+
+    //    Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+    //    go.transform.position = _gameController.Player.transform.position + offset;
+    //}
 
 
     #endregion

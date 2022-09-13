@@ -105,6 +105,7 @@ public class HealthHandler : MonoBehaviour
         if (!_movement.IsPlayer)
         {
             Vector2 dir = UnityEngine.Random.onUnitSphere;
+            Debug.Log($"should spawn {_scrapValue} scraps");
             _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
         }
 
