@@ -10,7 +10,7 @@ public class ProjectileBrain : MonoBehaviour
     
     public enum PType //Each PType must unique to a single weapon, even if different PTypes look similar/same
     {
-        PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerPopRocket3, Player4,
+        PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerPopRocket3, PlayerCannon4,
         Player5, Player6, Player7, Player8, Player9,
         EnemyBolt10, Enemy11, Enemy12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19

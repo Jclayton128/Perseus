@@ -266,7 +266,7 @@ MonoBehaviour:
     levels, limiting it to a short battles.
   _upgradeDescription: Upgrading grants more shots per warp.
   WeaponType: 10
-  _projectileType: 0
+  _projectileType: 4
   _normalDamage: 15
   _shieldBonusDamage: 5
   _ionDamage: 0
