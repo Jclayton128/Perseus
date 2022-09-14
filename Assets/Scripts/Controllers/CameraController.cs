@@ -17,6 +17,11 @@ public class CameraController : MonoBehaviour
         _cvc.Follow = target;
     }
 
+    public void ModifyCameraFOV(float FOVtoAdd)
+    {
+        _cvc.m_Lens.FieldOfView += FOVtoAdd;
+    }
+
     //private void Start()
     //{        
     //    Vector2 resTarget = new Vector2(960f, 960f);

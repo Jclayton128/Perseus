@@ -219,4 +219,15 @@ public class Radar : MonoBehaviour
             }
         }
     }
+
+    public void ModifyRadarRange(float radiusToAdd)
+    {
+        _radarDetector.radius += radiusToAdd;
+    }
+
+    public void ModifyArrivalError(float errorToAdd)
+    {
+        _radarAccuracy += errorToAdd;
+        _radarAccuracy = Mathf.Clamp(_radarAccuracy, 0, 360f);
+    }
 }

@@ -262,8 +262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1359f2765ee69f247888bcc250a0922c, type: 3}
   _name: Revolver
-  _description: This wickedly powerful cannon only recharges when warping between
-    levels, limiting it to a short battles.
+  _description: This powerful cannon only recharges when warping between levels,
+    limiting it to a short battles.
   _upgradeDescription: Upgrading grants more shots per warp.
   WeaponType: 10
   _projectileType: 4
