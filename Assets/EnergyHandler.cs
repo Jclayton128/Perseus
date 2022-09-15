@@ -71,5 +71,14 @@ public class EnergyHandler : MonoBehaviour
         CurrentEnergy -= energySpent;
     }
 
+    #region System Modifiers
+
+    public void ModifyEnergyRegenRate(float rateToAdd)
+    {
+        _energyGainRate += rateToAdd;
+    }
+
+    #endregion
+
 
 }

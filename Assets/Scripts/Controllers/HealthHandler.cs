@@ -249,6 +249,17 @@ public class HealthHandler : MonoBehaviour
         _UIController?.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
     }
 
+    /// <summary>
+    /// Increase both the maximum hull level and current hull level by this much.
+    /// </summary>
+    /// <param name="hullAddition"></param>
+    public void AdjustHullMaximumAndCurrent(float hullAddition)
+    {
+        _maxHullPoints += hullAddition;
+        HullPoints += hullAddition;
+        _UIController?.UpdateHullBar(HullPoints, _maxHullPoints);
+    }
+
     #endregion
 
     #region Public Gets

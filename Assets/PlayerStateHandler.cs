@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,16 @@ public class PlayerStateHandler : MonoBehaviour
     GameController _gameController;
     InputController _inputController;
 
+    HealthHandler _healthHandler;
+    EnergyHandler _energyHandler;
+
     //Settings
-    int _scrapsPerLevelMod = 2; //15;
+    int _scrapsPerLevelMod = 10;
     float _timeBetweenUpgradeMenuToggles = 0.9f; // Should be the same as the time to deploy the menu
+    
+    [SerializeField] float _shieldGainOnLevelUp = 1f;
+    [SerializeField] float _hullGainOnLevelUp = 1f;
+    [SerializeField] float _energyGainOnLevelUp = 2f;
 
     //State
     int _scrapCollected = 0;
@@ -36,6 +44,9 @@ public class PlayerStateHandler : MonoBehaviour
 
         _gameController = _uiController.GetComponent<GameController>();
         _scrapNeededForNextUpgradeLevel = _scrapsPerLevelMod;
+
+        _energyHandler = GetComponent<EnergyHandler>();
+        _healthHandler = GetComponent<HealthHandler>();
     }
 
  
@@ -85,17 +96,31 @@ public class PlayerStateHandler : MonoBehaviour
         _scrapCollected += amountToGain;
         if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
         {
-            int overage = _scrapCollected - _scrapNeededForNextUpgradeLevel;
-            _currentUpgradePoints++;
-            _scrapCollected = overage;
-            
-            _uiController.ShowHideTAB(true);
-            _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
-            _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
+            GainUpgradePointViaScrapPickup();
         }
 
         _scrapFactor = (float)_scrapCollected / (float)_scrapNeededForNextUpgradeLevel;
         _uiController.ModifyScrapAmount(_scrapFactor, _scrapCollected);
+    }
+
+    private void GainUpgradePointViaScrapPickup()
+    {
+        int overage = _scrapCollected - _scrapNeededForNextUpgradeLevel;
+        _currentUpgradePoints++;
+        _scrapCollected = overage;
+
+        _uiController.ShowHideTAB(true);
+        _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
+        _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
+
+        ImplementLevelUpBenefits();
+    }
+
+    private void ImplementLevelUpBenefits()
+    {
+        _healthHandler.AdjustShieldMaximum(_shieldGainOnLevelUp);
+        _healthHandler.AdjustHullMaximumAndCurrent(_hullGainOnLevelUp);
+        _energyHandler.ModifyEnergyRegenRate(_energyGainOnLevelUp);
     }
 
     public bool CheckUpgradePoints(int cost)
