@@ -560,9 +560,19 @@ public class UI_Controller : MonoBehaviour
 
     public void UpdateScanner(Sprite icon, string crateName, string counterStatus)
     {
-        _scanImage.color = Color.white;
-        _scanImage.sprite = icon;
-        _scanNameTMP.text = crateName;
+
+        if (icon)
+        {
+            _scanImage.sprite = icon;
+            _scanImage.color = Color.white;
+        } 
+        else _scanImage.color = Color.clear;
+
+        if (crateName != null)
+        {
+            _scanNameTMP.text = crateName;
+        }
+
         _scanCounterTMP.text = counterStatus;
     }
 

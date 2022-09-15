@@ -51,33 +51,38 @@ public class Scanner : MonoBehaviour
 
     private void PushScannedObjectToUI()
     {
-        string currentName = _scannablesInRange[_indexOfCurrentScan].ScanName();
-        Sprite currentIcon = _scannablesInRange[_indexOfCurrentScan].ScanIcon();
         string counterStatus;
         if (_indexOfCurrentScan >= 0)
         {
+            string currentName = _scannablesInRange[_indexOfCurrentScan].ScanName();
+            Sprite currentIcon = _scannablesInRange[_indexOfCurrentScan].ScanIcon();
+
             counterStatus = $"{_indexOfCurrentScan + 1} of {_scannablesInRange.Count}";
+            _uiController.UpdateScanner(currentIcon, currentName, counterStatus);
+
+            if (_scannablesInRange[_indexOfCurrentScan] is SystemCrateHandler sch)
+            {
+                if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
+                {
+                    IInstallable crate = _systemWeaponLibrary.GetWeaponHandler(sch.WeaponInCrate);
+                    _uiController.UpdateCrateScannerSelectable(crate);
+                }
+
+                if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
+                {
+                    IInstallable crate = _systemWeaponLibrary.GetSystemHandler(sch.SystemInCrate);
+                    _uiController.UpdateCrateScannerSelectable(crate);
+                }
+            }
         }
         else
         {
             counterStatus = "";
+            _uiController.UpdateScanner(null, null, counterStatus);
         }
-        _uiController.UpdateScanner(currentIcon, currentName, counterStatus);
 
-        if (_scannablesInRange[_indexOfCurrentScan] is SystemCrateHandler sch)
-        {
-            if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
-            {
-                IInstallable crate = _systemWeaponLibrary.GetWeaponHandler(sch.WeaponInCrate);
-                _uiController.UpdateCrateScannerSelectable(crate);
-            }
 
-            if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
-            {
-                IInstallable crate = _systemWeaponLibrary.GetSystemHandler(sch.SystemInCrate);
-                _uiController.UpdateCrateScannerSelectable(crate);
-            }
-        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -116,6 +121,18 @@ public class Scanner : MonoBehaviour
         _scannablesInRange.RemoveAt(_indexOfCurrentScan);
         Destroy(_scanReticle);
         destroyedThing.DestroyScannable();
+        
+        if (_scannablesInRange.Count > 0)
+        {
+            _indexOfCurrentScan = 0;
+            PushScannedObjectToUI();
+        }
+        else
+        {
+            _indexOfCurrentScan = -1;
+            PushScannedObjectToUI();
+        }
+        
 
     }
 

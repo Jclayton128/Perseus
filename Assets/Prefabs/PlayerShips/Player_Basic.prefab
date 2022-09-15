@@ -1191,6 +1191,10 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: -817384740162021574, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2809415920374471055, guid: ea9812bd4d8df0b428a7ad2b9a044497, type: 3}
       propertyPath: m_Name
       value: Player_Basic

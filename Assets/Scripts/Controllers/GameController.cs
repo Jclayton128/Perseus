@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour
 
     public void SetupNewGame()
     {
+
         //Spawn Player
         //Retract Meta Menu
         //Create First Level
@@ -69,8 +70,8 @@ public class GameController : MonoBehaviour
 
     public void EndGameOnPlayerChoice()
     {
-        _player = null;
         Destroy(_player);
+        _player = null;
         _camCon.FocusCameraOnTarget(null);
         _uiController.DeployMetaMenu();
         PauseGame(1.2f);

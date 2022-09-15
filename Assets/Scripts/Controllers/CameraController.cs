@@ -14,7 +14,15 @@ public class CameraController : MonoBehaviour
 
     public void FocusCameraOnTarget(Transform target)
     {
-        _cvc.Follow = target;
+        if (target == null)
+        {
+            _cvc.Follow = this.transform;
+        }
+        else
+        {
+            _cvc.Follow = target;
+        }
+
     }
 
     public void ModifyCameraFOV(float FOVtoAdd)
