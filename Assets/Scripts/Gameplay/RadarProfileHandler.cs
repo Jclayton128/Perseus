@@ -7,7 +7,10 @@ using System;
 [RequireComponent(typeof(Collider2D))]
 public class RadarProfileHandler : MonoBehaviour
 {
+    SpriteRenderer[] _spriteRenderers;
     CircleCollider2D _radarProfileCollider;
+    
+    //settings
     float _highLevel = 60f; //At high level, this is the radius of the arena, meaning everything sees the player
     float _lowLevel = 0.1f;
     float _changeRate = 10f; //units per second.
@@ -16,6 +19,9 @@ public class RadarProfileHandler : MonoBehaviour
     public float CurrentRadarProfile;
     public float CurrentRadarProfileFactor;
     private float _baseRadarProfile;
+
+    [SerializeField] bool _isCloaked = false;
+    Color halftone = new Color(1, 1, 1, .5f);
 
     /// <summary>
     /// If true, this radar profile never changes size. Used for enemies. If false, it can change size,
@@ -27,10 +33,14 @@ public class RadarProfileHandler : MonoBehaviour
     {
         _radarProfileCollider = GetComponent<CircleCollider2D>();
         _baseRadarProfile = CurrentRadarProfile;
+
+        _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();   
     }
 
     private void Update()
     {
+        if (_isCloaked) return;
+
         UpdateBackToBaseRate();
         if (!_isStaticSized)
         {
@@ -56,8 +66,28 @@ public class RadarProfileHandler : MonoBehaviour
 
     public void AddToCurrentRadarProfile(float profileToAdd)
     {
+        if (_isCloaked) return;
         CurrentRadarProfile += profileToAdd;
         CurrentRadarProfile = Mathf.Clamp(CurrentRadarProfile, _lowLevel, _highLevel);
         CurrentRadarProfileFactor = CurrentRadarProfile / _highLevel;
+    }
+
+    public void Cloak()
+    {
+        _isCloaked = true;
+        CurrentRadarProfile = 0f;
+        foreach (SpriteRenderer sr in _spriteRenderers)
+        {
+            sr.color = halftone;
+        }
+    }
+
+    public void Decloak()
+    {
+        _isCloaked = false;
+        foreach (SpriteRenderer sr in _spriteRenderers)
+        {
+            sr.color = Color.white;
+        }
     }
 }
