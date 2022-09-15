@@ -1314,6 +1314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e73a52520649364aa09105557716ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shieldGainOnLevelUp: 1
+  _hullGainOnLevelUp: 1
+  _energyGainOnLevelUp: 2
 --- !u!114 &2074364254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,8 +1352,11 @@ MonoBehaviour:
   - {fileID: 2291206457893564455}
   - {fileID: 3691665194677790910}
   IsPlayer: 1
+  IsMouseSteering: 1
   ShouldAccelerate: 0
   ShouldDecelerate: 0
+  ShouldTurnLeft: 0
+  ShouldTurnRight: 0
   DesiredSteering: {x: 0, y: 0, z: 0}
   _thrust: 300
   _turnRate: 180

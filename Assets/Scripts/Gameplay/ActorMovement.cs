@@ -16,9 +16,12 @@ public class ActorMovement : MonoBehaviour
 
     //state
     public bool IsPlayer = false;
+    public bool IsMouseSteering = true;
 
     public bool ShouldAccelerate;
     public bool ShouldDecelerate;
+    public bool ShouldTurnLeft;
+    public bool ShouldTurnRight;
     public Vector3 DesiredSteering;
 
     [SerializeField] float _thrust;
@@ -46,6 +49,9 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnAccelEnd += HandleStopAccelerating;
             _inputCon.OnDecelBegin += HandleBeginDecelerating;
             _inputCon.OnDecelEnd += HandleStopDecelerating;
+            _inputCon.OnTurnLeft += HandleTurningLeft;
+            _inputCon.OnTurnRight += HandleTurningRight;
+            _inputCon.OnMSelect += HandleTurnModeToggle;
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
             
         }
@@ -58,7 +64,8 @@ public class ActorMovement : MonoBehaviour
     {
         if (IsPlayer)
         {
-            ConverMouseIntoDesiredSteering();
+            if (IsMouseSteering) ConverMouseIntoDesiredSteering();
+            else UpdateSteering();
         }
     }
 
@@ -67,10 +74,27 @@ public class ActorMovement : MonoBehaviour
         DesiredSteering = _inputCon.MousePos - transform.position;
     }
 
+    private void UpdateSteering()
+    {
+        if (ShouldTurnLeft)
+        {
+            DesiredSteering = Vector3.RotateTowards(DesiredSteering, -transform.right,
+                _turnRate*Mathf.Deg2Rad * Time.deltaTime, 180f);
+            return;
+        }
+        if (ShouldTurnRight)
+        {
+            DesiredSteering = Vector3.RotateTowards(DesiredSteering, transform.right,
+                _turnRate * Mathf.Deg2Rad * Time.deltaTime, 180f);
+            return;
+        }
+
+    }
+
     private void FixedUpdate()
     {
         UpdateAccelDecel();
-        UpdateMouseTurning();
+        UpdateTurning();        
 
     }
 
@@ -96,7 +120,7 @@ public class ActorMovement : MonoBehaviour
         }
     }
 
-    private void UpdateMouseTurning()
+    private void UpdateTurning()
     {
        
         float angleToTarget = Vector3.SignedAngle(DesiredSteering, transform.up, transform.forward);
@@ -113,7 +137,6 @@ public class ActorMovement : MonoBehaviour
 
         //transform.rotation = Quaternion.LookRotation()
     }
-
 
     #endregion
 
@@ -146,6 +169,25 @@ public class ActorMovement : MonoBehaviour
     {
         ShouldDecelerate = false;
     }
+
+    private void HandleTurningLeft(bool isStartingToTurnLeft)
+    {
+        ShouldTurnLeft = isStartingToTurnLeft;
+        if (isStartingToTurnLeft) ShouldTurnRight = false;
+
+    }
+
+    private void HandleTurningRight(bool isStartingToTurnRight)
+    {
+        ShouldTurnRight = isStartingToTurnRight;
+        if (isStartingToTurnRight) ShouldTurnLeft = false;
+    }
+
+    private void HandleTurnModeToggle()
+    {
+        IsMouseSteering = !IsMouseSteering;
+    }
+
 
     #endregion
 

@@ -9,6 +9,8 @@ public class InputController : MonoBehaviour
     public Action OnAccelEnd;
     public Action OnDecelBegin;
     public Action OnDecelEnd;
+    public Action<bool> OnTurnLeft;
+    public Action<bool> OnTurnRight;
     public Action OnMousePositionMove;
     public Action<int> OnScroll;
     public Action<int> OnMouseDown;
@@ -16,6 +18,7 @@ public class InputController : MonoBehaviour
     public Action OnUpgradeMenuToggled;
     public Action OnScanDecrement;
     public Action OnScanIncrement;
+    public Action OnMSelect;
 
     Ray ray;
     float distance;
@@ -88,6 +91,13 @@ public class InputController : MonoBehaviour
         {
             OnDecelEnd?.Invoke();
         }
+        
+        if (Input.GetKeyDown(KeyCode.A)) OnTurnLeft?.Invoke(true);
+        if (Input.GetKeyUp(KeyCode.A)) OnTurnLeft?.Invoke(false);
+
+        if (Input.GetKeyDown(KeyCode.D)) OnTurnRight?.Invoke(true);
+        if (Input.GetKeyUp(KeyCode.D)) OnTurnRight?.Invoke(false);
+
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             OnUpgradeMenuToggled?.Invoke();
@@ -95,6 +105,8 @@ public class InputController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Q)) OnScanDecrement?.Invoke();
         if (Input.GetKeyDown(KeyCode.E)) OnScanIncrement?.Invoke();
+
+        if (Input.GetKeyDown(KeyCode.M)) OnMSelect?.Invoke();
     }
 
     private void UpdateMouseInput()
