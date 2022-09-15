@@ -45,7 +45,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _playerHandler = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
         _healthHandler = GetComponent<HealthHandler>();
-        _healthHandler.OnReceiveDamagePack += CheckOnboardSystemsForReceivedDamageReaction;
+        _healthHandler.ReceivingHullDamage += CheckOnboardSystemsForReceivedDamageReaction;
 
     }
 

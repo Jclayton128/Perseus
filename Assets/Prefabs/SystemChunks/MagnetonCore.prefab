@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 69
   m_Sprite: {fileID: 21300000, guid: 828cecb2f3e398e4baef5598306c5dfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -152,7 +152,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 68
   m_Sprite: {fileID: 21300000, guid: 043b4c46ca852724a8e5d609b361c638, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -262,8 +262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 5fb0e8b1e87dfee4a9b0b69fedcdbfbf, type: 3}
   _name: Magneton Core
-  _description: Unique Shield Core greatly increase maximum shield level, but reduces
-    shield regen to zero. Shields only regen during warp to new sector.
+  _description: Greatly increase maximum shield level, but reduces shield regen to
+    zero. Shields only regen during warp to new sector.
   _upgradeDescription: Upgrading further increase maximum shield level
   SystemType: 18
   SystemLocation: 5

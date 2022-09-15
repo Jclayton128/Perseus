@@ -14,7 +14,9 @@ public class HealthHandler : MonoBehaviour
     Rigidbody2D _rb;
     UI_Controller _UIController;
 
-    public event System.Action<DamagePack> OnReceiveDamagePack = null;
+    public event System.Action<DamagePack> ReceivingDamagePack = null;
+    public event System.Action<DamagePack> ReceivingShieldDamage = null;
+    public event System.Action<DamagePack> ReceivingHullDamage = null;
 
     #endregion
 
@@ -142,7 +144,7 @@ public class HealthHandler : MonoBehaviour
         ProjectileBrain pb;
         if (weaponImpact.TryGetComponent<ProjectileBrain>(out pb))
         {
-            OnReceiveDamagePack?.Invoke(pb.DamagePack);
+            ReceivingDamagePack?.Invoke(pb.DamagePack);
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
             pb.DecrementPenetrationOnImpact();
         }
@@ -159,12 +161,14 @@ public class HealthHandler : MonoBehaviour
             float carryoverHullDamage = incomingDamage.NormalDamage - 
                     Mathf.Clamp(ShieldPoints - incomingDamage.ShieldBonusDamage, 0 , 999);
 
+            ReceivingShieldDamage?.Invoke(incomingDamage);
             float shieldDamage = incomingDamage.NormalDamage + incomingDamage.ShieldBonusDamage;
             ReceiveShieldDamage(shieldDamage, impactPosition, impactHeading);
-            
-            if (carryoverHullDamage > 0)
+            incomingDamage.NormalDamage = carryoverHullDamage;
+            if (incomingDamage.NormalDamage > 0)
             {
-                ReceiveHullDamage(carryoverHullDamage, incomingDamage.ScrapBonus, impactPosition, impactHeading);
+                ReceivingHullDamage?.Invoke(incomingDamage);
+                ReceiveHullDamage(incomingDamage.NormalDamage, incomingDamage.ScrapBonus, impactPosition, impactHeading);
             }
         }
 
