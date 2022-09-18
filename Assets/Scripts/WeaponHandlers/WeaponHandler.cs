@@ -189,7 +189,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     public (bool,string) CheckIfInstallable()
     {
         (bool, string) outcome;
-        (bool,string) canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainWeapon(this);
+        (bool,string) canInstall = FindObjectOfType<PlayerSystemHandler>().CheckIfCanGainSecondaryWeapon(this);
         
         outcome.Item1 = (canInstall.Item1 && !_isInstalled);
         outcome.Item2 = canInstall.Item2;

@@ -1,0 +1,289 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &568825597256626950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224192949469094795}
+  - component: {fileID: 3035579228460380858}
+  - component: {fileID: 2895815006829263250}
+  m_Layer: 0
+  m_Name: ActualTurret
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224192949469094795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568825597256626950}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.493, y: -0.248, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_Children:
+  - {fileID: 528075328982006342}
+  m_Father: {fileID: 391027060436349402}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3035579228460380858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568825597256626950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _turretTurnRate: 90
+--- !u!212 &2895815006829263250
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568825597256626950}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1587654815
+  m_SortingLayer: 4
+  m_SortingOrder: 61
+  m_Sprite: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.49, y: 0.45}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1543628747912721107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528075328982006342}
+  - component: {fileID: 8799983199885762414}
+  m_Layer: 0
+  m_Name: Muzzle_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528075328982006342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543628747912721107}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.556, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224192949469094795}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8799983199885762414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543628747912721107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706f0645c2aea534ea0882e1e36f9f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &4937677336895057722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: _icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+    - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: WeaponType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: IsSecondary
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: LocalPosition.x
+      value: -0.405
+      objectReference: {fileID: 0}
+    - target: {fileID: 982522037941904301, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: LocalPosition.y
+      value: -0.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615773119955788077, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634286086191686377, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+    - target: {fileID: 5634286086191686377, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+      propertyPath: m_Name
+      value: BeamTurret
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5076610187721481087, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+    - {fileID: 8780457460541004273, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+--- !u!1 &1190160963467541320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+  m_PrefabInstance: {fileID: 4937677336895057722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &391027060436349402 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
+  m_PrefabInstance: {fileID: 4937677336895057722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7298886654218497150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190160963467541320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195d089b8b3758e46a104c5b492a3b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  _name: Beam Turret
+  _description: "Manually-steered turret. Fires an energy beam, causing high shield
+    damage and ionization.\t"
+  _upgradeDescription: Upgrading increases the beam lifetime
+  WeaponType: 11
+  _projectileType: 0
+  _normalDamage: 0
+  _shieldBonusDamage: 4
+  _ionDamage: 2
+  _knockBackAmount: 0
+  _scrapBonus: 0
+  _activationCost: 15
+  _sustainCostRate: 0
+  _profileIncreaseOnActivation: 1
+  _activationSounds: []
+  _firingSounds: []
+  _deactivationSounds: []
+  IsSecondary: 1
+  _isPermanent: 0
+  _maxUpgradeLevel: 5
+  _turretMuzzle: {fileID: 528075328982006342}
+  _maxCharge: 3
+  _maxChargeIncrease_Upgrade: 0.5
+  _beamFX: {fileID: 9093641688725695630, guid: 44b04f2b25e7b334e81fb61f04eb48e0, type: 3}
+  _chargeRate: 1

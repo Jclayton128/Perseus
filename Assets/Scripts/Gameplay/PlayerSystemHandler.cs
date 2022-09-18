@@ -75,10 +75,10 @@ public class PlayerSystemHandler : MonoBehaviour
 
     #region System/Weapon Count Checks
 
-    public (bool, string) CheckIfCanGainWeapon(WeaponHandler wh)
+    public (bool, string) CheckIfCanGainSecondaryWeapon(WeaponHandler wh)
     {
         (bool, string) outcome;
-        if (_weaponsOnBoard.Count >= _maxWeapons)
+        if (_secondaryWeaponsOnBoard.Count >= _maxWeapons)
         {
             Debug.LogError("unable to hold any more weapons");
             outcome.Item1 = false;

@@ -43,7 +43,7 @@ public class PoolController : MonoBehaviour
                 List<ProjectileBrain> newList = new List<ProjectileBrain>();
                 _activePools.Add(ptype, newList);
 
-                Debug.Log($"added {ptype} to menu");
+                //Debug.Log($"added {ptype} to menu");
             }
             else
             {
