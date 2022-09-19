@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 60
   m_Sprite: {fileID: 21300000, guid: d36a1f97d459b0d4cacfb4c6eebba3b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -270,10 +270,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: d36a1f97d459b0d4cacfb4c6eebba3b7, type: 3}
-  _description: default description
+  _name: Marker Turret
+  _description: This light turret ionizes its target, reducing its energy and shield
+    regen.
+  _upgradeDescription: Upgrading increases shot speed and ionization damage.
   WeaponType: 9
   _projectileType: 0
-  _activationCost: 0
+  _normalDamage: 2
+  _shieldBonusDamage: 0
+  _ionDamage: 1
+  _knockBackAmount: 0.3
+  _scrapBonus: 0
+  _activationCost: 1.5
   _sustainCostRate: 0
+  _profileIncreaseOnActivation: 4
+  _activationSounds: []
+  _firingSounds: []
+  _deactivationSounds: []
   IsSecondary: 0
-  _maxUpgradeLevel: 1
+  _isPermanent: 1
+  _maxUpgradeLevel: 5
+  _turretMuzzle: {fileID: 1599807124452228561}
+  _minModeToggle: 0.25
+  _timeBetweenShots: 0.25
+  _shotLifetime: 2
+  _shotSpeed: 10
+  _shotSpeedIncrease_Upgrade: 1
+  _ionizationIncrease_Upgrade: 0.5

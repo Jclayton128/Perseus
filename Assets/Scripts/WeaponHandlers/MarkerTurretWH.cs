@@ -4,28 +4,95 @@ using UnityEngine;
 
 public class MarkerTurretWH : WeaponHandler
 {
+    [SerializeField] Transform _turretMuzzle = null;
+
+    //settings
+    [SerializeField] float _minModeToggle = 0.25f;
+    [SerializeField] float _timeBetweenShots = 0.25f;
+    [SerializeField] float _shotLifetime = 2f;
+    [SerializeField] float _shotSpeed = 5f;
+
+    [Header("Upgrade Settings")]
+    [SerializeField] float _shotSpeedIncrease_Upgrade = 1.0f;
+    [SerializeField] float _ionizationIncrease_Upgrade = 0.5f;
+
+    //state
+    bool _isFiring = false;
+    float _timeOfNextShot = 0;
+    float _timeToToggleModes = 0;
+
     protected override void ActivateInternal()
     {
-        throw new System.NotImplementedException();
+        if (Time.time >= _timeToToggleModes)
+        {
+            _timeOfNextShot = Time.time + _minModeToggle;
+            _timeToToggleModes = Time.time + _minModeToggle;
+            _isFiring = true;
+
+            //if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+            //else _hostAudioSource.PlayOneShot(GetRandomActivationClip());
+        }
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
     {
-        throw new System.NotImplementedException();
+        if (Time.time > _timeToToggleModes && _isFiring)
+        {
+            if (_isPlayer && !wasPausedDuringDeactivationAttempt)
+            {
+                //_playerAudioSource.PlayGameplayClipForPlayer(GetRandomDeactivationClip());
+            }
+            _timeToToggleModes = Time.time + _minModeToggle;
+
+        }
+
+        _isFiring = false;
+    }
+
+    private void Update()
+    {
+        if (_isFiring && Time.time >= _timeOfNextShot)
+        {
+            if (_hostEnergyHandler.CheckEnergy(_activationCost))
+            {
+                _hostEnergyHandler.SpendEnergy(_activationCost);
+                Fire();
+            }
+            else
+            {
+                //TODO audio sound of insufficient energy to fire
+                DeactivateInternal(false);
+            }
+            _timeOfNextShot = Time.time + _timeBetweenShots;
+        }
+    }
+    private void Fire()
+    {
+        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
+        ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _turretMuzzle);
+        pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
+            ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
+        pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + (pb.transform.up * _shotSpeed);
+
+        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+
+        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        else _hostAudioSource.PlayOneShot(GetRandomFireClip());
     }
 
     public override object GetUIStatus()
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 
     protected override void ImplementWeaponUpgrade()
     {
-        throw new System.NotImplementedException();
+        _shotSpeed += _shotSpeedIncrease_Upgrade;
+        _ionDamage += _ionizationIncrease_Upgrade;
     }
 
     protected override void InitializeWeaponSpecifics()
     {
-        throw new System.NotImplementedException();
+        //none needed
     }
 }

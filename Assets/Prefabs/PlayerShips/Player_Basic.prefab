@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingSystems: 
-  _startingWeapons: 000000000b000000
+  _startingWeapons: 00000000
   _activeWeaponIndex: 0
   _primaryWeaponsOnBoard: []
   _secondaryWeaponsOnBoard: []
@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxEnergyPoints: 30
-  _energyGainRate: 1
+  _energyGainRate: 3
 --- !u!114 &3710267741437525808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1387,9 +1387,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: aff460842c401564089bb54046e95bd9, type: 3}
-  _name: Fighter
-  _description: Armed with a repeating blaster and heavy hull, the Fighter is well-equipped
-    for the short range fight.
+  _name: Test Dummy
+  _description: This is ship has high stats for easy testing.
 --- !u!114 &4691011983045253245
 MonoBehaviour:
   m_ObjectHideFlags: 0
