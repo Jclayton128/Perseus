@@ -18,7 +18,7 @@ public class PlayerStateHandler : MonoBehaviour
     
     [SerializeField] float _shieldGainOnLevelUp = 1f;
     [SerializeField] float _hullGainOnLevelUp = 1f;
-    [SerializeField] float _energyGainOnLevelUp = 2f;
+    [SerializeField] float _energyRegenGainOnLevelUp = 2f;
 
     //State
     int _scrapCollected = 0;
@@ -120,7 +120,7 @@ public class PlayerStateHandler : MonoBehaviour
     {
         _healthHandler.AdjustShieldMaximum(_shieldGainOnLevelUp);
         _healthHandler.AdjustHullMaximumAndCurrent(_hullGainOnLevelUp);
-        _energyHandler.ModifyEnergyRegenRate(_energyGainOnLevelUp);
+        _energyHandler.ModifyEnergyRegenRate(_energyRegenGainOnLevelUp);
     }
 
     public bool CheckUpgradePoints(int cost)

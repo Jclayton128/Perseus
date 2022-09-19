@@ -2,30 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BeamTurretWH : WeaponHandler
 {
+    AudioSource _onboardAudioSource;
+
     //settings
     [SerializeField] Transform _turretMuzzle = null;
     [SerializeField] float _maxCharge = 3f;
     [SerializeField] float _maxChargeIncrease_Upgrade = 0.5f;
+    [SerializeField] float _chargeRateIncrease_Upgrade = 0.5f;
     [SerializeField] ParticleSystem _beamFX = null;
     [SerializeField] float _chargeRate = 1.0f;
+    [SerializeField] float _expendRate = 2.0f;
     float _particlePerFrame = 1f;
+    [SerializeField] float _maxRange = 10f;
+    int _enemyLayerMask = 1 << 9;
+    float _minChargeFactorToFire = 0.5f;
 
     //state
     bool _isBeaming = false;
-
     GameObject _beamFXObject;
     ParticleSystem _ps;
-    ParticleSystem.ShapeModule shape;
-    ParticleSystem.EmissionModule emission;
-    Vector3 endPoint;
-    Vector3 dir;
-    float angle;
-    Quaternion rot;
-    [SerializeField] Vector3 midway;
-    
+    ParticleSystem.ShapeModule _shape;
+    Vector3 _dir;
+    float _effectiveRange;
+    Vector3 _midway;
+    HealthHandler _targetHealthHandler;
+
+    DamagePack _damagePack;
 
     float _currentCharge;
     float _chargeFactor = 1;
@@ -44,55 +50,43 @@ public class BeamTurretWH : WeaponHandler
     }
     protected override void ActivateInternal()
     {
-        if (_hostEnergyHandler.CheckEnergy(_activationCost))
+        if (_hostEnergyHandler.CheckEnergy(_activationCost) && _chargeFactor > _minChargeFactorToFire)
         {
+            _hostEnergyHandler.SpendEnergy(_activationCost);
             FireBeam();
+            //_playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+            _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
             _isBeaming = true;
         }
     }
 
     private void FireBeam()
     {
-        endPoint = _inputCon.MousePos;
-        dir = (endPoint - _turretMuzzle.position);
-        angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-        rot = Quaternion.Euler(0, 0, angle);
-        midway = _turretMuzzle.position + (endPoint - _turretMuzzle.position) / 2f;
-        Debug.Log($"muzzle Pos: {_turretMuzzle.position}");
-
         if (_beamFXObject == null)
         {
-            _beamFXObject = Instantiate(_beamFX.gameObject, midway, rot);
-            _beamFXObject.transform.parent = this.transform;
+            _beamFXObject = Instantiate(_beamFX.gameObject, Vector3.zero, Quaternion.identity);
+            _beamFXObject.transform.parent = _turretMuzzle;
             _ps = _beamFXObject.GetComponent<ParticleSystem>();
-            shape = _ps.shape;
-            emission = _ps.emission;
+            _shape = _ps.shape;
         }
-        else
-        {
-            _beamFXObject.transform.position = midway;
-            _beamFXObject.transform.rotation = rot;
-            _beamFXObject.SetActive(true);
-        }
-
-        shape.radius = dir.magnitude / 2f;
-        int count = Mathf.RoundToInt(dir.magnitude / 2f * _particlePerFrame);
-        _ps.Emit(count);
-        //ParticleSystem.Burst newBurst = new ParticleSystem.Burst(0.00f, count, 3, 0.1f);
-        //emission.SetBurst(0, newBurst);
+        _onboardAudioSource.volume = _chargeFactor;
+        _onboardAudioSource.Play();
+        UpdateBeam();
     }
 
     private void Update()
     {
         if (_isBeaming)
         {
-            _currentCharge -= _chargeRate * Time.deltaTime * 2f;
+            _currentCharge -= _expendRate * Time.deltaTime;
             UpdateBeam();
+            _onboardAudioSource.volume = _chargeFactor;
             if (_currentCharge < 0)
             {
                 _isBeaming = false;
-                //_beamFXObject.SetActive(false);
-                _currentCharge = 0;
+                _currentCharge = 0;                
+                _onboardAudioSource.Stop();
+                //_playerAudioSource.PlayGameplayClipForPlayer(GetRandomDeactivationClip());
             }
             UpdateUI();
         }
@@ -106,18 +100,43 @@ public class BeamTurretWH : WeaponHandler
 
     private void UpdateBeam()
     {
-        endPoint = _inputCon.MousePos;
-        dir = (-endPoint + _turretMuzzle.position);
-        angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-        rot = Quaternion.Euler(0, 0,angle);
+        _dir = _turretMuzzle.transform.up * _maxRange;
+        
 
-        midway = _turretMuzzle.position + (endPoint - _turretMuzzle.position) / 2f;
+        RaycastHit2D rh2d = Physics2D.Linecast(_turretMuzzle.position, _turretMuzzle.position + _dir, _enemyLayerMask);
+        if (rh2d.collider != null)
+        {
+            //Debug.DrawLine(_turretMuzzle.position, rh2d.point, Color.red, 0.1f);
+            _effectiveRange = rh2d.distance;
+            
+            if (_targetHealthHandler == null || rh2d.collider.gameObject != _targetHealthHandler.gameObject)
+            {
+                rh2d.collider.TryGetComponent<HealthHandler>(out _targetHealthHandler);
+            }
+            _damagePack = new DamagePack(_normalDamage * Time.deltaTime,
+                _shieldBonusDamage * Time.deltaTime,
+                _ionDamage * Time.deltaTime,
+                _knockBackAmount * Time.deltaTime,
+                _scrapBonus * Time.deltaTime);
 
-        _beamFXObject.transform.position = midway;
-        _beamFXObject.transform.rotation = rot;
+            _targetHealthHandler?.ReceiveNonColliderDamage(_damagePack, rh2d.point, _dir);
 
-        shape.radius = dir.magnitude / 2f;
-        int count = Mathf.RoundToInt(dir.magnitude / 2f * _particlePerFrame);
+        }
+        else
+        {
+            //Debug.DrawLine(_turretMuzzle.position, _turretMuzzle.position + dir, Color.blue, 0.1f);
+            _effectiveRange = _maxRange;
+        }       
+
+
+
+        _midway = Vector3.up * _effectiveRange / 2f;
+
+        _beamFXObject.transform.localPosition = _midway;
+        _beamFXObject.transform.localEulerAngles = Vector3.zero;
+
+        _shape.radius = _effectiveRange / 2f;
+        int count = Mathf.RoundToInt(_effectiveRange / 2f * _particlePerFrame);
         _ps.Emit(count);
     }
 
@@ -129,11 +148,14 @@ public class BeamTurretWH : WeaponHandler
     protected override void ImplementWeaponUpgrade()
     {
         _maxCharge += _maxChargeIncrease_Upgrade;
+        _chargeRate += _chargeRateIncrease_Upgrade;
         UpdateUI();
     }
 
     protected override void InitializeWeaponSpecifics()
     {
         _currentCharge = _maxCharge;
+        _onboardAudioSource = GetComponent<AudioSource>();
+        _onboardAudioSource.clip = GetRandomFireClip();
     }
 }

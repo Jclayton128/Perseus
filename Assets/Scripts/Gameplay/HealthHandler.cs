@@ -150,6 +150,18 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This is used to force a Health Handler to take damage, such as from a beam weapon that doesn't
+    /// otherwise have a collider.
+    /// </summary>
+    /// <param name="incomingDamage"></param>
+    /// <param name="impactPosition"></param>
+    /// <param name="impactHeading"></param>
+    public void ReceiveNonColliderDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
+    {
+        ReceiveDamage(incomingDamage, impactPosition, impactHeading);
+    }
+
     private void ReceiveDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
         //receive damage

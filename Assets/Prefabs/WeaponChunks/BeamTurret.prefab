@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568825597256626950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.493, y: -0.248, z: 0}
+  m_LocalPosition: {x: -0.52, y: -0.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 528075328982006342}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b018f44aaf41154ababb61149b82a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turretTurnRate: 90
+  _turretTurnRate: 180
 --- !u!212 &2895815006829263250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 1543628747912721107}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.556, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 224192949469094795}
   m_RootOrder: 0
@@ -249,6 +249,102 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
   m_PrefabInstance: {fileID: 4937677336895057722}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &-5434999740598951991
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190160963467541320}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7298886654218497150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,27 +359,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
   _name: Beam Turret
-  _description: "Manually-steered turret. Fires an energy beam, causing high shield
-    damage and ionization.\t"
-  _upgradeDescription: Upgrading increases the beam lifetime
+  _description: Manually-steered turret that fires a very powerful, very noticeable
+    shield-destroying beam
+  _upgradeDescription: Upgrading increases the beam lifetime and recharge rate.
   WeaponType: 11
   _projectileType: 0
   _normalDamage: 0
-  _shieldBonusDamage: 4
-  _ionDamage: 2
+  _shieldBonusDamage: 10
+  _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
-  _activationCost: 15
+  _activationCost: 10
   _sustainCostRate: 0
-  _profileIncreaseOnActivation: 1
-  _activationSounds: []
-  _firingSounds: []
-  _deactivationSounds: []
+  _profileIncreaseOnActivation: 40
+  _activationSounds:
+  - {fileID: 8300000, guid: f8cbd2046f0cb7143b75cc98904cc2a8, type: 3}
+  - {fileID: 8300000, guid: 9191eef9e8c14054485d74ad719b29f0, type: 3}
+  _firingSounds:
+  - {fileID: 8300000, guid: 916eb52d2dc0a894f92a7a40e6c81c07, type: 3}
+  _deactivationSounds:
+  - {fileID: 8300000, guid: 2f717586686835c4a822e477900777bf, type: 3}
+  - {fileID: 8300000, guid: 7b058b56ddeff184586d784679a7252e, type: 3}
   IsSecondary: 1
   _isPermanent: 0
   _maxUpgradeLevel: 5
   _turretMuzzle: {fileID: 528075328982006342}
   _maxCharge: 3
   _maxChargeIncrease_Upgrade: 0.5
+  _chargeRateIncrease_Upgrade: 0.5
   _beamFX: {fileID: 9093641688725695630, guid: 44b04f2b25e7b334e81fb61f04eb48e0, type: 3}
   _chargeRate: 1
+  _expendRate: 2
+  _maxRange: 10
