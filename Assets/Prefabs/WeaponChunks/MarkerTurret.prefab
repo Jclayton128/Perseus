@@ -294,6 +294,6 @@ MonoBehaviour:
   _minModeToggle: 0.25
   _timeBetweenShots: 0.25
   _shotLifetime: 2
-  _shotSpeed: 10
+  _shotSpeed: 14
   _shotSpeedIncrease_Upgrade: 1
   _ionizationIncrease_Upgrade: 0.5

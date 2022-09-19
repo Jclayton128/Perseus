@@ -21,8 +21,8 @@ public class HealthHandler : MonoBehaviour
     #endregion
 
     //global settings
-    //[SerializeField] [Range(0,10)] float _particlesPerPointOfShieldDamage = 1f; //Amount of particles created per point of shield damage
-    //[SerializeField] [Range(0, 10)] float _scrapsPerPointOfNormalDamage = 1f; //Amount of scrap peeled off per point of hull damage.
+    float _minSecondsBetweenShieldDamageFX = 0.125f;
+    float _minSecondsToBeginRechargingShields = 0.5f;
 
     #region Instance Settings
     //instance settings
@@ -58,7 +58,8 @@ public class HealthHandler : MonoBehaviour
     [ShowInInspector] public float IonFactor = 0;
 
     int _scrapValue;
-
+    float _secondsSinceLastShieldDamageFX = 0;
+    float _secondsSinceLastShieldDamage = 0;
     #endregion
 
     private void Awake()
@@ -90,7 +91,15 @@ public class HealthHandler : MonoBehaviour
         UpdateDeathCheck();
         UpdateIonization();
         UpdateRechargeShield();
+        UpdateShieldDamageCounters();
     }
+
+    private void UpdateShieldDamageCounters()
+    {
+        _secondsSinceLastShieldDamageFX += Time.deltaTime;
+        _secondsSinceLastShieldDamage += Time.deltaTime;
+    }
+
     private bool UpdateDeathCheck()
     {
         if (HullPoints <= 0)
@@ -116,6 +125,7 @@ public class HealthHandler : MonoBehaviour
 
     private void UpdateRechargeShield()
     {
+        if (_secondsSinceLastShieldDamage < _minSecondsToBeginRechargingShields) return;
 
         ShieldPoints += _shieldHealRate * (1-IonFactor) * Time.deltaTime;
         ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
@@ -197,10 +207,18 @@ public class HealthHandler : MonoBehaviour
     }
     private void ReceiveShieldDamage(float shieldDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
+        if (shieldDamage <= 0) return;
         ShieldPoints -= shieldDamage;
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
         int amount = Mathf.RoundToInt(damageDone+0.5f) ;
-        _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
+
+        _secondsSinceLastShieldDamage = 0;
+
+        if (_secondsSinceLastShieldDamageFX >= _minSecondsBetweenShieldDamageFX)
+        {
+            _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
+            _secondsSinceLastShieldDamageFX = 0;
+        }
         
         if (_movement.IsPlayer)
         {
