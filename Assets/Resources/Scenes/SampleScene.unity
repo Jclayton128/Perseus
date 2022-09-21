@@ -17463,6 +17463,7 @@ MonoBehaviour:
   - {fileID: -2118620994063847308, guid: aba734942111e094abb41c8830b5f778, type: 3}
   - {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
   - {fileID: -3401993238952020647, guid: 3303187da1d4e8240bfce9955fb90b9b, type: 3}
+  - {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
 --- !u!4 &973215305
 Transform:
   m_ObjectHideFlags: 0
@@ -17505,6 +17506,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _possibleLevels:
   - {fileID: 11400000, guid: f3b241bd7dae35d4da34f7de7243162d, type: 2}
+  - {fileID: 11400000, guid: 3951cb17aa2786645882d4fb0a72a44c, type: 2}
+  - {fileID: 11400000, guid: 651f2d59873ae7f48bb86885c771eab6, type: 2}
   _asteroidPrefabs: []
   _nebulaPrefabs: []
   _wormholePrefabs: []
@@ -17524,6 +17527,7 @@ MonoBehaviour:
   - {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
   - {fileID: 5451778544029270900, guid: fe76a4527eecdea4c85e2a908d8521d5, type: 3}
   - {fileID: 1357919580726889231, guid: aafa9fe2c8a5c9a40a8805646bd9725d, type: 3}
+  - {fileID: 1357919580726889231, guid: 39e0dec8d80210942b4de77031b69b7a, type: 3}
 --- !u!1 &977142425
 GameObject:
   m_ObjectHideFlags: 0

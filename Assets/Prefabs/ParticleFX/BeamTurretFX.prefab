@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9093641688725695630}
   - component: {fileID: 9093641688725695631}
   m_Layer: 0
-  m_Name: BeamFX
+  m_Name: BeamTurretFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

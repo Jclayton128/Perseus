@@ -18,7 +18,7 @@ public class BeamTurretWH : WeaponHandler
     [SerializeField] float _expendRate = 2.0f;
     float _particlePerFrame = 1f;
     [SerializeField] float _maxRange = 10f;
-    int _enemyLayerMask = 1 << 9;
+    int _enemyLayerMask = 1 << 9; //TODO Caution - this makes this weapon ignore physics layer changes!
     float _minChargeFactorToFire = 0.5f;
 
     //state

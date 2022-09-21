@@ -1,31 +1,87 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DarkbladeWH : WeaponHandler
 {
+    [SerializeField] ParticleSystem _beamFX = null;
+
+    //settings
+    [SerializeField] float _beamLength = 3f;
+    [SerializeField] float _beamLengthIncrease_Upgrade = 0.5f;
+    [SerializeField] float _beamDamageIncrease_Upgrade = 5f;
+    int _enemyLayerMask = 1 << 9; //TODO Caution - this makes this weapon ignore physics layer changes!
+
+    //state
+    Vector3 _dir;
+    float _effectiveRange;
+
+
     protected override void ActivateInternal()
     {
-        throw new System.NotImplementedException();
+        if (_hostEnergyHandler.CheckEnergy(_activationCost))
+        {
+            _hostEnergyHandler.SpendEnergy(_activationCost);
+            FireBeam();
+            _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+        }
+    }
+
+    private void FireBeam()
+    {
+        _dir = _muzzle.transform.up * _beamLength;
+        float _effectiveRange;
+        RaycastHit2D rh2d = Physics2D.Linecast(_muzzle.position, _muzzle.position + _dir, _enemyLayerMask);
+        if (rh2d.collider != null)
+        {            
+            _effectiveRange = rh2d.distance;
+
+            HealthHandler targetHealthHandler;
+            if (rh2d.collider.TryGetComponent<HealthHandler>(out targetHealthHandler))
+            {
+                float diff = Mathf.Abs(Quaternion.Angle(_muzzle.rotation, rh2d.transform.rotation));
+                float damageAngleCoefficient = 1.5f - (diff / 180);
+
+                //Debug.Log($"damage coefficient: {damageAngleCoefficient}");
+                DamagePack damagePack = new DamagePack(_normalDamage * damageAngleCoefficient,
+                _shieldBonusDamage, _ionDamage, _knockBackAmount,_scrapBonus);
+
+                targetHealthHandler?.ReceiveNonColliderDamage(damagePack, rh2d.point, _dir);
+            }
+        }
+        else
+        {
+            //Debug.DrawLine(_turretMuzzle.position, _turretMuzzle.position + dir, Color.blue, 0.1f);
+            _effectiveRange = _beamLength;
+        }
+
+
+        Vector3 pos = _muzzle.position + (_muzzle.transform.up * _effectiveRange / 2f);
+        Quaternion rot = _muzzle.rotation;
+        ParticleSystem ps = Instantiate(_beamFX, pos, rot).GetComponent<ParticleSystem>();
+        ParticleSystem.ShapeModule shape = ps.shape;
+        shape.radius = _effectiveRange / 2f;
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
     {
-        throw new System.NotImplementedException();
+        //nothing. Fires on MB down.
     }
 
     public override object GetUIStatus()
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 
     protected override void ImplementWeaponUpgrade()
     {
-        throw new System.NotImplementedException();
+        _normalDamage += _beamDamageIncrease_Upgrade;
+        _beamLength += _beamLengthIncrease_Upgrade;
     }
 
     protected override void InitializeWeaponSpecifics()
     {
-        throw new System.NotImplementedException();
+        //none needed
     }
 }

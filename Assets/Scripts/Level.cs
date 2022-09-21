@@ -6,6 +6,10 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(menuName ="Level")]
 public class Level : ScriptableObject
 {
+    public string LevelName = "default level name";
+
+    public Sprite Icon = null;
+
     public LevelController.AsteroidAmounts AsteroidAmount =
         LevelController.AsteroidAmounts.None;
 

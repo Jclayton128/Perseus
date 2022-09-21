@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3780d823931d665428284fca2ed6d059, type: 3}
-  m_Name: EasyLevel
+  m_Name: EasyLevel 1
   m_EditorClassIdentifier: 
-  LevelName: Easy Level
+  LevelName: Asteroid Level
   Icon: {fileID: 21300000, guid: 4aca50ab2f212fd4897f530cbdeea606, type: 3}
   AsteroidAmount: 0
   NebulaAmount: 0
