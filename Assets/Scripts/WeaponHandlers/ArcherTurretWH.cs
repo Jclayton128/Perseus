@@ -7,7 +7,6 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     //settings
     float _maxCharge = 10f;
     float _chargeRate = 2f;
-    float _shotSpeed = 15f;
     bool _isCharging;
     ParticleSystem _particleSystem;
     ParticleSystem.EmissionModule _psem;
@@ -86,11 +85,6 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     public override float GetLifetimeForProjectile()
     {
         return _chargeLevel * 2f;
-    }
-
-    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
-    {
-        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
     }
 
     public override object GetUIStatus()

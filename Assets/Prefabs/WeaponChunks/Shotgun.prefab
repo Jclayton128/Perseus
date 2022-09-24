@@ -225,6 +225,7 @@ MonoBehaviour:
   _knockBackAmount: 0.25
   _scrapBonus: 0
   _projectileLifetime: 0.6
+  _projectileSpeed: 10
   _activationCost: 0.5
   _sustainCostRate: 0
   _profileIncreaseOnActivation: 1
@@ -240,6 +241,4 @@ MonoBehaviour:
   _maxUpgradeLevel: 5
   _degreeSpread: 30
   _chargeRate: 3.3
-  _shotLifetime: 0.6
-  _shotSpeed: 10
   _chargeLevel: 0

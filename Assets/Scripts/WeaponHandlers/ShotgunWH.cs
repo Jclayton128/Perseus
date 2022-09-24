@@ -11,8 +11,6 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     [SerializeField] float _chargeRate = 3.3f; // units per second;
     float _maxCharge = 5f;
 
-    [SerializeField] float _shotLifetime = 0.6f;
-    [SerializeField] float _shotSpeed = 10f;
 
     //state
     Color _chargeColor;
@@ -73,11 +71,7 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
 
     public override float GetLifetimeForProjectile()
     {
-        return _shotLifetime * UnityEngine.Random.Range(0.8f, 1.2f);
-    }
-    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
-    {
-        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
+        return _projectileLifetime * UnityEngine.Random.Range(0.8f, 1.2f);
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
@@ -93,7 +87,7 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     protected override void ImplementWeaponUpgrade()
     {
         _maxCharge += 2;
-        _shotLifetime *= 1.2f;
+        _projectileLifetime *= 1.2f;
         _activationCost *= .9f;
     }
 

@@ -8,8 +8,6 @@ public class RevolverCannonSH : WeaponHandler
 
     //settings
     int _chargesPerUpgrade = 1;
-    [SerializeField] float _shotLifetime = 10f;
-    [SerializeField] float _shotSpeed = 10f;
 
     //state
     Vector2Int _chargeStatus = new Vector2Int(1,1);
@@ -39,9 +37,6 @@ public class RevolverCannonSH : WeaponHandler
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
         
-        //PROJ this should be done by the projectile itself.
-        //pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + pb.transform.up * _shotSpeed;
-
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());

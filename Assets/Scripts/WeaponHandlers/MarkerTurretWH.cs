@@ -9,7 +9,6 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
     //settings
     [SerializeField] float _minModeToggle = 0.25f;
     [SerializeField] float _timeBetweenShots = 0.25f;
-    [SerializeField] float _shotSpeed = 5f;
 
     [Header("Upgrade Settings")]
     [SerializeField] float _shotSpeedIncrease_Upgrade = 1.0f;
@@ -67,7 +66,6 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
     }
     private void Fire()
     {
-        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _turretMuzzle);
         pb.SetupInstance(this);
 
@@ -77,10 +75,6 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
     }
 
-    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
-    {
-        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
-    }
 
     public override object GetUIStatus()
     {
@@ -89,7 +83,7 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
 
     protected override void ImplementWeaponUpgrade()
     {
-        _shotSpeed += _shotSpeedIncrease_Upgrade;
+        _projectileSpeed += _shotSpeedIncrease_Upgrade;
         _ionDamage += _ionizationIncrease_Upgrade;
     }
 

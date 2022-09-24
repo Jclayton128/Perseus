@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBoltLauncher 
 {
-    public Vector3 GetInitialBoltVelocity(Transform boltTransform);
+    // Likely no bolt-launcher specific interface needed...
 }

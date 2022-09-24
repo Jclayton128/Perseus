@@ -37,7 +37,8 @@ public abstract class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// This sets up a weapon type's general needs, and calls the specific weapon's setup method.
+    /// This sets up a projectile's lifetime and DamagePack.
+    /// It then executes any weapon-specific methods.
     /// </summary>
     /// <param name="allegiance"></param>
     /// <param name="launchingWeaponHandler"></param>
@@ -69,6 +70,8 @@ public abstract class Projectile : MonoBehaviour
                     Debug.LogError("Smart Missiles must be launched by Smart MissileLauchers!");
                 }
                 break;
+
+            case ProjectileType.EnemyBolt10: break;
 
             default:
                 Debug.LogError("Validation hasn't been set up for this Projectile Type!");

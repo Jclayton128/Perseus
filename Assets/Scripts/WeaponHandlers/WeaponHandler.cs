@@ -45,6 +45,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [SerializeField] protected float _scrapBonus = 0;
 
     [SerializeField] protected float _projectileLifetime = 0.5f;
+    [SerializeField] protected float _projectileSpeed = 10.1f;
 
     [SerializeField] protected float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;
@@ -245,6 +246,11 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     #endregion
 
     #region Projectile-Related public methods
+
+    public virtual Vector3 GetInitialProjectileVelocity(Transform projectileTransform)
+    {
+        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _projectileSpeed);
+    }
 
     public virtual DamagePack GetDamagePackForProjectile()
     {

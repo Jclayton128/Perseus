@@ -246,6 +246,7 @@ MonoBehaviour:
   _knockBackAmount: 0
   _scrapBonus: 0
   _projectileLifetime: 2
+  _projectileSpeed: 10
   _activationCost: 1
   _sustainCostRate: 0
   _profileIncreaseOnActivation: 4
@@ -267,6 +268,5 @@ MonoBehaviour:
   _maxUpgradeLevel: 5
   _minModeToggle: 0.75
   _timeBetweenShots: 0.25
-  _shotSpeed: 10
   _fireRateMultiplier_Upgrade: 0.8
   _energyCostSubtraction_Upgrade: 0.8

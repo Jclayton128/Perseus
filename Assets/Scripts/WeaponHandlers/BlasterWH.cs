@@ -7,7 +7,6 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
     //settings
     [SerializeField] float _minModeToggle = 0.75f;
     [SerializeField] float _timeBetweenShots = 0.25f;
-    [SerializeField] float _shotSpeed = 5f;
 
     [Header("Upgrade Settings")]
     [SerializeField] float _fireRateMultiplier_Upgrade = 0.8f;
@@ -83,11 +82,6 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
         _connectedWID?.UpdateUI("FIRE");
-    }
-
-    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
-    {
-        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
     }
 
     protected override void ImplementWeaponUpgrade()

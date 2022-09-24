@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoltProjectile : Projectile
+public class SmartMissileProjectile : Projectile
 {
     protected override void ExecuteLifetimeExpirationSequence()
     {
@@ -11,12 +11,12 @@ public class BoltProjectile : Projectile
 
     protected override void ExecuteMovement()
     {
-        // Bolt movement is purely handled by Unity physics
+        // Steer to minimize theta
     }
 
     protected override void ExecuteUpdateSpecifics()
     {
-        // Bolts don't update
+        // Set theta to desired steer direction toward desired point
     }
 
     protected override void SetupInstanceSpecifics()
