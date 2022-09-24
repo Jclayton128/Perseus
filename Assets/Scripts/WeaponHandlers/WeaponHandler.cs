@@ -31,7 +31,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [SerializeField] protected string _upgradeDescription = "upgrade description";
 
     public SystemWeaponLibrary.WeaponType WeaponType;
-    [SerializeField] protected ProjectileBrain.PType _projectileType;
+    [SerializeField] protected Projectile.ProjectileType _projectileType;
 
     [FoldoutGroup("Damage Pack")]
     [SerializeField] protected float _normalDamage = 0;
@@ -44,6 +44,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [FoldoutGroup("Damage Pack")]
     [SerializeField] protected float _scrapBonus = 0;
 
+    [SerializeField] protected float _projectileLifetime = 0.5f;
 
     [SerializeField] protected float _activationCost = 0;
     [SerializeField] protected float _sustainCostRate = 0;
@@ -243,13 +244,25 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     #endregion
 
+    #region Projectile-Related public methods
+
+    public virtual DamagePack GetDamagePackForProjectile()
+    {
+        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
+        return dp;
+    }
+
+    public virtual float GetLifetimeForProjectile()
+    {
+        return _projectileLifetime;
+    }
+
+    #endregion
 
     public void UpdateWeaponIconDriver(WeaponIconDriver newWID)
     {
         _connectedWID = newWID;
-    }
-
-    
+    }    
 
     #region Sound Helpers
     protected AudioClip GetRandomActivationClip()

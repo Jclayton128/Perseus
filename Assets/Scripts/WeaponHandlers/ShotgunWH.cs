@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotgunWH : WeaponHandler
+public class ShotgunWH : WeaponHandler, IBoltLauncher
 {
     //settings
     [Tooltip("Every shot attempts to spread bullets over this range")]
@@ -56,13 +56,12 @@ public class ShotgunWH : WeaponHandler
         {
             Quaternion sector = Quaternion.Euler(0, 0, 
                 (i * spreadSubdivided) - (_degreeSpread / 2f) + transform.eulerAngles.z);
-            ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
+            Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
 
-            float thisLifetime = _shotLifetime * UnityEngine.Random.Range(0.8f, 1.2f);
-            pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
-                ProjectileBrain.DeathBehaviour.Fizzle, thisLifetime, -1, dp, Vector3.zero);
             pb.transform.rotation = sector;
-            pb.GetComponent<Rigidbody2D>().velocity = pb.transform.up * _shotSpeed;
+
+            pb.SetupInstance(this);
+
         }
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
@@ -70,6 +69,15 @@ public class ShotgunWH : WeaponHandler
 
         _chargeLevel = 0;
         UpdateUI();
+    }
+
+    public override float GetLifetimeForProjectile()
+    {
+        return _shotLifetime * UnityEngine.Random.Range(0.8f, 1.2f);
+    }
+    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
+    {
+        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)

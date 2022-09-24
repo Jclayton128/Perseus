@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkerTurretWH : WeaponHandler
+public class MarkerTurretWH : WeaponHandler, IBoltLauncher
 {
     [SerializeField] Transform _turretMuzzle = null;
 
     //settings
     [SerializeField] float _minModeToggle = 0.25f;
     [SerializeField] float _timeBetweenShots = 0.25f;
-    [SerializeField] float _shotLifetime = 2f;
     [SerializeField] float _shotSpeed = 5f;
 
     [Header("Upgrade Settings")]
@@ -69,15 +68,18 @@ public class MarkerTurretWH : WeaponHandler
     private void Fire()
     {
         DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
-        ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _turretMuzzle);
-        pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
-            ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero);
-        pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + (pb.transform.up * _shotSpeed);
+        Projectile pb = _poolCon.SpawnProjectile(_projectileType, _turretMuzzle);
+        pb.SetupInstance(this);
 
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
+    }
+
+    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
+    {
+        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
     }
 
     public override object GetUIStatus()

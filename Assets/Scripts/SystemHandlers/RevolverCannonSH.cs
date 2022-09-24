@@ -36,11 +36,11 @@ public class RevolverCannonSH : WeaponHandler
 
     private void Fire()
     {
-        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
-        ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
-        pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
-            ProjectileBrain.DeathBehaviour.Fizzle, _shotLifetime, -1, dp, Vector3.zero); ;
-        pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + pb.transform.up * _shotSpeed;
+        Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
+        pb.SetupInstance(this);
+        
+        //PROJ this should be done by the projectile itself.
+        //pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + pb.transform.up * _shotSpeed;
 
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 

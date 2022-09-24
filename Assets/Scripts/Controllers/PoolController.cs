@@ -9,12 +9,12 @@ public class PoolController : MonoBehaviour
     SystemWeaponLibrary _sysLib;
 
     //state
-    Dictionary<ProjectileBrain.PType, Queue<ProjectileBrain>> _unusedPools = 
-        new Dictionary<ProjectileBrain.PType, Queue<ProjectileBrain>>();
-    Dictionary<ProjectileBrain.PType, List<ProjectileBrain>> _activePools =
-        new Dictionary<ProjectileBrain.PType, List<ProjectileBrain>>();
-    Dictionary<ProjectileBrain.PType, GameObject>_projectileMenu = 
-        new Dictionary<ProjectileBrain.PType, GameObject>();
+    Dictionary<Projectile.ProjectileType, Queue<Projectile>> _unusedPools = 
+        new Dictionary<Projectile.ProjectileType, Queue<Projectile>>();
+    Dictionary<Projectile.ProjectileType, List<Projectile>> _activePools =
+        new Dictionary<Projectile.ProjectileType, List<Projectile>>();
+    Dictionary<Projectile.ProjectileType, GameObject>_projectileMenu = 
+        new Dictionary<Projectile.ProjectileType, GameObject>();
 
     private void Awake()
     {
@@ -30,17 +30,17 @@ public class PoolController : MonoBehaviour
     {
         foreach (var projectile in _projectilePrefabs)
         {
-            ProjectileBrain.PType ptype =
-                projectile.GetComponent<ProjectileBrain>().pType;
+            Projectile.ProjectileType ptype =
+                projectile.GetComponent<Projectile>().PType;
 
             if (!_projectileMenu.ContainsKey(ptype))
             {
                 _projectileMenu.Add(ptype, projectile);
 
-                Queue<ProjectileBrain> newQueue = new Queue<ProjectileBrain>();
+                Queue<Projectile> newQueue = new Queue<Projectile>();
                 _unusedPools.Add(ptype, newQueue);
 
-                List<ProjectileBrain> newList = new List<ProjectileBrain>();
+                List<Projectile> newList = new List<Projectile>();
                 _activePools.Add(ptype, newList);
 
                 //Debug.Log($"added {ptype} to menu");
@@ -52,14 +52,14 @@ public class PoolController : MonoBehaviour
         }
     }
 
-    public ProjectileBrain SpawnProjectile(ProjectileBrain.PType projectileType, Transform muzzle)
+    public Projectile SpawnProjectile(Projectile.ProjectileType projectileType, Transform muzzle)
     {
         Debug.Log($"Asked to spawn a {projectileType}");
-        ProjectileBrain pb;
+        Projectile pb;
         if (_unusedPools[projectileType].Count == 0)
         {
             pb = Instantiate(_projectileMenu[projectileType], Vector3.zero, Quaternion.identity)
-                .GetComponent<ProjectileBrain>();
+                .GetComponent<Projectile>();
             pb.Initialize(this);
             
         }
@@ -77,10 +77,10 @@ public class PoolController : MonoBehaviour
 
     }
 
-    public void ReturnDeadProjectile(ProjectileBrain deadProjectile)
+    public void ReturnDeadProjectile(Projectile deadProjectile)
     {
-        _unusedPools[deadProjectile.pType].Enqueue(deadProjectile);
-        _activePools[deadProjectile.pType].Remove(deadProjectile);
+        _unusedPools[deadProjectile.PType].Enqueue(deadProjectile);
+        _activePools[deadProjectile.PType].Remove(deadProjectile);
         deadProjectile.gameObject.SetActive(false);
     }
 

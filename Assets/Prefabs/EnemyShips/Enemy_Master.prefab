@@ -161,11 +161,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engineParticles: []
   IsPlayer: 0
+  IsMouseSteering: 1
   ShouldAccelerate: 0
   ShouldDecelerate: 0
+  ShouldTurnLeft: 0
+  ShouldTurnRight: 0
   DesiredSteering: {x: 0, y: 0, z: 0}
   _thrust: 0
-  _mass: 0
   _turnRate: 0
 --- !u!114 &2293803639130907992
 MonoBehaviour:
@@ -358,6 +360,10 @@ PrefabInstance:
     - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
       propertyPath: _timeBetweenShots
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
+      propertyPath: _projectileLifetime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4203932618607404, guid: 3ce156c98bcb8b34393227c00de7479e, type: 3}
       propertyPath: _profileIncreaseOnActivation

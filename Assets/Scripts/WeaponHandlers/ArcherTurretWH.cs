@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherTurretWH : WeaponHandler
+public class ArcherTurretWH : WeaponHandler, IBoltLauncher
 {
     //settings
     float _maxCharge = 10f;
@@ -65,18 +65,32 @@ public class ArcherTurretWH : WeaponHandler
     }
 
     private void Fire()
-    {
-        DamagePack dp = new DamagePack(_chargeLevel*3f, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
-        ProjectileBrain pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
-        pb.SetupBrain(ProjectileBrain.Behaviour.Bolt, ProjectileBrain.Allegiance.Player,
-            ProjectileBrain.DeathBehaviour.Fizzle, _chargeLevel*2f, -1, dp, Vector3.zero);
-        pb.GetComponent<Rigidbody2D>().velocity = (Vector3)_rb.velocity + pb.transform.up * _shotSpeed;
+    {        
+        Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
+        pb.SetupInstance(this);
 
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
+    }
+
+    public override DamagePack GetDamagePackForProjectile()
+    {
+        DamagePack dp =
+            new DamagePack(_chargeLevel * 3f, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
+        return dp;
+    }
+
+    public override float GetLifetimeForProjectile()
+    {
+        return _chargeLevel * 2f;
+    }
+
+    public Vector3 GetInitialBoltVelocity(Transform projectileTransform)
+    {
+        return (Vector3)_rb.velocity + (projectileTransform.transform.up * _shotSpeed);
     }
 
     public override object GetUIStatus()

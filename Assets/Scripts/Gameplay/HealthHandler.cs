@@ -151,8 +151,8 @@ public class HealthHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D weaponImpact)
     {
-        ProjectileBrain pb;
-        if (weaponImpact.TryGetComponent<ProjectileBrain>(out pb))
+        Projectile pb;
+        if (weaponImpact.TryGetComponent<Projectile>(out pb))
         {
             ReceivingDamagePack?.Invoke(pb.DamagePack);
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());

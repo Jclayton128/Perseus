@@ -281,6 +281,7 @@ MonoBehaviour:
   _ionDamage: 1
   _knockBackAmount: 0.3
   _scrapBonus: 0
+  _projectileLifetime: 2
   _activationCost: 1.5
   _sustainCostRate: 0
   _profileIncreaseOnActivation: 4
