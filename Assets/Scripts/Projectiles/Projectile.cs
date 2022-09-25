@@ -30,7 +30,7 @@ public abstract class Projectile : MonoBehaviour
     public Vector2 ImpactHeading;
 
     //This is called once per game session per pooled weapon object.
-    public void Initialize(PoolController poolController)
+    public virtual void Initialize(PoolController poolController)
     {
         _poolCon = poolController;
         _rb = GetComponent<Rigidbody2D>();  
@@ -65,9 +65,9 @@ public abstract class Projectile : MonoBehaviour
                 break;
 
             case ProjectileType.PlayerSmartMissile1:
-                if (_launchingWeaponHandler.GetComponent<ISmartMissileLauncher>() == null)
+                if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Smart Missiles must be launched by Smart MissileLauchers!");
+                    Debug.LogError("Smart Missiles must be launched by Smart Missile Lauchers!");
                 }
                 break;
 

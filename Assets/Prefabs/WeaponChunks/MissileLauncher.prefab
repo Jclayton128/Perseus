@@ -266,15 +266,14 @@ MonoBehaviour:
   _upgradeDescription: upgrade description
   WeaponType: 2
   _projectileType: 1
-  _normalDamage: 0
+  _normalDamage: 10
   _shieldBonusDamage: 0
   _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
-  _projectileLifetime: 0.5
-  _projectileSpeed: 10.1
-  _activationCost: 0
-  _sustainCostRate: 0
+  _projectileLifetime: 30
+  _projectileSpeed: 10
+  _activationCost: 5
   _profileIncreaseOnActivation: 1
   _activationSounds: []
   _firingSounds: []
@@ -282,3 +281,8 @@ MonoBehaviour:
   IsSecondary: 1
   _isPermanent: 0
   _maxUpgradeLevel: 5
+  _missileTurnRate: 30
+  _missileSnakeAmount: 1
+  _missileScanRadius: 0.25
+  _missileSpeedAddition_Upgrade: 20
+  _missileTurnRateAddition_Upgrade: 30

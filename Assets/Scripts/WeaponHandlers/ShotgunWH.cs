@@ -15,9 +15,6 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     //state
     Color _chargeColor;
     public float _chargeLevel;
-    bool _isFiring;
-    float _timeOfNextShot;
-    float _timeToToggleModes;
 
     private void Update()
     {
@@ -45,8 +42,6 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
 
     private void Fire()
     {
-        DamagePack dp = new DamagePack(_normalDamage, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
-
         int amount = Mathf.RoundToInt(_chargeLevel);
 
         float spreadSubdivided = _degreeSpread / amount;

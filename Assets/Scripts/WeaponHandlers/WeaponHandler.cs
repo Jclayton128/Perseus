@@ -48,7 +48,6 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [SerializeField] protected float _projectileSpeed = 10.1f;
 
     [SerializeField] protected float _activationCost = 0;
-    [SerializeField] protected float _sustainCostRate = 0;
     [SerializeField] protected float _profileIncreaseOnActivation = 1f;
 
     [FoldoutGroup("Audio")]
