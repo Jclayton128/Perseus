@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_Name
-      value: MissileLauncher
+      value: HoundMissiles
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,9 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 5f8697847591fbc4397230b3243a5329, type: 3}
-  _name: default name
-  _description: default description
-  _upgradeDescription: upgrade description
+  _name: Hound Missiles
+  _description: Fast-moving, mid-damage guided missile. Pricey but effective.
+  _upgradeDescription: Upgrading improves the speed and turn rate (more houndy!)
   WeaponType: 2
   _projectileType: 1
   _normalDamage: 10
@@ -271,9 +271,9 @@ MonoBehaviour:
   _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
-  _projectileLifetime: 30
-  _projectileSpeed: 10
-  _activationCost: 5
+  _projectileLifetime: 10
+  _projectileSpeed: 5
+  _activationCost: 15
   _profileIncreaseOnActivation: 1
   _activationSounds: []
   _firingSounds: []
@@ -281,8 +281,8 @@ MonoBehaviour:
   IsSecondary: 1
   _isPermanent: 0
   _maxUpgradeLevel: 5
-  _missileTurnRate: 30
-  _missileSnakeAmount: 1
+  _missileTurnRate: 100
+  _missileSnakeAmount: 10
   _missileScanRadius: 0.25
   _missileSpeedAddition_Upgrade: 20
   _missileTurnRateAddition_Upgrade: 30

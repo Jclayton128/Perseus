@@ -79,7 +79,7 @@ public class MissileProjectile : Projectile
                 _angleToTarget = 0;
                 _hasHitTargetPosition = true;
                 
-                Debug.Log("close enough!");
+                //Debug.Log("close enough!");
             }
 
         }

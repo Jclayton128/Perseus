@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingSystems: 
-  _startingWeapons: 02000000
+  _startingWeapons: 020000000c0000000d000000
   _activeWeaponIndex: 0
   _primaryWeaponsOnBoard: []
   _secondaryWeaponsOnBoard: []
