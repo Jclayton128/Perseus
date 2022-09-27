@@ -4865,7 +4865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2363114265929812265, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Name
-      value: PPopRocket
+      value: PRocket
       objectReference: {fileID: 0}
     - target: {fileID: 6678518615658740022, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Sprite
@@ -4900,7 +4900,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2054328011332903447, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
   m_PrefabInstance: {fileID: 7064165228821484683}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8605599683529028564
+--- !u!114 &2855443650593128165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4909,14 +4909,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4810833131604385186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606c643b819a082478b31d7ac103e72f, type: 3}
+  m_Script: {fileID: 11500000, guid: 570beff481499e64a824de15bc7622ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PType: 3
   ImpactHeading: {x: 0, y: 0}
-  _lockedOnSprite: {fileID: 21300000, guid: 35662c3d2ebe64a4a965254c8721d3f5, type: 3}
-  _closeEnough: 0.2
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _targetTransform: {fileID: 0}
-  _angleToTarget: 0
-  _hasHitTargetPosition: 0
