@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_Name
-      value: HoundMissiles
+      value: TorpedoLauncher
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -248,7 +248,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4749910481353826016, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
   m_PrefabInstance: {fileID: 80467259812122595}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1956077029239354867
+--- !u!114 &-3963371976820328285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,32 +257,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 6133774033663171473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54381d5cf134724ea8bc2b113f1400b, type: 3}
+  m_Script: {fileID: 11500000, guid: af6b0e5af18cae54986ea65144fc9a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 5f8697847591fbc4397230b3243a5329, type: 3}
-  _name: Hound Missiles
-  _description: Fast-moving, mid-damage guided missile. Pricey but effective.
-  _upgradeDescription: Upgrading improves the speed and turn rate (more houndy!)
-  WeaponType: 2
-  _projectileType: 1
+  _icon: {fileID: 21300000, guid: bd3e3c1dd69e25043918b792f35840ca, type: 3}
+  _name: Torpedo
+  _description: Persistent homing weapon. Punches through multiple obstacles, releasing
+    bonus scrap.
+  _upgradeDescription: Upgrading grants increased penetration and lifetime
+  WeaponType: 12
+  _projectileType: 5
   _normalDamage: 10
   _shieldBonusDamage: 0
   _ionDamage: 0
   _knockBackAmount: 0
-  _scrapBonus: 0
-  _projectileLifetime: 10
-  _projectileSpeed: 5
-  _activationCost: 15
-  _profileIncreaseOnActivation: 1
+  _scrapBonus: 1
+  _projectileLifetime: 30
+  _projectileSpeed: 3
+  _activationCost: 10
+  _profileIncreaseOnActivation: 40
   _activationSounds: []
   _firingSounds: []
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
   _maxUpgradeLevel: 5
-  _missileTurnRate: 100
-  _missileSnakeAmount: 10
-  _missileScanRadius: 0.25
-  _missileSpeedAddition_Upgrade: 20
-  _missileTurnRateAddition_Upgrade: 30
+  _missileTurnRate: 70
+  _startingResilience: 4
+  _resilienceAddition_Upgrade: 2
+  _lifetimeAddition_Upgrade: 10

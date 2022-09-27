@@ -12,9 +12,9 @@ public class SystemWeaponLibrary : MonoBehaviour
 
     public enum WeaponType
     {
-        PBlaster0, PArcherTurret1, PHoundMissile2, PShotgun3, PPopRockets4, PScrapedo5, 
+        PBlaster0, PArcherTurret1, PMissile2, PShotgun3, PRockets4, PScrapedo5, 
         PHarpoon6, PDarkblade7, PFlakTurret8, PMarkerTurret9, PRevolver10, PBeamTurret11, 
-        PCamelTorp12, PJavelin13,Player14, Player15,
+        PTorpedo12, PJavelin13,Player14, Player15,
         Player16, Player17, Player18, Player19,
         TrundlerBlaster20, Enemy21, Enemy22, Enemy23, Enemy24, Enemy25, Enemy26, Enemy27,
         Enemy28, Enemy29, Enemy30, Enemy31, Enemy32, Enemy33, Enemy34,

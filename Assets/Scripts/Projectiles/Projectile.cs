@@ -10,8 +10,8 @@ public abstract class Projectile : MonoBehaviour
     
     public enum ProjectileType //Each PType must unique to a single weapon, even if different PTypes look similar/same
     {
-        PlayerBolt0, PlayerHoundMissile1, PlayerScrapedo2, PlayerPopRocket3, PlayerCannon4,
-        PlayerCamelTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
+        PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
+        PlayerTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
         EnemyBolt10, Enemy11, Enemy12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }
@@ -37,7 +37,7 @@ public abstract class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// This sets up a projectile's lifetime and DamagePack.
+    /// This sets up a projectile's lifetime and DamagePack, and resets its resilience to 1.
     /// It then executes any weapon-specific methods.
     /// </summary>
     /// <param name="allegiance"></param>
@@ -47,6 +47,7 @@ public abstract class Projectile : MonoBehaviour
         _lifetimeRemaining = launchingWeaponHandler.GetLifetimeForProjectile();
         DamagePack = launchingWeaponHandler.GetDamagePackForProjectile();
         _launchingWeaponHandler = launchingWeaponHandler;
+        _resilienceRemaining = 1;
 
         ValidateWeaponHandlerMatchesWeaponType();
 
@@ -64,10 +65,17 @@ public abstract class Projectile : MonoBehaviour
                 }
                 break;
 
-            case ProjectileType.PlayerHoundMissile1:
+            case ProjectileType.PlayerMissile1:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Smart Missiles must be launched by Smart Missile Lauchers!");
+                    Debug.LogError("Smart Missiles must be launched by IMissileLaunchers!");
+                }
+                break;
+
+            case ProjectileType.PlayerTorpedo5:
+                if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
+                {
+                    Debug.LogError("Torpedos must be launched by IMissileLaunchers!");
                 }
                 break;
 
@@ -120,6 +128,17 @@ public abstract class Projectile : MonoBehaviour
     /// Use ExecuteGenericExpiration_XXX() for generic methods.
     /// </summary>
     protected abstract void ExecuteLifetimeExpirationSequence();
+
+    /// <summary>
+    /// Optional method that allows resilience to be greater than 1 to allow for multiple penetrations
+    /// </summary>
+    /// <param name="resilience"></param>
+    public void SetResilience(int resilience)
+    {
+        //Resilience of zero means it insta-destructs
+        resilience = Mathf.Clamp(resilience, 1, 99);
+        _resilienceRemaining = resilience;
+    }
 
     #region Public Impact Helpers
 

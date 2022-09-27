@@ -36,6 +36,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     {
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
+        
 
         if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
@@ -67,6 +68,11 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     public Vector3 GetTargetPosition()
     {
         return _inputCon.MousePos;
+    }
+
+    public Transform GetTargetTransform()
+    {
+        return null;
     }
 
     public float GetSpeedSpec()

@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileProjectile : Projectile
+public class TorpedoProjectile : Projectile
 {
     SpriteRenderer _sr;
+    IMissileLauncher _torpedoLauncher;
 
     //settings
     [SerializeField] Sprite _lockedOnSprite;
@@ -13,10 +13,8 @@ public class MissileProjectile : Projectile
     //Full turn authority is reduced inside this cone
     private const float _turnDampingCoefficient = 10f;
 
-    float _snakeAmount;
     float _turnRate;
     float _speed;
-
     float _timeBetweenTargetScans = 0.1f;
     float _scanOriginOffset_near = 4.0f; //full radius
     float _scanOriginOffset_far = 10f; //4x radius
@@ -28,11 +26,10 @@ public class MissileProjectile : Projectile
 
     //state
     Sprite _startingSprite;
-    Vector3 _targetPosition;
-    Transform _targetTransform;
+    [SerializeField] Transform _targetTransform;
     float _angleToTarget;
     float _timeForNextTargetScan;
-    bool _hasHitTargetPosition = false;
+
 
     public override void Initialize(PoolController poolController)
     {
@@ -48,45 +45,36 @@ public class MissileProjectile : Projectile
         _rb.velocity =
             _launchingWeaponHandler.GetInitialProjectileVelocity(transform);
 
-        IMissileLauncher sml = _launchingWeaponHandler.GetComponent<IMissileLauncher>();
+        _torpedoLauncher = _launchingWeaponHandler.GetComponent<IMissileLauncher>();
 
-        _targetPosition = sml.GetTargetPosition();
-        //_thrust = sml.GetThrustSpec();
-        _speed = sml.GetSpeedSpec();
-        _turnRate = sml.GetTurnSpec();
-        _scanRadius = sml.GetMissileScanRadius();
-        _snakeAmount = sml.GetSnakeAmount();
+        _targetTransform = _torpedoLauncher.GetTargetTransform();
+        _speed = _torpedoLauncher.GetSpeedSpec();
+        _turnRate = _torpedoLauncher.GetTurnSpec();
+        _scanRadius = _torpedoLauncher.GetMissileScanRadius();
+
         _targetTransform = null; // in case this is a pool object that otherwise retains old target
-        _hasHitTargetPosition = false;
-        _legalTarget_LayerMask = sml.GetLegalTargetsLayerMask();
 
-        if (_snakeAmount > Mathf.Epsilon)
-        {
-            _rb.angularVelocity = _turnRate;
-        }
+        _legalTarget_LayerMask = _torpedoLauncher.GetLegalTargetsLayerMask();
     }
 
     protected override void ExecuteUpdateSpecifics()
     {
         if (!_targetTransform && Time.time >= _timeForNextTargetScan)
         {
-            UpdateScanTargetTransform();
-            _timeForNextTargetScan = Time.time + _timeBetweenTargetScans;
-
-            if ((_targetPosition - transform.position).sqrMagnitude <= _closeEnough)
+            _targetTransform = _torpedoLauncher.GetTargetTransform();
+            if (_targetTransform)
             {
-                _angleToTarget = 0;
-                _hasHitTargetPosition = true;
-                
-                //Debug.Log("close enough!");
+                _sr.sprite = _lockedOnSprite;
             }
+            else
+            {
+                _sr.sprite = _startingSprite;
 
+            }
+            _timeForNextTargetScan = Time.time + _timeBetweenTargetScans;
         }
-        
-        if (!_hasHitTargetPosition)
-        {
-            UpdateSteering();
-        }
+
+        UpdateSteering();
     }
 
     private void UpdateScanTargetTransform()
@@ -111,7 +99,7 @@ public class MissileProjectile : Projectile
             //far scan is 3x the radius of near scan.
             coll = Physics2D.OverlapCircle(
                 transform.position + (transform.up * _scanOriginOffset_far * _scanRadius),
-                _scanRadius*3f, _legalTarget_LayerMask);
+                _scanRadius * 3f, _legalTarget_LayerMask);
 
             Vector3 pos_f = transform.position + (transform.up * _scanOriginOffset_far * _scanRadius);
             Debug.DrawLine(pos_f, pos_f + Vector3.up * _scanRadius * 4f, Color.red, _timeBetweenTargetScans);
@@ -128,7 +116,6 @@ public class MissileProjectile : Projectile
     private void LockOnTransform(Collider2D coll)
     {
         _targetTransform = coll.transform;
-        _hasHitTargetPosition = false;
         _sr.sprite = _lockedOnSprite;
     }
 
@@ -136,31 +123,25 @@ public class MissileProjectile : Projectile
     {
         if (_targetTransform)
         {
-            _targetPosition = _targetTransform.position;
-            _hasHitTargetPosition = false;
+            _angleToTarget = Vector3.SignedAngle((_targetTransform.position - transform.position),
+    transform.up, transform.forward);
+        }
+        else
+        {
+            _angleToTarget = 0;
         }
 
-        _angleToTarget = Vector3.SignedAngle((_targetPosition - transform.position),
-            transform.up, transform.forward);
     }
 
     protected override void ExecuteMovement()
     {
         float angleWithTurnDamper = Mathf.Clamp(_angleToTarget, -_turnDampingCoefficient, _turnDampingCoefficient);
         float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / _turnDampingCoefficient, -_turnRate, _turnRate);
-
-        if (Mathf.Abs(_angleToTarget) > _snakeAmount)
+                
+        if (angleWithTurnDamper > _boresightTolerance || angleWithTurnDamper < -_boresightTolerance)
         {
-            if (angleWithTurnDamper > _boresightTolerance || angleWithTurnDamper < -_boresightTolerance)
-            {
-                //Target outside of acceptable boresight
-                _rb.angularVelocity = currentTurnRate;
-            }
-        }
-
-        if (_hasHitTargetPosition)
-        {
-            _rb.angularVelocity = 0;
+            //Target outside of acceptable boresight
+            _rb.angularVelocity = currentTurnRate;
         }
 
         _rb.velocity = _speed * transform.up;
@@ -170,5 +151,4 @@ public class MissileProjectile : Projectile
     {
         ExecuteGenericExpiration_Fizzle();
     }
-
 }

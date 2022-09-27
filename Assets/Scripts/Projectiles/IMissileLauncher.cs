@@ -6,6 +6,8 @@ public interface IMissileLauncher
 {
     public Vector3 GetTargetPosition();
 
+    public Transform GetTargetTransform();
+
     public float GetSpeedSpec();
 
     public float GetTurnSpec();

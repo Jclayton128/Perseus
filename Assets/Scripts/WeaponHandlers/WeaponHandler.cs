@@ -68,7 +68,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     protected bool _isPlayer;
     protected WeaponIconDriver _connectedWID;
-    [SerializeField] protected int _maxUpgradeLevel;
+    [SerializeField] protected int _maxUpgradeLevel = 5;
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
     protected bool _isInstalled = false;
 
