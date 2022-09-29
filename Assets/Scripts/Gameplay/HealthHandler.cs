@@ -21,14 +21,19 @@ public class HealthHandler : MonoBehaviour
     #endregion
 
     //global settings
-    float _minSecondsBetweenShieldDamageFX = 0.125f;
-    float _minSecondsToBeginRechargingShields = 0.5f;
+    float _minSecondsBetweenDamageFX = 0.125f;
+    float _minDelayToBeginRechargingShields = 0.5f;
 
     #region Instance Settings
     //instance settings
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maximum (and starting) Hull Points")]
     [SerializeField] [Range(1, 100)] float _maxHullPoints = 10;
+
+    [FoldoutGroup("Starting Stats")]
+    [Tooltip("Emits hull damage FX when receiving hull damage. Should be FALSE for asteroids.")]
+    [SerializeField] bool _emitsHullChunks = true;
+
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maxium (and starting) Shield Points")]
@@ -58,8 +63,10 @@ public class HealthHandler : MonoBehaviour
     [ShowInInspector] public float IonFactor = 0;
 
     int _scrapValue;
-    float _secondsSinceLastShieldDamageFX = 0;
-    float _secondsSinceLastShieldDamage = 0;
+    float _timeToAllowShieldDamageFX = 0;
+    float _timeToAllowShieldRegen = 0;
+    float _timeToAllowHullDamageFX = 0;
+    float _gatheredHullDamageForSingleParticleRelease = 0;
     #endregion
 
     private void Awake()
@@ -91,13 +98,6 @@ public class HealthHandler : MonoBehaviour
         UpdateDeathCheck();
         UpdateIonization();
         UpdateRechargeShield();
-        UpdateShieldDamageCounters();
-    }
-
-    private void UpdateShieldDamageCounters()
-    {
-        _secondsSinceLastShieldDamageFX += Time.deltaTime;
-        _secondsSinceLastShieldDamage += Time.deltaTime;
     }
 
     private bool UpdateDeathCheck()
@@ -125,7 +125,7 @@ public class HealthHandler : MonoBehaviour
 
     private void UpdateRechargeShield()
     {
-        if (_secondsSinceLastShieldDamage < _minSecondsToBeginRechargingShields) return;
+        if (Time.time < _timeToAllowShieldRegen) return;
 
         ShieldPoints += _shieldHealRate * (1-IonFactor) * Time.deltaTime;
         ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
@@ -212,13 +212,14 @@ public class HealthHandler : MonoBehaviour
         float damageDone = shieldDamage + Mathf.Clamp(ShieldPoints, -999, 0);
         int amount = Mathf.RoundToInt(damageDone+0.5f) ;
 
-        _secondsSinceLastShieldDamage = 0;
+        _timeToAllowShieldRegen = Time.time + _minDelayToBeginRechargingShields;
 
-        if (_secondsSinceLastShieldDamageFX >= _minSecondsBetweenShieldDamageFX)
+        if (Time.time >= _timeToAllowShieldDamageFX)
         {
             _particleController.RequestShieldDamageParticles(amount, impactPosition, impactHeading);
-            _secondsSinceLastShieldDamageFX = 0;
+            _timeToAllowShieldDamageFX = Time.time + _minSecondsBetweenDamageFX;
         }
+
         
         if (_movement.IsPlayer)
         {
@@ -229,10 +230,21 @@ public class HealthHandler : MonoBehaviour
 
     private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
     {
-
         HullPoints -= normalDamage;
         _scrapValue += Mathf.RoundToInt(scrapBonus);
-        
+
+        if (Time.time >= _timeToAllowHullDamageFX)
+        {
+            int amount = Mathf.RoundToInt(_gatheredHullDamageForSingleParticleRelease + 0.5f);
+            _particleController.RequestHullDamageParticles(amount, impactPosition, impactHeading);
+            _timeToAllowHullDamageFX = Time.time + _minSecondsBetweenDamageFX;
+            _gatheredHullDamageForSingleParticleRelease = 0;
+        }
+        else
+        {
+            _gatheredHullDamageForSingleParticleRelease += normalDamage;
+        }
+
         if (_movement.IsPlayer)
         {
             _UIController.UpdateHullBar(HullPoints, _maxHullPoints);

@@ -61,7 +61,7 @@ public abstract class Projectile : MonoBehaviour
             case ProjectileType.PlayerBolt0:
                 if (_launchingWeaponHandler.GetComponent<IBoltLauncher>() == null)
                 {
-                    Debug.LogError("Bolts must be launched by Bolt Lauchers!");
+                    Debug.LogError("Bolts must be launched by IBoltLaunchers!");
                 }
                 break;
 
@@ -69,6 +69,13 @@ public abstract class Projectile : MonoBehaviour
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
                     Debug.LogError("Smart Missiles must be launched by IMissileLaunchers!");
+                }
+                break;
+
+            case ProjectileType.PlayerRocket3:
+                if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
+                {
+                    Debug.LogError("Rockets must be launched by IMissileLaunchers!");
                 }
                 break;
 
@@ -176,6 +183,8 @@ public abstract class Projectile : MonoBehaviour
     protected void ExecuteGenericExpiration_Explode()
     {
         Debug.LogError("Generic Expiration-Explode not implemented yet");
+
+        _poolCon.ReturnDeadProjectile(this);
     }
 
     #endregion

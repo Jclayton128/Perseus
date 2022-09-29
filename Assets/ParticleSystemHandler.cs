@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class ParticleSystemHandler : MonoBehaviour
 {
+    public enum ParticleType { Shield, Hull, Blast};
     ParticleController _particleController;
+
+    public ParticleType ThisParticleType = ParticleType.Shield;
 
     internal void Initalize(ParticleController particleController)
     {
@@ -14,7 +17,7 @@ public class ParticleSystemHandler : MonoBehaviour
 
     void OnParticleSystemStopped()
     {
-        _particleController.ReturnParticleSystem(gameObject.GetComponent<ParticleSystem>());
+        _particleController.ReturnParticle(gameObject.GetComponent<ParticleSystem>());
     }
 
 }

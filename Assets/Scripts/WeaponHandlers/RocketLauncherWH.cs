@@ -24,7 +24,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
     public override Vector3 GetInitialProjectileVelocity(Transform projectileTransform)
     {
-        return (projectileTransform.transform.up * _projectileSpeed);
+        return projectileTransform.transform.up;
     }
 
     protected override void ActivateInternal()
@@ -45,10 +45,13 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
     {
         float spreadSubdivided = _degreeSpread / _rocketCount;
 
-        _projectileLifetime = (_inputCon.MousePos - transform.position).magnitude / _projectileSpeed;
+       
 
         for (int i = 0; i < _rocketCount; i++)
         {
+            float rand = Random.Range(0.9f, 1.1f);
+            _projectileLifetime = rand * (_inputCon.MousePos - transform.position).magnitude / _projectileSpeed;
+
             Quaternion sector = Quaternion.Euler(0, 0,
                 (i * spreadSubdivided) - (_degreeSpread / 2f) + transform.eulerAngles.z);
             Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
@@ -97,12 +100,14 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
     public float GetSnakeAmount()
     {
-        return _snakeAmount;
+        float rand = Random.Range(0.8f, 1.2f);
+        return _snakeAmount * rand;
     }
 
     public float GetSpeedSpec()
     {
-        return _projectileSpeed;
+        float rand = Random.Range(0.8f, 1.2f);
+        return _projectileSpeed * rand;
     }
 
     public Vector3 GetTargetPosition()
