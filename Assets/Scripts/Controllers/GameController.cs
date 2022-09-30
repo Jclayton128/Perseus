@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     CameraController _camCon;
     UI_Controller _uiController;
     PlayerShipLibrary _playerShipLibrary;
+    RunController _runStatsController;
 
     public Action<GameObject> OnPlayerSpawned;
 
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
     {
         _camCon = GetComponent<CameraController>();
         _uiController = GetComponent<UI_Controller>();
+        _runStatsController = GetComponent<RunController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
     }
 
@@ -51,6 +53,9 @@ public class GameController : MonoBehaviour
             _uiController.FlashShipSelectionDescription();
             return;
         }
+
+        _runStatsController.ResetRunStats();
+
         _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         OnPlayerSpawned?.Invoke(_player);
 
@@ -66,6 +71,7 @@ public class GameController : MonoBehaviour
         Destroy(_player);
         _player = null;
         _camCon.FocusCameraOnTarget(null);
+        _uiController.SetIntroText(_runStatsController.GetGameoverText(false));
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
         PauseGame(0.7f);
@@ -75,6 +81,7 @@ public class GameController : MonoBehaviour
     {
         _player = null;
         _camCon.FocusCameraOnTarget(null);
+        _uiController.SetIntroText(_runStatsController.GetGameoverText(true));
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
         PauseGame(0.7f);

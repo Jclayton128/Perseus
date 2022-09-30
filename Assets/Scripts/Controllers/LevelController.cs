@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 {
     //Refs
     GameController _gameController;
+    RunController _runController;
     SystemWeaponLibrary _systemWeaponLibrary;
     EnemyLibrary _enemyLibrary;
     LevelLibrary _levelLibrary;
@@ -20,7 +21,6 @@ public class LevelController : MonoBehaviour
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
 
     //settings 
-    int _startingThreatBudget = 2;
     float _minSeparationBetweenWormholes = 20f;
     float _wormholeSelectionTime = 5f;
     [SerializeField] GameObject _cratePrefab = null;
@@ -29,8 +29,6 @@ public class LevelController : MonoBehaviour
 
     //state
     public Level _currentLevel;
-    public int CurrentLevelNumber;
-    public int CurrentThreatBudget;
     [SerializeField] Color _filterColor = Color.white;
     Tween _filterTween;
 
@@ -49,13 +47,10 @@ public class LevelController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _runController = GetComponent<RunController>();
         _gameController.OnPlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
-        _systemWeaponLibrary = _levelLibrary.GetComponent<SystemWeaponLibrary>();   
-
-        CurrentThreatBudget = _startingThreatBudget;
-        CurrentLevelNumber = 1;
 
         _arenaEdgeCollider = FindObjectOfType<CircleEdgeCollider2D>();
         ArenaRadius = _arenaEdgeCollider.Radius;
@@ -97,6 +92,8 @@ public class LevelController : MonoBehaviour
 
     private void WarpIntoNewLevel()
     {
+        _runController.IncrementSectorCount();
+
         _gameController.Player.transform.position = Vector3.zero;
 
         _filterTween.Kill();
@@ -190,7 +187,7 @@ public class LevelController : MonoBehaviour
     [ContextMenu("SpawnRandomEnemies")]
     public void SpawnEnemiesInNewSector_Debug()
     {
-        int budget = CurrentThreatBudget;
+        int budget = _runController.GetThreatBudget() ;
         bool hasNebula = (_currentLevel.NebulaAmount == NebulaAmounts.None) ? false : true;
         bool hasAsteroids = (_currentLevel.AsteroidAmount == AsteroidAmounts.None) ? false : true;
 

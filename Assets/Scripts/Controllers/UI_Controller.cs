@@ -134,6 +134,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Meta Menu")]
     [SerializeField] Image[] _shipChoiceOptionImages = null;
 
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] TextMeshProUGUI _introTextTMP = null;
+
     [FoldoutGroup("Radar")]
     [SerializeField] RadarSector[] _radarSectors = null;
 
@@ -320,6 +323,11 @@ public class UI_Controller : MonoBehaviour
         ClearAllSystemSlots();
         ClearAllSecondaryWeaponSlots();
         ClearPrimaryWeaponSlot();
+    }
+
+    public void SetIntroText(string text)
+    {
+        _introTextTMP.text = text;
     }
 
     #endregion
