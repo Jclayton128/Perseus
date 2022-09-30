@@ -54,7 +54,7 @@ public class PoolController : MonoBehaviour
 
     public Projectile SpawnProjectile(Projectile.ProjectileType projectileType, Transform muzzle)
     {
-        Debug.Log($"Asked to spawn a {projectileType}");
+        //Debug.Log($"Asked to spawn a {projectileType}");
         Projectile pb;
         if (_unusedPools[projectileType].Count == 0)
         {

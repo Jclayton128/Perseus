@@ -1298,8 +1298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingSystems: 
-  _startingWeapons: 0c00000004000000
-  _activeWeaponIndex: 0
+  _startingWeapons: 04000000000000000a000000
+  _systemsOnBoard: []
   _primaryWeaponsOnBoard: []
   _secondaryWeaponsOnBoard: []
 --- !u!114 &1235920834
@@ -1402,6 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHullPoints: 20
+  _emitsHullChunks: 1
   _maxShieldPoints: 10
   _shieldHealRate: 1
   _ionHealRate: 0.1
