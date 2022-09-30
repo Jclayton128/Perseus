@@ -67,6 +67,12 @@ public class HealthHandler : MonoBehaviour
     float _timeToAllowShieldRegen = 0;
     float _timeToAllowHullDamageFX = 0;
     float _gatheredHullDamageForSingleParticleRelease = 0;
+    
+    /// <summary>
+    /// If this is TRUE, when this HealthHandler hits zero, the game session ends. Good for the player,
+    /// or someother kind of mission essential ship.
+    /// </summary>
+    bool _shouldEndGameSessionUponDeath = false;
     #endregion
 
     private void Awake()
@@ -86,6 +92,7 @@ public class HealthHandler : MonoBehaviour
             _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
             _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
             _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
+            _shouldEndGameSessionUponDeath = true;
         }
 
         _ionizationPointsAbsorbed = 0;
@@ -113,11 +120,15 @@ public class HealthHandler : MonoBehaviour
 
     private void Die()
     {
-        if (!_movement.IsPlayer)
+        if (!_shouldEndGameSessionUponDeath)
         {
             Vector2 dir = UnityEngine.Random.onUnitSphere;
             Debug.Log($"should spawn {_scrapValue} scraps");
             _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
+        }
+        else
+        {
+            FindObjectOfType<GameController>().EndGameOnPlayerDeath();
         }
 
         Destroy(gameObject);
