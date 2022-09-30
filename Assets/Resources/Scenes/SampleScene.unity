@@ -17856,6 +17856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+  - {fileID: 4695839022140833980, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39995,6 +39996,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bfeae42452d808a46882be2db69a2431, type: 2}
   - {fileID: 11400000, guid: 82ee714845c78e941a47ee74da445a50, type: 2}
   - {fileID: 11400000, guid: ef2f272c0a652fe40bf37184a86a5d89, type: 2}
+  - {fileID: 11400000, guid: 0d64d81ffe30f574c90ea23204c59151, type: 2}
+  - {fileID: 11400000, guid: 37c40f68c2acffe4083e21f0b856103f, type: 2}
+  - {fileID: 11400000, guid: 2b34a8966b89d3e43b10b76d7fd71257, type: 2}
   _tutorialPanelBackground: {fileID: 1443925609}
   _tutorialTMP: {fileID: 1254465634}
   _tutorialFontColor: {r: 1, g: 1, b: 1, a: 1}

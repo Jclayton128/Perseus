@@ -28,7 +28,8 @@ public class TutorialStep : ScriptableObject
         TopRight,
         BottomLeft,
         BottomMiddle,
-        BottomRight
+        BottomRight,
+        Hidden
     }
 
     [SerializeField] Location _location = Location.BottomMiddle;

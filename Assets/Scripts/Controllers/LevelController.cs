@@ -70,7 +70,7 @@ public class LevelController : MonoBehaviour
     {
         ClearLevel();
         _currentLevel = _tutorialLevel;
-        BuildNewLevel();
+        BuildTutorialLevel();
     }
 
     public void StartGameWithRegular()
@@ -86,10 +86,18 @@ public class LevelController : MonoBehaviour
     {
         ClearLevel();
         WarpIntoNewLevel();
-        BuildNewLevel();
+        BuildNewRegularLevel();
     }
 
-    private void BuildNewLevel()
+
+    private void BuildTutorialLevel()
+    {
+        Vector2[] tutorialWormholePosition = new Vector2[1] {new Vector2(0,30f)};
+        SpawnWormholes(1, tutorialWormholePosition);
+        SpawnTutorialEnemy();
+    }
+
+    private void BuildNewRegularLevel()
     {
         SpawnWormholes(3);
         SpawnEnemiesInNewSector_Debug();         // Populate Enemies according threat budget, add to list
@@ -200,6 +208,17 @@ public class LevelController : MonoBehaviour
     #region Spawning New Level Items
 
     [ContextMenu("SpawnRandomEnemies")]
+
+    public void SpawnTutorialEnemy()
+    {
+        Vector2 tutorialEnemyPosition = new Vector2(10f, 10f);
+        Quaternion rot = Quaternion.identity;
+        GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyOfType(EnemyInfoHolder.EnemyType.Dummy1),
+            tutorialEnemyPosition, rot);
+        RegisterEnemy(newEnemy);
+
+    }
+
     public void SpawnEnemiesInNewSector_Debug()
     {
         int budget = _runController.GetThreatBudget() ;
@@ -225,6 +244,19 @@ public class LevelController : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(pos, Vector3.forward);
         GameObject newEnemy = Instantiate(enemy, pos, rot);
         RegisterEnemy(newEnemy);
+    }
+
+    public void SpawnWormholes(int count, Vector2[] positions)
+    {
+        for (int i = 0; i < count; i++)
+        {           
+            WormholeHandler wh = Instantiate(_wormholePrefab, 
+                positions[i], Quaternion.identity).GetComponent<WormholeHandler>();
+            _wormholesOnLevel.Add(wh);
+            wh.Initialize(_levelLibrary.GetRandomLevel());
+            wh.OnPlayerEnterWormhole += ReactToPlayerEnteringWormhole;
+            wh.OnPlayerExitWormhole += ReactToPlayerExitingWormhome;
+        }
     }
 
     public void SpawnWormholes(int count)

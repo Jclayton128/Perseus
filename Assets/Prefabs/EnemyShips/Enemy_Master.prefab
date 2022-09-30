@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHullPoints: 10
+  _emitsHullChunks: 1
   _maxShieldPoints: 10
   _shieldHealRate: 0.25
   _ionHealRate: 0
@@ -195,6 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb67051a40b9f64d953f354b746ba60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThreatScore: 1
+  EType: 0
+  LivesAmongAsteroidsOnly: 0
+  LivesInNebulaOnly: 0
+  ScannerName: Master
 --- !u!114 &752881964
 MonoBehaviour:
   m_ObjectHideFlags: 0

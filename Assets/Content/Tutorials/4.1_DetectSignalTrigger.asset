@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d16e446837e5544a9b26dd6fdc6c6e9, type: 3}
-  m_Name: TutorialStep_DetectSignal
+  m_Name: 4.1_DetectSignalTrigger
   m_EditorClassIdentifier: 
-  _location: 4
-  _completionCriteria: 3
-  _tutorialText: Radar shows signals from enemies and warp points, plus your own
-    signal level.
+  _location: 6
+  _completionCriteria: 4
+  _tutorialText: 

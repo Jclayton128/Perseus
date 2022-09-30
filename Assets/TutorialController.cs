@@ -25,7 +25,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField] Color _tutorialPanelColor = Color.white;
     [SerializeField] float _tutorialPanelDeployTime = 1.0f;
 
-    float _timeDelayCompletionCriteria = 20f; //Time to show time-based steps.
+    float _timeDelayCompletionCriteria = 8f; //Time to show time-based steps.
 
     //state
     Tween _backgroundTween;
@@ -33,7 +33,7 @@ public class TutorialController : MonoBehaviour
     int _currentStepIndex = -1;
     TutorialStep _currentTutorialStep;
     TutorialStep.CompletionCriteria _currentCompletionCriteria;
-    float _timeForTimebasedCompletion;
+    float _timeForTimebasedCompletion = Mathf.Infinity;
 
     private void Awake()
     {
@@ -91,6 +91,10 @@ public class TutorialController : MonoBehaviour
         _currentStepIndex++;
         _currentTutorialStep = _tutorialSteps[_currentStepIndex];
         _currentCompletionCriteria = _currentTutorialStep.GetCompletionCriteria();
+        if (_currentCompletionCriteria == TutorialStep.CompletionCriteria.Timed)
+        {
+            _timeForTimebasedCompletion = Time.time + _timeDelayCompletionCriteria;
+        }
         
         Invoke(nameof(DisplayCurrentTutorialStep), _tutorialPanelDeployTime * 2f);
     }
@@ -121,8 +125,8 @@ public class TutorialController : MonoBehaviour
     private void DisplayCurrentTutorialStep()
     {
         int locationAsInt = (int)_currentTutorialStep.GetLocation();
-        // LocationAsInt of 0 means None, which means the panel should remain undisplayed
-        if (locationAsInt != 0)
+        // LocationAsInt of 6 means None, which means the panel should remain undisplayed
+        if (locationAsInt != 6)
         {
             _tutorialPanel.anchoredPosition = _tutorialPositions[locationAsInt];
             _backgroundTween.Kill();
