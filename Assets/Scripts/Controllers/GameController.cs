@@ -25,8 +25,6 @@ public class GameController : MonoBehaviour
 
     public static bool IsPaused { get; private set; } = false;
 
-    [SerializeField] bool _ispausedtattle;
-
     private void Awake()
     {
         _camCon = GetComponent<CameraController>();
@@ -37,12 +35,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _uiController.InstantDeployMetaMenu();
-        PauseGame(1.2f);
-    }
-
-    private void Update()
-    {
-        _ispausedtattle = IsPaused;
+        //PauseGame(1.2f);
     }
 
     public void SetupNewGame()
@@ -62,7 +55,7 @@ public class GameController : MonoBehaviour
         OnPlayerSpawned?.Invoke(_player);
 
         _uiController.RetractMetaMenu();
-        UnpauseGame();
+        //UnpauseGame();
         
         //TODO snap the camera to something interesting?
         _camCon.FocusCameraOnTarget(_player.transform);
