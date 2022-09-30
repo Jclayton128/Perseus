@@ -5,13 +5,15 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
+
 public class GameController : MonoBehaviour
 {
     CameraController _camCon;
     UI_Controller _uiController;
+    LevelController _levelController;
     PlayerShipLibrary _playerShipLibrary;
     RunController _runStatsController;
-
+    TutorialController _tutorialController;
     public Action<GameObject> OnPlayerSpawned;
 
     //state
@@ -31,6 +33,8 @@ public class GameController : MonoBehaviour
         _camCon = GetComponent<CameraController>();
         _uiController = GetComponent<UI_Controller>();
         _runStatsController = GetComponent<RunController>();
+        _tutorialController = GetComponent<TutorialController>();
+        _levelController = GetComponent<LevelController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
     }
 
@@ -54,14 +58,25 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        _runStatsController.ResetRunStats();
-
         _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         OnPlayerSpawned?.Invoke(_player);
 
+  
+
+        _runStatsController.ResetRunStats();     
+
         _uiController.RetractMetaMenu();
         UnpauseGame();
-        
+        if (_uiController.GetTutorialModeCheckStatus())
+        {
+            _tutorialController.BeginTutorialSequence();
+            _levelController.StartGameWithTutorial();
+        }
+        else
+        {
+            _tutorialController.EndTutorial();
+            _levelController.StartGameWithRegular();
+        }
         //TODO snap the camera to something interesting?
         _camCon.FocusCameraOnTarget(_player.transform);
     }

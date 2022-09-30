@@ -26,6 +26,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] GameObject _cratePrefab = null;
     [SerializeField] GameObject _wormholePrefab = null;
     [SerializeField] SpriteRenderer _filterSR;
+    [SerializeField] Level _tutorialLevel = null;
 
     //state
     public Level _currentLevel;
@@ -61,17 +62,31 @@ public class LevelController : MonoBehaviour
     private void ReactToPlayerSpawned(GameObject player)
     {
         _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
+    }
+
+    #region Entry Points to Level sequences
+
+    public void StartGameWithTutorial()
+    {
+        ClearLevel();
+        _currentLevel = _tutorialLevel;
+        BuildNewLevel();
+    }
+
+    public void StartGameWithRegular()
+    {
         LoadNewRandomLevel();
     }
 
-    #region Flow
+    #endregion
 
+
+    #region Flow
     private void LoadNewRandomLevel()
     {
         ClearLevel();
         WarpIntoNewLevel();
         BuildNewLevel();
-
     }
 
     private void BuildNewLevel()

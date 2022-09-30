@@ -24,7 +24,7 @@ public class EnemyLibrary : MonoBehaviour
         {
             _enemies.Add(enemy.GetComponent<EnemyInfoHolder>().EType, enemy);
         }
-        //Debug.Log($"Created an menu with {_enemies.Count} enemies");
+        Debug.Log($"Created an menu with {_enemies.Count} enemies");
     }
 
     public List<GameObject> CreateRandomMenuFromBudget(

@@ -17,6 +17,8 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Meta Menu")]
     [SerializeField] Image _bottomMetaWing = null;
 
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] Toggle _tutorialModeToggle = null;
 
     [FoldoutGroup("Systems & Weapons")]
     [SerializeField] SystemIconDriver[] _systemIcons = null;
@@ -146,6 +148,9 @@ public class UI_Controller : MonoBehaviour
     PlayerSystemHandler _playerSystemHandler;
     GameController _gameController;
     PlayerShipLibrary _playerShipLibrary;
+    public Action OnScrapLevelIncrease;
+    public Action OnUpgradePointsIncrease;
+    public Action OnDetectStrongSignal;
 
     public enum Context { None, Start, Core, End };
 
@@ -330,6 +335,11 @@ public class UI_Controller : MonoBehaviour
         _introTextTMP.text = text;
     }
 
+    public bool GetTutorialModeCheckStatus()
+    {
+        return _tutorialModeToggle.isOn;
+    }
+
     #endregion
 
     #region Scrap and Upgrade Points
@@ -342,11 +352,22 @@ public class UI_Controller : MonoBehaviour
         }
 
         _scrapAmountTMP.text = totalScrapAmount.ToString();
+        float before = _scrapBarFill.fillAmount;
         _scrapBarFill.fillAmount = Mathf.Lerp(_minScrapFactor, _maxScrapFactor, scrapFillFactor);
+        
+        if (_scrapBarFill.fillAmount > before)
+        {
+            OnScrapLevelIncrease?.Invoke();
+        }
     }
 
     public void ModifyUpgradePointsAvailable(int newLevel)
     {
+        if (newLevel > 0)
+        {
+            OnUpgradePointsIncrease?.Invoke();
+        }
+
         _levelTMP.text = newLevel.ToString();
     }
 
@@ -770,10 +791,15 @@ public class UI_Controller : MonoBehaviour
         for (int i = 0; i < intensities.Length; i++)
         {
             _radarSectors[i].SetIntensityLevel(intensities[i]);
+            
+            if (intensities[i] >= 0.5f) //Magic number is for a signal of 50% power.
+            {
+                OnDetectStrongSignal?.Invoke();
+            }
         }
     }
 
-    #endregion
+    #endregion    
 
     #region Public Gets
     public int GetMaxSystems()
