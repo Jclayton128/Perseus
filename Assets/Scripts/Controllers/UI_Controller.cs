@@ -315,6 +315,13 @@ public class UI_Controller : MonoBehaviour
         _shipChoiceDescription.rectTransform.DOLocalJump(Vector2.up, 14f, 1, 0.7f).SetUpdate(true);
     }
 
+    public void ResetAllShipRelatedUI()
+    {
+        ClearAllSystemSlots();
+        ClearAllSecondaryWeaponSlots();
+        ClearPrimaryWeaponSlot();
+    }
+
     #endregion
 
     #region Scrap and Upgrade Points

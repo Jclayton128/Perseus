@@ -21,13 +21,13 @@ public class PlayerSystemHandler : MonoBehaviour
     Dictionary<SystemWeaponLibrary.SystemLocation, GameObject> _systemsOnBoardByLocation = new Dictionary<SystemWeaponLibrary.SystemLocation, GameObject>();
 
     //state
-   public  int _activeWeaponIndex;
+    int _activeWeaponIndex;
     public WeaponHandler ActiveWeapon { get; protected set; }
     int _maxSystems;
     int _maxWeapons;
 
     //These lists are to help with scrolling and shooting multiple primary systems at once
-    List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
+    [SerializeField] List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
     [SerializeField] List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
     [SerializeField] List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
     private void Awake()
@@ -36,9 +36,13 @@ public class PlayerSystemHandler : MonoBehaviour
         _syslib = FindObjectOfType<SystemWeaponLibrary>();
         _UICon = FindObjectOfType<UI_Controller>();
         _inputCon = _UICon.GetComponent<InputController>();
-        _inputCon.OnScroll += ScrollThroughActiveWeapons;
-        _inputCon.OnMouseDown += ActivateWeapons;
-        _inputCon.OnMouseUp += DeactivateWeapons;
+        if (_inputCon)
+        {
+            _inputCon.OnScroll += ScrollThroughActiveWeapons;
+            _inputCon.OnMouseDown += ActivateWeapons;
+            _inputCon.OnMouseUp += DeactivateWeapons;
+        }
+
         _maxSystems = _UICon.GetMaxSystems();
         _maxWeapons = _UICon.GetMaxWeapons();
 
@@ -58,6 +62,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     private void LoadStartingSystems()
     {
+        _systemsOnBoard.Clear();
         foreach (var system in _startingSystems)
         {
             GainSystem(_syslib.GetSystem(system));
@@ -67,6 +72,11 @@ public class PlayerSystemHandler : MonoBehaviour
 
     private void LoadStartingWeapons()
     {
+        _weaponsOnBoard.Clear();
+        _secondaryWeaponsOnBoard.Clear();
+        _primaryWeaponsOnBoard.Clear();
+        _activeWeaponIndex = -1;
+        ActiveWeapon = null;
         foreach (var weapon in _startingWeapons)
         {
             GainWeapon(_syslib.GetWeapon(weapon));
@@ -320,6 +330,7 @@ public class PlayerSystemHandler : MonoBehaviour
         }
         if (priOrSec == 1) // Active Secondary Weapon
         {
+            Debug.Log($"activating {ActiveWeapon}");
             ActiveWeapon?.Activate();
         }
     }
@@ -401,5 +412,12 @@ public class PlayerSystemHandler : MonoBehaviour
         }
 
         return weaponTypes;
+    }
+
+    private void OnDestroy()
+    {
+        _inputCon.OnScroll -= ScrollThroughActiveWeapons;
+        _inputCon.OnMouseDown -= ActivateWeapons;
+        _inputCon.OnMouseUp -= DeactivateWeapons;
     }
 }

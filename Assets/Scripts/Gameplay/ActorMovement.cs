@@ -236,4 +236,21 @@ public class ActorMovement : MonoBehaviour
     }
 
     #endregion
+
+    private void OnDestroy()
+    {
+        if (!_inputCon) _inputCon = FindObjectOfType<InputController>();
+
+        if (_inputCon)
+        {
+            _inputCon.OnAccelBegin -= HandleBeginAccelerating;
+            _inputCon.OnAccelEnd -= HandleStopAccelerating;
+            _inputCon.OnDecelBegin -= HandleBeginDecelerating;
+            _inputCon.OnDecelEnd -= HandleStopDecelerating;
+            _inputCon.OnTurnLeft -= HandleTurningLeft;
+            _inputCon.OnTurnRight -= HandleTurningRight;
+            _inputCon.OnMSelect -= HandleTurnModeToggle;
+        }
+
+    }
 }

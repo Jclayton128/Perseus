@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
         OnPlayerSpawned?.Invoke(_player);
 
         _uiController.RetractMetaMenu();
-        //UnpauseGame();
+        UnpauseGame();
         
         //TODO snap the camera to something interesting?
         _camCon.FocusCameraOnTarget(_player.transform);
@@ -67,7 +67,8 @@ public class GameController : MonoBehaviour
         _player = null;
         _camCon.FocusCameraOnTarget(null);
         _uiController.DeployMetaMenu();
-        PauseGame(1.2f);
+        _uiController.ResetAllShipRelatedUI();
+        PauseGame(0.7f);
     }
 
     public void EndGameOnPlayerDeath()
@@ -75,7 +76,8 @@ public class GameController : MonoBehaviour
         _player = null;
         _camCon.FocusCameraOnTarget(null);
         _uiController.DeployMetaMenu();
-        PauseGame(1.2f);
+        _uiController.ResetAllShipRelatedUI();
+        PauseGame(0.7f);
     }
 
     #region Time Scale
