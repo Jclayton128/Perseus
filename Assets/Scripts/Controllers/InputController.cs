@@ -5,6 +5,7 @@ using System;
 
 public class InputController : MonoBehaviour
 {
+    public Action<Vector2> OnDesiredTranslateChange;
     public Action OnAccelBegin;
     public Action OnAccelEnd;
     public Action OnDecelBegin;
@@ -29,11 +30,16 @@ public class InputController : MonoBehaviour
 
     //state
     public Vector3 MousePos { get; private set; }
+    public bool IsTranslationalMovementMode = false;
+    Vector2 _desiredTranslation = Vector2.zero;
+
 
 
     private void Update()
     {
-        UpdateKeyboardInput();
+        if (IsTranslationalMovementMode == true) UpdateKeyboardInput_Translation();
+        else UpdateKeyboardInput_Rotation();
+
         UpdateMouseInput();
         UpdateMouseScrollInput();
         UpdateMouseFiringInput();
@@ -73,7 +79,38 @@ public class InputController : MonoBehaviour
         }
     }
 
-    private void UpdateKeyboardInput()
+    private void UpdateKeyboardInput_Translation()
+    {
+        _desiredTranslation = Vector2.zero;
+        if (Input.GetKey(KeyCode.W))
+        {
+            _desiredTranslation.y += 1f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            _desiredTranslation.y -= 1f;
+        }
+        _desiredTranslation.y =
+            Mathf.Clamp(_desiredTranslation.y ,- 1f, 1f);
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            _desiredTranslation.x -= 1f;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            _desiredTranslation.x += 1f;
+        }
+        _desiredTranslation.x =
+            Mathf.Clamp(_desiredTranslation.x ,- 1f, 1f);
+
+
+        OnDesiredTranslateChange?.Invoke(_desiredTranslation.normalized);
+        
+    }
+
+
+    private void UpdateKeyboardInput_Rotation()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {

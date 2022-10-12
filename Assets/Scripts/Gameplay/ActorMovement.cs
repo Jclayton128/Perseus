@@ -27,6 +27,14 @@ public class ActorMovement : MonoBehaviour
     [SerializeField] float _thrust;
     [SerializeField] float _turnRate;
 
+    //translate experiment
+    [Header("Translational Movement")]
+    [SerializeField] bool _isCommandedToTranslate;
+    [SerializeField] Vector2 _commandedVector = Vector2.zero;
+    [SerializeField] float maxAngleOffBoresightToDrive = 10f;
+    [SerializeField] float angleOffCommandedVector;
+
+
     /// <summary>
     /// This much Profile is added to an actor's profile every second while thrusting.
     /// </summary>
@@ -52,6 +60,7 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnTurnLeft += HandleTurningLeft;
             _inputCon.OnTurnRight += HandleTurningRight;
             _inputCon.OnMSelect += HandleTurnModeToggle;
+            _inputCon.OnDesiredTranslateChange += HandleTranslateChange;
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
             
         }
@@ -62,12 +71,13 @@ public class ActorMovement : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayer)
+        if (IsPlayer && !_inputCon.IsTranslationalMovementMode)
         {
             if (IsMouseSteering) ConverMouseIntoDesiredSteering();
             else UpdateSteering();
         }
     }
+
 
     private void ConverMouseIntoDesiredSteering()
     {
@@ -91,11 +101,21 @@ public class ActorMovement : MonoBehaviour
 
     }
 
+    
+    
+
     private void FixedUpdate()
     {
-        UpdateAccelDecel();
-        UpdateTurning();        
-
+        if (!_inputCon.IsTranslationalMovementMode)
+        {
+            UpdateAccelDecel();
+            UpdateTurning();
+        }
+        else
+        {
+            UpdateTranslationBasedRotation();
+            UpdateTranslationalMovement();
+        }
     }
 
     private void UpdateAccelDecel()
@@ -137,11 +157,55 @@ public class ActorMovement : MonoBehaviour
 
         //transform.rotation = Quaternion.LookRotation()
     }
+    private void UpdateTranslationBasedRotation()
+    {
+        angleOffCommandedVector = Vector3.SignedAngle(transform.up, _commandedVector, Vector3.forward);
+
+        if (!_isCommandedToTranslate)
+        {
+            _rb.angularVelocity = 0;
+            return;
+        }
+        if (angleOffCommandedVector > -0.1f)
+        {
+            _rb.angularVelocity = _turnRate;
+        }
+        if (angleOffCommandedVector < 0.1f)
+        {
+            _rb.angularVelocity = -_turnRate;
+        }
+    }
+
+    private void UpdateTranslationalMovement()
+    {
+
+        if (!_isCommandedToTranslate || Mathf.Abs(angleOffCommandedVector) > maxAngleOffBoresightToDrive)
+        {
+            //_rb.velocity = Vector2.Lerp(_rb.velocity, Vector2.zero, Time.deltaTime * 3);
+        }
+        if (_isCommandedToTranslate)
+        {
+            if (Mathf.Abs(angleOffCommandedVector) < maxAngleOffBoresightToDrive * 4)
+            {
+                _rb.AddForce(_commandedVector * (_thrust / 2f) * Time.fixedDeltaTime);
+            }
+            if (Mathf.Abs(angleOffCommandedVector) < maxAngleOffBoresightToDrive)
+            {
+                _rb.AddForce(_commandedVector * _thrust * Time.fixedDeltaTime);
+            }
+        }
+    }
 
     #endregion
 
     #region Event Handlers
 
+    private void HandleTranslateChange(Vector2 translationVector)
+    {
+        if (translationVector.magnitude > Mathf.Epsilon) _isCommandedToTranslate = true;
+        else _isCommandedToTranslate = false;
+        _commandedVector = translationVector;
+    }
     private void HandleBeginAccelerating()
     {
         ShouldAccelerate = true;
