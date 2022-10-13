@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ActorMovement : MonoBehaviour
@@ -10,41 +8,51 @@ public class ActorMovement : MonoBehaviour
     Rigidbody2D _rb;
     [SerializeField] ParticleSystem[] _engineParticles = null;
     RadarProfileHandler _radarProfileHandler;
+    MindsetHandler _mindsetHandler;
 
     //settings
     float _turningForce = 300f;
 
     //state
     public bool IsPlayer = false;
+
+    [ShowIf("IsPlayer")]
     public bool IsMouseSteering = true;
 
     public bool ShouldAccelerate;
     public bool ShouldDecelerate;
     public bool ShouldTurnLeft;
     public bool ShouldTurnRight;
-    public Vector3 DesiredSteering;
+
+    [HideIf("IsPlayer")]
+    [SerializeField] float _decelDistanceDecision = 5f;
+    [HideIf("IsPlayer")]
+    [SerializeField] float _accelClosureDecision = 10.0f;
+    [HideIf("IsPlayer")]
+    [SerializeField] float _minAngleOffDesiredSteeringToAccel = 10.0f;
 
     [SerializeField] float _thrust;
     [SerializeField] float _turnRate;
 
-    //translate experiment
-    [Header("Translational Movement")]
-    [SerializeField] bool _isCommandedToTranslate;
-    [SerializeField] Vector2 _commandedVector = Vector2.zero;
-    [SerializeField] float maxAngleOffBoresightToDrive = 10f;
-    [SerializeField] float angleOffCommandedVector;
-
+    [Tooltip("Negative drag rate defaults to thrust/100")]
+    [SerializeField] float _decelDragRate = -1f;
+    [SerializeField] float _normalDragRate = 0f;
 
     /// <summary>
     /// This much Profile is added to an actor's profile every second while thrusting.
     /// </summary>
-    float _thrustProfileIncreaseRate = 15f;
+    [SerializeField] float _thrustProfileIncreaseRate = 15f;
 
     /// <summary>
     /// This is how much energy gets drained per second of thrusting. Normally zero;
     /// </summary>
-    float _thrustEnergyCostRate = 0; 
+    [SerializeField] float _thrustEnergyCostRate = 0;
 
+    //state
+    [SerializeField] float _angleOffComputedSteering;
+    Vector2 _desiredSteering;
+    Vector2 _computedSteering;
+    [SerializeField] float _closure;
 
     private void Awake()
     {
@@ -60,62 +68,112 @@ public class ActorMovement : MonoBehaviour
             _inputCon.OnTurnLeft += HandleTurningLeft;
             _inputCon.OnTurnRight += HandleTurningRight;
             _inputCon.OnMSelect += HandleTurnModeToggle;
-            _inputCon.OnDesiredTranslateChange += HandleTranslateChange;
+
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
             
         }
-        
+        else
+        {
+            _mindsetHandler = GetComponent <MindsetHandler>();
+        } 
     }
 
     #region Flow
 
     private void Update()
     {
-        if (IsPlayer && !_inputCon.IsTranslationalMovementMode)
+        if (IsPlayer)
         {
             if (IsMouseSteering) ConverMouseIntoDesiredSteering();
             else UpdateSteering();
+            _computedSteering = _desiredSteering;
+        }
+        else
+        {
+            _desiredSteering =
+                   (_mindsetHandler.TargetPosition - (Vector2)transform.position);
+
+            if (_mindsetHandler.IsTargetStrict)
+            {
+                _computedSteering = _desiredSteering;
+            }
+            else
+            {
+                _computedSteering = _desiredSteering +
+                    _mindsetHandler.TargetVelocity - _rb.velocity;
+            }
+
+
+            Debug.DrawLine(transform.position,
+                _rb.velocity + (Vector2)transform.position,
+                Color.green, 0.1f);
+
+            Debug.DrawLine((Vector2)transform.position,
+                (Vector2)transform.position + _computedSteering,
+                Color.blue, .1f);
+
+            Debug.DrawLine(transform.position,
+                (Vector2)transform.position + _desiredSteering,
+                Color.red, 0.1f);
+
+            _angleOffComputedSteering =
+                Vector3.SignedAngle(transform.up, _computedSteering, Vector3.forward);
+            UpdateAccelDecelDecision();
         }
     }
 
 
     private void ConverMouseIntoDesiredSteering()
     {
-        DesiredSteering = _inputCon.MousePos - transform.position;
+        _desiredSteering = _inputCon.MousePos - transform.position;
     }
 
     private void UpdateSteering()
     {
         if (ShouldTurnLeft)
         {
-            DesiredSteering = Vector3.RotateTowards(DesiredSteering, -transform.right,
+            _desiredSteering = Vector3.RotateTowards(_desiredSteering, -transform.right,
                 _turnRate*Mathf.Deg2Rad * Time.deltaTime, 180f);
             return;
         }
         if (ShouldTurnRight)
         {
-            DesiredSteering = Vector3.RotateTowards(DesiredSteering, transform.right,
+            _desiredSteering = Vector3.RotateTowards(_desiredSteering, transform.right,
                 _turnRate * Mathf.Deg2Rad * Time.deltaTime, 180f);
             return;
         }
 
     }
 
-    
-    
 
-    private void FixedUpdate()
+    private void UpdateAccelDecelDecision()
     {
-        if (!_inputCon.IsTranslationalMovementMode)
+        float dist = (_mindsetHandler.TargetPosition - (Vector2)transform.position).magnitude;
+        _closure = Vector3.Dot(_rb.velocity, _computedSteering.normalized);
+
+        if (dist < _decelDistanceDecision || _closure > _accelClosureDecision)
         {
-            UpdateAccelDecel();
-            UpdateTurning();
+            HandleStopAccelerating();
+            HandleBeginDecelerating();
+        }
+        else if (_angleOffComputedSteering < _minAngleOffDesiredSteeringToAccel
+            && _closure < _accelClosureDecision)
+        {
+            HandleBeginAccelerating();
+            HandleStopDecelerating();
         }
         else
         {
-            UpdateTranslationBasedRotation();
-            UpdateTranslationalMovement();
+            HandleStopAccelerating();
+            HandleStopDecelerating();
         }
+    }
+
+
+    private void FixedUpdate()
+    {
+        UpdateAccelDecel();
+        UpdateTurning();
     }
 
     private void UpdateAccelDecel()
@@ -123,89 +181,57 @@ public class ActorMovement : MonoBehaviour
         if (ShouldAccelerate)
         {
             if (_hostEnergyHandler.CheckEnergy(_thrustEnergyCostRate))
-            {
-                _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
-                _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
-                _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate * Time.fixedDeltaTime);
+            {             
+                if (IsPlayer)
+                {
+                    _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+                    _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
+                    _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+                    _radarProfileHandler?.AddToCurrentRadarProfile(
+                        Time.fixedDeltaTime * _thrustProfileIncreaseRate);
+                    _hostEnergyHandler?.SpendEnergy(
+                        _thrustEnergyCostRate * Time.fixedDeltaTime);
+                }
             }
 
         }
         if (ShouldDecelerate)
         {
-            _rb.drag = _thrust / 100f;
+            _rb.drag = (_decelDragRate < 0) ? (_thrust / 100f) : _decelDragRate ;
         }
         if (!ShouldDecelerate)
         {
-            _rb.drag = 0;
+            _rb.drag = _normalDragRate;
         }
     }
 
     private void UpdateTurning()
     {
-       
-        float angleToTarget = Vector3.SignedAngle(DesiredSteering, transform.up, transform.forward);
-        float angleWithTurnDamper = Mathf.Clamp(angleToTarget, -10, 10);
+        _angleOffComputedSteering =
+                Vector3.SignedAngle(_computedSteering, transform.up, transform.forward);
+        float angleWithTurnDamper = Mathf.Clamp(_angleOffComputedSteering, -10, 10);
         float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / 10, -_turnRate, _turnRate);
-        if (angleToTarget > 0.02)
+        if (_angleOffComputedSteering > 0.02)
         {
             _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, currentTurnRate, _turningForce * Time.deltaTime);
         }
-        if (angleToTarget < -0.02)
+        if (_angleOffComputedSteering < -0.02)
         {
             _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, currentTurnRate, _turningForce * Time.deltaTime);
         }
 
         //transform.rotation = Quaternion.LookRotation()
     }
-    private void UpdateTranslationBasedRotation()
-    {
-        angleOffCommandedVector = Vector3.SignedAngle(transform.up, _commandedVector, Vector3.forward);
-
-        if (!_isCommandedToTranslate)
-        {
-            _rb.angularVelocity = 0;
-            return;
-        }
-        if (angleOffCommandedVector > -0.1f)
-        {
-            _rb.angularVelocity = _turnRate;
-        }
-        if (angleOffCommandedVector < 0.1f)
-        {
-            _rb.angularVelocity = -_turnRate;
-        }
-    }
-
-    private void UpdateTranslationalMovement()
-    {
-
-        if (!_isCommandedToTranslate || Mathf.Abs(angleOffCommandedVector) > maxAngleOffBoresightToDrive)
-        {
-            //_rb.velocity = Vector2.Lerp(_rb.velocity, Vector2.zero, Time.deltaTime * 3);
-        }
-        if (_isCommandedToTranslate)
-        {
-            if (Mathf.Abs(angleOffCommandedVector) < maxAngleOffBoresightToDrive * 4)
-            {
-                _rb.AddForce(_commandedVector * (_thrust / 2f) * Time.fixedDeltaTime);
-            }
-            if (Mathf.Abs(angleOffCommandedVector) < maxAngleOffBoresightToDrive)
-            {
-                _rb.AddForce(_commandedVector * _thrust * Time.fixedDeltaTime);
-            }
-        }
-    }
-
+    
     #endregion
 
     #region Event Handlers
 
-    private void HandleTranslateChange(Vector2 translationVector)
-    {
-        if (translationVector.magnitude > Mathf.Epsilon) _isCommandedToTranslate = true;
-        else _isCommandedToTranslate = false;
-        _commandedVector = translationVector;
-    }
+
     private void HandleBeginAccelerating()
     {
         ShouldAccelerate = true;

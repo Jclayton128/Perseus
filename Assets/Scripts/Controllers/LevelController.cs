@@ -23,6 +23,8 @@ public class LevelController : MonoBehaviour
     //settings 
     float _minSeparationBetweenWormholes = 20f;
     float _wormholeSelectionTime = 5f;
+    float _enemySpawnRadius_min = .1f;
+    float _enemySpawnRadius_max = .9f;
     [SerializeField] GameObject _cratePrefab = null;
     [SerializeField] GameObject _wormholePrefab = null;
     [SerializeField] SpriteRenderer _filterSR;
@@ -42,7 +44,7 @@ public class LevelController : MonoBehaviour
     WormholeHandler _selectedWormhole = null;
     float _timeToSelectWormhole = 0;
 
-    public float ArenaRadius { get; private set; }
+    public float ArenaRadius => _arenaEdgeCollider.Radius;
 
 
     private void Awake()
@@ -54,7 +56,6 @@ public class LevelController : MonoBehaviour
         _levelLibrary = FindObjectOfType<LevelLibrary>();
 
         _arenaEdgeCollider = FindObjectOfType<CircleEdgeCollider2D>();
-        ArenaRadius = _arenaEdgeCollider.Radius;
 
     }
 
@@ -230,7 +231,7 @@ public class LevelController : MonoBehaviour
 
         foreach (var enemy in enemiesToMake)
         {
-            Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
+            var pos = CUR.FindRandomPointWithinDistance(Vector2.zero, _enemySpawnRadius_max, _enemySpawnRadius_min);
             Quaternion rot = Quaternion.identity;
             GameObject newEnemy = Instantiate(enemy, pos, rot);
             RegisterEnemy(newEnemy);

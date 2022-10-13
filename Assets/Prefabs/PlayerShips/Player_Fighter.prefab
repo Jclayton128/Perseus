@@ -79,5 +79,6 @@ PrefabInstance:
       propertyPath: _startingWeapons.Array.data[1]
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6445634418287577144, guid: aafa9fe2c8a5c9a40a8805646bd9725d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aafa9fe2c8a5c9a40a8805646bd9725d, type: 3}

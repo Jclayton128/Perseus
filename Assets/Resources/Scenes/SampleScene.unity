@@ -17855,7 +17855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefabs:
-  - {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
   - {fileID: 4695839022140833980, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
@@ -39651,6 +39650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3ad5962e2ea8547adbee3ecdc4b9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTranslationalMovementMode: 0
 --- !u!4 &2102641474
 Transform:
   m_ObjectHideFlags: 0
