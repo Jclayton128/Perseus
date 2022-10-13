@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class EnergyHandler : MonoBehaviour
 {
@@ -9,9 +10,22 @@ public class EnergyHandler : MonoBehaviour
     HealthHandler _health;
 
     [SerializeField] float _maxEnergyPoints = 30f;
+    
+    [HideIf("_usesBurstRecharge")]
     [SerializeField] float _energyGainRate = 1f;
 
-    public float CurrentEnergy { get; protected set; }
+    [Tooltip("Burst Recharge keeps energy at zero, and then instantly returns to full once " +
+        "sufficient time has elapsed.")]
+    [SerializeField] bool _usesBurstRecharge = false;
+
+    [ShowIf("_usesBurstRecharge")]
+    [SerializeField] float _timeToBurstRecharge = 5f;
+
+    //state
+    [SerializeField] float _currentEnergy;
+    public float CurrentEnergy => _currentEnergy;
+
+    [SerializeField] float _burstRechargeCountdown = Mathf.Infinity;
 
     private void Awake()
     {
@@ -29,24 +43,40 @@ public class EnergyHandler : MonoBehaviour
 
     private void Start()
     {
-        CurrentEnergy = _maxEnergyPoints;
+        _currentEnergy = _maxEnergyPoints;
         
         if (_movement.IsPlayer)
         {
             _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
             _uicontroller.UpdateEnergyRegenTMP(_energyGainRate.ToString("F1"), Color.white);
         }
+
+        if (_usesBurstRecharge) _burstRechargeCountdown = _timeToBurstRecharge;
     }
 
     private void Update()
     {
-        CurrentEnergy += _energyGainRate * (1 - _health.IonFactor) * Time.deltaTime;
-        CurrentEnergy = Mathf.Clamp(CurrentEnergy, 0, _maxEnergyPoints);
-
-        if (_movement.IsPlayer)
+        if (_usesBurstRecharge)
         {
-            _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
+            if (_currentEnergy > 0) return;
+            _burstRechargeCountdown -= Time.deltaTime;
+            if (_burstRechargeCountdown <= 0)
+            {
+                _currentEnergy = _maxEnergyPoints;
+                _burstRechargeCountdown = _timeToBurstRecharge;
+            }
         }
+        else
+        {
+            _currentEnergy += _energyGainRate * (1 - _health.IonFactor) * Time.deltaTime;
+            _currentEnergy = Mathf.Clamp(CurrentEnergy, 0, _maxEnergyPoints);
+            if (_movement.IsPlayer)
+            {
+                _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
+            }
+        }        
+
+
     }
 
     /// <summary>
@@ -68,7 +98,7 @@ public class EnergyHandler : MonoBehaviour
 
     public void SpendEnergy(float energySpent)
     {
-        CurrentEnergy -= energySpent;
+        _currentEnergy -= energySpent;
     }
 
     #region System Modifiers

@@ -35,7 +35,7 @@ public class MindsetHandler : MonoBehaviour
 
 
 
-    [SerializeField] float _targetAge = 0; // how many seconds has it been since the player was detected
+    float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
     public float TargetAge => _targetAge;
 
 

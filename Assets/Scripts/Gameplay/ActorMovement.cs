@@ -169,6 +169,14 @@ public class ActorMovement : MonoBehaviour
         float dist = (_mindsetHandler.TargetPosition - (Vector2)transform.position).magnitude;
         _closure = _closureVec.magnitude;
 
+        if (_hostEnergyHandler.CheckEnergy(_thrustEnergyCostRate) == false)
+        {
+            _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate + 1f);
+            HandleStopAccelerating();
+            HandleBeginDecelerating();
+            return;
+        }
+
         if (dist < _decelDistanceDecision || _closure > _accelClosureDecision)
         {
             HandleStopAccelerating();

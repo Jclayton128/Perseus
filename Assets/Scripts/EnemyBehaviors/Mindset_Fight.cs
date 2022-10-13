@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,9 @@ public class Mindset_Fight : Mindset
     [SerializeField] FightOptions _fightOption = FightOptions.Contact;
 
     [Tooltip("What percentage of max weapon range does this strategy reference")]
-    [SerializeField] float _decisionRangeFactor = .5f;
+    [SerializeField] float _decisionRangeFactor = 1f;
 
+    [SerializeField] float _minBoresightErrorToFire = 5f;
     //state
     float _decisionRange;
 
@@ -41,6 +43,28 @@ public class Mindset_Fight : Mindset
 
     public override void UpdateMindset()
     {
+        UpdateNavigation();
+        UpdateWeaponry();
+
+    }
+
+    private void UpdateWeaponry()
+    {
+        Vector2 dir = _mindsetHandler.PlayerPosition - (Vector2)transform.position;
+        bool isInRange = (dir).magnitude < _decisionRange;
+
+        float angleOffComputedSteering = Vector3.SignedAngle(transform.up, dir, Vector3.forward);
+
+        bool isInAngle = Mathf.Abs(angleOffComputedSteering) < _minBoresightErrorToFire;
+
+        if (isInRange && isInAngle)
+        {
+            _weaponHandler.Activate();
+        }
+    }
+
+    private void UpdateNavigation()
+    {
         Vector2 newTargetPos = Vector2.zero;
         switch (_fightOption)
         {
@@ -57,6 +81,5 @@ public class Mindset_Fight : Mindset
                 _mindsetHandler.SetTarget(newTargetPos, false);
                 break;
         }
-
     }
 }

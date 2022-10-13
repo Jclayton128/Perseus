@@ -7,11 +7,12 @@ using System;
 public class EnemyLibrary : MonoBehaviour
 {
     //settings
-    [SerializeField] List<GameObject> _enemyPrefabs = new List<GameObject>();
+    [SerializeField] List<EnemyInfoHolder> _enemyPrefabs = new List<EnemyInfoHolder>();
 
     //state
     Dictionary<EnemyInfoHolder.EnemyType, GameObject> _enemies =
         new Dictionary<EnemyInfoHolder.EnemyType, GameObject>();
+    List<EnemyInfoHolder.EnemyType> _loadedEnemies = new List<EnemyInfoHolder.EnemyType>();
 
     private void Awake()
     {
@@ -20,9 +21,18 @@ public class EnemyLibrary : MonoBehaviour
 
     private void CreateEnemyDictionary()
     {
-        foreach (GameObject enemy in _enemyPrefabs)
+        foreach (var enemy in _enemyPrefabs)
         {
-            _enemies.Add(enemy.GetComponent<EnemyInfoHolder>().EType, enemy);
+            if (_enemies.ContainsKey(enemy.EType))
+            {
+                Debug.LogError($"Already loaded a {enemy.EType}");
+                continue;
+            }
+            else
+            {
+                _enemies.Add(enemy.EType, enemy.gameObject);
+                _loadedEnemies.Add(enemy.EType);
+            }
         }
         Debug.Log($"Created an menu with {_enemies.Count} enemies");
     }
@@ -36,7 +46,7 @@ public class EnemyLibrary : MonoBehaviour
 
         if (_enemies.Count > 0)
         {
-            menu.Add(_enemies[EnemyInfoHolder.EnemyType.Dummy1].gameObject);
+            //menu.Add(_enemies[EnemyInfoHolder.EnemyType.Dummy1].gameObject);
         }
         else
         {
@@ -49,5 +59,10 @@ public class EnemyLibrary : MonoBehaviour
     public GameObject GetEnemyOfType(EnemyInfoHolder.EnemyType EnemyType)
     {
         return _enemies[EnemyType];
+    }
+
+    public EnemyInfoHolder.EnemyType[] GetAllLoadedEnemyTypes()
+    {
+        return _loadedEnemies.ToArray();
     }
 }

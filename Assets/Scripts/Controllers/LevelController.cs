@@ -239,11 +239,11 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void SpawnSingleLevelEnemy(int index)
+    public void SpawnSingleLevelEnemy(EnemyInfoHolder.EnemyType enemyType)
     {
-        GameObject enemy = _enemyLibrary.GetEnemyOfType((EnemyInfoHolder.EnemyType)index);
+        GameObject enemy = _enemyLibrary.GetEnemyOfType(enemyType);
         Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
-        Quaternion rot = Quaternion.LookRotation(pos, Vector3.forward);
+        Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(enemy, pos, rot);
         RegisterEnemy(newEnemy);
     }

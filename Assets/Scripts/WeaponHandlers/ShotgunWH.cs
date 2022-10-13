@@ -9,8 +9,8 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     [SerializeField] float _degreeSpread = 30f;
 
     [SerializeField] float _chargeRate = 3.3f; // units per second;
-    float _maxCharge = 5f;
-
+    [SerializeField] float _maxCharge = 5f;
+    [SerializeField] float _minChargeToFire = 3f;
 
     //state
     Color _chargeColor;
@@ -31,7 +31,7 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
 
     protected override void ActivateInternal()
     {
-        if (_chargeLevel < 3) return;
+        if (_chargeLevel < _minChargeToFire) return;
         float cost = _chargeLevel * _activationCost;
         if (_hostEnergyHandler.CheckEnergy(cost))
         {

@@ -10,6 +10,7 @@ public class DebugController : MonoBehaviour
     ActorMovement _playerPH;
     GameController _gameController;
     SystemWeaponLibrary _systemsLibrary;
+    EnemyLibrary _enemyLibrary;
     PlayerSystemHandler _playerSystemsHandler;
     PlayerStateHandler _playerStateHandler;
     LevelController _levelController;
@@ -29,6 +30,8 @@ public class DebugController : MonoBehaviour
 
     [SerializeField] Toggle[] _weaponToggles = null;
 
+    [SerializeField] TextMeshProUGUI[] _spawnEnemyLabels = null;
+
     //Dictionary<int, bool> _systemToggleStatus = new Dictionary<int, bool>();
     //Dictionary<int, bool> _weaponToggleStatus = new Dictionary<int, bool>();
 
@@ -41,11 +44,14 @@ public class DebugController : MonoBehaviour
         _gameController = GetComponent<GameController>();
         _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         _levelController = GetComponent<LevelController>();
+
         _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
+        _enemyLibrary = _systemsLibrary.GetComponent<EnemyLibrary>();
+
         SetupToggleLabels();
         SetupSpawnCrateLabels();
+        SetupEnemyLabels();
     }
-
 
     private void ReactToPlayerSpawning(GameObject player)
     {
@@ -164,6 +170,18 @@ public class DebugController : MonoBehaviour
         {
             if (j >= allWeapons.Length) break;
             _spawnWeaponCrateButtonLabels[j].text = allWeapons[j].GetName();
+        }
+    }
+
+    private void SetupEnemyLabels()
+    {
+        EnemyInfoHolder.EnemyType[] types = _enemyLibrary.GetAllLoadedEnemyTypes();
+        for (int i = 0; i < types.Length; i++)
+        {
+            int etypeAsInt = (int)types[i];
+            _spawnEnemyLabels[i].text = $"Spawn {types[i]}";
+            _spawnEnemyLabels[i].GetComponentInParent<Button>().
+                onClick.AddListener(() => SpawnEnemy_Debug(etypeAsInt));
         }
     }
 
@@ -371,9 +389,11 @@ public class DebugController : MonoBehaviour
 
     #region Level Tools
 
-    public void SpawnEnemy_Debug(int enemyIndex)
+    public void SpawnEnemy_Debug(int enemyTypeAsInt)
     {
-        _levelController.SpawnEnemiesInNewSector_Debug();
+        EnemyInfoHolder.EnemyType etype =
+            (EnemyInfoHolder.EnemyType)enemyTypeAsInt;
+        _levelController.SpawnSingleLevelEnemy(etype);
     }
 
     #endregion

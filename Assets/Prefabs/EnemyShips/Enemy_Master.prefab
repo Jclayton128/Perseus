@@ -274,8 +274,8 @@ MonoBehaviour:
   _decelDistanceDecision: 1
   _accelClosureDecision: 5
   _minAngleOffDesiredSteeringToAccel: 10
-  _thrust: 0
-  _turnRate: 0
+  _thrust: 100
+  _turnRate: 180
   _decelDragRate: -1
   _normalDragRate: 0
   _thrustProfileIncreaseRate: 15
@@ -487,6 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e408e72cb9c0641a83630f26a02a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerRB: {fileID: 0}
 --- !u!1001 &2004794582366000413
 PrefabInstance:
   m_ObjectHideFlags: 0
