@@ -49,10 +49,15 @@ public class ActorMovement : MonoBehaviour
     [SerializeField] float _thrustEnergyCostRate = 0;
 
     //state
-    [SerializeField] float _angleOffComputedSteering;
+    float _angleOffComputedSteering;
     Vector2 _desiredSteering;
     Vector2 _computedSteering;
-    [SerializeField] float _closure;
+    float _closure;
+    Vector2 _closureDir;
+    Vector2 _driftDir;
+
+    Vector2 _closureVec;
+    Vector2 _driftVec;
 
     private void Awake()
     {
@@ -90,31 +95,44 @@ public class ActorMovement : MonoBehaviour
         }
         else
         {
+            Debug.DrawLine(transform.position,
+               _rb.velocity + (Vector2)transform.position,
+               Color.green, 0.1f);
+
+            _closureDir = _desiredSteering.normalized;
+            _driftDir = Vector2.Perpendicular(_closureDir).normalized;
+
+            _closureVec = Vector3.Project(_rb.velocity, _closureDir);
+            _driftVec = Vector3.Project(_rb.velocity, _driftDir);
+
+            //Debug.DrawLine(transform.position,
+            //     closureVec + (Vector2)transform.position,
+            //    Color.yellow, 0.1f);
+
+            //Debug.DrawLine(transform.position,
+            //     driftVec + (Vector2)transform.position,
+            //    Color.blue, 0.1f);
+
             _desiredSteering =
                    (_mindsetHandler.TargetPosition - (Vector2)transform.position);
 
             if (_mindsetHandler.IsTargetStrict)
             {
-                _computedSteering = _desiredSteering;
+                _computedSteering = _desiredSteering - _driftVec;
+
+                //Debug.DrawLine((Vector2)transform.position,
+                //    (Vector2)transform.position + _computedSteering,
+                //    Color.gray, .1f);
             }
             else
             {
                 _computedSteering = _desiredSteering +
-                    _mindsetHandler.TargetVelocity - _rb.velocity;
-            }
+                    _mindsetHandler.PlayerVelocity - _closureVec;// - _rb.velocity;
 
-
-            Debug.DrawLine(transform.position,
-                _rb.velocity + (Vector2)transform.position,
-                Color.green, 0.1f);
-
-            Debug.DrawLine((Vector2)transform.position,
-                (Vector2)transform.position + _computedSteering,
-                Color.blue, .1f);
-
-            Debug.DrawLine(transform.position,
-                (Vector2)transform.position + _desiredSteering,
-                Color.red, 0.1f);
+                //Debug.DrawLine(transform.position,
+                //    (Vector2)transform.position + _desiredSteering,
+                //    Color.magenta, 0.1f);
+            };
 
             _angleOffComputedSteering =
                 Vector3.SignedAngle(transform.up, _computedSteering, Vector3.forward);
@@ -149,7 +167,7 @@ public class ActorMovement : MonoBehaviour
     private void UpdateAccelDecelDecision()
     {
         float dist = (_mindsetHandler.TargetPosition - (Vector2)transform.position).magnitude;
-        _closure = Vector3.Dot(_rb.velocity, _computedSteering.normalized);
+        _closure = _closureVec.magnitude;
 
         if (dist < _decelDistanceDecision || _closure > _accelClosureDecision)
         {

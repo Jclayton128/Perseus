@@ -231,7 +231,8 @@ public class LevelController : MonoBehaviour
 
         foreach (var enemy in enemiesToMake)
         {
-            var pos = CUR.FindRandomPointWithinDistance(Vector2.zero, _enemySpawnRadius_max, _enemySpawnRadius_min);
+            var pos = CUR.FindRandomPointWithinDistance(Vector2.zero,
+                _enemySpawnRadius_max * ArenaRadius, _enemySpawnRadius_min * ArenaRadius);
             Quaternion rot = Quaternion.identity;
             GameObject newEnemy = Instantiate(enemy, pos, rot);
             RegisterEnemy(newEnemy);

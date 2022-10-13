@@ -6,6 +6,15 @@ public class Mindset_Hunt : Mindset
 {
     MindsetHandler _mindsetHandler;
     LevelController _levelController;
+
+    //settings
+    [Tooltip("How long the enemy will continue to hunt before going back into explore")]
+    [SerializeField] float _timeframeForHunting = 5f;
+
+    public float TimeframeForHunting => _timeframeForHunting;
+
+    //state
+
     public override void InitializeMindset(MindsetHandler mindsetHandlerRef, LevelController levelConRef)
     {
         _mindsetHandler = mindsetHandlerRef;
@@ -14,14 +23,14 @@ public class Mindset_Hunt : Mindset
     
     public override void EnterMindset()
     {
-        throw new System.NotImplementedException();
+        
     }
     public override void ExitMindset()
     {
-        throw new System.NotImplementedException();
+        
     }
     public override void UpdateMindset()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

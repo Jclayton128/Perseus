@@ -242,6 +242,11 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     protected abstract void ImplementWeaponUpgrade();
 
+    public float GetMaxWeaponRange()
+    {
+        return _projectileLifetime * _projectileSpeed;
+    }
+
     #endregion
 
     #region Projectile-Related public methods

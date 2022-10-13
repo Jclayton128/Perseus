@@ -11,7 +11,7 @@ public class RadarProfileHandler : MonoBehaviour
     CircleCollider2D _radarProfileCollider;
     
     //settings
-    float _highLevel = 60f; //At high level, this is the radius of the arena, meaning everything sees the player
+    float _highLevel = 30f; //At high level, this is the half-radius of the arena, meaning lots of enemies will see the player
     float _lowLevel = 0.1f;
     float _changeRate = 10f; //units per second.
 

@@ -17889,9 +17889,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerShips:
   - {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-  - {fileID: 5451778544029270900, guid: fe76a4527eecdea4c85e2a908d8521d5, type: 3}
+  - {fileID: 4008633754966471592, guid: fe76a4527eecdea4c85e2a908d8521d5, type: 3}
   - {fileID: 1357919580726889231, guid: aafa9fe2c8a5c9a40a8805646bd9725d, type: 3}
-  - {fileID: 1357919580726889231, guid: 39e0dec8d80210942b4de77031b69b7a, type: 3}
+  - {fileID: 5450211034550464930, guid: 39e0dec8d80210942b4de77031b69b7a, type: 3}
 --- !u!1 &977142425
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _thrust
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _turnRate
@@ -17,11 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _normalDragRate
-      value: 5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _accelClosureDecision
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _decelDistanceDecision
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1270348748403635888, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -99,6 +103,10 @@ PrefabInstance:
       propertyPath: ScannerName
       value: Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 7819680869571203382, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_Radius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _range
       value: 1
@@ -109,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _exploreBehavior
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
