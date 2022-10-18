@@ -4865,12 +4865,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2363114265929812265, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Name
-      value: PMissile
+      value: WMissile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2363114265929812265, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6678518615658740022, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5f8697847591fbc4397230b3243a5329, type: 3}
+      objectReference: {fileID: 21300000, guid: 9721e02dea2960d419de25d2928d5ad7, type: 3}
     - target: {fileID: 9031389794413941311, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: PType
       value: 0
@@ -4912,7 +4916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1102c94fefd43f4478e52b3de1e5e7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PType: 1
+  PType: 11
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 2c02eb8f501bf774cb2b1983171bef5a, type: 3}
   _targetTransform: {fileID: 0}

@@ -42077,6 +42077,7 @@ MonoBehaviour:
   - {fileID: 4810833131604385186, guid: 97e0ffe519372f346b9007a2e750b974, type: 3}
   - {fileID: 4810833131604385186, guid: d9a2012cb8b706f45ad3ba4ceb156d6c, type: 3}
   - {fileID: 4810833131604385186, guid: 2e3271816713d7a4789b46b5a15b8b4b, type: 3}
+  - {fileID: 4810833131604385186, guid: a6222f30365e7424ebce0a1fe70a99b2, type: 3}
 --- !u!114 &2102641480
 MonoBehaviour:
   m_ObjectHideFlags: 0

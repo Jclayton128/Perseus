@@ -12,7 +12,7 @@ public abstract class Projectile : MonoBehaviour
     {
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
         PlayerTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
-        EnemyBolt10, Enemy11, Enemy12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
+        EnemyBolt10, EnemyMissile11, Enemy12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }
 
