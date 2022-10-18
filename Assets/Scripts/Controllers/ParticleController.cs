@@ -114,7 +114,7 @@ public class ParticleController : MonoBehaviour
         }
         _activeHullParticles.Add(ps);
         int count = Mathf.RoundToInt(particlesToMake * _hullGloryFactor);
-        Debug.Log($"spawning {particlesToMake} hull FX");
+        //Debug.Log($"spawning {particlesToMake} hull FX");
         ps.Emit(count);
     }
 

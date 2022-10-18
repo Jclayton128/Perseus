@@ -25,6 +25,7 @@ public class EnergyHandler : MonoBehaviour
     [SerializeField] float _currentEnergy;
     public float CurrentEnergy => _currentEnergy;
 
+    [ShowIf("_usesBurstRecharge")]
     [SerializeField] float _burstRechargeCountdown = Mathf.Infinity;
 
     private void Awake()

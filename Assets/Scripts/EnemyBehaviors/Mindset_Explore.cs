@@ -66,7 +66,7 @@ public class Mindset_Explore : Mindset
 
         if (_distanceToTargetPosition < _closeEnough)
         {
-            Debug.Log("generating new point to explore");
+            //Debug.Log("generating new point to explore");
             UpdateTargetPosition();
         }
     }
@@ -78,28 +78,28 @@ public class Mindset_Explore : Mindset
         {
             case ExploreOptions.RandomCloseMove:
                 newTargetPosition = FindRandomCloseMove();
-                _mindsetHandler.SetTarget(newTargetPosition, false);
+                _mindsetHandler.SetTarget(newTargetPosition,0, false);
                 break;
 
             case ExploreOptions.RandomFarMove:
                 newTargetPosition = FindRandomFarMove();
-                _mindsetHandler.SetTarget(newTargetPosition,  false);
+                _mindsetHandler.SetTarget(newTargetPosition, 0, false);
                 break;
 
             case ExploreOptions.StrictOctagonalMove:
                 newTargetPosition = FindStrictOctagonalMove();
-                _mindsetHandler.SetTarget(newTargetPosition,  true);
+                _mindsetHandler.SetTarget(newTargetPosition, 0, true);
                 break;
 
             case ExploreOptions.RandomCloseDependentMove:
                 if (!_dependentTransform) Debug.LogError("Need a dependent transform!");
                 else newTargetPosition = FindRandomCloseDependentMove();
-                _mindsetHandler.SetTarget(newTargetPosition, false);
+                _mindsetHandler.SetTarget(newTargetPosition, 0, false);
                 break;
 
             case ExploreOptions.HoldPosition:
                 newTargetPosition = transform.position;
-                _mindsetHandler.SetTarget(newTargetPosition, true);
+                _mindsetHandler.SetTarget(newTargetPosition, 0, true);
                 break;
 
         }

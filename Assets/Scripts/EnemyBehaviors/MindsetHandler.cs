@@ -11,19 +11,25 @@ public class MindsetHandler : MonoBehaviour
     WeaponHandler _weaponHandler;
     LevelController _levelController;
 
+
     Mindset_Explore _exploreMindset;
     Mindset_Fight _fightMindset;
     Mindset_Hunt _huntMindset;
     Mindset_React _reactMindset;
 
+    //settings
+    [SerializeField] float _detectorRange = 10f;
 
     //state
     [SerializeField] Mindset _activeMindset;
     [SerializeField] Vector2 _targetPosition = Vector2.zero;
     public Vector2 TargetPosition => _targetPosition;
 
-    bool _isTargetStrict = false;
-    public bool IsTargetStrict => _isTargetStrict;
+    bool _shouldLeadTargetPos = false;
+    public bool ShouldLeadTargetPos => _shouldLeadTargetPos;
+
+    float _standoffRange = 0;
+    public float StandoffRange => _standoffRange;
 
 
     Vector2 _playerPosition = Vector2.zero;
@@ -37,6 +43,8 @@ public class MindsetHandler : MonoBehaviour
 
     float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
     public float TargetAge => _targetAge;
+
+
 
 
     private void Awake()
@@ -62,6 +70,11 @@ public class MindsetHandler : MonoBehaviour
 
         _activeMindset = _exploreMindset;
         _activeMindset.EnterMindset();
+    }
+
+    private void Start()
+    {
+        GetComponentInChildren<PerceptionHandler>().ModifyDetectorRange(_detectorRange);
     }
 
     private void Update()
@@ -96,11 +109,11 @@ public class MindsetHandler : MonoBehaviour
         _activeMindset.EnterMindset();
     }
 
-    public void SetTarget(Vector2 targetPosition, bool isStrict)
+    public void SetTarget(Vector2 targetPosition, float standoffRange, bool shouldLeadTarget)
     {
         _targetPosition =  targetPosition;
         _playerVelocity = Vector2.zero;
-        _isTargetStrict = isStrict;
+        _shouldLeadTargetPos = shouldLeadTarget;
     }
 
     public void SetPlayerPositionOnPlayerSighting(Vector2 playerPosition, Vector2 playerVelocity)
@@ -110,6 +123,11 @@ public class MindsetHandler : MonoBehaviour
         _targetAge = 0;
     }
 
+    [ContextMenu("Set New Detector Range")]
+    private void SetDetectorRange()
+    {
+        GetComponentInChildren<PerceptionHandler>().ModifyDetectorRange(_detectorRange);
+    }
 
 
 }

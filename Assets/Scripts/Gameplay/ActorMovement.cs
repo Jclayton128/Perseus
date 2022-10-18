@@ -25,8 +25,6 @@ public class ActorMovement : MonoBehaviour
     public bool ShouldTurnRight;
 
     [HideIf("IsPlayer")]
-    [SerializeField] float _decelDistanceDecision = 5f;
-    [HideIf("IsPlayer")]
     [SerializeField] float _accelClosureDecision = 10.0f;
     [HideIf("IsPlayer")]
     [SerializeField] float _minAngleOffDesiredSteeringToAccel = 10.0f;
@@ -105,33 +103,33 @@ public class ActorMovement : MonoBehaviour
             _closureVec = Vector3.Project(_rb.velocity, _closureDir);
             _driftVec = Vector3.Project(_rb.velocity, _driftDir);
 
-            //Debug.DrawLine(transform.position,
-            //     closureVec + (Vector2)transform.position,
-            //    Color.yellow, 0.1f);
+            Debug.DrawLine(transform.position,
+                 _closureVec + (Vector2)transform.position,
+                Color.yellow, 0.1f);
 
-            //Debug.DrawLine(transform.position,
-            //     driftVec + (Vector2)transform.position,
-            //    Color.blue, 0.1f);
+            Debug.DrawLine(transform.position,
+                 _driftVec + (Vector2)transform.position,
+                Color.blue, 0.1f);
 
             _desiredSteering =
                    (_mindsetHandler.TargetPosition - (Vector2)transform.position);
 
-            if (_mindsetHandler.IsTargetStrict)
+            if (!_mindsetHandler.ShouldLeadTargetPos)
             {
                 _computedSteering = _desiredSteering - _driftVec;
 
-                //Debug.DrawLine((Vector2)transform.position,
-                //    (Vector2)transform.position + _computedSteering,
-                //    Color.gray, .1f);
+                Debug.DrawLine((Vector2)transform.position,
+                    (Vector2)transform.position + _computedSteering,
+                    Color.gray, .1f);
             }
             else
             {
                 _computedSteering = _desiredSteering +
-                    _mindsetHandler.PlayerVelocity - _closureVec;// - _rb.velocity;
+                    _mindsetHandler.PlayerVelocity - _driftVec;// - _rb.velocity;
 
-                //Debug.DrawLine(transform.position,
-                //    (Vector2)transform.position + _desiredSteering,
-                //    Color.magenta, 0.1f);
+                Debug.DrawLine(transform.position,
+                    (Vector2)transform.position + _desiredSteering,
+                    Color.magenta, 0.1f);
             };
 
             _angleOffComputedSteering =
@@ -171,13 +169,13 @@ public class ActorMovement : MonoBehaviour
 
         if (_hostEnergyHandler.CheckEnergy(_thrustEnergyCostRate) == false)
         {
-            _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate + 1f);
+            //_hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate + 1f);
             HandleStopAccelerating();
             HandleBeginDecelerating();
             return;
         }
 
-        if (dist < _decelDistanceDecision || _closure > _accelClosureDecision)
+        if (dist < _mindsetHandler.StandoffRange || _closure > _accelClosureDecision)
         {
             HandleStopAccelerating();
             HandleBeginDecelerating();

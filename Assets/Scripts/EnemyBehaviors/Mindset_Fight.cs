@@ -9,17 +9,27 @@ public class Mindset_Fight : Mindset
     LevelController _levelController;
     WeaponHandler _weaponHandler;
 
-    public enum FightOptions { Contact, CloseRange, StandoffRange}
+    public enum FightMovement { Contact, StandoffDumb, StandoffLead}
+    public enum FightWeaponUse { FireWhenAccurate, FireContinuously}
 
-    [SerializeField] FightOptions _fightOption = FightOptions.Contact;
+    [SerializeField] FightMovement _fightMovement = FightMovement.Contact;
+    [SerializeField] FightWeaponUse _fightWeaponUse = FightWeaponUse.FireWhenAccurate;
 
     [Tooltip("What percentage of max weapon range does this strategy reference")]
     [SerializeField] float _decisionRangeFactor = 1f;
 
     [SerializeField] float _minBoresightErrorToFire = 5f;
     //state
-    float _decisionRange;
+    [SerializeField] float _decisionRange;
+    bool _isFiringContinuously = false;
 
+    private void Start()
+    {
+        if (_fightWeaponUse == FightWeaponUse.FireContinuously)
+        {
+            _isFiringContinuously = true;
+        }
+    }
 
     public override void InitializeMindset(MindsetHandler mindsetHandlerRef, LevelController levelConRef)
     {
@@ -40,45 +50,67 @@ public class Mindset_Fight : Mindset
     {
 
     }
+    public void Update()
+    {
+        if (_isFiringContinuously)
+        {
+            Debug.Log("pew!");
+            _weaponHandler.Activate();
+        }
+    }
 
     public override void UpdateMindset()
     {
         UpdateNavigation();
         UpdateWeaponry();
-
     }
 
     private void UpdateWeaponry()
     {
         Vector2 dir = _mindsetHandler.PlayerPosition - (Vector2)transform.position;
         bool isInRange = (dir).magnitude < _decisionRange;
-
         float angleOffComputedSteering = Vector3.SignedAngle(transform.up, dir, Vector3.forward);
-
         bool isInAngle = Mathf.Abs(angleOffComputedSteering) < _minBoresightErrorToFire;
 
+        switch (_fightWeaponUse)
+        {
+            case FightWeaponUse.FireWhenAccurate:
+                FireWhenAccurate(isInRange, isInAngle);
+                break;
+        }
+
+    }
+
+    private void FireWhenAccurate(bool isInRange, bool isInAngle)
+    {
         if (isInRange && isInAngle)
         {
             _weaponHandler.Activate();
+        }
+        else
+        {
+            _weaponHandler.Deactivate();
         }
     }
 
     private void UpdateNavigation()
     {
-        Vector2 newTargetPos = Vector2.zero;
-        switch (_fightOption)
+        Vector2 newTargetPos = Vector2.zero;     
+        switch (_fightMovement)
         {
-            case FightOptions.Contact:
+            case FightMovement.Contact:
                 newTargetPos = _mindsetHandler.PlayerPosition;
-                _mindsetHandler.SetTarget(newTargetPos, true);
+                _mindsetHandler.SetTarget(newTargetPos,0, true);
                 break;
 
-            case FightOptions.CloseRange:
-                _mindsetHandler.SetTarget(newTargetPos, false);
+            case FightMovement.StandoffDumb:
+                newTargetPos = _mindsetHandler.PlayerPosition;
+                _mindsetHandler.SetTarget(newTargetPos, _decisionRange, false);
                 break;
 
-            case FightOptions.StandoffRange:
-                _mindsetHandler.SetTarget(newTargetPos, false);
+            case FightMovement.StandoffLead:
+                newTargetPos = _mindsetHandler.PlayerPosition;
+                _mindsetHandler.SetTarget(newTargetPos, _decisionRange, true);
                 break;
         }
     }
