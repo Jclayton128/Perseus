@@ -88,6 +88,13 @@ public abstract class Projectile : MonoBehaviour
 
             case ProjectileType.EnemyBolt10: break;
 
+            case ProjectileType.EnemyMissile11:
+                if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
+                {
+                    Debug.LogError("Smart Missiles must be launched by IMissileLaunchers!");
+                }
+                break;
+
             default:
                 Debug.LogError("Validation hasn't been set up for this Projectile Type!");
                 break;

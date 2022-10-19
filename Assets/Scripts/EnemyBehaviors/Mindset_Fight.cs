@@ -9,10 +9,11 @@ public class Mindset_Fight : Mindset
     LevelController _levelController;
     WeaponHandler _weaponHandler;
 
-    public enum FightMovement { Contact, StandoffDumb, StandoffLead}
-    public enum FightWeaponUse { FireWhenAccurate, FireContinuously}
+    public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement}
+    public enum FightWeaponUse { FireWhenAccurate, FireContinuously,
+        FireContinuouslyIfSeePlayer}
 
-    [SerializeField] FightMovement _fightMovement = FightMovement.Contact;
+    [SerializeField] public FightMovements FightMovement = FightMovements.Contact;
     [SerializeField] FightWeaponUse _fightWeaponUse = FightWeaponUse.FireWhenAccurate;
 
     [Tooltip("What percentage of max weapon range does this strategy reference")]
@@ -21,15 +22,7 @@ public class Mindset_Fight : Mindset
     [SerializeField] float _minBoresightErrorToFire = 5f;
     //state
     [SerializeField] float _decisionRange;
-    bool _isFiringContinuously = false;
 
-    private void Start()
-    {
-        if (_fightWeaponUse == FightWeaponUse.FireContinuously)
-        {
-            _isFiringContinuously = true;
-        }
-    }
 
     public override void InitializeMindset(MindsetHandler mindsetHandlerRef, LevelController levelConRef)
     {
@@ -38,7 +31,6 @@ public class Mindset_Fight : Mindset
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         if (_weaponHandler) _decisionRange = _weaponHandler.GetMaxWeaponRange() * _decisionRangeFactor;
         else _decisionRange = 1;
-
     }
 
     public override void EnterMindset()
@@ -52,7 +44,12 @@ public class Mindset_Fight : Mindset
     }
     public void Update()
     {
-        if (_isFiringContinuously)
+        if (_fightWeaponUse == FightWeaponUse.FireContinuously)
+        {
+            _weaponHandler.Activate();
+        }
+        if (_fightWeaponUse == FightWeaponUse.FireContinuouslyIfSeePlayer &&
+            _mindsetHandler.TargetAge < 0.1f)
         {
             _weaponHandler.Activate();
         }
@@ -105,19 +102,19 @@ public class Mindset_Fight : Mindset
     private void UpdateNavigation()
     {
         Vector2 newTargetPos = Vector2.zero;     
-        switch (_fightMovement)
+        switch (FightMovement)
         {
-            case FightMovement.Contact:
+            case FightMovements.Contact:
                 newTargetPos = _mindsetHandler.PlayerPosition;
                 _mindsetHandler.SetTargetPosition(newTargetPos,0, true);
                 break;
 
-            case FightMovement.StandoffDumb:
+            case FightMovements.StandoffDumb:
                 newTargetPos = _mindsetHandler.PlayerPosition;
                 _mindsetHandler.SetTargetPosition(newTargetPos, _decisionRange, false);
                 break;
 
-            case FightMovement.StandoffLead:
+            case FightMovements.StandoffLead:
                 newTargetPos = _mindsetHandler.PlayerPosition;
                 _mindsetHandler.SetTargetPosition(newTargetPos, _decisionRange, true);
                 break;

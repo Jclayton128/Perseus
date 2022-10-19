@@ -48,6 +48,7 @@ public class HealthHandler : MonoBehaviour
     [Tooltip("Points of ionization healed per second. Max Ionization Amount is equal to total Hull Points.")]
     [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
 
+    float _damageInvulnerabilityDuration = 0.2f;
     #endregion;
 
     #region State
@@ -68,6 +69,8 @@ public class HealthHandler : MonoBehaviour
     float _timeToAllowShieldRegen = 0;
     float _timeToAllowHullDamageFX = 0;
     float _gatheredHullDamageForSingleParticleRelease = 0;
+    float _timeToAllowDamageAgain = 0; //This is give the BlinkEngine a moment to work.
+
     
     /// <summary>
     /// If this is TRUE, when this HealthHandler hits zero, the game session ends. Good for the player,
@@ -161,11 +164,27 @@ public class HealthHandler : MonoBehaviour
 
     #region Receive Damage
 
+    /// <summary>
+    /// This grants a very short invulnerability to all DamagePacks. Intended for 
+    /// use by the Blink Engine.
+    /// </summary>
+    public void ActivateDamageInvulnerability()
+    {
+        if (Time.time > _timeToAllowDamageAgain)
+        {
+            _timeToAllowDamageAgain = Time.time + _damageInvulnerabilityDuration;
+        }
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D weaponImpact)
     {
         Projectile pb;
         if (weaponImpact.TryGetComponent<Projectile>(out pb))
         {
+            if (Time.time < _timeToAllowDamageAgain) return;
+            Debug.Log("receiving damage pack");
             ReceivingDamagePack?.Invoke(pb.DamagePack);
             ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
@@ -182,6 +201,7 @@ public class HealthHandler : MonoBehaviour
     /// <param name="impactHeading"></param>
     public void ReceiveNonColliderDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
+        if (Time.time < _timeToAllowDamageAgain) return;
         ReceivingDamagePack?.Invoke(incomingDamage);
         ReceivingThreatVector?.Invoke(impactHeading);
         ReceiveDamage(incomingDamage, impactPosition, impactHeading);

@@ -89,8 +89,19 @@ public class TorpedoLauncherWH : WeaponHandler, IMissileLauncher
 
     protected override void InitializeWeaponSpecifics()
     {
-        //Only locks on to actual enemy ships, and no neutrals (ie, asteroids)
-        _legalTarget_layerMask = (1 << 9);
+        if (_isPlayer)
+        {
+            //Only locks on to actual enemy ships, and no neutrals (ie, asteroids)
+            _legalTarget_layerMask = (1 << 9);
+        }
+        else
+        {
+            // 7 is PlayerShip
+            _legalTarget_layerMask = 1 << 7;
+        }
+
+
+
     }
 
     public Transform GetTargetTransform()

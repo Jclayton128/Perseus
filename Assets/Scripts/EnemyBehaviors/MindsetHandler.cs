@@ -60,6 +60,12 @@ public class MindsetHandler : MonoBehaviour
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         _weaponHandler?.Initialize(_energyHandler, false, null);
 
+        SystemHandler[] shs = GetComponentsInChildren<SystemHandler>();
+        foreach (SystemHandler sh in shs)
+        {
+            sh.IntegrateSystem(null);
+        }
+
         ExploreMindset = GetComponent<Mindset_Explore>();
         FightMindset = GetComponent<Mindset_Fight>();
         HuntMindset = GetComponent<Mindset_Hunt>();
@@ -88,7 +94,8 @@ public class MindsetHandler : MonoBehaviour
 
     private void EvaluateMindsetBasedOnTargetAge()
     {
-        if (_targetAge < 0.1f)
+        if (_targetAge < 0.1f &&
+            FightMindset.FightMovement != Mindset_Fight.FightMovements.NoSpecialFightMovement)
         {
             if (_activeMindset != FightMindset) MoveToNewMindset(FightMindset);
         }

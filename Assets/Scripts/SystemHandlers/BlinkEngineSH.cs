@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlinkEngineSH : SystemHandler, IDamageReflexable
+public class BlinkEngineSH : SystemHandler
 {
     LevelController _levelController;
+    HealthHandler _healthHandler;
 
     //settings
     [SerializeField] GameObject _blinkInParticleFX = null;
@@ -17,13 +18,15 @@ public class BlinkEngineSH : SystemHandler, IDamageReflexable
     [SerializeField] float _rechargeRateAddition_Upgrade = 0.1f;
 
     //state
-    float _currentCharge = 1;
+    [SerializeField] float _currentCharge = 1;
     Color _currentColor = Color.white;
 
 
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
         base.IntegrateSystem(connectedSID);
+        _healthHandler = GetComponentInParent<HealthHandler>();
+        _healthHandler.ReceivingHullDamage += ExecuteDamageReflex;
         _levelController = FindObjectOfType<LevelController>();
     }
 
@@ -46,26 +49,22 @@ public class BlinkEngineSH : SystemHandler, IDamageReflexable
         _rechargeRate -= _rechargeRateAddition_Upgrade;
     }
 
-    public bool ModifyDamagePack(DamagePack receivedDamagePack)
+    private void ExecuteDamageReflex(DamagePack dp)
     {
-        if (_currentCharge >= .99f)
-        {
-            receivedDamagePack.NullifyDamage();
-            
-            _currentCharge = 0;
-            _connectedID.UpdateUI(_currentCharge, Color.red);
-            return true;
-        }
-        else return false;
-    }
+        if (_currentCharge < .99f) return;
 
-    public void ExecuteDamageReflex()
-    {
+        Debug.Log("blinking away");
         //TODO cool blink audio sound
+        _healthHandler.ActivateDamageInvulnerability();
         Instantiate(_blinkOutParticleFX, transform.position, Quaternion.identity);
         transform.parent.position = CUR.FindRandomPositionWithinRangeBandAndWithinArena(transform.position,
             _minBlinkRange, _maxBlinkRange, Vector3.zero, _levelController.ArenaRadius);
         Instantiate(_blinkInParticleFX, transform.position, Quaternion.identity);
+
+        dp.NullifyDamage();
+
+        _currentCharge = 0;
+        _connectedID?.UpdateUI(_currentCharge, Color.red);
     }
 
     private void Update()
@@ -73,6 +72,6 @@ public class BlinkEngineSH : SystemHandler, IDamageReflexable
         _currentCharge += Time.deltaTime * _rechargeRate;
         _currentCharge = Mathf.Clamp(_currentCharge, 0, 1.0f);
         _currentColor = Color.Lerp(Color.red, Color.green, _currentCharge);
-        _connectedID.UpdateUI(_currentCharge, _currentColor);
+        _connectedID?.UpdateUI(_currentCharge, _currentColor);
     }
 }

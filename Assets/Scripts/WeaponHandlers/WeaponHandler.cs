@@ -13,6 +13,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     protected EnergyHandler _hostEnergyHandler;
     protected Rigidbody2D _rb;
     protected RadarProfileHandler _hostRadarProfileHandler;
+    protected MindsetHandler _mindsetHandler;
 
     //[FoldoutGroup("Brochure")]
     [FoldoutGroup("Brochure"), PreviewField(50, ObjectFieldAlignment.Left)]
@@ -82,6 +83,11 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         _hostEnergyHandler = hostEnergyHandler;
         _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();
         _isPlayer = isPlayer;
+
+        if (!_isPlayer)
+        {
+            _mindsetHandler = GetComponentInParent<MindsetHandler>();
+        }
 
         _isInstalled = true;
 

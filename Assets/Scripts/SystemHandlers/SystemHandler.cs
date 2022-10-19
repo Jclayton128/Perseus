@@ -91,7 +91,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         }
 
         CurrentUpgradeLevel++;
-        _connectedID.ModifySystemLevel(CurrentUpgradeLevel);
+        _connectedID?.ModifySystemLevel(CurrentUpgradeLevel);
         Debug.Log($"Implementing system-specific upgrades for level {CurrentUpgradeLevel}");
         ImplementSystemUpgrade();
     }
@@ -187,7 +187,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
     /// </summary>
     public virtual void DeintegrateSystem()
     {
-        _connectedID.ClearUIIcon();
+        _connectedID?.ClearUIIcon();
         //Undo all the level 1 upgrades here
         _isCurrentlyInstalled = false;
     }

@@ -49,7 +49,6 @@ public class PlayerSystemHandler : MonoBehaviour
         _playerHandler = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
         _healthHandler = GetComponent<HealthHandler>();
-        _healthHandler.ReceivingHullDamage += CheckOnboardSystemsForReceivedDamageReaction;
 
     }
 
@@ -291,22 +290,6 @@ public class PlayerSystemHandler : MonoBehaviour
 
     #endregion
 
-    #region Event Responses
-
-    private void CheckOnboardSystemsForReceivedDamageReaction(DamagePack incomingDamagePack)
-    {
-        foreach (SystemHandler sh in _systemsOnBoard)
-        {
-            if (sh is IDamageReflexable dr)
-            {
-                bool didModifyDamage = dr.ModifyDamagePack(incomingDamagePack);
-                if (didModifyDamage) dr.ExecuteDamageReflex();
-            }
-        }
-    }
-
-
-    #endregion
 
     #region Input Responses
 

@@ -18759,6 +18759,7 @@ MonoBehaviour:
   - {fileID: 5867531201207933844, guid: 7652f087802cb2f41ab8ad372a7dc663, type: 3}
   - {fileID: 3557419019999438709, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
   - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
+  - {fileID: 2796412785005916749, guid: 787ce16dcea83f246812e3a122873dcc, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41826,6 +41827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3ad5962e2ea8547adbee3ecdc4b9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mousePosSensitivity: 0.1
   IsTranslationalMovementMode: 0
 --- !u!4 &2102641474
 Transform:

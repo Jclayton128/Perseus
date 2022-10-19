@@ -57,7 +57,16 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     {
         // 9 is EnemyShip
         // 11 is NeutralShip
-        _legalTarget_layerMask = (1 << 9) | (1 << 11);
+        if (_isPlayer)
+        {
+            _legalTarget_layerMask = (1 << 9) | (1 << 11);
+        }
+        else
+        {
+            // 7 is PlayerShip
+            _legalTarget_layerMask = 1 << 7;
+        }
+
     }
 
     public int GetLegalTargetsLayerMask()
@@ -67,7 +76,15 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
 
     public Vector3 GetTargetPosition()
     {
-        return _inputCon.MousePos;
+        if (_isPlayer)
+        {
+            return _inputCon.MousePos;
+        }
+        else
+        {
+            return _mindsetHandler.PlayerPosition;
+        }
+
     }
 
     public Transform GetTargetTransform()
