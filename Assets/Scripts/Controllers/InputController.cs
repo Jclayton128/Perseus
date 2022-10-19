@@ -26,7 +26,7 @@ public class InputController : MonoBehaviour
     Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 0));
 
     //settings
-
+    [SerializeField] float _mousePosSensitivity = 0.1f;
 
     //state
     public Vector3 MousePos { get; private set; }
@@ -148,9 +148,16 @@ public class InputController : MonoBehaviour
 
     private void UpdateMouseInput()
     {
+        Vector3 prev = MousePos;
+
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         xy.Raycast(ray, out distance);
         MousePos = ray.GetPoint(distance);
+
+        if ((MousePos - prev).magnitude > _mousePosSensitivity)
+        {
+            OnMousePositionMove?.Invoke();
+        }
 
     }
 
