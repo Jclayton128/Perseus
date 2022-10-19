@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _detectorRange
-      value: 5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _thrust
@@ -97,6 +97,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072237115753002881, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _huntOption
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452306029984838462, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _reactOption
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7494439780592425772, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}

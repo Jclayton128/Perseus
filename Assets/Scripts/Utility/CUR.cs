@@ -40,7 +40,7 @@ public static class CUR : object
         return pos;
     }
 
-    static public Vector3 FindRandomBlinkWithinRangeBandAndWithinArena(Vector3 localCenter,
+    static public Vector3 FindRandomPositionWithinRangeBandAndWithinArena(Vector3 localCenter,
         float minLocalDistance, float maxLocalDistance, Vector3 globalCenter, float maxGlobalDistance)
     {
         Vector3 point;

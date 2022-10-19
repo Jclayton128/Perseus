@@ -14,6 +14,7 @@ public class HealthHandler : MonoBehaviour
     Rigidbody2D _rb;
     UI_Controller _UIController;
 
+    public event Action<Vector2> ReceivingThreatVector = null;
     public event System.Action<DamagePack> ReceivingDamagePack = null;
     public event System.Action<DamagePack> ReceivingShieldDamage = null;
     public event System.Action<DamagePack> ReceivingHullDamage = null;
@@ -166,6 +167,7 @@ public class HealthHandler : MonoBehaviour
         if (weaponImpact.TryGetComponent<Projectile>(out pb))
         {
             ReceivingDamagePack?.Invoke(pb.DamagePack);
+            ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
             pb.DecrementPenetrationOnImpact();
         }
@@ -180,6 +182,8 @@ public class HealthHandler : MonoBehaviour
     /// <param name="impactHeading"></param>
     public void ReceiveNonColliderDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
+        ReceivingDamagePack?.Invoke(incomingDamage);
+        ReceivingThreatVector?.Invoke(impactHeading);
         ReceiveDamage(incomingDamage, impactPosition, impactHeading);
     }
 

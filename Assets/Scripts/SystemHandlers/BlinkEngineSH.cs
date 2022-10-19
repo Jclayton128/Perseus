@@ -63,7 +63,7 @@ public class BlinkEngineSH : SystemHandler, IDamageReflexable
     {
         //TODO cool blink audio sound
         Instantiate(_blinkOutParticleFX, transform.position, Quaternion.identity);
-        transform.parent.position = CUR.FindRandomBlinkWithinRangeBandAndWithinArena(transform.position,
+        transform.parent.position = CUR.FindRandomPositionWithinRangeBandAndWithinArena(transform.position,
             _minBlinkRange, _maxBlinkRange, Vector3.zero, _levelController.ArenaRadius);
         Instantiate(_blinkInParticleFX, transform.position, Quaternion.identity);
     }

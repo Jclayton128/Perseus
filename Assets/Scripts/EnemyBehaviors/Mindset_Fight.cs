@@ -48,7 +48,7 @@ public class Mindset_Fight : Mindset
 
     public override void ExitMindset()
     {
-
+        _weaponHandler.Deactivate();
     }
     public void Update()
     {

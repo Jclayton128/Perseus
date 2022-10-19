@@ -107,7 +107,7 @@ public class Mindset_Explore : Mindset
 
     private Vector2 FindRandomCloseMove()
     {
-        Vector2 pos = CUR.FindRandomBlinkWithinRangeBandAndWithinArena(
+        Vector2 pos = CUR.FindRandomPositionWithinRangeBandAndWithinArena(
             transform.position, 0, _range,
             Vector2.zero, _levelController.ArenaRadius);
         return pos;
@@ -115,7 +115,7 @@ public class Mindset_Explore : Mindset
 
     private Vector2 FindRandomFarMove()
     {
-        Vector2 pos = CUR.FindRandomBlinkWithinRangeBandAndWithinArena(
+        Vector2 pos = CUR.FindRandomPositionWithinRangeBandAndWithinArena(
             transform.position, _range, _levelController.ArenaRadius,
             Vector2.zero, _levelController.ArenaRadius);
         return pos;
@@ -226,7 +226,7 @@ public class Mindset_Explore : Mindset
     }
     private Vector2 FindRandomCloseDependentMove()
     {
-        Vector2 pos = CUR.FindRandomBlinkWithinRangeBandAndWithinArena(
+        Vector2 pos = CUR.FindRandomPositionWithinRangeBandAndWithinArena(
             _dependentTransform.position, 0, _range,
             Vector2.zero, _levelController.ArenaRadius);
         return pos;

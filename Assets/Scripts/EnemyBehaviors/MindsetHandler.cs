@@ -18,6 +18,8 @@ public class MindsetHandler : MonoBehaviour
     public Mindset_React ReactMindset { get; private set; }
 
     //settings
+    [Tooltip("Radius of the player detector collider. If negative, that collider is disabled," +
+        "and the player will never be detected.")]
     [SerializeField] float _detectorRange = 10f;
 
     //state
@@ -40,7 +42,6 @@ public class MindsetHandler : MonoBehaviour
     public Vector2 PlayerVelocity => _playerVelocity;
 
 
-
     [SerializeField] float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
     public float TargetAge => _targetAge;
 
@@ -54,6 +55,7 @@ public class MindsetHandler : MonoBehaviour
        _movement = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
         _health = GetComponent<HealthHandler>();
+        _health.ReceivingDamagePack += HandleReceivingDamage;
 
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         _weaponHandler?.Initialize(_energyHandler, false, null);
@@ -113,6 +115,12 @@ public class MindsetHandler : MonoBehaviour
         _playerVelocity = playerVelocity;
         _targetAge = 0;
     }
+
+    private void HandleReceivingDamage(DamagePack dp)
+    {
+        MoveToNewMindset(ReactMindset);
+    }
+
 
     [ContextMenu("Set New Detector Range")]
     private void SetDetectorRange()
