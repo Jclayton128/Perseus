@@ -54,7 +54,6 @@ public class Mindset_Fight : Mindset
     {
         if (_isFiringContinuously)
         {
-            Debug.Log("pew!");
             _weaponHandler.Activate();
         }
     }

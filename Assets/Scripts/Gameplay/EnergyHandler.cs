@@ -59,7 +59,6 @@ public class EnergyHandler : MonoBehaviour
     {
         if (_usesBurstRecharge)
         {
-            if (_currentEnergy > 0) return;
             _burstRechargeCountdown -= Time.deltaTime;
             if (_burstRechargeCountdown <= 0)
             {

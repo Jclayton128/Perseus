@@ -61,11 +61,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _chargeRate
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _activationCost
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileType
@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _minChargeToFire
-      value: 9.9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileLifetime
@@ -92,13 +92,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _detectorRange
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _thrust
       value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _turnRate
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _decelDragRate
@@ -137,12 +141,16 @@ PrefabInstance:
       value: -0.548
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _fightWeaponUse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _decisionRangeFactor
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _minBoresightErrorToFire
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
@@ -200,6 +208,10 @@ PrefabInstance:
       propertyPath: _usesBurstRecharge
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2293803639130907992, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _timeToBurstRecharge
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7494439780592425772, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -218,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7819680869571203382, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Radius
-      value: 20
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _range

@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour
         _gameController.OnPlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
-
+        _systemWeaponLibrary = _levelLibrary.GetComponent<SystemWeaponLibrary>();
         _arenaEdgeCollider = FindObjectOfType<CircleEdgeCollider2D>();
 
     }
