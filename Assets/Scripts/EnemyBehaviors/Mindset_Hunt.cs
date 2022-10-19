@@ -63,6 +63,13 @@ public class Mindset_Hunt : Mindset
                 Vector2 futureTravel = _mindsetHandler.PlayerVelocity * timeToReachPlayer;
                 newTargetPos = _mindsetHandler.PlayerPosition + futureTravel;
 
+                if (_levelController.ArenaRadius * .9 < newTargetPos.magnitude)
+                {
+                    newTargetPos = _mindsetHandler.PlayerPosition;
+                    //if future position is predicted to be outside of 90% arena,
+                    //then just revert to current position.
+                }
+
                 Debug.DrawLine(_mindsetHandler.PlayerPosition,
                     _mindsetHandler.PlayerPosition + futureTravel,
                     Color.blue, 5f);
