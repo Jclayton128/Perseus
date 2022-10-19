@@ -271,7 +271,6 @@ MonoBehaviour:
   ShouldDecelerate: 0
   ShouldTurnLeft: 0
   ShouldTurnRight: 0
-  _decelDistanceDecision: 1
   _accelClosureDecision: 5
   _minAngleOffDesiredSteeringToAccel: 10
   _thrust: 100
@@ -294,6 +293,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxEnergyPoints: 30
   _energyGainRate: 1
+  _usesBurstRecharge: 0
+  _timeToBurstRecharge: 5
+  _currentEnergy: 0
+  _burstRechargeCountdown: Infinity
 --- !u!114 &7683091770654198741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,9 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2539aff6de937f4eb6816553eb183ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _detectorRange: 10
   _activeMindset: {fileID: 0}
   _targetPosition: {x: 0, y: 0}
-  _targetAge: 0
 --- !u!114 &8716158890381425836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,8 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd92a154b998d34ea65f1f88de06ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fightOption: 0
+  _fightMovement: 0
+  _fightWeaponUse: 0
   _decisionRangeFactor: 0.5
+  _minBoresightErrorToFire: 5
+  _decisionRange: 0
 --- !u!114 &3072237115753002881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +432,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!1 &8791234689907253783
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e408e72cb9c0641a83630f26a02a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerRB: {fileID: 0}
 --- !u!1001 &2004794582366000413
 PrefabInstance:
   m_ObjectHideFlags: 0
