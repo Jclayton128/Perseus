@@ -13,7 +13,8 @@ public class Scanner : MonoBehaviour
     [ShowInInspector] List<IScannable> _scannablesInRange = new List<IScannable>();
 
     //settings
-    int _scannableLayer = 6;
+    int _layerMask_Scannable = 6;
+    [SerializeField] float _scanRange = 10f;
 
     //state
     int _indexOfCurrentScan = -1;
@@ -26,28 +27,97 @@ public class Scanner : MonoBehaviour
         _inputController = _uiController.GetComponent<InputController>();
         _inputController.OnScanDecrement += DecrementCurrentScan;
         _inputController.OnScanIncrement += IncrementCurrentScan;
+        _inputController.OnMousePositionMove += HandleMousePositionMove;
         _systemWeaponLibrary = FindObjectOfType<SystemWeaponLibrary>();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    private void HandleMousePositionMove()
     {
-        if (collision.gameObject.layer == _scannableLayer) // Crate
-        {
-            IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
-            if (scannedThing != null)
-            {
-                _scannablesInRange.Add(scannedThing);
-                //TODO add subtle 'gained scan info' audio clip
-                if (_indexOfCurrentScan < 0)
-                {
-                    _indexOfCurrentScan = 0;
-                    _scanReticle = Instantiate(_scanReticlePrefab, collision.transform);
-                }
-                PushScannedObjectToUI();
-            }
+        Vector3 dir = _inputController.MousePos - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, _scanRange,
+            _layerMask_Scannable);
 
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position,
+            0.5f, dir, _scanRange,_layerMask_Scannable);
+
+        if (!hit)
+        {
+            Debug.DrawRay(transform.position,dir.normalized * _scanRange,
+                Color.red, 0.1f);
+            return;
+        }
+        else
+        {
+            _uiController.UpdateScanner(null, null, "na");
+            Debug.Log("hit!");
+        }
+
+        IScannable scannedThing = hit.transform.GetComponentInParent<IScannable>();
+        if (scannedThing != null)
+        {
+            Debug.Log("found a scannable!");
+            Sprite scanIcon = scannedThing.ScanIcon();
+            string scanName = scannedThing.ScanName();
+            _uiController.UpdateScanner(scanIcon, scanName, "ray");
+            Debug.DrawRay(transform.position, dir.normalized * _scanRange, 
+                Color.green, 0.1f);
+        }
+        else
+        {
+            Debug.Log("found something else");
+            Debug.DrawRay(transform.position, dir.normalized * _scanRange, 
+                Color.yellow, 0.1f);
         }
     }
+
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.layer == _scannableLayer) // Crate
+    //    {
+    //        IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
+    //        if (scannedThing != null)
+    //        {
+    //            _scannablesInRange.Add(scannedThing);
+    //            //TODO add subtle 'gained scan info' audio clip
+    //            if (_indexOfCurrentScan < 0)
+    //            {
+    //                _indexOfCurrentScan = 0;
+    //                _scanReticle = Instantiate(_scanReticlePrefab, collision.transform);
+    //            }
+    //            PushScannedObjectToUI();
+    //        }
+
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.layer == _scannableLayer)
+    //    {
+    //        IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
+    //        if (_scannablesInRange.Contains(scannedThing))
+    //        {
+    //            _scannablesInRange.Remove(scannedThing);
+    //            //TODO add subtle 'lost scan info' audio clip
+    //            if (_scannablesInRange.Count > 0)
+    //            {
+    //                _indexOfCurrentScan = 0;
+    //                _scanReticle.transform.parent = _scannablesInRange[_indexOfCurrentScan].GetScanTransform();
+    //                _scanReticle.transform.localPosition = Vector2.zero;
+    //                PushScannedObjectToUI();
+    //            }
+    //            else
+    //            {
+    //                _indexOfCurrentScan = -1;
+    //                Destroy(_scanReticle);
+    //                _uiController.ClearCrateScan();
+    //            }
+
+    //        }
+
+    //    }
+
+    //}
 
     private void PushScannedObjectToUI()
     {
@@ -85,34 +155,7 @@ public class Scanner : MonoBehaviour
         
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == _scannableLayer)
-        {
-            IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
-            if (_scannablesInRange.Contains(scannedThing))
-            {
-                _scannablesInRange.Remove(scannedThing);
-                //TODO add subtle 'lost scan info' audio clip
-                if (_scannablesInRange.Count > 0)
-                {
-                    _indexOfCurrentScan = 0;
-                    _scanReticle.transform.parent = _scannablesInRange[_indexOfCurrentScan].GetScanTransform();
-                    _scanReticle.transform.localPosition = Vector2.zero;
-                    PushScannedObjectToUI();
-                }
-                else
-                {
-                    _indexOfCurrentScan = -1;
-                    Destroy(_scanReticle);
-                    _uiController.ClearCrateScan();
-                }  
 
-            }
-
-        }
-
-    }
 
     public void DestroyScannedCrateAfterInstall()
     {
