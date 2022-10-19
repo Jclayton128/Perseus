@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerceptionHandler : MonoBehaviour
+public class DectectionHandler : MonoBehaviour
 {
     MindsetHandler _mindsetHandler;
     CircleCollider2D _circleCollider;
@@ -20,7 +20,6 @@ public class PerceptionHandler : MonoBehaviour
     {
         if (collision.transform.root.tag == "Player")
         {
-            Debug.Log("Found player!");
             _playerRB = collision.GetComponentInParent<Rigidbody2D>();
         }
     }
@@ -28,14 +27,13 @@ public class PerceptionHandler : MonoBehaviour
     {
         if (collision.transform.root.tag == "Player")
         {
-            Debug.Log("Lost player!");
             _playerRB = null;
         }
     }
 
     private void Update()
     {
-        if (_playerRB)
+        if (_playerRB != null)
         {
             _mindsetHandler.SetPlayerPositionOnPlayerSighting(_playerRB.position,
                  _playerRB.velocity);

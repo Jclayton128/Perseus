@@ -60,8 +60,18 @@ public class Mindset_Fight : Mindset
 
     public override void UpdateMindset()
     {
+        CheckForExitFightMindset();
         UpdateNavigation();
         UpdateWeaponry();
+
+    }
+
+    private void CheckForExitFightMindset()
+    {
+        if (_mindsetHandler.TargetAge > 0.1f)
+        {
+            _mindsetHandler.MoveToNewMindset(_mindsetHandler.HuntMindset);
+        }
     }
 
     private void UpdateWeaponry()
@@ -99,17 +109,17 @@ public class Mindset_Fight : Mindset
         {
             case FightMovement.Contact:
                 newTargetPos = _mindsetHandler.PlayerPosition;
-                _mindsetHandler.SetTarget(newTargetPos,0, true);
+                _mindsetHandler.SetTargetPosition(newTargetPos,0, true);
                 break;
 
             case FightMovement.StandoffDumb:
                 newTargetPos = _mindsetHandler.PlayerPosition;
-                _mindsetHandler.SetTarget(newTargetPos, _decisionRange, false);
+                _mindsetHandler.SetTargetPosition(newTargetPos, _decisionRange, false);
                 break;
 
             case FightMovement.StandoffLead:
                 newTargetPos = _mindsetHandler.PlayerPosition;
-                _mindsetHandler.SetTarget(newTargetPos, _decisionRange, true);
+                _mindsetHandler.SetTargetPosition(newTargetPos, _decisionRange, true);
                 break;
         }
     }

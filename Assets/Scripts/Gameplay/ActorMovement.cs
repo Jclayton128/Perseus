@@ -26,6 +26,8 @@ public class ActorMovement : MonoBehaviour
 
     [HideIf("IsPlayer")]
     [SerializeField] float _accelClosureDecision = 10.0f;
+    public float TopSpeed_Chosen => _accelClosureDecision;
+
     [HideIf("IsPlayer")]
     [SerializeField] float _minAngleOffDesiredSteeringToAccel = 10.0f;
 

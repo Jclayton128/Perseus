@@ -12,10 +12,10 @@ public class MindsetHandler : MonoBehaviour
     LevelController _levelController;
 
 
-    Mindset_Explore _exploreMindset;
-    Mindset_Fight _fightMindset;
-    Mindset_Hunt _huntMindset;
-    Mindset_React _reactMindset;
+    public Mindset_Explore ExploreMindset { get; private set; }
+    public Mindset_Fight FightMindset { get; private set; }
+    public Mindset_Hunt HuntMindset { get; private set; }
+    public Mindset_React ReactMindset { get; private set; }
 
     //settings
     [SerializeField] float _detectorRange = 10f;
@@ -41,7 +41,7 @@ public class MindsetHandler : MonoBehaviour
 
 
 
-    float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
+    [SerializeField] float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
     public float TargetAge => _targetAge;
 
 
@@ -58,23 +58,23 @@ public class MindsetHandler : MonoBehaviour
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         _weaponHandler?.Initialize(_energyHandler, false, null);
 
-        _exploreMindset = GetComponent<Mindset_Explore>();
-        _fightMindset = GetComponent<Mindset_Fight>();
-        _huntMindset = GetComponent<Mindset_Hunt>();
-        _reactMindset = GetComponent<Mindset_React>();
+        ExploreMindset = GetComponent<Mindset_Explore>();
+        FightMindset = GetComponent<Mindset_Fight>();
+        HuntMindset = GetComponent<Mindset_Hunt>();
+        ReactMindset = GetComponent<Mindset_React>();
 
-        _exploreMindset.InitializeMindset(this, _levelController);
-        _fightMindset.InitializeMindset(this, _levelController);
-        _huntMindset.InitializeMindset(this, _levelController);
-        _reactMindset.InitializeMindset(this, _levelController);
+        ExploreMindset.InitializeMindset(this, _levelController);
+        FightMindset.InitializeMindset(this, _levelController);
+        HuntMindset.InitializeMindset(this, _levelController);
+        ReactMindset.InitializeMindset(this, _levelController);
 
-        _activeMindset = _exploreMindset;
+        _activeMindset = ExploreMindset;
         _activeMindset.EnterMindset();
     }
 
     private void Start()
     {
-        GetComponentInChildren<PerceptionHandler>().ModifyDetectorRange(_detectorRange);
+        GetComponentInChildren<DectectionHandler>().ModifyDetectorRange(_detectorRange);
     }
 
     private void Update()
@@ -88,31 +88,22 @@ public class MindsetHandler : MonoBehaviour
     {
         if (_targetAge < 0.1f)
         {
-            if (_activeMindset != _fightMindset) MoveToNewMindset(_fightMindset);
-        }
-        else if (_targetAge < _huntMindset.TimeframeForHunting)
-        {
-            if (_activeMindset != _huntMindset) MoveToNewMindset(_huntMindset);
-        }
-        else
-        {
-            //stick with current
+            if (_activeMindset != FightMindset) MoveToNewMindset(FightMindset);
         }
 
     }
 
     public void MoveToNewMindset(Mindset newMindset)
     {
-        Debug.Log($"Exiting {_activeMindset}. Entering {newMindset}");
+        //Debug.Log($"Exiting {_activeMindset}. Entering {newMindset}");
         _activeMindset.ExitMindset();
         _activeMindset = newMindset;
         _activeMindset.EnterMindset();
     }
 
-    public void SetTarget(Vector2 targetPosition, float standoffRange, bool shouldLeadTarget)
+    public void SetTargetPosition(Vector2 targetPosition, float standoffRange, bool shouldLeadTarget)
     {
         _targetPosition =  targetPosition;
-        _playerVelocity = Vector2.zero;
         _shouldLeadTargetPos = shouldLeadTarget;
     }
 
@@ -126,7 +117,7 @@ public class MindsetHandler : MonoBehaviour
     [ContextMenu("Set New Detector Range")]
     private void SetDetectorRange()
     {
-        GetComponentInChildren<PerceptionHandler>().ModifyDetectorRange(_detectorRange);
+        GetComponentInChildren<DectectionHandler>().ModifyDetectorRange(_detectorRange);
     }
 
 

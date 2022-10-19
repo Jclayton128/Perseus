@@ -78,28 +78,28 @@ public class Mindset_Explore : Mindset
         {
             case ExploreOptions.RandomCloseMove:
                 newTargetPosition = FindRandomCloseMove();
-                _mindsetHandler.SetTarget(newTargetPosition,0, false);
+                _mindsetHandler.SetTargetPosition(newTargetPosition,0, false);
                 break;
 
             case ExploreOptions.RandomFarMove:
                 newTargetPosition = FindRandomFarMove();
-                _mindsetHandler.SetTarget(newTargetPosition, 0, false);
+                _mindsetHandler.SetTargetPosition(newTargetPosition, 0, false);
                 break;
 
             case ExploreOptions.StrictOctagonalMove:
                 newTargetPosition = FindStrictOctagonalMove();
-                _mindsetHandler.SetTarget(newTargetPosition, 0, true);
+                _mindsetHandler.SetTargetPosition(newTargetPosition, 0, true);
                 break;
 
             case ExploreOptions.RandomCloseDependentMove:
                 if (!_dependentTransform) Debug.LogError("Need a dependent transform!");
                 else newTargetPosition = FindRandomCloseDependentMove();
-                _mindsetHandler.SetTarget(newTargetPosition, 0, false);
+                _mindsetHandler.SetTargetPosition(newTargetPosition, 0, false);
                 break;
 
             case ExploreOptions.HoldPosition:
                 newTargetPosition = transform.position;
-                _mindsetHandler.SetTarget(newTargetPosition, 0, true);
+                _mindsetHandler.SetTargetPosition(newTargetPosition, 0, true);
                 break;
 
         }
