@@ -13,6 +13,8 @@ public class HealthHandler : MonoBehaviour
     ScrapController _scrapController;
     Rigidbody2D _rb;
     UI_Controller _UIController;
+    [SerializeField] ParticleSystem _ionizationParticles = null;
+    ParticleSystem.EmissionModule _ipem;
 
     public event Action<Vector2> ReceivingThreatVector = null;
     public event System.Action<DamagePack> ReceivingDamagePack = null;
@@ -24,6 +26,7 @@ public class HealthHandler : MonoBehaviour
     //global settings
     float _minSecondsBetweenDamageFX = 0.125f;
     float _minDelayToBeginRechargingShields = 0.5f;
+    float _ionizationGlory = 10f; // multiplied by Ion Factor for Ionization Particle emit rate
 
     #region Instance Settings
     //instance settings
@@ -96,11 +99,14 @@ public class HealthHandler : MonoBehaviour
             _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
             _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
             _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
+            _UIController.UpdateIonizationBars(IonFactor, 1);
             _shouldEndGameSessionUponDeath = true;
         }
 
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
+        _ipem = _ionizationParticles.emission;
+        _ipem.rateOverTime = IonFactor * _ionizationGlory;
     }
 
     #region Flow
@@ -153,10 +159,15 @@ public class HealthHandler : MonoBehaviour
 
     private void UpdateIonization()
     {
-        if (_ionizationPointsAbsorbed <= 0) return;
+        if (_ionizationPointsAbsorbed < 0) return;
         _ionizationPointsAbsorbed -= _ionHealRate * Time.deltaTime;
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
         IonFactor = (_ionizationPointsAbsorbed / _maxHullPoints);
+        _ipem.rateOverTime = IonFactor * _ionizationGlory;
+        if (_movement.IsPlayer)
+        {
+            _UIController.UpdateIonizationBars(IonFactor, 1);
+        }
     }
 
 

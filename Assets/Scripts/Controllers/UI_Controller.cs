@@ -45,6 +45,12 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] AdjustableImageBar _energyBar = null;
 
     [FoldoutGroup("SHEI")]
+    [SerializeField] AdjustableImageBar _ionBar_CW = null;
+
+    [FoldoutGroup("SHEI")]
+    [SerializeField] AdjustableImageBar _ionBar_CCW = null;
+
+    [FoldoutGroup("SHEI")]
     [SerializeField] TextMeshProUGUI _energyRegenTMP = null;
 
     [FoldoutGroup("SHEI")]
@@ -765,6 +771,12 @@ public class UI_Controller : MonoBehaviour
     public void UpdateEnergyBar(float currentValue, float maxValue)
     {
         _energyBar.SetFactor(currentValue / maxValue);
+    }
+
+    public void UpdateIonizationBars(float currentValue, float maxValue)
+    {
+        _ionBar_CCW.SetFactor(currentValue / maxValue);
+        _ionBar_CW.SetFactor(currentValue/maxValue);
     }
 
     public AdjustableImageBar GetEnergyBar()

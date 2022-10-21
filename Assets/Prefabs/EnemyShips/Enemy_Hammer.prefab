@@ -56,12 +56,20 @@ PrefabInstance:
       value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _ionDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _maxCharge
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _chargeRate
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _normalDamage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _activationCost

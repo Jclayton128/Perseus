@@ -50,6 +50,7 @@ public class EnergyHandler : MonoBehaviour
         {
             _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
             _uicontroller.UpdateEnergyRegenTMP(_energyGainRate.ToString("F1"), Color.white);
+
         }
 
         if (_usesBurstRecharge) _burstRechargeCountdown = _timeToBurstRecharge;
