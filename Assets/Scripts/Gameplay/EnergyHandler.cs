@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class EnergyHandler : MonoBehaviour
 {
+    public Action<float, float> EnergyPointsChanged;
+    public Action<string, Color> EnergyRegenChanged;
+
     ActorMovement _movement;
     UI_Controller _uicontroller;
     HealthHandler _health;
@@ -24,6 +28,7 @@ public class EnergyHandler : MonoBehaviour
     //state
     [SerializeField] float _currentEnergy;
     public float CurrentEnergy => _currentEnergy;
+    Color _energyRegenColor;
 
     [ShowIf("_usesBurstRecharge")]
     [SerializeField] float _burstRechargeCountdown = Mathf.Infinity;
@@ -32,6 +37,7 @@ public class EnergyHandler : MonoBehaviour
     {
         _movement = GetComponent<ActorMovement>();
         _health = GetComponent<HealthHandler>();
+        _health.IonFactorChanged += HandleIonFactorChange;
 
         if (_movement == null || _health == null)
         {
@@ -44,14 +50,10 @@ public class EnergyHandler : MonoBehaviour
 
     private void Start()
     {
-        _currentEnergy = _maxEnergyPoints;
-        
-        if (_movement.IsPlayer)
-        {
-            _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
-            _uicontroller.UpdateEnergyRegenTMP(_energyGainRate.ToString("F1"), Color.white);
+        _currentEnergy = _maxEnergyPoints;        
 
-        }
+        EnergyPointsChanged?.Invoke(CurrentEnergy, _maxEnergyPoints);
+        EnergyRegenChanged?.Invoke(_energyGainRate.ToString("F1"), Color.white);
 
         if (_usesBurstRecharge) _burstRechargeCountdown = _timeToBurstRecharge;
     }
@@ -60,7 +62,7 @@ public class EnergyHandler : MonoBehaviour
     {
         if (_usesBurstRecharge)
         {
-            _burstRechargeCountdown -= Time.deltaTime;
+            _burstRechargeCountdown -= Time.deltaTime * (1 - _health.IonFactor);
             if (_burstRechargeCountdown <= 0)
             {
                 _currentEnergy = _maxEnergyPoints;
@@ -71,10 +73,7 @@ public class EnergyHandler : MonoBehaviour
         {
             _currentEnergy += _energyGainRate * (1 - _health.IonFactor) * Time.deltaTime;
             _currentEnergy = Mathf.Clamp(CurrentEnergy, 0, _maxEnergyPoints);
-            if (_movement.IsPlayer)
-            {
-                _uicontroller.UpdateEnergyBar(CurrentEnergy, _maxEnergyPoints);
-            }
+            EnergyPointsChanged?.Invoke(CurrentEnergy, _maxEnergyPoints);
         }        
 
 
@@ -102,11 +101,19 @@ public class EnergyHandler : MonoBehaviour
         _currentEnergy -= energySpent;
     }
 
+    private void HandleIonFactorChange(float currentIonization, float throwaway)
+    {
+        _energyRegenColor = Color.Lerp(Color.white, Color.green, currentIonization);
+        EnergyRegenChanged?.Invoke((_energyGainRate * (1 - _health.IonFactor)).ToString("F1"),
+            _energyRegenColor);
+    }
+
     #region System Modifiers
 
     public void ModifyEnergyRegenRate(float rateToAdd)
     {
         _energyGainRate += rateToAdd;
+        EnergyRegenChanged?.Invoke(_energyGainRate.ToString("F1"), Color.white);
     }
 
     #endregion

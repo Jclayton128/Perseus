@@ -180,7 +180,6 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] float _metaMenuDeployTime = 1.2f;
 
 
-
     //state
     IInstallable _currentUpgradeableSelection;
     IInstallable _crateScannerThing;
@@ -205,6 +204,16 @@ public class UI_Controller : MonoBehaviour
     {
         _playerStateHandler = player.GetComponent<PlayerStateHandler>();
         _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
+
+        HealthHandler hh = player.GetComponent<HealthHandler>();
+        hh.ShieldPointChanged += HandleShieldPointsChanged;
+        hh.HullPointsChanged += HandleHullPointsChanged;
+        hh.IonFactorChanged += HandleIonFactorChanged;
+        hh.ShieldRegenChanged += HandleShieldRegenChanged;
+
+        player.GetComponent<EnergyHandler>().EnergyPointsChanged += HandleEnergyPointsChanged;
+        player.GetComponent<EnergyHandler>().EnergyRegenChanged += HandleEnergyRegenChanged;
+
         ClearSelection();
     }
 
@@ -752,38 +761,35 @@ public class UI_Controller : MonoBehaviour
 
     #region SHEI Updates
 
-    public void UpdateShieldBar(float currentValue, float maxValue)
+    private void HandleShieldPointsChanged(float currentValue, float maxValue)
     {
         _shieldBar.SetFactor(currentValue / maxValue);
     }
 
-    public void UpdateHullBar(float currentValue, float maxValue)
+    private void HandleHullPointsChanged(float currentValue, float maxValue)
     {
         _hullBar.SetFactor(currentValue / maxValue);
     }
 
-    public void UpdateShieldRegenTMP(string amountAsString, Color color)
+    private void HandleShieldRegenChanged(string amountAsString, Color color)
     {
         _shieldRegenTMP.text = amountAsString;
         _shieldRegenTMP.color = color;
     }
 
-    public void UpdateEnergyBar(float currentValue, float maxValue)
-    {
-        _energyBar.SetFactor(currentValue / maxValue);
-    }
 
-    public void UpdateIonizationBars(float currentValue, float maxValue)
+    private void HandleIonFactorChanged(float currentValue, float maxValue)
     {
         _ionBar_CCW.SetFactor(currentValue / maxValue);
         _ionBar_CW.SetFactor(currentValue/maxValue);
     }
 
-    public AdjustableImageBar GetEnergyBar()
+    private void HandleEnergyPointsChanged(float currentValue, float maxValue)
     {
-        return _energyBar;
+        _energyBar.SetFactor(currentValue / maxValue);
     }
-    public void UpdateEnergyRegenTMP(string amountAsString, Color color)
+
+    private void HandleEnergyRegenChanged(string amountAsString, Color color)
     {
         _energyRegenTMP.text = amountAsString;
         _energyRegenTMP.color = color;

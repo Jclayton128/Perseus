@@ -6,6 +6,11 @@ using System;
 
 public class HealthHandler : MonoBehaviour
 {
+    public Action<float, float> ShieldPointChanged;
+    public Action<float, float> HullPointsChanged;
+    public Action<float, float> IonFactorChanged;
+    public Action<string, Color> ShieldRegenChanged;
+
     #region References
     //references
     ActorMovement _movement;
@@ -66,6 +71,7 @@ public class HealthHandler : MonoBehaviour
     private float _ionizationPointsAbsorbed = 0;
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float IonFactor = 0;
+    Color _shieldRegenColor;
 
     int _scrapValue;
     float _timeToAllowShieldDamageFX = 0;
@@ -94,19 +100,17 @@ public class HealthHandler : MonoBehaviour
         ShieldPoints = _maxShieldPoints;
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
-        if (_movement.IsPlayer)
-        {
-            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
-            _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
-            _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
-            _UIController.UpdateIonizationBars(IonFactor, 1);
-            _shouldEndGameSessionUponDeath = true;
-        }
-
+        if (_movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
+        
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
         _ipem = _ionizationParticles.emission;
         _ipem.rateOverTime = IonFactor * _ionizationGlory;
+
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+        IonFactorChanged?.Invoke(IonFactor, 1);
+        ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
     }
 
     #region Flow
@@ -150,11 +154,8 @@ public class HealthHandler : MonoBehaviour
 
         ShieldPoints += _shieldHealRate * (1-IonFactor) * Time.deltaTime;
         ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
 
-        if (_movement.IsPlayer)
-        {
-            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
-        }
     }
 
     private void UpdateIonization()
@@ -164,10 +165,11 @@ public class HealthHandler : MonoBehaviour
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
         IonFactor = (_ionizationPointsAbsorbed / _maxHullPoints);
         _ipem.rateOverTime = IonFactor * _ionizationGlory;
-        if (_movement.IsPlayer)
-        {
-            _UIController.UpdateIonizationBars(IonFactor, 1);
-        }
+
+        IonFactorChanged?.Invoke(IonFactor, 1);
+        _shieldRegenColor = Color.Lerp(Color.white, Color.green, IonFactor);
+        ShieldRegenChanged?.Invoke((_shieldHealRate * (1 - IonFactor)).ToString("F1"),
+            _shieldRegenColor);
     }
 
 
@@ -251,6 +253,7 @@ public class HealthHandler : MonoBehaviour
         }
 
     }
+   
     private void ReceiveShieldDamage(float shieldDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
         if (shieldDamage <= 0) return;
@@ -266,12 +269,7 @@ public class HealthHandler : MonoBehaviour
             _timeToAllowShieldDamageFX = Time.time + _minSecondsBetweenDamageFX;
         }
 
-        
-        if (_movement.IsPlayer)
-        {
-            _UIController.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
-        }
-
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
     }
 
     private void ReceiveHullDamage(float normalDamage, float scrapBonus, Vector2 impactPosition, Vector2 impactHeading)
@@ -291,10 +289,7 @@ public class HealthHandler : MonoBehaviour
             _gatheredHullDamageForSingleParticleRelease += normalDamage;
         }
 
-        if (_movement.IsPlayer)
-        {
-            _UIController.UpdateHullBar(HullPoints, _maxHullPoints);
-        }
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
 
     private void ReceiveIonDamage(DamagePack incomingDamage)
@@ -323,7 +318,8 @@ public class HealthHandler : MonoBehaviour
     {
         _shieldHealRate += shieldHealRateAddition;
         _shieldHealRate = Mathf.Clamp(_shieldHealRate, 0, 99);
-        _UIController.UpdateShieldRegenTMP(_shieldHealRate.ToString("F1"), Color.white);
+        ShieldRegenChanged(_shieldHealRate.ToString("F1"), Color.white);
+
     }
 
     /// <summary>
@@ -334,7 +330,7 @@ public class HealthHandler : MonoBehaviour
     {
         _maxShieldPoints += shieldMaxAddition;
         _maxShieldPoints = Mathf.Clamp(_maxShieldPoints, 0, 999);
-        _UIController?.UpdateShieldBar(ShieldPoints, _maxShieldPoints);
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
     }
 
     /// <summary>
@@ -345,7 +341,7 @@ public class HealthHandler : MonoBehaviour
     {
         _maxHullPoints += hullAddition;
         HullPoints += hullAddition;
-        _UIController?.UpdateHullBar(HullPoints, _maxHullPoints);
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
 
     #endregion
