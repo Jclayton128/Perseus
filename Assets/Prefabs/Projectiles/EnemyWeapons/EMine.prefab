@@ -92,6 +92,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8910399456984433170, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8910399456984433170, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
@@ -120,12 +124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124082dc7e52c4848b09b8f32a6dc117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifetimeRemaining: 0
   PType: 12
   ImpactHeading: {x: 0, y: 0}
   _safeSprite: {fileID: 21300000, guid: 2f68826b799f2ca4b92ba3a7fcbfe822, type: 3}
   _maxDetectionRange: 10
   _warningRange: 5
   _detonationRange: 3
+  _damageRange: 3.2
+  _detonationDelay: 0.15
+  _timeToDetonate: Infinity
   _playerRange: 0
 --- !u!114 &2039553803331184426
 MonoBehaviour:
@@ -140,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ionizationParticles: {fileID: 0}
-  _maxHullPoints: 1
+  _maxHullPoints: 0.1
   _emitsHullChunks: 0
   _isShip: 0
   _maxShieldPoints: 0

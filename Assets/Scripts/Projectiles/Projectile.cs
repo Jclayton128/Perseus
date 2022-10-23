@@ -22,7 +22,7 @@ public abstract class Projectile : MonoBehaviour
     protected WeaponHandler _launchingWeaponHandler;
 
     //state
-    float _lifetimeRemaining = 0;
+    [SerializeField] float _lifetimeRemaining = 0;
     float _resilienceRemaining = 1; //Hits it can take from PD turret or number of penetrations allowed
     public ProjectileType PType;
 
@@ -211,7 +211,7 @@ public abstract class Projectile : MonoBehaviour
         {
             HealthHandler hh = hit.transform.GetComponent<HealthHandler>();
             Vector2 point = hit.ClosestPoint(transform.position);
-            Vector2 dir = (transform.position - hit.transform.position);
+            Vector2 dir = (hit.transform.position - transform.position);
             DamagePack.FadeDamage(
                 (maxDamageRange - dir.magnitude)/maxDamageRange);
             hh?.ReceiveNonColliderDamage(DamagePack, point, dir.normalized);

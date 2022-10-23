@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentRadarProfile: 20
   CurrentRadarProfileFactor: 0
+  _isCloaked: 0
   _isStaticSized: 1
 --- !u!58 &6668427055719874846
 CircleCollider2D:

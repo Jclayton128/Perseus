@@ -118,12 +118,13 @@ public class ParticleController : MonoBehaviour
         ps.Emit(count);
     }
 
-    public void RequestBlastParticles(int particlesToMake,
+    public void RequestBlastParticles(int particlesToMake, float blastRange,
         Vector3 spawnPosition)
     {
         if (particlesToMake <= 0) return;
 
         ParticleSystem ps;
+
 
         if (_pooledBlastParticles.Count == 0)
         {
@@ -137,6 +138,8 @@ public class ParticleController : MonoBehaviour
             ps.gameObject.SetActive(true);
             ps.transform.position = spawnPosition;
         }
+        ParticleSystem.MainModule psm = ps.main;
+        psm.startLifetime = blastRange / psm.startSpeed.constantMin;
         _activeBlastParticles.Add(ps);
         int count = Mathf.RoundToInt(particlesToMake * _blastGloryFactor);
         //Debug.Log($"spawning {particlesToMake} hull FX");

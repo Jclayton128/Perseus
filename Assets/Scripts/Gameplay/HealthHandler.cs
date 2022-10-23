@@ -38,7 +38,7 @@ public class HealthHandler : MonoBehaviour
     //instance settings
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maximum (and starting) Hull Points")]
-    [SerializeField] [Range(1, 100)] float _maxHullPoints = 10;
+    [SerializeField] [Range(.1f, 100)] float _maxHullPoints = 10;
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Emits hull damage FX when receiving hull damage. Should be FALSE for asteroids.")]
@@ -101,13 +101,12 @@ public class HealthHandler : MonoBehaviour
         _scrapController = _particleController.GetComponent<ScrapController>();
         _UIController = _particleController.GetComponent<UI_Controller>();
 
-        HullPoints = _maxHullPoints;
-        ShieldPoints = _maxShieldPoints;
+        ResetCurrentHullAndShieldLevels();
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
         if (!_isShip) return;
         if (_movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
-        
+
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
         _ipem = _ionizationParticles.emission;
@@ -117,6 +116,12 @@ public class HealthHandler : MonoBehaviour
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
         IonFactorChanged?.Invoke(IonFactor, 1);
         ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
+    }
+
+    public void ResetCurrentHullAndShieldLevels()
+    {
+        HullPoints = _maxHullPoints;
+        ShieldPoints = _maxShieldPoints;
     }
 
     #region Flow
@@ -294,16 +299,19 @@ public class HealthHandler : MonoBehaviour
         HullPoints -= normalDamage;
         _scrapValue += Mathf.RoundToInt(scrapBonus);
 
-        if (Time.time >= _timeToAllowHullDamageFX)
+        if (_emitsHullChunks)
         {
-            int amount = Mathf.RoundToInt(_gatheredHullDamageForSingleParticleRelease + 0.5f);
-            _particleController.RequestHullDamageParticles(amount, impactPosition, impactHeading);
-            _timeToAllowHullDamageFX = Time.time + _minSecondsBetweenDamageFX;
-            _gatheredHullDamageForSingleParticleRelease = 0;
-        }
-        else
-        {
-            _gatheredHullDamageForSingleParticleRelease += normalDamage;
+            if (Time.time >= _timeToAllowHullDamageFX)
+            {
+                int amount = Mathf.RoundToInt(_gatheredHullDamageForSingleParticleRelease + 0.5f);
+                _particleController.RequestHullDamageParticles(amount, impactPosition, impactHeading);
+                _timeToAllowHullDamageFX = Time.time + _minSecondsBetweenDamageFX;
+                _gatheredHullDamageForSingleParticleRelease = 0;
+            }
+            else
+            {
+                _gatheredHullDamageForSingleParticleRelease += normalDamage;
+            }
         }
 
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);

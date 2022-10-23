@@ -20,6 +20,8 @@ public class MineProjectile : Projectile, IPlayerSeeking
     int layerMask_PlayerNeutralEnemy = (1 << 7) | (1 << 9) | (1 << 11);
 
     //state
+    bool _isDetonating = false;
+    [SerializeField] float _timeToDetonate = Mathf.Infinity;
     Sprite _warningSprite;
     [SerializeField] float _playerRange = 0;
     public override void Initialize(PoolController poolController)
@@ -34,9 +36,12 @@ public class MineProjectile : Projectile, IPlayerSeeking
 
     protected override void SetupInstanceSpecifics()
     {
-        _playerRange = 0;
+        _isDetonating = false;
+        _playerRange = _maxDetectionRange;
         _sr.sprite = _safeSprite;
-        GetComponent<HealthHandler>().Dying += Detonate;
+        _timeToDetonate = Mathf.Infinity;
+        GetComponent<HealthHandler>().ResetCurrentHullAndShieldLevels();
+        GetComponent<HealthHandler>().Dying += BeginDetonationSequence;
     }
 
     protected override void ExecuteMovement()
@@ -46,21 +51,31 @@ public class MineProjectile : Projectile, IPlayerSeeking
 
     protected override void ExecuteUpdateSpecifics()
     {
-        //none
+        if (Time.time >= _timeToDetonate)
+        {
+            Detonate(); 
+        }
     }
 
     protected override void ExecuteLifetimeExpirationSequence()
     {
-        _particleController.RequestBlastParticles(1,transform.position);
-        Debug.Log("expired");
+        _particleController.RequestBlastParticles(1, 2f,transform.position);
         ExecuteGenericExpiration_Explode(0, 0);
+    }
+
+    private void BeginDetonationSequence()
+    {
+        if (_isDetonating) return;
+        _isDetonating = true;
+        _timeToDetonate = Time.time + _detonationDelay;
     }
 
     private void Detonate()
     {
-        _particleController.RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
-    transform.position);
-        Debug.Log("Detonated");
+        _particleController.
+            RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
+            _damageRange,
+            transform.position);
         ExecuteGenericExpiration_Explode(_damageRange, layerMask_PlayerNeutralEnemy);
     }
 
@@ -69,9 +84,10 @@ public class MineProjectile : Projectile, IPlayerSeeking
     {
         _playerRange = (playerPosition - (Vector2)transform.position).magnitude;
         _sr.sprite = GetSpriteBasedOnPlayerRange(_playerRange);
-        if (_playerRange < _detonationRange)
+        if (!_isDetonating && _playerRange < _detonationRange)
         {
-            Invoke(nameof(Detonate), _detonationDelay);
+            BeginDetonationSequence();
+            //Invoke(nameof(Detonate), _detonationDelay);
         }
     }
 

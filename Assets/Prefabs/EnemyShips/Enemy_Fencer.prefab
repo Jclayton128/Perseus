@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2384988038390529058}
     m_Modifications:
+    - target: {fileID: -694096584363138200, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
+      propertyPath: _normalDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -694096584363138200, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
+      propertyPath: _knockBackAmount
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2975548982831552488, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -120,6 +128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Fencer
       objectReference: {fileID: 0}
+    - target: {fileID: 1939738846384467041, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467042, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -170,7 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293803639130907992, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _energyGainRate
-      value: 3.33
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2293803639130907992, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxEnergyPoints
