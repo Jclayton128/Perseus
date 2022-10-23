@@ -31,11 +31,19 @@ public class DamagePack : object
 
     public void NullifyDamage()
     {
-
         NormalDamage = 0;
         ShieldBonusDamage = 0;
         IonDamage = 0;
         KnockbackAmount = 0;
         ScrapBonus = 0;
+    }
+
+    public void FadeDamage(float fadeFactor)
+    {
+        NormalDamage *= fadeFactor;
+        ShieldBonusDamage *= fadeFactor;
+        IonDamage *= fadeFactor;
+        KnockbackAmount *= fadeFactor;
+        ScrapBonus *= fadeFactor;
     }
 }

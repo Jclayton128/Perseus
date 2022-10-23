@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MindsetHandler : MonoBehaviour
+public class MindsetHandler : MonoBehaviour, IPlayerSeeking
 {
     ActorMovement _movement;
     EnergyHandler _energyHandler;
@@ -82,7 +82,7 @@ public class MindsetHandler : MonoBehaviour
 
     private void Start()
     {
-        GetComponentInChildren<DectectionHandler>().ModifyDetectorRange(_detectorRange);
+        GetComponentInChildren<DetectionHandler>().ModifyDetectorRange(_detectorRange);
     }
 
     private void Update()
@@ -116,7 +116,7 @@ public class MindsetHandler : MonoBehaviour
         _shouldLeadTargetPos = shouldLeadTarget;
     }
 
-    public void SetPlayerPositionOnPlayerSighting(Vector2 playerPosition, Vector2 playerVelocity)
+    public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)
     {
         _playerPosition = playerPosition;
         _playerVelocity = playerVelocity;
@@ -132,7 +132,7 @@ public class MindsetHandler : MonoBehaviour
     [ContextMenu("Set New Detector Range")]
     private void SetDetectorRange()
     {
-        GetComponentInChildren<DectectionHandler>().ModifyDetectorRange(_detectorRange);
+        GetComponentInChildren<DetectionHandler>().ModifyDetectorRange(_detectorRange);
     }
 
 

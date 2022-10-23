@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DectectionHandler : MonoBehaviour
+public class DetectionHandler : MonoBehaviour
 {
     MindsetHandler _mindsetHandler;
+    IPlayerSeeking _playerSeeker;
     CircleCollider2D _circleCollider;
 
     //state
@@ -12,7 +13,7 @@ public class DectectionHandler : MonoBehaviour
     
     private void Awake()
     {
-        _mindsetHandler = GetComponentInParent<MindsetHandler>();
+        _playerSeeker = GetComponentInParent<IPlayerSeeking>();
         _circleCollider = GetComponent<CircleCollider2D>();
     }
 
@@ -35,8 +36,7 @@ public class DectectionHandler : MonoBehaviour
     {
         if (_playerRB != null)
         {
-            _mindsetHandler.SetPlayerPositionOnPlayerSighting(_playerRB.position,
-                 _playerRB.velocity);
+            _playerSeeker.ReportPlayer(_playerRB.position,_playerRB.velocity);
         }
 
     }

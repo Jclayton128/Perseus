@@ -12,7 +12,7 @@ public abstract class Projectile : MonoBehaviour
     {
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
         PlayerTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
-        EnemyBolt10, EnemyMissile11, Enemy12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
+        EnemyBolt10, EnemyMissile11, EnemyMine12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }
 
@@ -87,6 +87,7 @@ public abstract class Projectile : MonoBehaviour
                 break;
 
             case ProjectileType.EnemyBolt10: break;
+            case ProjectileType.EnemyMine12: break;
 
             case ProjectileType.EnemyMissile11:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
@@ -110,7 +111,6 @@ public abstract class Projectile : MonoBehaviour
     /// These are the specific setup tasks that each weapon needs to operate properly.
     /// </summary>
     protected abstract void SetupInstanceSpecifics();
-
 
     private void Update()
     {
@@ -185,12 +185,37 @@ public abstract class Projectile : MonoBehaviour
     protected void ExecuteGenericExpiration_Spawn()
     {
         Debug.LogError("Generic Expiration-Spawn not implemented yet");
+
+        _poolCon.ReturnDeadProjectile(this);
     }
 
-    protected void ExecuteGenericExpiration_Explode()
+    /// <summary>
+    /// Handles the damage dealing and projectile disposal for an explosion.
+    /// Does not handle any desired particle FX.
+    /// </summary>
+    /// <param name="maxDamageRange"></param>
+    protected void ExecuteGenericExpiration_Explode(float maxDamageRange,
+        int vulnerableLayerMask)
     {
-        Debug.LogError("Generic Expiration-Explode not implemented yet");
+        if (maxDamageRange <=0 )
+        {
+            _poolCon.ReturnDeadProjectile(this);
+            return;
+        }
 
+        Collider2D[] hits =
+            Physics2D.OverlapCircleAll(transform.position, maxDamageRange,
+            vulnerableLayerMask);
+
+        foreach (Collider2D hit in hits)
+        {
+            HealthHandler hh = hit.transform.GetComponent<HealthHandler>();
+            Vector2 point = hit.ClosestPoint(transform.position);
+            Vector2 dir = (transform.position - hit.transform.position);
+            DamagePack.FadeDamage(
+                (maxDamageRange - dir.magnitude)/maxDamageRange);
+            hh?.ReceiveNonColliderDamage(DamagePack, point, dir.normalized);
+        }
         _poolCon.ReturnDeadProjectile(this);
     }
 

@@ -118,4 +118,29 @@ public class ParticleController : MonoBehaviour
         ps.Emit(count);
     }
 
+    public void RequestBlastParticles(int particlesToMake,
+        Vector3 spawnPosition)
+    {
+        if (particlesToMake <= 0) return;
+
+        ParticleSystem ps;
+
+        if (_pooledBlastParticles.Count == 0)
+        {
+            ps = Instantiate(_blastDamageFXprefab.gameObject, spawnPosition, 
+                Quaternion.identity).GetComponent<ParticleSystem>();
+            ps.GetComponent<ParticleSystemHandler>().Initalize(this);
+        }
+        else
+        {
+            ps = _pooledBlastParticles.Dequeue();
+            ps.gameObject.SetActive(true);
+            ps.transform.position = spawnPosition;
+        }
+        _activeBlastParticles.Add(ps);
+        int count = Mathf.RoundToInt(particlesToMake * _blastGloryFactor);
+        //Debug.Log($"spawning {particlesToMake} hull FX");
+        ps.Emit(count);
+    }
+
 }

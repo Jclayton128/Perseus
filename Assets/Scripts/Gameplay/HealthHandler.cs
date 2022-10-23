@@ -10,6 +10,7 @@ public class HealthHandler : MonoBehaviour
     public Action<float, float> HullPointsChanged;
     public Action<float, float> IonFactorChanged;
     public Action<string, Color> ShieldRegenChanged;
+    public Action Dying;
 
     #region References
     //references
@@ -42,6 +43,10 @@ public class HealthHandler : MonoBehaviour
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Emits hull damage FX when receiving hull damage. Should be FALSE for asteroids.")]
     [SerializeField] bool _emitsHullChunks = true;
+
+    [FoldoutGroup("Starting Stats")]
+    [Tooltip("Is a ship (ie, releases scrap when killed). Should be FALSE for asteroids, mines, etc.")]
+    [SerializeField] bool _isShip = true;
 
 
     [FoldoutGroup("Starting Stats")]
@@ -100,6 +105,7 @@ public class HealthHandler : MonoBehaviour
         ShieldPoints = _maxShieldPoints;
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
+        if (!_isShip) return;
         if (_movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
         
         _ionizationPointsAbsorbed = 0;
@@ -117,8 +123,11 @@ public class HealthHandler : MonoBehaviour
     private void Update()
     {
         UpdateDeathCheck();
-        UpdateIonization();
-        UpdateRechargeShield();
+        if (_isShip)
+        {
+            UpdateIonization();
+            UpdateRechargeShield();
+        }
     }
 
     private bool UpdateDeathCheck()
@@ -134,18 +143,27 @@ public class HealthHandler : MonoBehaviour
 
     private void Die()
     {
+        Dying?.Invoke();
         if (!_shouldEndGameSessionUponDeath)
         {
-            Vector2 dir = UnityEngine.Random.onUnitSphere;
-            Debug.Log($"should spawn {_scrapValue} scraps");
-            _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
+            if (_isShip)
+            {
+                SpawnScrapUponDeath();
+            }
         }
         else
         {
             FindObjectOfType<GameController>().EndGameOnPlayerDeath();
         }
 
-        Destroy(gameObject);
+        if (_isShip) Destroy(gameObject);
+    }
+
+    private void SpawnScrapUponDeath()
+    {
+        Vector2 dir = UnityEngine.Random.onUnitSphere;
+        Debug.Log($"should spawn {_scrapValue} scraps");
+        _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
     }
 
     private void UpdateRechargeShield()
@@ -197,7 +215,6 @@ public class HealthHandler : MonoBehaviour
         if (weaponImpact.TryGetComponent<Projectile>(out pb))
         {
             if (Time.time < _timeToAllowDamageAgain) return;
-            Debug.Log("receiving damage pack");
             ReceivingDamagePack?.Invoke(pb.DamagePack);
             ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
             ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
