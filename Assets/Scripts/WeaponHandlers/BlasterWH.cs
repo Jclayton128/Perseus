@@ -31,7 +31,7 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
             _isFiring = true;
             _connectedWID?.UpdateUI("RDY");
 
-            if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+            if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomActivationClip());
             else _hostAudioSource.PlayOneShot(GetRandomActivationClip());
         }
     }
@@ -42,7 +42,7 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
         {
             if (_isPlayer && !wasPausedDuringDeactivationAttempt)
             {
-                _playerAudioSource.PlayGameplayClipForPlayer(GetRandomDeactivationClip());
+                _playerAudioSource.PlayClipAtPlayer(GetRandomDeactivationClip());
             }
             _connectedWID?.UpdateUI("COOL");
             _timeToToggleModes = Time.time + _minModeToggle;
@@ -78,7 +78,7 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
         
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
-        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
         _connectedWID?.UpdateUI("FIRE");

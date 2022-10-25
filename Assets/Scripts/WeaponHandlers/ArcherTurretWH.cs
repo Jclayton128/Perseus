@@ -45,7 +45,7 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
         _isCharging = true;
         //todo emit cool charge particles
         _psem.rateOverTime = 3f;
-        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomActivationClip());
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
@@ -70,7 +70,7 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
 
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
-        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
     }

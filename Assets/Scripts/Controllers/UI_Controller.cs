@@ -154,9 +154,10 @@ public class UI_Controller : MonoBehaviour
     PlayerSystemHandler _playerSystemHandler;
     GameController _gameController;
     PlayerShipLibrary _playerShipLibrary;
-    public Action OnScrapLevelIncrease;
-    public Action OnUpgradePointsIncrease;
-    public Action OnDetectStrongSignal;
+    AudioController _audioCon;
+    public Action ScrapLevelIncreased;
+    public Action UpgradePointsIncreased;
+    public Action DetectedStrongSignal;
 
     public enum Context { None, Start, Core, End };
 
@@ -193,6 +194,7 @@ public class UI_Controller : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
+        _audioCon = GetComponent<AudioController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
         _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         InitializeSystemWeaponIcons();
@@ -286,7 +288,9 @@ public class UI_Controller : MonoBehaviour
         _bottomMetaTween = _bottomMetaWing.rectTransform.DOAnchorPosY(
             _bottomMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
-
+        
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+        
     }
 
     public void RetractMetaMenu()
@@ -303,6 +307,7 @@ public class UI_Controller : MonoBehaviour
             _bottomMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
     }
 
     public void InstantDeployMetaMenu()
@@ -316,11 +321,13 @@ public class UI_Controller : MonoBehaviour
     public void HandleStartNewGamePress()
     {
         _gameController.SetupNewGame();
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickUp);
     }
 
     public void HandleExitToMenuPress()
     {
         _gameController.EndGameOnPlayerChoice();
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickUp);
     }
 
     public void HandleSelectShip(int index)
@@ -331,6 +338,7 @@ public class UI_Controller : MonoBehaviour
         _shipChoiceDescription.text = details.Item3;
 
         _playerShipLibrary.UpdateSelectedPlayerShip(index);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickUp);
     }
 
     public void FlashShipSelectionDescription()
@@ -372,7 +380,8 @@ public class UI_Controller : MonoBehaviour
         
         if (_scrapBarFill.fillAmount > before)
         {
-            OnScrapLevelIncrease?.Invoke();
+            ScrapLevelIncreased?.Invoke();
+            _audioCon.PlayUIClip(AudioLibrary.ClipID.GainScrap);
         }
     }
 
@@ -380,7 +389,8 @@ public class UI_Controller : MonoBehaviour
     {
         if (newLevel > 0)
         {
-            OnUpgradePointsIncrease?.Invoke();
+            UpgradePointsIncreased?.Invoke();
+            _audioCon.PlayUIClip(AudioLibrary.ClipID.GainUpgradePoint);
         }
 
         _levelTMP.text = newLevel.ToString();
@@ -408,6 +418,8 @@ public class UI_Controller : MonoBehaviour
             _rightUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+
         ClearSelection();
         DeploySelectors();
     }
@@ -425,6 +437,7 @@ public class UI_Controller : MonoBehaviour
             _rightUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
         RetractSelectors();
     }
 
@@ -480,7 +493,14 @@ public class UI_Controller : MonoBehaviour
     }
 
     public void UpdateSelection(IInstallable upgradeableThing)
-    {
+    {   
+        if (upgradeableThing == null)
+        {
+            _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickNegative);
+            return;
+        }
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickUp);
+
         _currentUpgradeableSelection = upgradeableThing;
         (Sprite, string, string, string, int) selectionInfo = upgradeableThing.GetUpgradeDetails();
 
@@ -562,7 +582,8 @@ public class UI_Controller : MonoBehaviour
         _playerStateHandler.SpendUpgradePoints(currentSelectionUpgradeCost);
         _currentUpgradeableSelection.Upgrade();
         UpdateSelection(_currentUpgradeableSelection);
-        
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.UpgradeSystem);
+
     }
 
     public void HandleSelectedInstall()
@@ -579,6 +600,7 @@ public class UI_Controller : MonoBehaviour
 
         //TODO play install audio
         _playerStateHandler.SpendUpgradePoints(1);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.InstallSystem);
         RetractScannedCrateSelector();
         ClearCrateScan();
         ClearSelection();
@@ -601,7 +623,7 @@ public class UI_Controller : MonoBehaviour
         }
 
         ClearSelection();
-
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ScrapSystem);
         //TODO play scrap system audio
     }
 
@@ -616,8 +638,13 @@ public class UI_Controller : MonoBehaviour
         {
             _scanImage.sprite = icon;
             _scanImage.color = Color.white;
+            _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
+        }
+        else
+        {
+            _scanImage.color = Color.clear;
+            _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerDrop);
         } 
-        else _scanImage.color = Color.clear;
 
         if (crateName != null)
         {
@@ -812,7 +839,7 @@ public class UI_Controller : MonoBehaviour
             
             if (intensities[i] >= 0.5f) //Magic number is for a signal of 50% power.
             {
-                OnDetectStrongSignal?.Invoke();
+                DetectedStrongSignal?.Invoke();
             }
         }
     }

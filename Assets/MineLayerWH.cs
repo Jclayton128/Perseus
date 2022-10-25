@@ -24,7 +24,7 @@ public class MineLayerWH : WeaponHandler
     {
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
-        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
     }
 

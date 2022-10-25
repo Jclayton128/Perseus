@@ -2,21 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AudioController : MonoBehaviour
 {
-    
-    AudioSource _playerAudioSource;
+    AudioLibrary _audioLibrary;
+    AudioSource _cameraAudioSource;
+
 
     private void Awake()
     {
-        _playerAudioSource = Camera.main.GetComponent<AudioSource>();
+        _cameraAudioSource = Camera.main.GetComponent<AudioSource>();
+        _audioLibrary = FindObjectOfType<AudioLibrary>();
     }
 
-    public void PlayGameplayClipForPlayer(AudioClip clip)
+    public void PlayUIClip(AudioLibrary.ClipID clipID)
+    {
+        AudioClip clip = _audioLibrary.GetClip(clipID);
+        _cameraAudioSource.PlayOneShot(clip);
+    }
+
+    public void PlayClipAtPlayer(AudioClip clip)
     {
         if (GameController.IsPaused == false)
         {
-            _playerAudioSource.PlayOneShot(clip);
+            _cameraAudioSource.PlayOneShot(clip);
         }
         else
         {

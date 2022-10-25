@@ -77,7 +77,7 @@ public class TorpedoLauncherWH : WeaponHandler, IMissileLauncher
         pb.SetupInstance(this);
         pb.SetResilience(_startingResilience);
 
-        if (_isPlayer) _playerAudioSource.PlayGameplayClipForPlayer(GetRandomFireClip());
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
     }
 

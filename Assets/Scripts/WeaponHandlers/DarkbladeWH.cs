@@ -24,7 +24,7 @@ public class DarkbladeWH : WeaponHandler
         {
             _hostEnergyHandler.SpendEnergy(_activationCost);
             FireBeam();
-            _playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
+            _playerAudioSource.PlayClipAtPlayer(GetRandomActivationClip());
         }
     }
 

@@ -51,9 +51,9 @@ public class TutorialController : MonoBehaviour
         _inputController.OnScroll += HandleCompletedScrollSecondary;
         _inputController.OnMouseDown += HandleCompletedFireWeapon;
 
-        _uiController.OnScrapLevelIncrease += HandleCompletedGainScrap;
-        _uiController.OnUpgradePointsIncrease += HandleCompletedGainUpgradePoint;
-        _uiController.OnDetectStrongSignal += HandleCompletedReceivedStrongSignal;
+        _uiController.ScrapLevelIncreased += HandleCompletedGainScrap;
+        _uiController.UpgradePointsIncreased += HandleCompletedGainUpgradePoint;
+        _uiController.DetectedStrongSignal += HandleCompletedReceivedStrongSignal;
     }
 
     private void Start()
