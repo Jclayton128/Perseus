@@ -57,12 +57,12 @@ public class RevolverCannonSH : WeaponHandler
     protected override void InitializeWeaponSpecifics()
     {
         _levelController = FindObjectOfType<LevelController>();
-        _levelController.OnWarpIntoNewLevel += ReactToLevelWarp;
+        _levelController.WarpedIntoNewLevel += ReactToLevelWarp;
     }
 
     private void OnDestroy()
     {
-        _levelController.OnWarpIntoNewLevel -= ReactToLevelWarp;
+        _levelController.WarpedIntoNewLevel -= ReactToLevelWarp;
     }
 
     private void ReactToLevelWarp(Level throwawayParamForLevel)

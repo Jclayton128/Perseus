@@ -15,7 +15,9 @@ public class LevelController : MonoBehaviour
     PlayerSystemHandler _playerSystemHandler;
     CircleEdgeCollider2D _arenaEdgeCollider;
 
-    public Action<Level> OnWarpIntoNewLevel;
+    public Action WarpingOutFromOldLevel;
+    public Action WarpingIntoNewLevel;
+    public Action<Level> WarpedIntoNewLevel;
 
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
@@ -125,7 +127,7 @@ public class LevelController : MonoBehaviour
 
         _currentLevel = _levelLibrary.GetRandomLevel();
         Debug.Log($"Entering new level: {_currentLevel.name} ");
-        OnWarpIntoNewLevel?.Invoke(_currentLevel);
+        WarpedIntoNewLevel?.Invoke(_currentLevel);
         //Player should listen in to this^ to recharge energy, shields, and systems, and reduce profile
 
         //TODO ripping audio sound for warp in;
@@ -135,7 +137,7 @@ public class LevelController : MonoBehaviour
     {
         _selectedWormhole = wh;
         _timeToSelectWormhole = 0;
-        Debug.Log("Player in wormhole");
+        //Debug.Log("Player in wormhole");
     }
 
     private void Update()
@@ -162,9 +164,12 @@ public class LevelController : MonoBehaviour
         _filterTween = DOTween.To(() => _filterSR.color, x => _filterSR.color = x, Color.clear, 0.5f);
 
         //_timeToSelectWormhole = Mathf.Infinity;
-        Debug.Log("Player exits wormhole");
+        //Debug.Log("Player exits wormhole");
     }
     #endregion
+
+
+
 
     #region Registers
     private void RegisterEnemy(GameObject enemy)
@@ -287,6 +292,7 @@ public class LevelController : MonoBehaviour
 
     private void ClearLevel()
     {
+        WarpingOutFromOldLevel?.Invoke();
         ClearAllEnemiesFromLevel();
         ClearAllWormholesFromLevel();
         

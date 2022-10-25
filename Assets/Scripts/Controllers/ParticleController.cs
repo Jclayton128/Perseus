@@ -26,6 +26,12 @@ public class ParticleController : MonoBehaviour
     Queue<ParticleSystem> _pooledBlastParticles = new Queue<ParticleSystem>();
     [SerializeField] ParticleSystem _blastDamageFXprefab = null;
 
+    private void Awake()
+    {
+        GetComponent<LevelController>().WarpingOutFromOldLevel += ReturnAllParticles;
+    }
+
+
     /// <summary>
     /// Spawns a short-lived, high-speed burst of shield energy particles right at the point of collision 
     /// in an opposite heading of the impact.
@@ -57,6 +63,22 @@ public class ParticleController : MonoBehaviour
         int count = Mathf.RoundToInt(particlesToMake * _shieldGloryFactor);
         ps.Emit(count);
 
+    }
+
+    public void ReturnAllParticles()
+    {
+        for (int i = _activeShieldParticles.Count; i > 0; i--)
+        {
+            ReturnParticle(_activeShieldParticles[i]);
+        }
+        for (int i = _activeHullParticles.Count; i > 0; i--)
+        {
+            ReturnParticle(_activeHullParticles[i]);
+        }
+        for (int i = _activeBlastParticles.Count; i > 0; i--)
+        {
+            ReturnParticle(_activeBlastParticles[i]);
+        }
     }
 
     public void ReturnParticle(ParticleSystem completedParticleSystem)

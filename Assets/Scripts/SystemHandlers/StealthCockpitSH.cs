@@ -28,7 +28,7 @@ public class StealthCockpitSH : SystemHandler
         _hostRadarProfileHandler = transform.parent.GetComponentInChildren<RadarProfileHandler>();
         _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         _levelController = FindObjectOfType<LevelController>();
-        _levelController.OnWarpIntoNewLevel += OnWarpToNewLevel;
+        _levelController.WarpedIntoNewLevel += OnWarpToNewLevel;
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         
     }
@@ -37,7 +37,7 @@ public class StealthCockpitSH : SystemHandler
     {
         base.DeintegrateSystem();
         _hostRadarProfileHandler.Decloak();
-        _levelController.OnWarpIntoNewLevel -= OnWarpToNewLevel;
+        _levelController.WarpedIntoNewLevel -= OnWarpToNewLevel;
     }
 
     public override object GetUIStatus()

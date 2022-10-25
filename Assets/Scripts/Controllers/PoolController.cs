@@ -19,6 +19,7 @@ public class PoolController : MonoBehaviour
     private void Awake()
     {
         _sysLib = FindObjectOfType<SystemWeaponLibrary>();
+        GetComponent<LevelController>().WarpingOutFromOldLevel += ReturnAllProjectiles;
     }
 
     private void Start()
@@ -84,4 +85,19 @@ public class PoolController : MonoBehaviour
         deadProjectile.gameObject.SetActive(false);
     }
 
+    private void ReturnAllProjectiles()
+    {
+        var keyList = new List<Projectile.ProjectileType>(_activePools.Keys);
+        foreach (var key in keyList)
+        {
+            List<Projectile> ps = _activePools[key];
+            for (int i = ps.Count -1; i > 0; i--)
+            {
+                ReturnDeadProjectile(ps[i]);
+            }
+        }
+
+    }
+
+    
 }
