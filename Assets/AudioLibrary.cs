@@ -6,9 +6,9 @@ using Sirenix.Serialization;
 
 public class AudioLibrary : SerializedMonoBehaviour
 {
-    public enum ClipID { ButtonClickDown, ButtonClickUp, ButtonClickNegative, PanelSlide, PanelCollide,
+    public enum ClipID { ButtonClickDown, ButtonClickUp, ButtonClickNegative, MetaPanelSlide, PanelCollide,
     ScannerPickup, ScannerDrop, WeaponToggle, InstallSystem, UpgradeSystem, ScrapSystem, GainScrap,
-    GainUpgradePoint }
+    GainUpgradePoint, UpgradePanelSlide, SelectSystem }
     public Dictionary<ClipID, AudioClip> _clipsByID = new Dictionary<ClipID, AudioClip>();
 
     public AudioClip GetClip(ClipID clipID)

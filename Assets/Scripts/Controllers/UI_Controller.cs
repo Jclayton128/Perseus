@@ -289,7 +289,7 @@ public class UI_Controller : MonoBehaviour
             _bottomMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         
-        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.MetaPanelSlide);
         
     }
 
@@ -307,7 +307,7 @@ public class UI_Controller : MonoBehaviour
             _bottomMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.MetaPanelSlide);
     }
 
     public void InstantDeployMetaMenu()
@@ -385,9 +385,9 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-    public void ModifyUpgradePointsAvailable(int newLevel)
+    public void ModifyUpgradePointsAvailable(int newLevel, bool didUpgradePointsIncrease)
     {
-        if (newLevel > 0)
+        if (didUpgradePointsIncrease)
         {
             UpgradePointsIncreased?.Invoke();
             _audioCon.PlayUIClip(AudioLibrary.ClipID.GainUpgradePoint);
@@ -418,7 +418,7 @@ public class UI_Controller : MonoBehaviour
             _rightUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.UpgradePanelSlide);
 
         ClearSelection();
         DeploySelectors();
@@ -437,7 +437,7 @@ public class UI_Controller : MonoBehaviour
             _rightUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
-        _audioCon.PlayUIClip(AudioLibrary.ClipID.PanelSlide);
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.UpgradePanelSlide);
         RetractSelectors();
     }
 
@@ -629,13 +629,14 @@ public class UI_Controller : MonoBehaviour
 
     #endregion
 
-    #region Crate Scan
+    #region Scanner
 
     public void UpdateScanner(Sprite icon, string crateName, string counterStatus)
     {
 
         if (icon)
         {
+            Debug.Log("scanner pikcup");
             _scanImage.sprite = icon;
             _scanImage.color = Color.white;
             _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
@@ -643,7 +644,6 @@ public class UI_Controller : MonoBehaviour
         else
         {
             _scanImage.color = Color.clear;
-            _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerDrop);
         } 
 
         if (crateName != null)
@@ -669,6 +669,7 @@ public class UI_Controller : MonoBehaviour
     {
         InitializeScanner();
         _crateScannerThing = null;
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerDrop);
     }
 
     #endregion
@@ -733,7 +734,9 @@ public class UI_Controller : MonoBehaviour
             sid.DehighlightAsActive();
         }
         _secondaryWeaponIcons[index].HighlightAsActive();
+        _audioCon.PlayUIClip(AudioLibrary.ClipID.WeaponToggle);
     }
+
     public WeaponIconDriver IntegrateNewWeapon(WeaponHandler wh)
     {
         if (wh == null)

@@ -34,7 +34,7 @@ public class PlayerStateHandler : MonoBehaviour
         if (GetComponentInParent<ActorMovement>().IsPlayer)
         {
             _uiController = FindObjectOfType<UI_Controller>();
-            _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
+            _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints, false);
             _uiController.ModifyScrapAmount(0, 0);
             _uiController.ShowHideTAB(false);
         }
@@ -76,24 +76,7 @@ public class PlayerStateHandler : MonoBehaviour
     public void GainScrap()
     {
         _scrapCollected++;
-        //TODO play collect scrap sound
 
-        if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
-        {
-            _scrapCollected = 0;
-            _currentUpgradePoints++;
-            _uiController.ShowHideTAB(true);
-            _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
-            _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
-        }
-
-        _scrapFactor = (float)_scrapCollected / (float)_scrapNeededForNextUpgradeLevel;
-        _uiController.ModifyScrapAmount(_scrapFactor, _scrapCollected);
-    }
-
-    public void GainScrap(int amountToGain)
-    {
-        _scrapCollected += amountToGain;
         if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
         {
             GainUpgradePointViaScrapPickup();
@@ -103,14 +86,21 @@ public class PlayerStateHandler : MonoBehaviour
         _uiController.ModifyScrapAmount(_scrapFactor, _scrapCollected);
     }
 
+    public void GainScrap(int amountToGain)
+    {
+        for (int i = 0; i < amountToGain; i++)
+        {
+            GainScrap();
+        }
+    }
+
     private void GainUpgradePointViaScrapPickup()
     {
         int overage = _scrapCollected - _scrapNeededForNextUpgradeLevel;
         _currentUpgradePoints++;
         _scrapCollected = overage;
-
         _uiController.ShowHideTAB(true);
-        _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
+        _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints, true);
         _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
 
         ImplementLevelUpBenefits();
@@ -132,7 +122,7 @@ public class PlayerStateHandler : MonoBehaviour
     public void SpendUpgradePoints(int cost)
     {
         _currentUpgradePoints -= cost;
-        _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints);
+        _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints, false);
 
         bool pointsLeft = (_currentUpgradePoints > 0) ? true : false;
         _uiController.ShowHideTAB(pointsLeft);

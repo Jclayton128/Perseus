@@ -51,8 +51,8 @@ public class TutorialController : MonoBehaviour
         _inputController.OnScroll += HandleCompletedScrollSecondary;
         _inputController.OnMouseDown += HandleCompletedFireWeapon;
 
-        _uiController.ScrapLevelIncreased += HandleCompletedGainScrap;
-        _uiController.UpgradePointsIncreased += HandleCompletedGainUpgradePoint;
+        _uiController.ScrapLevelIncreased += HandleScrapLevelIncreased;
+        _uiController.UpgradePointsIncreased += HandleUpgradePointsIncreased;
         _uiController.DetectedStrongSignal += HandleCompletedReceivedStrongSignal;
     }
 
@@ -184,7 +184,7 @@ public class TutorialController : MonoBehaviour
         }
     }
 
-    private void HandleCompletedGainScrap()
+    private void HandleScrapLevelIncreased()
     {
         if (_currentCompletionCriteria == TutorialStep.CompletionCriteria.GainScrap)
         {
@@ -200,7 +200,7 @@ public class TutorialController : MonoBehaviour
         }
     }
 
-    private void HandleCompletedGainUpgradePoint()
+    private void HandleUpgradePointsIncreased()
     {
         if (_currentCompletionCriteria == TutorialStep.CompletionCriteria.GainUpgradePoint)
         {
