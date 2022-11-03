@@ -5,7 +5,7 @@ using UnityEngine;
 public class RunController : MonoBehaviour
 {
     //settings
-    int _startingThreatBudget = 2;
+    [SerializeField] int _startingThreatBudget = 2;
 
     //state
 

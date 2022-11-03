@@ -248,14 +248,22 @@ public class DebugController : MonoBehaviour
     {
         SystemHandler[] allsystems = _systemsLibrary.GetAllSystemHandlers_Debug();
         SystemHandler sh = allsystems[index];
-        _levelController.SpawnSpecificCrateNearPlayer(sh.SystemType);
+
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+        Vector3 pos = _gameController.Player.transform.position + offset;
+
+        _levelController.SpawnCrateAtLocation(pos, sh.SystemType);
     }
 
     public void SpawnWeaponByIndex(int index)
     {
         WeaponHandler[] allweapons = _systemsLibrary.GetAllWeaponHandlers_Debug();
         WeaponHandler weapon = allweapons[index];
-        _levelController.SpawnSpecificCrateNearPlayer(weapon.WeaponType);
+
+        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
+        Vector3 pos = _gameController.Player.transform.position + offset;
+
+        _levelController.SpawnCrateAtLocation(pos,weapon.WeaponType);
     }
     
     #region System Toggles
@@ -393,7 +401,7 @@ public class DebugController : MonoBehaviour
     {
         EnemyInfoHolder.EnemyType etype =
             (EnemyInfoHolder.EnemyType)enemyTypeAsInt;
-        _levelController.SpawnSingleLevelEnemy(etype);
+        _levelController.SpawnSingleLevelEnemy_Debug(etype);
     }
 
     #endregion

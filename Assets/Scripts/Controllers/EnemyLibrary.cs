@@ -46,7 +46,7 @@ public class EnemyLibrary : MonoBehaviour
 
         if (_enemies.Count > 0)
         {
-            //menu.Add(_enemies[EnemyInfoHolder.EnemyType.Dummy1].gameObject);
+            menu.Add(_enemies[EnemyInfoHolder.EnemyType.Hammer3].gameObject);
         }
         else
         {

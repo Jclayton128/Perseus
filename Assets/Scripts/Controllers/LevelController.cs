@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
@@ -99,23 +98,6 @@ public class LevelController : MonoBehaviour
         SpawnWormholes(1, tutorialWormholePosition);
         SpawnTutorialEnemy();
     }
-
-    private void BuildNewRegularLevel()
-    {
-        SpawnWormholes(3);
-        SpawnEnemiesInNewSector_Debug();         // Populate Enemies according threat budget, add to list
-
-        if (_currentLevel.AsteroidAmount > 0)
-        {
-            // Populate Asteroids and add to list
-        }
-        if (_currentLevel.NebulaAmount > 0)
-        {
-
-            // Populate Nebulae and add to list
-        }
-    }
-
     private void WarpIntoNewLevel()
     {
         _runController.IncrementSectorCount();
@@ -132,7 +114,23 @@ public class LevelController : MonoBehaviour
 
         //TODO ripping audio sound for warp in;
     }
+    private void BuildNewRegularLevel()
+    {
+        SpawnWormholes(3);
+        SpawnEnemiesInNewSector();         // Populate Enemies according threat budget, add to list
+        AssignRewardSystemToRandomEnemy();
+        if (_currentLevel.AsteroidAmount > 0)
+        {
+            // Populate Asteroids and add to list
+        }
+        if (_currentLevel.NebulaAmount > 0)
+        {
 
+            // Populate Nebulae and add to list
+        }
+    }
+
+   
     private void ReactToPlayerEnteringWormhole(WormholeHandler wh)
     {
         _selectedWormhole = wh;
@@ -213,8 +211,6 @@ public class LevelController : MonoBehaviour
 
     #region Spawning New Level Items
 
-    [ContextMenu("SpawnRandomEnemies")]
-
     public void SpawnTutorialEnemy()
     {
         Vector2 tutorialEnemyPosition = new Vector2(10f, 10f);
@@ -225,7 +221,7 @@ public class LevelController : MonoBehaviour
 
     }
 
-    public void SpawnEnemiesInNewSector_Debug()
+    public void SpawnEnemiesInNewSector()
     {
         int budget = _runController.GetThreatBudget() ;
         bool hasNebula = (_currentLevel.NebulaAmount == NebulaAmounts.None) ? false : true;
@@ -243,8 +239,33 @@ public class LevelController : MonoBehaviour
             RegisterEnemy(newEnemy);
         }
     }
+    private void AssignRewardSystemToRandomEnemy()
+    {
+        if (_enemiesOnLevel.Count == 0) return;
 
-    public void SpawnSingleLevelEnemy(EnemyInfoHolder.EnemyType enemyType)
+        int rand = UnityEngine.Random.Range(0, _enemiesOnLevel.Count);
+        GameObject chosenEnemy = _enemiesOnLevel[rand];
+
+        RewardSystemHolder rsh = chosenEnemy.AddComponent<RewardSystemHolder>();
+        rsh.Initialize(this);
+        int sysOrWeap = UnityEngine.Random.Range(0, 2);
+        if (sysOrWeap == 0)
+        {
+            SystemWeaponLibrary.SystemType systype =
+                _systemWeaponLibrary.GetRandomUninstalledSystemType(
+                _playerSystemHandler.SystemTypesOnBoard);
+            rsh.HeldSystem = systype;
+        }
+        else
+        {
+            SystemWeaponLibrary.WeaponType weaptype =
+                _systemWeaponLibrary.GetRandomUninstalledSecondaryWeaponType(
+                _playerSystemHandler.WeaponTypesOnBoard);
+            rsh.HeldWeapon = weaptype;
+        }
+
+    }
+    public void SpawnSingleLevelEnemy_Debug(EnemyInfoHolder.EnemyType enemyType)
     {
         GameObject enemy = _enemyLibrary.GetEnemyOfType(enemyType);
         Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
@@ -324,7 +345,7 @@ public class LevelController : MonoBehaviour
 
     #region Crate Spawning
 
-    public void SpawnSpecificCrateNearPlayer(SystemWeaponLibrary.SystemType systemType)
+    public void SpawnCrateAtLocation(Vector2 location, SystemWeaponLibrary.SystemType systemType)
     {
         Destroy(_crateOnLevel);
 
@@ -334,13 +355,12 @@ public class LevelController : MonoBehaviour
         go.GetComponent<SystemCrateHandler>().Initialize(icon,
             SystemWeaponLibrary.WeaponType.None, systemType, crateName);
 
-        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
-        go.transform.position = _gameController.Player.transform.position + offset;
+        go.transform.position = location;
 
         _crateOnLevel = go;
     }
 
-    public void SpawnSpecificCrateNearPlayer(SystemWeaponLibrary.WeaponType weaponType)
+    public void SpawnCrateAtLocation(Vector2 location, SystemWeaponLibrary.WeaponType weaponType)
     {
         Destroy(_crateOnLevel);
 
@@ -350,50 +370,12 @@ public class LevelController : MonoBehaviour
         go.GetComponent<SystemCrateHandler>().Initialize(icon,
             weaponType, SystemWeaponLibrary.SystemType.None, crateName);
 
-        Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
-        go.transform.position = _gameController.Player.transform.position + offset;
+        go.transform.position = location;
 
         _crateOnLevel = go;
     }
 
-    //[ContextMenu("Spawn Weapon Crate Near Player")]
-    //public void SpawnRandomWeaponCrateNearPlayer()
-    //{
-
-    //    List<SystemWeaponLibrary.WeaponType> weaponsAlreadyInstalled =
-    //        _playerSystemHandler.GetSecondaryWeaponTypesOnBoard();
-
-    //    SystemWeaponLibrary.WeaponType weaponInCrate =
-    //        _systemWeaponLibrary.GetRandomUninstalledSecondaryWeaponType(weaponsAlreadyInstalled);
-
-    //    GameObject go = Instantiate(_cratePrefab);
-    //    Sprite icon = _systemWeaponLibrary.GetIcon(weaponInCrate);
-    //    string crateName = _systemWeaponLibrary.GetName(weaponInCrate);
-    //    go.GetComponent<SystemCrateHandler>().Initialize(
-    //        icon, weaponInCrate, SystemWeaponLibrary.SystemType.None, crateName);
-
-    //    Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
-    //    go.transform.position = _gameController.Player.transform.position + offset;
-    //}
-
-    //[ContextMenu("Spawn System Crate Near Player")]
-    //public void SpawnRandomSystemCrateNearPlayer()
-    //{
-    //    List<SystemWeaponLibrary.SystemType> systemsAlreadyInstalled =
-    //        _playerSystemHandler.GetSystemTypesOnBoard();
-
-    //    SystemWeaponLibrary.SystemType systemInCrate =
-    //        _systemWeaponLibrary.GetRandomUninstalledSystemType(systemsAlreadyInstalled);
-
-    //    GameObject go = Instantiate(_cratePrefab);
-    //    Sprite icon = _systemWeaponLibrary.GetIcon(systemInCrate);
-    //    string crateName = _systemWeaponLibrary.GetName(systemInCrate);
-    //    go.GetComponent<SystemCrateHandler>().Initialize(icon, 
-    //        SystemWeaponLibrary.WeaponType.None, systemInCrate, crateName);
-
-    //    Vector3 offset = (UnityEngine.Random.insideUnitCircle.normalized * 3.0f);
-    //    go.transform.position = _gameController.Player.transform.position + offset;
-    //}
+    
 
 
     #endregion

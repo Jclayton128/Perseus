@@ -27,9 +27,14 @@ public class PlayerSystemHandler : MonoBehaviour
     int _maxWeapons;
 
     //These lists are to help with scrolling and shooting multiple primary systems at once
-    [SerializeField] List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
-    [SerializeField] List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
-    [SerializeField] List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
+    List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
+    public List<SystemWeaponLibrary.SystemType> SystemTypesOnBoard { get; private set; }
+        = new List<SystemWeaponLibrary.SystemType>();
+    
+    List<WeaponHandler> _primaryWeaponsOnBoard = new List<WeaponHandler>();
+    List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
+    public List<SystemWeaponLibrary.WeaponType> WeaponTypesOnBoard
+        = new List<SystemWeaponLibrary.WeaponType>();
     private void Awake()
     {
         _crateScanner = GetComponent<Scanner>();
@@ -89,7 +94,7 @@ public class PlayerSystemHandler : MonoBehaviour
         (bool, string) outcome;
         if (_secondaryWeaponsOnBoard.Count >= _maxWeapons)
         {
-            Debug.LogError("unable to hold any more weapons");
+            Debug.Log("unable to hold any more weapons");
             outcome.Item1 = false;
             outcome.Item2 = "Max Weapons Reached";
             return outcome;
@@ -150,6 +155,7 @@ public class PlayerSystemHandler : MonoBehaviour
         WeaponIconDriver wid = _UICon.IntegrateNewWeapon(wh);
         wh.Initialize(_energyHandler, true, wid);
         _weaponsOnBoard.Add(wh.WeaponType, go);
+        WeaponTypesOnBoard.Add(wh.WeaponType);
 
 
         if (wh.IsSecondary)
@@ -172,6 +178,7 @@ public class PlayerSystemHandler : MonoBehaviour
     public void GainSystem(SystemWeaponLibrary.SystemType systemType)
     {
         GainSystem(_syslib.GetSystem(systemType));
+
     }
 
     private void GainSystem(GameObject newSystem)
@@ -184,6 +191,7 @@ public class PlayerSystemHandler : MonoBehaviour
         SystemIconDriver sid = _UICon.IntegrateNewSystem(sh);
         sh.IntegrateSystem(sid);
         _systemsOnBoard.Add(sh);
+        SystemTypesOnBoard.Add(sh.SystemType);
         _crateScanner.DestroyScannedCrateAfterInstall();
 
     }
@@ -373,29 +381,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     #endregion
 
-    public List<SystemWeaponLibrary.SystemType> GetSystemTypesOnBoard()
-    {
-        List<SystemWeaponLibrary.SystemType> systemTypes = new List<SystemWeaponLibrary.SystemType>();
 
-        foreach (SystemHandler sh in _systemsOnBoard)
-        {
-            systemTypes.Add(sh.SystemType);
-        }
-
-        return systemTypes;
-    }
-
-    public List<SystemWeaponLibrary.WeaponType> GetSecondaryWeaponTypesOnBoard()
-    {
-        List<SystemWeaponLibrary.WeaponType> weaponTypes = new List<SystemWeaponLibrary.WeaponType>();
-
-        foreach (WeaponHandler wh in _secondaryWeaponsOnBoard)
-        {
-            weaponTypes.Add(wh.WeaponType);
-        }
-
-        return weaponTypes;
-    }
 
     private void OnDestroy()
     {
