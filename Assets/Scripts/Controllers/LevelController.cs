@@ -215,7 +215,7 @@ public class LevelController : MonoBehaviour
     {
         Vector2 tutorialEnemyPosition = new Vector2(10f, 10f);
         Quaternion rot = Quaternion.identity;
-        GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyOfType(EnemyInfoHolder.EnemyType.Dummy1),
+        GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyGameObjectOfType(EnemyInfoHolder.EnemyType.Dummy1),
             tutorialEnemyPosition, rot);
         RegisterEnemy(newEnemy);
 
@@ -224,11 +224,8 @@ public class LevelController : MonoBehaviour
     public void SpawnEnemiesInNewSector()
     {
         int budget = _runController.GetThreatBudget() ;
-        bool hasNebula = (_currentLevel.NebulaAmount == NebulaAmounts.None) ? false : true;
-        bool hasAsteroids = (_currentLevel.AsteroidAmount == AsteroidAmounts.None) ? false : true;
-
-        List<GameObject> enemiesToMake = _enemyLibrary.CreateRandomMenuFromBudget(
-            budget, hasNebula, hasAsteroids);
+        List<GameObject> enemiesToMake =
+            _enemyLibrary.CreateMenuFromBudgetAndLevel(budget, _currentLevel);
 
         foreach (var enemy in enemiesToMake)
         {
@@ -267,7 +264,7 @@ public class LevelController : MonoBehaviour
     }
     public void SpawnSingleLevelEnemy_Debug(EnemyInfoHolder.EnemyType enemyType)
     {
-        GameObject enemy = _enemyLibrary.GetEnemyOfType(enemyType);
+        GameObject enemy = _enemyLibrary.GetEnemyGameObjectOfType(enemyType);
         Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
         Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(enemy, pos, rot);

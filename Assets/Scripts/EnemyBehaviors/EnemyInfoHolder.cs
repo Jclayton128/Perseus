@@ -13,7 +13,8 @@ public class EnemyInfoHolder : MonoBehaviour, IScannable
 
     [Tooltip("Threat Score is used by the Enemy Factory to determine how many enemies to create upon jumping to a new sector.")]
     [Range(0, 10)]
-    [ShowInInspector] public int ThreatScore = 1;
+    [ShowInInspector] private int _threatScore = 1;
+    public int ThreatScore => _threatScore;
 
     [ShowInInspector] public EnemyType EType = EnemyType.Unassigned0;
     [ShowInInspector] public bool LivesAmongAsteroidsOnly = false;

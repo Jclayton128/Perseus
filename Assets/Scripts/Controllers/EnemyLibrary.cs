@@ -10,8 +10,12 @@ public class EnemyLibrary : MonoBehaviour
     [SerializeField] List<EnemyInfoHolder> _enemyPrefabs = new List<EnemyInfoHolder>();
 
     //state
-    Dictionary<EnemyInfoHolder.EnemyType, GameObject> _enemies =
+    Dictionary<EnemyInfoHolder.EnemyType, GameObject> _enemyGameObjects =
         new Dictionary<EnemyInfoHolder.EnemyType, GameObject>();
+
+    Dictionary<EnemyInfoHolder.EnemyType, int> _enemyThreatScores =
+        new Dictionary<EnemyInfoHolder.EnemyType, int>();
+
     List<EnemyInfoHolder.EnemyType> _loadedEnemies = new List<EnemyInfoHolder.EnemyType>();
 
     private void Awake()
@@ -23,45 +27,93 @@ public class EnemyLibrary : MonoBehaviour
     {
         foreach (var enemy in _enemyPrefabs)
         {
-            if (_enemies.ContainsKey(enemy.EType))
+            if (_enemyGameObjects.ContainsKey(enemy.EType))
             {
                 Debug.LogError($"Already loaded a {enemy.EType}");
                 continue;
             }
             else
             {
-                _enemies.Add(enemy.EType, enemy.gameObject);
+                _enemyGameObjects.Add(enemy.EType, enemy.gameObject);
+                _enemyThreatScores.Add(enemy.EType, enemy.ThreatScore);
                 _loadedEnemies.Add(enemy.EType);
             }
         }
-        Debug.Log($"Created an menu with {_enemies.Count} enemies");
+        Debug.Log($"Created an menu with {_enemyGameObjects.Count} enemies");
     }
 
-    public List<GameObject> CreateRandomMenuFromBudget(
-        int totalBudget, bool isAsteroidSector, bool isNebulaSector)
+    public List<GameObject> CreateMenuFromBudgetAndLevel(int totalBudget, Level level)
     {
+        int remainingBudget = totalBudget;
+        Debug.Log("starting budget = " + remainingBudget);
         List<GameObject> menu = new List<GameObject>();
-        // Given a budget, create a random list of enemies for a particular level.
-        // No constraints on which enemies are allowed for this (ie, no nebula-only restrictions)
 
-        if (_enemies.Count > 0)
-        {
-            menu.Add(_enemies[EnemyInfoHolder.EnemyType.Hammer3].gameObject);
-        }
-        else
+        //Prepare the submenu based on max budget and enemies allowed on the level
+        List<EnemyInfoHolder.EnemyType> startingEnemyList = level.PossibleEnemies;
+        List<EnemyInfoHolder.EnemyType> allowedEnemyList = TrimEnemiesByBudget(
+            startingEnemyList, remainingBudget);
+                
+
+        if (startingEnemyList.Count == 0)
         {
             Debug.LogError("No enemies on the menu to choose from!");
+            return null;
+        }
+
+        //Populate the actual enemy list
+        for (int i = 0; i < 100; i++) // max enemy count of 100;
+        { 
+            int rand = UnityEngine.Random.Range(0, allowedEnemyList.Count);
+            EnemyInfoHolder.EnemyType etype = allowedEnemyList[rand];
+            menu.Add(_enemyGameObjects[etype]);
+            remainingBudget -= _enemyThreatScores[etype];
+            //Debug.Log($"added a {etype} to the menu");
+            //Debug.Log("starting budget = " + remainingBudget);
+
+            //Review the allowed menu list and remove anything that exceeds budget
+            allowedEnemyList = TrimEnemiesByBudget(allowedEnemyList, remainingBudget);
+
+            if (remainingBudget <= 0) break;
         }
 
         return menu;
     }
 
-    public GameObject GetEnemyOfType(EnemyInfoHolder.EnemyType EnemyType)
+    private List<EnemyInfoHolder.EnemyType> TrimEnemiesByBudget(
+        List<EnemyInfoHolder.EnemyType> startingList, int remainingBudget)
     {
-        return _enemies[EnemyType];
+        List<EnemyInfoHolder.EnemyType> enemiesUnderBudget =
+            new List<EnemyInfoHolder.EnemyType>(startingList);
+
+        foreach (var enemy in startingList)
+        {
+            int threat = _enemyThreatScores[enemy];
+
+            if (threat <= remainingBudget)
+            {
+                //this enemy is under budget and may stay on the menu
+            }
+            else
+            {
+                //Debug.Log($"{enemy} is too threatening for the current budget.");
+                enemiesUnderBudget.Remove(enemy);
+            }
+        }
+
+        //foreach (var enemy in enemiesUnderBudget)
+        //{
+        //    Debug.Log($"menu includes an {enemy}");
+        //}
+        return enemiesUnderBudget;
+
     }
 
-    public EnemyInfoHolder.EnemyType[] GetAllLoadedEnemyTypes()
+    public GameObject GetEnemyGameObjectOfType(EnemyInfoHolder.EnemyType EnemyType)
+    {
+        return _enemyGameObjects[EnemyType];
+    }
+
+    public EnemyInfoHolder.EnemyType[] GetAllLoadedEnemyTypes_Debug()
     {
         return _loadedEnemies.ToArray();
     }

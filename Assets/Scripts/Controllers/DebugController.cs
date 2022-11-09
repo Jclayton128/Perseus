@@ -9,6 +9,7 @@ public class DebugController : MonoBehaviour
 {
     ActorMovement _playerPH;
     GameController _gameController;
+    RunController _runController;
     SystemWeaponLibrary _systemsLibrary;
     EnemyLibrary _enemyLibrary;
     PlayerSystemHandler _playerSystemsHandler;
@@ -44,6 +45,7 @@ public class DebugController : MonoBehaviour
         _gameController = GetComponent<GameController>();
         _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
         _levelController = GetComponent<LevelController>();
+        _runController = GetComponent<RunController>();
 
         _systemsLibrary = FindObjectOfType<SystemWeaponLibrary>();
         _enemyLibrary = _systemsLibrary.GetComponent<EnemyLibrary>();
@@ -175,7 +177,7 @@ public class DebugController : MonoBehaviour
 
     private void SetupEnemyLabels()
     {
-        EnemyInfoHolder.EnemyType[] types = _enemyLibrary.GetAllLoadedEnemyTypes();
+        EnemyInfoHolder.EnemyType[] types = _enemyLibrary.GetAllLoadedEnemyTypes_Debug();
         for (int i = 0; i < types.Length; i++)
         {
             int etypeAsInt = (int)types[i];
@@ -402,6 +404,11 @@ public class DebugController : MonoBehaviour
         EnemyInfoHolder.EnemyType etype =
             (EnemyInfoHolder.EnemyType)enemyTypeAsInt;
         _levelController.SpawnSingleLevelEnemy_Debug(etype);
+    }
+
+    public void IncreaseBudgetForNextLevel_Debug()
+    {
+        _runController.ModifyRunBudget(5);
     }
 
     #endregion

@@ -10,6 +10,7 @@ public class TutorialController : MonoBehaviour
 {
     UI_Controller _uiController;
     InputController _inputController;
+    LevelController _levelController;
     [SerializeField] RectTransform _tutorialPanel = null;
 
     [Tooltip("TopLeft, TopMiddle, TopRight, BottomLeft, BottomMiddle, BottomRight")]
@@ -38,6 +39,8 @@ public class TutorialController : MonoBehaviour
     private void Awake()
     {
         _uiController = GetComponent<UI_Controller>();
+        _levelController = GetComponent<LevelController>();
+        _levelController.WarpingIntoNewLevel += EndTutorial;
         _inputController = GetComponent<InputController>();
         AttachInputToCompletionCriteriaCheckers();
     }
@@ -86,6 +89,12 @@ public class TutorialController : MonoBehaviour
     }
     private void IncrementCurrentTutorialStep()
     {
+        if (_currentStepIndex == _tutorialSteps.Length - 1)
+        {
+            EndTutorial();
+            return;
+        }
+
         HideTutorialPanel(false);
 
         _currentStepIndex++;

@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3780d823931d665428284fca2ed6d059, type: 3}
   m_Name: EasyLevel 1
   m_EditorClassIdentifier: 
-  LevelName: Asteroid Level
+  LevelName: TrundlerHammer
   Icon: {fileID: 21300000, guid: 4aca50ab2f212fd4897f530cbdeea606, type: 3}
   AsteroidAmount: 0
   NebulaAmount: 0
-  HasSpecificEnemies: 1
-  PossibleEnemies: 
+  _possibleEnemies: 0a000000

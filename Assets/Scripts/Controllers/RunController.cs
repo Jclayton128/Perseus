@@ -55,4 +55,10 @@ public class RunController : MonoBehaviour
         }
 
     }
+
+    public void ModifyRunBudget(int amountToIncrease)
+    {
+        _currentThreatBudget += amountToIncrease;
+        Debug.Log("Budget increased. Current budget is now: " + _currentThreatBudget);
+    }
 }

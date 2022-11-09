@@ -16,9 +16,7 @@ public class Level : ScriptableObject
     public LevelController.NebulaAmounts NebulaAmount =
         LevelController.NebulaAmounts.None;
 
-    public bool HasSpecificEnemies = false;
-
-    [ShowIf(nameof(HasSpecificEnemies))]
-    public EnemyInfoHolder.EnemyType[] PossibleEnemies;
+    [SerializeField] private List<EnemyInfoHolder.EnemyType> _possibleEnemies;
+    public List<EnemyInfoHolder.EnemyType> PossibleEnemies => _possibleEnemies;
 
 }
