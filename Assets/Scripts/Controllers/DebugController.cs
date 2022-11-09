@@ -178,13 +178,16 @@ public class DebugController : MonoBehaviour
     private void SetupEnemyLabels()
     {
         EnemyInfoHolder.EnemyType[] types = _enemyLibrary.GetAllLoadedEnemyTypes_Debug();
+        _spawnEnemyLabels[0].transform.parent.parent.gameObject.SetActive(true);
         for (int i = 0; i < types.Length; i++)
         {
             int etypeAsInt = (int)types[i];
+
             _spawnEnemyLabels[i].text = $"Spawn {types[i]}";
             _spawnEnemyLabels[i].GetComponentInParent<Button>().
                 onClick.AddListener(() => SpawnEnemy_Debug(etypeAsInt));
         }
+        _spawnEnemyLabels[0].transform.parent.parent.gameObject.SetActive(false);
     }
 
     #region Ship Changes
