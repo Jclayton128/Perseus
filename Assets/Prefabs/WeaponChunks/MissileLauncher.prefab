@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_Name
-      value: Missiles
+      value: MissileLauncher
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,5 +284,5 @@ MonoBehaviour:
   _missileTurnRate: 100
   _missileSnakeAmount: 10
   _missileScanRadius: 0.25
-  _missileSpeedAddition_Upgrade: 20
+  _missileSpeedAddition_Upgrade: 2
   _missileTurnRateAddition_Upgrade: 30

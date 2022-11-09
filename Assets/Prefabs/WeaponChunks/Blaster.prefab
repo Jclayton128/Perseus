@@ -247,8 +247,7 @@ MonoBehaviour:
   _scrapBonus: 0
   _projectileLifetime: 2
   _projectileSpeed: 10
-  _activationCost: 1
-  _sustainCostRate: 0
+  _activationCost: 1.5
   _profileIncreaseOnActivation: 4
   _activationSounds: []
   _firingSounds:
@@ -261,12 +260,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 199f3a0ee57ae9947b690bd92672118f, type: 3}
   - {fileID: 8300000, guid: 367e1c6363fb033499a233c5c8635716, type: 3}
   - {fileID: 8300000, guid: 6599defdbe4091145bd8f0e4176e6935, type: 3}
-  _deactivationSounds:
-  - {fileID: 8300000, guid: e8aabcd24e3b50c4a913c7e67d7530b5, type: 3}
+  _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 1
   _maxUpgradeLevel: 5
-  _minModeToggle: 0.75
-  _timeBetweenShots: 0.25
-  _fireRateMultiplier_Upgrade: 0.8
-  _energyCostSubtraction_Upgrade: 0.8
+  _spoolUpTime: 6
+  _BestTimeBetweenShots: 0.25
+  _fireRateModifier_Initial: 0.33
+  _timeBetweenShotsMultiplier_Upgrade: 0.9
+  _spoolUpTimeMultiplier_Upgrade: 0.9

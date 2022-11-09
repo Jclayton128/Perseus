@@ -10022,7 +10022,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2102641477}
         m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleMoreThrust
+        m_MethodName: IncreaseBudgetForNextLevel_Debug
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13147,7 +13147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &607036610
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16122,19 +16122,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 777525874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleLessThrust
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &777525874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18671,7 +18659,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +Thr
+  m_Text: +5 level budget
 --- !u!222 &955875664
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22605,19 +22593,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1218717495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleMoreTurnRate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1218717495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30634,19 +30610,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1671824243}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleLessTurnRate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1671824243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31927,19 +31891,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1750334460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleLessMass
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1750334460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40437,19 +40389,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971422616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleSpawnRandomSystem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1971422616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42585,6 +42525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7438fe9ff69ecd6458f0c7b8e876062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingThreatBudget: 2
 --- !u!114 &2102641485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42878,19 +42819,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2107131021}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2102641477}
-        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
-        m_MethodName: HandleMoreMass
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2107131021
 MonoBehaviour:
   m_ObjectHideFlags: 0

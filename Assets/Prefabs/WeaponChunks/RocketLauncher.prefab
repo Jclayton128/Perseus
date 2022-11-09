@@ -283,7 +283,7 @@ MonoBehaviour:
   _isPermanent: 0
   _maxUpgradeLevel: 5
   _missileTurnRate: 150
-  _snakeAmount: 50
+  _snakeAmount: 25
   _rocketCount: 2
   _maxMissRange: 2
   _degreeSpread: 45
