@@ -34,7 +34,7 @@ public class Scanner : MonoBehaviour
         if (collision.gameObject.layer == _scannableLayer) // Crate
         {
             IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
-            if (scannedThing != null)
+            if (scannedThing != null && !_scannablesInRange.Contains(scannedThing))
             {
                 _scannablesInRange.Add(scannedThing);
                 //TODO add subtle 'gained scan info' audio clip

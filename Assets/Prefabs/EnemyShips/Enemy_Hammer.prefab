@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _ionDamage
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _maxCharge
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _normalDamage
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _activationCost

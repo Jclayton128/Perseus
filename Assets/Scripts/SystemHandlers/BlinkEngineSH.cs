@@ -53,7 +53,7 @@ public class BlinkEngineSH : SystemHandler
     {
         if (_currentCharge < .99f) return;
 
-        Debug.Log("blinking away");
+        //Debug.Log("blinking away");
         //TODO cool blink audio sound
         _healthHandler.ActivateDamageInvulnerability();
         Instantiate(_blinkOutParticleFX, transform.position, Quaternion.identity);
