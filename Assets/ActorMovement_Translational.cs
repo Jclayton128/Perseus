@@ -38,7 +38,7 @@ public class ActorMovement_Translational : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _hostEnergyHandler = GetComponent<EnergyHandler>();
         _inputCon = FindObjectOfType<InputController>();
-        _inputCon.OnDesiredTranslateChange += HandleTranslateChange;
+        _inputCon.DesiredTranslateChanged += HandleTranslateChange;
     }
 
     private void HandleTranslateChange(Vector2 translationVector)

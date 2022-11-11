@@ -22,7 +22,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
     //state
     int _activeWeaponIndex;
-    public WeaponHandler ActiveWeapon { get; protected set; }
+    public WeaponHandler ActiveSecondaryWeapon { get; protected set; }
     int _maxSystems;
     int _maxWeapons;
 
@@ -43,9 +43,9 @@ public class PlayerSystemHandler : MonoBehaviour
         _inputCon = _UICon.GetComponent<InputController>();
         if (_inputCon)
         {
-            _inputCon.OnScroll += ScrollThroughActiveWeapons;
-            _inputCon.OnMouseDown += ActivateWeapons;
-            _inputCon.OnMouseUp += DeactivateWeapons;
+            _inputCon.ScrollWheelChanged += ScrollThroughActiveWeapons;
+            _inputCon.LeftMouseChanged += ActivateOrDeactivatePrimaryWeapon;
+            _inputCon.RightMouseChanged += ActivateOrDeactivateSelectedSecondaryWeapon;
         }
 
         _maxSystems = _UICon.GetMaxSystems();
@@ -80,7 +80,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _secondaryWeaponsOnBoard.Clear();
         _primaryWeaponsOnBoard.Clear();
         _activeWeaponIndex = -1;
-        ActiveWeapon = null;
+        ActiveSecondaryWeapon = null;
         foreach (var weapon in _startingWeapons)
         {
             GainWeapon(_syslib.GetWeapon(weapon));
@@ -161,9 +161,9 @@ public class PlayerSystemHandler : MonoBehaviour
         if (wh.IsSecondary)
         {
             _secondaryWeaponsOnBoard.Add(wh);
-            if (!ActiveWeapon)
+            if (!ActiveSecondaryWeapon)
             {
-                ActiveWeapon = wh;
+                ActiveSecondaryWeapon = wh;
                 _activeWeaponIndex = _secondaryWeaponsOnBoard.IndexOf(wh);
                 _UICon.HighlightNewSecondaryWeapon(_activeWeaponIndex);
             }
@@ -217,7 +217,7 @@ public class PlayerSystemHandler : MonoBehaviour
 
             //reselect an active weapon
 
-            if (weaponType == ActiveWeapon.WeaponType)
+            if (weaponType == ActiveSecondaryWeapon.WeaponType)
             {
                 if (_secondaryWeaponsOnBoard.Count > 0)
                 {
@@ -227,10 +227,10 @@ public class PlayerSystemHandler : MonoBehaviour
 
                     //Update the active weapon, and the highlighted icon
 
-                    ActiveWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
-                    _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveWeapon));
+                    ActiveSecondaryWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
+                    _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveSecondaryWeapon));
                 }
-                else ActiveWeapon = null;
+                else ActiveSecondaryWeapon = null;
 
                 
             }
@@ -306,38 +306,38 @@ public class PlayerSystemHandler : MonoBehaviour
         if (_secondaryWeaponsOnBoard.Count == 0) return;
         _activeWeaponIndex += direction;
         _activeWeaponIndex = Mathf.Clamp(_activeWeaponIndex, 0, _secondaryWeaponsOnBoard.Count-1);
-        ActiveWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
-        _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveWeapon));
+        ActiveSecondaryWeapon = _secondaryWeaponsOnBoard[_activeWeaponIndex];
+        _UICon.HighlightNewSecondaryWeapon(_secondaryWeaponsOnBoard.IndexOf(ActiveSecondaryWeapon));
     }
 
-    private void ActivateWeapons(int priOrSec)
+    private void ActivateOrDeactivatePrimaryWeapon(bool wasDepressed)
     {
-        if (priOrSec == 0)  // Primary Weapons
+        if (wasDepressed)
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
                 priweap?.Activate();
             }
         }
-        if (priOrSec == 1) // Active Secondary Weapon
-        {
-            Debug.Log($"activating {ActiveWeapon}");
-            ActiveWeapon?.Activate();
-        }
-    }
-
-    private void DeactivateWeapons(int priOrSec)
-    {
-        if (priOrSec == 0)  // Primary Weapons
+        else  // Primary Weapons
         {
             foreach (var priweap in _primaryWeaponsOnBoard)
             {
                 priweap?.Deactivate();
             }
         }
-        if (priOrSec == 1) // Active Secondary Weapon
+    }
+
+    private void ActivateOrDeactivateSelectedSecondaryWeapon(bool wasDepressed)
+    {
+        if (wasDepressed)
         {
-            ActiveWeapon?.Deactivate();
+            //Debug.Log($"activating {ActiveSecondaryWeapon}");
+            ActiveSecondaryWeapon?.Activate();
+        }
+        else // Active Secondary Weapon
+        {
+            ActiveSecondaryWeapon?.Deactivate();
         }
     }
 
@@ -382,11 +382,10 @@ public class PlayerSystemHandler : MonoBehaviour
     #endregion
 
 
-
     private void OnDestroy()
     {
-        _inputCon.OnScroll -= ScrollThroughActiveWeapons;
-        _inputCon.OnMouseDown -= ActivateWeapons;
-        _inputCon.OnMouseUp -= DeactivateWeapons;
+        _inputCon.ScrollWheelChanged -= ScrollThroughActiveWeapons;
+        _inputCon.LeftMouseChanged -= ActivateOrDeactivatePrimaryWeapon;
+        _inputCon.RightMouseChanged -= ActivateOrDeactivateSelectedSecondaryWeapon;
     }
 }

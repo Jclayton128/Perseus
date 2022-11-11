@@ -40,7 +40,7 @@ public class PlayerStateHandler : MonoBehaviour
         }
 
         _inputController = _uiController.GetComponent<InputController>();
-        _inputController.OnUpgradeMenuToggled += ToggleUpgradeMenu;
+        _inputController.UpgradeMenuToggled += ToggleUpgradeMenu;
 
         _gameController = _uiController.GetComponent<GameController>();
         _scrapNeededForNextUpgradeLevel = _scrapsPerLevelMod;

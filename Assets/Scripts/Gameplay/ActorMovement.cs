@@ -66,13 +66,13 @@ public class ActorMovement : MonoBehaviour
         if (IsPlayer)
         {
             _inputCon = FindObjectOfType<InputController>();
-            _inputCon.OnAccelBegin += HandleBeginAccelerating;
-            _inputCon.OnAccelEnd += HandleStopAccelerating;
-            _inputCon.OnDecelBegin += HandleBeginDecelerating;
-            _inputCon.OnDecelEnd += HandleStopDecelerating;
-            _inputCon.OnTurnLeft += HandleTurningLeft;
-            _inputCon.OnTurnRight += HandleTurningRight;
-            _inputCon.OnMSelect += HandleTurnModeToggle;
+            _inputCon.AccelStarted += HandleBeginAccelerating;
+            _inputCon.AccelEnded += HandleStopAccelerating;
+            _inputCon.DecelStarted += HandleBeginDecelerating;
+            _inputCon.DecelEnded += HandleStopDecelerating;
+            _inputCon.TurnLeftChanged += HandleTurningLeft;
+            _inputCon.TurnRightChanged += HandleTurningRight;
+            _inputCon.MKeySelected += HandleTurnModeToggle;
 
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
             
@@ -359,13 +359,13 @@ public class ActorMovement : MonoBehaviour
 
         if (_inputCon)
         {
-            _inputCon.OnAccelBegin -= HandleBeginAccelerating;
-            _inputCon.OnAccelEnd -= HandleStopAccelerating;
-            _inputCon.OnDecelBegin -= HandleBeginDecelerating;
-            _inputCon.OnDecelEnd -= HandleStopDecelerating;
-            _inputCon.OnTurnLeft -= HandleTurningLeft;
-            _inputCon.OnTurnRight -= HandleTurningRight;
-            _inputCon.OnMSelect -= HandleTurnModeToggle;
+            _inputCon.AccelStarted -= HandleBeginAccelerating;
+            _inputCon.AccelEnded -= HandleStopAccelerating;
+            _inputCon.DecelStarted -= HandleBeginDecelerating;
+            _inputCon.DecelEnded -= HandleStopDecelerating;
+            _inputCon.TurnLeftChanged -= HandleTurningLeft;
+            _inputCon.TurnRightChanged -= HandleTurningRight;
+            _inputCon.MKeySelected -= HandleTurnModeToggle;
         }
 
     }

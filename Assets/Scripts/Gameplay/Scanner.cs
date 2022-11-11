@@ -24,8 +24,8 @@ public class Scanner : MonoBehaviour
         _uiController = FindObjectOfType<UI_Controller>();
         _gameController = _uiController.GetComponent<GameController>();
         _inputController = _uiController.GetComponent<InputController>();
-        _inputController.OnScanDecrement += DecrementCurrentScan;
-        _inputController.OnScanIncrement += IncrementCurrentScan;
+        _inputController.ScanDecremented += DecrementCurrentScan;
+        _inputController.ScanIncremented += IncrementCurrentScan;
         _systemWeaponLibrary = FindObjectOfType<SystemWeaponLibrary>();
     }
 

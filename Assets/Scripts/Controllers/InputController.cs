@@ -5,21 +5,28 @@ using System;
 
 public class InputController : MonoBehaviour
 {
-    public Action<Vector2> OnDesiredTranslateChange;
-    public Action OnAccelBegin;
-    public Action OnAccelEnd;
-    public Action OnDecelBegin;
-    public Action OnDecelEnd;
-    public Action<bool> OnTurnLeft;
-    public Action<bool> OnTurnRight;
-    public Action OnMousePositionMove;
-    public Action<int> OnScroll;
-    public Action<int> OnMouseDown;
-    public Action<int> OnMouseUp;
-    public Action OnUpgradeMenuToggled;
-    public Action OnScanDecrement;
-    public Action OnScanIncrement;
-    public Action OnMSelect;
+    public Action<Vector2> DesiredTranslateChanged;
+    public Action AccelStarted;
+    public Action AccelEnded;
+    public Action DecelStarted;
+    public Action DecelEnded;
+    public Action<bool> TurnLeftChanged;
+    public Action<bool> TurnRightChanged;
+    public Action MousePositionMoved;
+    public Action<int> ScrollWheelChanged;
+    /// <summary>
+    /// Invoked when Mouse0/LMB is changed. True: down. False: Up.
+    /// </summary>
+    public Action<bool> LeftMouseChanged;
+    /// <summary>
+    /// Invoked when Mouse1/RMB is changed. True: down. False: Up.
+    /// </summary>
+    public Action<bool> RightMouseChanged;
+    public Action UpgradeMenuToggled;
+    public Action ScanDecremented;
+    public Action ScanIncremented;
+    public Action MKeySelected; // currently used to toggle between mouse and keyboard turning
+
 
     Ray ray;
     float distance;
@@ -42,26 +49,26 @@ public class InputController : MonoBehaviour
 
         UpdateMouseInput();
         UpdateMouseScrollInput();
-        UpdateMouseFiringInput();
+        //UpdateMouseFiringInput();
     }
 
     private void UpdateMouseFiringInput()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            OnMouseDown?.Invoke(0);
+            LeftMouseChanged?.Invoke(true);
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            OnMouseUp?.Invoke(0);
+            LeftMouseChanged?.Invoke(false);
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            OnMouseDown?.Invoke(1);
+            RightMouseChanged?.Invoke(true);
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            OnMouseUp?.Invoke(1);
+            RightMouseChanged?.Invoke(false);
         }
     }
 
@@ -69,12 +76,12 @@ public class InputController : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y > 0.00f)
         {
-            OnScroll?.Invoke(1);
+            ScrollWheelChanged?.Invoke(1);
             return;
         }
         if (Input.mouseScrollDelta.y < -0.00f)
         {
-            OnScroll?.Invoke(-1);
+            ScrollWheelChanged?.Invoke(-1);
             return;
         }
     }
@@ -105,7 +112,7 @@ public class InputController : MonoBehaviour
             Mathf.Clamp(_desiredTranslation.x ,- 1f, 1f);
 
 
-        OnDesiredTranslateChange?.Invoke(_desiredTranslation.normalized);
+        DesiredTranslateChanged?.Invoke(_desiredTranslation.normalized);
         
     }
 
@@ -114,36 +121,36 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            OnAccelBegin?.Invoke();
+            AccelStarted?.Invoke();
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
-            OnAccelEnd?.Invoke();   
+            AccelEnded?.Invoke();   
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            OnDecelBegin?.Invoke();
+            DecelStarted?.Invoke();
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
-            OnDecelEnd?.Invoke();
+            DecelEnded?.Invoke();
         }
         
-        if (Input.GetKeyDown(KeyCode.A)) OnTurnLeft?.Invoke(true);
-        if (Input.GetKeyUp(KeyCode.A)) OnTurnLeft?.Invoke(false);
+        if (Input.GetKeyDown(KeyCode.A)) TurnLeftChanged?.Invoke(true);
+        if (Input.GetKeyUp(KeyCode.A)) TurnLeftChanged?.Invoke(false);
 
-        if (Input.GetKeyDown(KeyCode.D)) OnTurnRight?.Invoke(true);
-        if (Input.GetKeyUp(KeyCode.D)) OnTurnRight?.Invoke(false);
+        if (Input.GetKeyDown(KeyCode.D)) TurnRightChanged?.Invoke(true);
+        if (Input.GetKeyUp(KeyCode.D)) TurnRightChanged?.Invoke(false);
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            OnUpgradeMenuToggled?.Invoke();
+            UpgradeMenuToggled?.Invoke();
         }
         
-        if (Input.GetKeyDown(KeyCode.Q)) OnScanDecrement?.Invoke();
-        if (Input.GetKeyDown(KeyCode.E)) OnScanIncrement?.Invoke();
+        if (Input.GetKeyDown(KeyCode.Q)) ScanDecremented?.Invoke();
+        if (Input.GetKeyDown(KeyCode.E)) ScanIncremented?.Invoke();
 
-        if (Input.GetKeyDown(KeyCode.M)) OnMSelect?.Invoke();
+        if (Input.GetKeyDown(KeyCode.M)) MKeySelected?.Invoke();
     }
 
     private void UpdateMouseInput()
@@ -156,9 +163,33 @@ public class InputController : MonoBehaviour
 
         if ((MousePos - prev).magnitude > _mousePosSensitivity)
         {
-            OnMousePositionMove?.Invoke();
+            MousePositionMoved?.Invoke();
         }
 
+    }
+
+    public void OnDiageticClick()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            LeftMouseChanged?.Invoke(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            RightMouseChanged?.Invoke(true);
+        }
+    }
+
+    public void OnDiageticRelease()
+    {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            LeftMouseChanged?.Invoke(false);
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            RightMouseChanged?.Invoke(false);
+        }
     }
 
 

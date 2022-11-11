@@ -29,6 +29,8 @@ public class TutorialController : MonoBehaviour
     float _timeDelayCompletionCriteria = 8f; //Time to show time-based steps.
 
     //state
+    bool _isInTutorial = false;
+    public bool IsInTutorial => _isInTutorial;
     Tween _backgroundTween;
     Tween _fontTween;
     int _currentStepIndex = -1;
@@ -47,12 +49,12 @@ public class TutorialController : MonoBehaviour
 
     private void AttachInputToCompletionCriteriaCheckers()
     {
-        _inputController.OnAccelBegin += HandleCompletedAccel;
-        _inputController.OnDecelBegin += HandleCompletedDecel;
-        _inputController.OnTurnLeft += HandleCompletedTurn;
-        _inputController.OnTurnRight += HandleCompletedTurn;
-        _inputController.OnScroll += HandleCompletedScrollSecondary;
-        _inputController.OnMouseDown += HandleCompletedFireWeapon;
+        _inputController.AccelStarted += HandleCompletedAccel;
+        _inputController.DecelStarted += HandleCompletedDecel;
+        _inputController.TurnLeftChanged += HandleCompletedTurn;
+        _inputController.TurnRightChanged += HandleCompletedTurn;
+        _inputController.ScrollWheelChanged += HandleCompletedScrollSecondary;
+        _inputController.LeftMouseChanged += HandleCompletedFirePrimary;
 
         _uiController.ScrapLevelIncreased += HandleScrapLevelIncreased;
         _uiController.UpgradePointsIncreased += HandleUpgradePointsIncreased;
@@ -68,13 +70,14 @@ public class TutorialController : MonoBehaviour
         _currentStepIndex = 0;
         _currentTutorialStep = _tutorialSteps[_currentStepIndex];
         _currentCompletionCriteria = _currentTutorialStep.GetCompletionCriteria();
-
+        _isInTutorial = true;
         DisplayCurrentTutorialStep();
     }
 
     public void EndTutorial()
     {
         HideTutorialPanel(true);
+        _isInTutorial = false;
     }
 
     #region Flow
@@ -178,19 +181,21 @@ public class TutorialController : MonoBehaviour
         }
     }
 
-    private void HandleCompletedFireWeapon(int mouseButton)
+    private void HandleCompletedFirePrimary(bool wasMouseButtonRelease)
     {
-        if (mouseButton == 0 &&
-            _currentCompletionCriteria== TutorialStep.CompletionCriteria.FirePrimary)
-        {
-            IncrementCurrentTutorialStep();
-            return;
-        }
-        if (mouseButton == 1 &&
-            _currentCompletionCriteria == TutorialStep.CompletionCriteria.FireSecondary)
-        {
-            IncrementCurrentTutorialStep();
-        }
+        if (!_isInTutorial) return;
+        Debug.Log("requires refactor.");
+        //if (mouseButton == 0 &&
+        //    _currentCompletionCriteria== TutorialStep.CompletionCriteria.FirePrimary)
+        //{
+        //    IncrementCurrentTutorialStep();
+        //    return;
+        //}
+        //if (mouseButton == 1 &&
+        //    _currentCompletionCriteria == TutorialStep.CompletionCriteria.FireSecondary)
+        //{
+        //    IncrementCurrentTutorialStep();
+        //}
     }
 
     private void HandleScrapLevelIncreased()
