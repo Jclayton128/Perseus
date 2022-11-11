@@ -43,7 +43,7 @@ public class DebugController : MonoBehaviour
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
-        _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
+        _gameController.PlayerSpawned += ReactToPlayerSpawning;
         _levelController = GetComponent<LevelController>();
         _runController = GetComponent<RunController>();
 

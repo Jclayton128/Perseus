@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     PlayerShipLibrary _playerShipLibrary;
     RunController _runStatsController;
     TutorialController _tutorialController;
-    public Action<GameObject> OnPlayerSpawned;
+    public Action<GameObject> PlayerSpawned;
 
     //state
     GameObject _player;
@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
         }
 
         _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        OnPlayerSpawned?.Invoke(_player);
+        PlayerSpawned?.Invoke(_player);
 
   
 

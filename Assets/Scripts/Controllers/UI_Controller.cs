@@ -60,6 +60,9 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] Image _scanImage = null;
 
     [FoldoutGroup("CrateScan")]
+    [SerializeField] RectTransform _lookDirector = null;
+
+    [FoldoutGroup("CrateScan")]
     [SerializeField] TextMeshProUGUI _scanNameTMP = null;
 
     [FoldoutGroup("CrateScan")]
@@ -155,6 +158,7 @@ public class UI_Controller : MonoBehaviour
     GameController _gameController;
     PlayerShipLibrary _playerShipLibrary;
     AudioController _audioCon;
+    InputController _inputCon;
     public Action ScrapLevelIncreased;
     public Action UpgradePointsIncreased;
     public Action DetectedStrongSignal;
@@ -189,14 +193,16 @@ public class UI_Controller : MonoBehaviour
     Tween _upgradeWingsTween_right;
     Tween _topMetaTween;
     Tween _bottomMetaTween;
+    Vector3 _lookIndicatorRotation = Vector3.zero;
 
     #region Initialization
     private void Awake()
     {
         _gameController = GetComponent<GameController>();
         _audioCon = GetComponent<AudioController>();
+        _inputCon = GetComponent<InputController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
-        _gameController.OnPlayerSpawned += ReactToPlayerSpawning;
+        _gameController.PlayerSpawned += ReactToPlayerSpawning;
         InitializeSystemWeaponIcons();
         InitializeShipSelection();
         InitializeScanner();
@@ -212,6 +218,7 @@ public class UI_Controller : MonoBehaviour
         hh.HullPointsChanged += HandleHullPointsChanged;
         hh.IonFactorChanged += HandleIonFactorChanged;
         hh.ShieldRegenChanged += HandleShieldRegenChanged;
+        _inputCon.LookDirChanged += HandleLookDirectionChanged;
 
         player.GetComponent<EnergyHandler>().EnergyPointsChanged += HandleEnergyPointsChanged;
         player.GetComponent<EnergyHandler>().EnergyRegenChanged += HandleEnergyRegenChanged;
@@ -630,6 +637,12 @@ public class UI_Controller : MonoBehaviour
     #endregion
 
     #region Scanner
+
+    public void HandleLookDirectionChanged(Vector2 newLookDir, float newLookAngle)
+    {
+        _lookIndicatorRotation.z = newLookAngle;
+        _lookDirector.localRotation = Quaternion.Euler(_lookIndicatorRotation);
+    }
 
     public void UpdateScanner(Sprite icon, string crateName, string counterStatus)
     {

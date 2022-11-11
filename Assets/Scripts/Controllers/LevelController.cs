@@ -52,7 +52,7 @@ public class LevelController : MonoBehaviour
     {
         _gameController = GetComponent<GameController>();
         _runController = GetComponent<RunController>();
-        _gameController.OnPlayerSpawned += ReactToPlayerSpawned;
+        _gameController.PlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
         _systemWeaponLibrary = _levelLibrary.GetComponent<SystemWeaponLibrary>();
