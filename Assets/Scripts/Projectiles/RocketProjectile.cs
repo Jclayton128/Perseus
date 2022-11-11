@@ -2,25 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketProjectile : Projectile
+public class RocketProjectile : Projectile, IProximityFuzed
 {
+    ParticleController _particleController;
 
+    //settings
     //Full turn authority is reduced inside this cone
     private const float _turnDampingCoefficient = 10f;
-
     float _snakeAmount;
     float _turnRate;
     float _speed;
-
     float _closeEnough = 0.3f;
-
     float _boresightTolerance = 0.02f;
+    [SerializeField] float _detonationRange = 2f;
 
     //state
     Vector3 _targetPosition;
     float _angleToTarget;
     bool _hasHitTargetPosition = false;
+    int layerMask_PlayerNeutralEnemy = (1 << 7) | (1 << 9) | (1 << 11);
 
+    public override void Initialize(PoolController poolController)
+    {
+        base.Initialize(poolController);
+        _particleController = poolController.GetComponent<ParticleController>();
+    }
 
     protected override void SetupInstanceSpecifics()
     {
@@ -31,7 +37,7 @@ public class RocketProjectile : Projectile
 
         _targetPosition = sml.GetTargetPosition();
         //_thrust = sml.GetThrustSpec();
-        _speed = sml.GetSpeedSpec();
+        _speed = _rb.velocity.magnitude;
         _turnRate = sml.GetTurnSpec();
         _snakeAmount = sml.GetSnakeAmount();
         _hasHitTargetPosition = false;
@@ -80,6 +86,15 @@ public class RocketProjectile : Projectile
 
     protected override void ExecuteLifetimeExpirationSequence()
     {
-        ExecuteGenericExpiration_Fizzle();
+        _particleController.
+               RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
+               _detonationRange,
+               transform.position);
+        ExecuteGenericExpiration_Explode(_detonationRange, layerMask_PlayerNeutralEnemy);
+    }
+
+    public void DetonateViaProximityFuze()
+    {
+        ExecuteLifetimeExpirationSequence();
     }
 }

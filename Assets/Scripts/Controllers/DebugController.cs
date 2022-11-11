@@ -251,6 +251,7 @@ public class DebugController : MonoBehaviour
 
     public void SpawnSystemByIndex(int index)
     {
+        HandleGainScrap();
         SystemHandler[] allsystems = _systemsLibrary.GetAllSystemHandlers_Debug();
         SystemHandler sh = allsystems[index];
 
@@ -262,6 +263,7 @@ public class DebugController : MonoBehaviour
 
     public void SpawnWeaponByIndex(int index)
     {
+        HandleGainScrap();
         WeaponHandler[] allweapons = _systemsLibrary.GetAllWeaponHandlers_Debug();
         WeaponHandler weapon = allweapons[index];
 

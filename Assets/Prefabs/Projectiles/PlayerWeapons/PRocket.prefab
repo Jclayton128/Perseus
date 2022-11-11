@@ -4804,6 +4804,67 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1001 &4010623216185396579
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9118246253681178268}
+    m_Modifications:
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886525140923516971, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8899077822617208748, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: _targetsPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218176135698540196, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
+      propertyPath: m_Name
+      value: ProximityFuze
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad569e3b9d04acb40bd44fd581c66eb5, type: 3}
 --- !u!1001 &7064165228821484683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4912,5 +4973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570beff481499e64a824de15bc7622ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifetimeRemaining: 0
   PType: 3
   ImpactHeading: {x: 0, y: 0}
+  _detonationRange: 2

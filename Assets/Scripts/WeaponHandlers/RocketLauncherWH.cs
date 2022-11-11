@@ -14,7 +14,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
     [SerializeField] int _rocketCount_Upgrade = 2;
     [SerializeField] float _rocketSpeed_Upgrade = 20f;
 
-    int _legalTarget_layerMask;
+    int _legalTarget_layerMask = (1 << 7) | (1<<9) | (1 <<11);
 
     #region Weapon Handler
     public override object GetUIStatus()
@@ -22,10 +22,10 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
         return null;
     }
 
-    public override Vector3 GetInitialProjectileVelocity(Transform projectileTransform)
-    {
-        return projectileTransform.transform.up;
-    }
+    //public override Vector3 GetInitialProjectileVelocity(Transform projectileTransform)
+    //{
+    //    return projectileTransform.transform.up + (Vector3)_rb.velocity;
+    //}
 
     protected override void ActivateInternal()
     {

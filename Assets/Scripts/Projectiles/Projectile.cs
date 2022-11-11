@@ -106,7 +106,6 @@ public abstract class Projectile : MonoBehaviour
     }
 
 
-
     /// <summary>
     /// These are the specific setup tasks that each weapon needs to operate properly.
     /// </summary>

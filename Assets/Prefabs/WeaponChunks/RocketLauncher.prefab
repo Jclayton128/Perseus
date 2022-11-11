@@ -273,7 +273,7 @@ MonoBehaviour:
   _knockBackAmount: 1
   _scrapBonus: 0
   _projectileLifetime: 99
-  _projectileSpeed: 5
+  _projectileSpeed: 7
   _activationCost: 5
   _profileIncreaseOnActivation: 20
   _activationSounds: []
@@ -283,9 +283,9 @@ MonoBehaviour:
   _isPermanent: 0
   _maxUpgradeLevel: 5
   _missileTurnRate: 150
-  _snakeAmount: 25
-  _rocketCount: 2
-  _maxMissRange: 2
-  _degreeSpread: 45
+  _snakeAmount: 15
+  _rocketCount: 3
+  _maxMissRange: 3
+  _degreeSpread: 90
   _rocketCount_Upgrade: 2
   _rocketSpeed_Upgrade: 0.6
