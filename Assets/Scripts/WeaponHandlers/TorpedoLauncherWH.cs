@@ -106,7 +106,7 @@ public class TorpedoLauncherWH : WeaponHandler, IMissileLauncher
 
     public Transform GetTargetTransform()
     {
-        Transform t = CUR.FindNearestGameObjectOnLayer(_inputCon.MousePos, _legalTarget_layerMask,
+        Transform t = CUR.FindNearestGameObjectOnLayer(_inputCon._mousePos, _legalTarget_layerMask,
             _maxSearchDistanceOnFire)?.transform;
         return t;
     }

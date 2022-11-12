@@ -50,7 +50,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
         for (int i = 0; i < _rocketCount; i++)
         {
             float rand = Random.Range(0.9f, 1.1f);
-            _projectileLifetime = rand * (_inputCon.MousePos - transform.position).magnitude / _projectileSpeed;
+            _projectileLifetime = rand * (_inputCon._mousePos - transform.position).magnitude / _projectileSpeed;
 
             Quaternion sector = Quaternion.Euler(0, 0,
                 (i * spreadSubdivided) - (_degreeSpread / 2f) + transform.eulerAngles.z);
@@ -112,7 +112,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
     public Vector3 GetTargetPosition()
     {
-        Vector3 pos = CUR.FindRandomPointWithinDistance(_inputCon.MousePos,_maxMissRange);
+        Vector3 pos = CUR.FindRandomPointWithinDistance(_inputCon._mousePos,_maxMissRange);
         return pos;
     }
 

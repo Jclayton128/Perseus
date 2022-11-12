@@ -19765,9 +19765,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 24234206}
+  - {fileID: 1601896672}
   - {fileID: 1148923408}
   - {fileID: 1443457961}
-  - {fileID: 1601896672}
   - {fileID: 1080463662}
   - {fileID: 29159475}
   - {fileID: 687260131}
@@ -22181,7 +22181,7 @@ RectTransform:
   - {fileID: 138967218}
   - {fileID: 180712366}
   m_Father: {fileID: 990435008}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26702,7 +26702,7 @@ RectTransform:
   m_Children:
   - {fileID: 1166333150}
   m_Father: {fileID: 990435008}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29944,7 +29944,7 @@ RectTransform:
   m_Children:
   - {fileID: 43299623}
   m_Father: {fileID: 990435008}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -42167,6 +42167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mousePosSensitivity: 0.1
+  _lookDirChangeThreshold: 0.999
+  _lookDirChangeSpeed: 3
+  _lookDirMultiplier: 100
+  _mousePos: {x: 0, y: 0, z: 0}
+  _lookDir_Commanded: {x: 1, y: 1}
   IsTranslationalMovementMode: 0
 --- !u!4 &2102641474
 Transform:

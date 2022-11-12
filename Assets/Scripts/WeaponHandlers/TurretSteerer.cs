@@ -24,9 +24,9 @@ public class TurretSteerer : MonoBehaviour
 
     private void UpdateTurretFacingToMousePos()
     {
-        Vector3 targetDir = _inputCon.MousePos - transform.position;
-        float angleToTargetFromNorth = Vector3.SignedAngle(targetDir, Vector2.up, transform.forward);
-        Quaternion angleToPoint = Quaternion.Euler(0, 0, -1 * angleToTargetFromNorth);
+        //Vector3 targetDir = _inputCon.LookDirection;
+        //float angleToTargetFromNorth = Vector3.SignedAngle(targetDir, Vector2.up, transform.forward);
+        Quaternion angleToPoint = Quaternion.Euler(0, 0, _inputCon.LookAngle);
         transform.rotation = 
             Quaternion.RotateTowards(transform.rotation, angleToPoint,
             _turretTurnRate * Time.deltaTime);

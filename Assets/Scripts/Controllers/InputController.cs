@@ -39,13 +39,15 @@ public class InputController : MonoBehaviour
     [SerializeField] float _mousePosSensitivity = 0.2f;
     [SerializeField] float _lookDirChangeThreshold = 0.95f;
     [SerializeField] float _lookDirChangeSpeed = 1f;
+    [SerializeField] float _lookDirMultiplier = 100f;
 
     //state
-    public Vector3 MousePos { get; private set; }
+    public Vector3 _mousePos;
     [SerializeField] private Vector2 _lookDir_Commanded = Vector2.one;
     private Vector2 _lookDir_Driven = Vector2.one;
     public Vector2 LookDirection => _lookDir_Driven;
     float _lookAngle = 0;
+    public float LookAngle => _lookAngle;
     public bool IsTranslationalMovementMode = false;
     Vector2 _desiredTranslation = Vector2.zero;
 
@@ -173,12 +175,12 @@ public class InputController : MonoBehaviour
 
     private void UpdateMouseInput()
     {
-        Vector3 prev = MousePos;
+        Vector3 prev = _mousePos;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         xy.Raycast(ray, out distance);
-        MousePos = ray.GetPoint(distance);
+        _mousePos = ray.GetPoint(distance);
 
-        if ((MousePos - prev).magnitude > _mousePosSensitivity)
+        if ((_mousePos - prev).magnitude > _mousePosSensitivity)
         {
             //MousePositionMoved?.Invoke();
         }
@@ -188,24 +190,20 @@ public class InputController : MonoBehaviour
     {
         Vector2 prev = _lookDir_Commanded;
 
-        _lookDir_Commanded = (MousePos - (Vector3)_playerTransform.position).normalized;
+        Vector2 test = (_mousePos - (Vector3)_playerTransform.position).normalized;
         
-        if (Vector2.Dot(prev, _lookDir_Commanded) < _lookDirChangeThreshold)
+        if (Vector2.Dot(prev, test) < _lookDirChangeThreshold)
         {
-            //LookDirChanged?.Invoke(_lookDir);
+            _lookDir_Commanded = test;
         }
 
         _lookDir_Driven = Vector3.RotateTowards(_lookDir_Driven, _lookDir_Commanded,
             _lookDirChangeSpeed * Time.unscaledDeltaTime,
             0);
-        _lookDir_Driven.Normalize();
-
-        Debug.DrawLine(_playerTransform.position, _playerTransform.position + (Vector3)_lookDir_Driven, Color.blue);
-        Debug.DrawLine(_playerTransform.position, _playerTransform.position + (Vector3)_lookDir_Commanded, Color.red);
-
+        _lookDir_Driven = _lookDir_Driven.normalized * _lookDirMultiplier;
         _lookAngle = Vector3.SignedAngle(Vector3.up, _lookDir_Driven, Vector3.forward);
-
         LookDirChanged?.Invoke(_lookDir_Driven, _lookAngle);
+
     }
 
     public void OnDiageticClick()

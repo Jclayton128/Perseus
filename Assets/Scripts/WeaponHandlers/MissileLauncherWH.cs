@@ -78,7 +78,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     {
         if (_isPlayer)
         {
-            return _inputCon.MousePos;
+            return _inputCon._mousePos;
         }
         else
         {

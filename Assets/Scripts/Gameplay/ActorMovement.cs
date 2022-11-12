@@ -143,7 +143,7 @@ public class ActorMovement : MonoBehaviour
 
     private void ConverMouseIntoDesiredSteering()
     {
-        _desiredSteering = _inputCon.MousePos - transform.position;
+        _desiredSteering = _inputCon._mousePos - transform.position;
     }
 
     private void UpdateSteering()
