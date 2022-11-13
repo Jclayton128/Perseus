@@ -119,7 +119,7 @@ public class BeamTurretWH : WeaponHandler
                 _knockBackAmount * Time.deltaTime,
                 _scrapBonus * Time.deltaTime);
 
-            _targetHealthHandler?.ReceiveNonColliderDamage(_damagePack, rh2d.point, _dir);
+            _targetHealthHandler?.ReceiveNonProjectileDamage(_damagePack, rh2d.point, _dir);
 
         }
         else

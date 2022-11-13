@@ -47,7 +47,7 @@ public class DarkbladeWH : WeaponHandler
                 DamagePack damagePack = new DamagePack(_normalDamage * damageAngleCoefficient,
                 _shieldBonusDamage, _ionDamage, _knockBackAmount,_scrapBonus);
 
-                targetHealthHandler?.ReceiveNonColliderDamage(damagePack, rh2d.point, _dir);
+                targetHealthHandler?.ReceiveNonProjectileDamage(damagePack, rh2d.point, _dir);
             }
         }
         else

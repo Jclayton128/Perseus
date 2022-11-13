@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77988005761333148, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6808520079009481910, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_Name
-      value: MasterEnemyProj
+      value: EBlaster
       objectReference: {fileID: 0}
     - target: {fileID: 7076772838127955848, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_RootOrder

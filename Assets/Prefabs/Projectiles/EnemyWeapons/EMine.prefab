@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.0021575987
       objectReference: {fileID: 0}
+    - target: {fileID: 77988005761333148, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 279854559357018016, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: PType
       value: 12
@@ -124,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124082dc7e52c4848b09b8f32a6dc117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetimeRemaining: 0
+  _deliversDamageOnlyAtExpiration: 0
   PType: 12
   ImpactHeading: {x: 0, y: 0}
   _safeSprite: {fileID: 21300000, guid: 2f68826b799f2ca4b92ba3a7fcbfe822, type: 3}

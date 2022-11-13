@@ -45,9 +45,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
     private void Fire()
     {
-        float spreadSubdivided = _degreeSpread / _rocketCount;
-
-       
+        float spreadSubdivided = _degreeSpread / _rocketCount;       
 
         for (int i = 0; i < _rocketCount; i++)
         {

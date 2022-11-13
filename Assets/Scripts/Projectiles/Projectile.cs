@@ -220,7 +220,7 @@ public abstract class Projectile : MonoBehaviour
             Vector2 dir = (hit.transform.position - transform.position);
             DamagePack.FadeDamage(
                 (maxDamageRange - dir.magnitude)/maxDamageRange);
-            hh?.ReceiveNonColliderDamage(DamagePack, point, dir.normalized);
+            hh?.ReceiveNonProjectileDamage(DamagePack, point, dir.normalized);
         }
         _poolCon.ReturnDeadProjectile(this);
     }

@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c29d0c09961f2e45b5495d386025cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deliversDamageOnlyAtExpiration: 0
   PType: 10
   ImpactHeading: {x: 0, y: 0}
 --- !u!50 &8910399456984433170

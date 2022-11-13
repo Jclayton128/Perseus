@@ -29,6 +29,24 @@ public class DamagePack : object
 
     }
 
+    public DamagePack(DamagePack dpToClone)
+    {
+        NormalDamage = dpToClone.NormalDamage;
+        ShieldBonusDamage = dpToClone.ShieldBonusDamage;
+        IonDamage = dpToClone.IonDamage;
+        KnockbackAmount = dpToClone.KnockbackAmount;
+
+        if (dpToClone.NormalDamage > 0)
+        {
+            ScrapBonus = dpToClone.ScrapBonus;
+        }
+        else
+        {
+            ScrapBonus = 0;
+            //Scrap Bonus is zero when normal damage is zero to prevent exploitation
+        }
+    }
+
     public void NullifyDamage()
     {
         NormalDamage = 0;

@@ -95,7 +95,7 @@ public class HealthHandler : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponentInParent<Rigidbody2D>();
         _movement = GetComponent<ActorMovement>();
         _particleController = FindObjectOfType<ParticleController>();
         _scrapController = _particleController.GetComponent<ScrapController>();
@@ -213,7 +213,6 @@ public class HealthHandler : MonoBehaviour
 
     }
 
-
     private void OnTriggerEnter2D(Collider2D weaponImpact)
     {
         Projectile pb;
@@ -232,18 +231,20 @@ public class HealthHandler : MonoBehaviour
 
     /// <summary>
     /// This is used to force a Health Handler to take damage, such as from a beam weapon that doesn't
-    /// otherwise have a collider.
+    /// otherwise have a projectile.
     /// </summary>
     /// <param name="incomingDamage"></param>
     /// <param name="impactPosition"></param>
     /// <param name="impactHeading"></param>
-    public void ReceiveNonColliderDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
+    public void ReceiveNonProjectileDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
+        DamagePack localDamage = new DamagePack(incomingDamage);
         if (Time.time < _timeToAllowDamageAgain) return;
-        ReceivingDamagePack?.Invoke(incomingDamage);
+        ReceivingDamagePack?.Invoke(localDamage);
         ReceivingThreatVector?.Invoke(impactHeading);
-        ReceiveDamage(incomingDamage, impactPosition, impactHeading);
+        ReceiveDamage(localDamage, impactPosition, impactHeading);
     }
+
 
     private void ReceiveDamage(DamagePack incomingDamage, Vector2 impactPosition, Vector2 impactHeading)
     {
