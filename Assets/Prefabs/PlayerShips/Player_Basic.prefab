@@ -966,6 +966,7 @@ MonoBehaviour:
   _turnRate: 180
   _decelDragRate: -1
   _normalDragRate: 0
+  _manualDragCoeff: 0.0025
   _thrustProfileIncreaseRate: 15
   _thrustEnergyCostRate: 0
 --- !u!114 &3577009792823772659

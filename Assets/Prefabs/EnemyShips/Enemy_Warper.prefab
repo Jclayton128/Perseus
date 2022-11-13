@@ -102,15 +102,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4512575181378527886, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
       propertyPath: _rechargeRate
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -4512575181378527886, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
       propertyPath: _maxBlinkRange
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -4512575181378527886, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
       propertyPath: _minBlinkRange
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3236209976901147699, guid: 7398f3dc984277348a1ba45cfb77caff, type: 3}
       propertyPath: m_RootOrder

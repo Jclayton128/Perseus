@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 public class ActorMovement : MonoBehaviour
@@ -37,6 +38,7 @@ public class ActorMovement : MonoBehaviour
     [Tooltip("Negative drag rate defaults to thrust/100")]
     [SerializeField] float _decelDragRate = -1f;
     [SerializeField] float _normalDragRate = 0f;
+    float _manualDragCoeff = 0.0025f;
 
     /// <summary>
     /// This much Profile is added to an actor's profile every second while thrusting.
@@ -58,6 +60,9 @@ public class ActorMovement : MonoBehaviour
 
     Vector2 _closureVec;
     Vector2 _driftVec;
+    float _speed_Current = 0;
+    float _manualDragMagnitude = 0;
+    Vector2 _manualDragVector = Vector2.zero;
 
     private void Awake()
     {
@@ -95,9 +100,9 @@ public class ActorMovement : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(transform.position,
-               _rb.velocity + (Vector2)transform.position,
-               Color.green, 0.1f);
+            //Debug.DrawLine(transform.position,
+            //   _rb.velocity + (Vector2)transform.position,
+            //   Color.green, 0.1f);
 
             _closureDir = _desiredSteering.normalized;
             _driftDir = Vector2.Perpendicular(_closureDir).normalized;
@@ -200,6 +205,15 @@ public class ActorMovement : MonoBehaviour
     {
         UpdateAccelDecel();
         UpdateTurning();
+        UpdateManualDrag();
+    }
+
+    private void UpdateManualDrag()
+    {
+        _speed_Current = _rb.velocity.magnitude;
+        _manualDragMagnitude = (_speed_Current * _speed_Current) * _manualDragCoeff;
+        _manualDragVector = _manualDragMagnitude * -_rb.velocity.normalized;
+        _rb.velocity += _manualDragVector;
     }
 
     private void UpdateAccelDecel()
