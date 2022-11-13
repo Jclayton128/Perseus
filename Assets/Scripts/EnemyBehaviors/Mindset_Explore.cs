@@ -35,6 +35,7 @@ public class Mindset_Explore : Mindset
     float _distanceToTargetPosition;
     Transform _dependentTransform;
 
+
     public override void InitializeMindset(MindsetHandler mindsetHandlerRef, LevelController levelConRef)
     {
         _mindsetHandler = mindsetHandlerRef;
@@ -47,6 +48,12 @@ public class Mindset_Explore : Mindset
         _mindsetHandler = mindsetHandlerRef;
         _levelController = levelConRef;
         _dependentTransform = dependentTransform;
+    }
+
+    public void SetDependentTransform(Transform dependentTransform)
+    {
+        _dependentTransform = dependentTransform;
+        _mindsetHandler.SetTargetPosition(_dependentTransform.position, 0, false);
     }
 
     public override void EnterMindset()
@@ -92,7 +99,7 @@ public class Mindset_Explore : Mindset
                 break;
 
             case ExploreOptions.RandomCloseDependentMove:
-                if (!_dependentTransform) Debug.LogError("Need a dependent transform!");
+                if (!_dependentTransform) Debug.Log("Need a dependent transform!");
                 else newTargetPosition = FindRandomCloseDependentMove();
                 _mindsetHandler.SetTargetPosition(newTargetPosition, 0, false);
                 break;

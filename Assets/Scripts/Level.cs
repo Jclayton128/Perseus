@@ -16,7 +16,7 @@ public class Level : ScriptableObject
     public LevelController.NebulaAmounts NebulaAmount =
         LevelController.NebulaAmounts.None;
 
-    [SerializeField] private List<EnemyInfoHolder.EnemyType> _possibleEnemies;
-    public List<EnemyInfoHolder.EnemyType> PossibleEnemies => _possibleEnemies;
+    [SerializeField] private List<ShipInfoHolder.ShipType> _possibleEnemies;
+    public List<ShipInfoHolder.ShipType> PossibleEnemies => _possibleEnemies;
 
 }

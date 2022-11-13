@@ -14,7 +14,6 @@ public class RocketProjectile : Projectile, IProximityFuzed
     float _speed;
     float _closeEnough = 0.3f;
     float _boresightTolerance = 0.02f;
-    [SerializeField] float _detonationRange = 2f;
 
     //state
     Vector3 _targetPosition;
@@ -88,9 +87,9 @@ public class RocketProjectile : Projectile, IProximityFuzed
     {
         _particleController.
                RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
-               _detonationRange,
+               DamagePack.NormalDamage,
                transform.position);
-        ExecuteGenericExpiration_Explode(_detonationRange, layerMask_PlayerNeutralEnemy);
+        ExecuteGenericExpiration_Explode(DamagePack.NormalDamage, layerMask_PlayerNeutralEnemy);
     }
 
     public void DetonateViaProximityFuze()

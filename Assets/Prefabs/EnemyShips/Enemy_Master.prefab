@@ -4955,6 +4955,7 @@ MonoBehaviour:
   _ionizationParticles: {fileID: 4983928252946256467}
   _maxHullPoints: 10
   _emitsHullChunks: 1
+  _isShip: 1
   _maxShieldPoints: 10
   _shieldHealRate: 0.25
   _ionHealRate: 0
@@ -5015,10 +5016,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1939738846384466972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb67051a40b9f64d953f354b746ba60, type: 3}
+  m_Script: {fileID: 11500000, guid: 743679e2bdb07804ea3d401bdb24ba36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThreatScore: 1
   EType: 0
   LivesAmongAsteroidsOnly: 0
   LivesInNebulaOnly: 0
@@ -5419,6 +5419,10 @@ PrefabInstance:
     - target: {fileID: 7345779193517694256, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: m_Name
       value: EngineParticleFX_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345779193517694256, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8346277631012441649, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: m_RootOrder

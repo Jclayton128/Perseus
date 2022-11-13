@@ -204,6 +204,7 @@ public class InputController : MonoBehaviour
         _lookAngle = Vector3.SignedAngle(Vector3.up, _lookDir_Driven, Vector3.forward);
         LookDirChanged?.Invoke(_lookDir_Driven, _lookAngle);
 
+
     }
 
     public void OnDiageticClick()

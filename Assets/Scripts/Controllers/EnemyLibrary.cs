@@ -7,16 +7,16 @@ using System;
 public class EnemyLibrary : MonoBehaviour
 {
     //settings
-    [SerializeField] List<EnemyInfoHolder> _enemyPrefabs = new List<EnemyInfoHolder>();
+    [SerializeField] List<ShipInfoHolder> _enemyPrefabs = new List<ShipInfoHolder>();
 
     //state
-    Dictionary<EnemyInfoHolder.EnemyType, GameObject> _enemyGameObjects =
-        new Dictionary<EnemyInfoHolder.EnemyType, GameObject>();
+    Dictionary<ShipInfoHolder.ShipType, GameObject> _enemyGameObjects =
+        new Dictionary<ShipInfoHolder.ShipType, GameObject>();
 
-    Dictionary<EnemyInfoHolder.EnemyType, int> _enemyThreatScores =
-        new Dictionary<EnemyInfoHolder.EnemyType, int>();
+    Dictionary<ShipInfoHolder.ShipType, int> _enemyThreatScores =
+        new Dictionary<ShipInfoHolder.ShipType, int>();
 
-    List<EnemyInfoHolder.EnemyType> _loadedEnemies = new List<EnemyInfoHolder.EnemyType>();
+    List<ShipInfoHolder.ShipType> _loadedEnemies = new List<ShipInfoHolder.ShipType>();
 
     private void Awake()
     {
@@ -49,8 +49,8 @@ public class EnemyLibrary : MonoBehaviour
         List<GameObject> menu = new List<GameObject>();
 
         //Prepare the submenu based on max budget and enemies allowed on the level
-        List<EnemyInfoHolder.EnemyType> startingEnemyList = level.PossibleEnemies;
-        List<EnemyInfoHolder.EnemyType> allowedEnemyList = TrimEnemiesByBudget(
+        List<ShipInfoHolder.ShipType> startingEnemyList = level.PossibleEnemies;
+        List<ShipInfoHolder.ShipType> allowedEnemyList = TrimEnemiesByBudget(
             startingEnemyList, remainingBudget);
                 
 
@@ -64,7 +64,7 @@ public class EnemyLibrary : MonoBehaviour
         for (int i = 0; i < 100; i++) // max enemy count of 100;
         { 
             int rand = UnityEngine.Random.Range(0, allowedEnemyList.Count);
-            EnemyInfoHolder.EnemyType etype = allowedEnemyList[rand];
+            ShipInfoHolder.ShipType etype = allowedEnemyList[rand];
             menu.Add(_enemyGameObjects[etype]);
             remainingBudget -= _enemyThreatScores[etype];
             //Debug.Log($"added a {etype} to the menu");
@@ -79,11 +79,11 @@ public class EnemyLibrary : MonoBehaviour
         return menu;
     }
 
-    private List<EnemyInfoHolder.EnemyType> TrimEnemiesByBudget(
-        List<EnemyInfoHolder.EnemyType> startingList, int remainingBudget)
+    private List<ShipInfoHolder.ShipType> TrimEnemiesByBudget(
+        List<ShipInfoHolder.ShipType> startingList, int remainingBudget)
     {
-        List<EnemyInfoHolder.EnemyType> enemiesUnderBudget =
-            new List<EnemyInfoHolder.EnemyType>(startingList);
+        List<ShipInfoHolder.ShipType> enemiesUnderBudget =
+            new List<ShipInfoHolder.ShipType>(startingList);
 
         foreach (var enemy in startingList)
         {
@@ -108,12 +108,12 @@ public class EnemyLibrary : MonoBehaviour
 
     }
 
-    public GameObject GetEnemyGameObjectOfType(EnemyInfoHolder.EnemyType EnemyType)
+    public GameObject GetEnemyGameObjectOfType(ShipInfoHolder.ShipType EnemyType)
     {
         return _enemyGameObjects[EnemyType];
     }
 
-    public EnemyInfoHolder.EnemyType[] GetAllLoadedEnemyTypes_Debug()
+    public ShipInfoHolder.ShipType[] GetAllLoadedEnemyTypes_Debug()
     {
         return _loadedEnemies.ToArray();
     }

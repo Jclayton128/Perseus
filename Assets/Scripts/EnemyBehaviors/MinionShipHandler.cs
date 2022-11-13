@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MinionShipHandler : MonoBehaviour, IMinionShip
+{
+    IMothership _mothership;
+    MindsetHandler _mindsetHandler;
+    ParticleController _particleController;
+
+    public void InitializeWithAssignedMothership(IMothership mothership, Transform mothershipTransform)
+    {
+        _particleController = FindObjectOfType<ParticleController>();
+        _mothership = mothership;
+        GetComponentInChildren<DetectionHandler>().PlayerTransformLocated += IssueAlertToMothership;
+        _mindsetHandler = GetComponentInParent<MindsetHandler>();
+        GetComponent<Mindset_Explore>().SetDependentTransform(mothershipTransform);
+        GetComponent<HealthHandler>().Dying += HandleMinionAspectsOfDying;
+    }
+
+    private void IssueAlertToMothership(Vector3 targetPosition, Vector3 targetVelocity)
+    {
+        _mothership.AlertAllMinionsToTargetTransform(targetPosition, targetVelocity);
+    }
+
+    public void AssignTarget(Vector3 targetPosition, Vector3 targetVelocity)
+    {
+        _mindsetHandler.ReportPlayer(targetPosition, targetVelocity);
+    }
+
+    private void HandleMinionAspectsOfDying()
+    {
+        _mothership.RemoveDeadMinion(this);
+        _particleController.RequestBlastParticles(5, 3f, transform.position);
+        Destroy(this);
+    }
+
+    public void KillMinionUponMothershipDeath()
+    {
+        HandleMinionAspectsOfDying();
+    }
+}

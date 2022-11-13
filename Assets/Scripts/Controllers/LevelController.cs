@@ -167,8 +167,6 @@ public class LevelController : MonoBehaviour
     #endregion
 
 
-
-
     #region Registers
     private void RegisterEnemy(GameObject enemy)
 
@@ -215,7 +213,7 @@ public class LevelController : MonoBehaviour
     {
         Vector2 tutorialEnemyPosition = new Vector2(10f, 10f);
         Quaternion rot = Quaternion.identity;
-        GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyGameObjectOfType(EnemyInfoHolder.EnemyType.Dummy1),
+        GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyGameObjectOfType(ShipInfoHolder.ShipType.Dummy1),
             tutorialEnemyPosition, rot);
         RegisterEnemy(newEnemy);
 
@@ -262,13 +260,24 @@ public class LevelController : MonoBehaviour
         }
 
     }
-    public void SpawnSingleLevelEnemy_Debug(EnemyInfoHolder.EnemyType enemyType)
+    public GameObject SpawnSingleLevelEnemy_Debug(ShipInfoHolder.ShipType enemyType)
     {
         GameObject enemy = _enemyLibrary.GetEnemyGameObjectOfType(enemyType);
         Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
         Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(enemy, pos, rot);
         RegisterEnemy(newEnemy);
+        return newEnemy;
+    }
+
+    public GameObject SpawnSingleShipAtPoint(ShipInfoHolder.ShipType shipType, Vector3 spawnPoint)
+    {
+        GameObject enemy = _enemyLibrary.GetEnemyGameObjectOfType(shipType);
+        float randRot = UnityEngine.Random.Range(-179, 179);
+        Quaternion rot = Quaternion.Euler(0, 0, randRot);
+        GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
+        RegisterEnemy(newEnemy);
+        return newEnemy;
     }
 
     public void SpawnWormholes(int count, Vector2[] positions)

@@ -97,7 +97,7 @@ public abstract class Projectile : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("Validation hasn't been set up for this Projectile Type!");
+                Debug.Log("Validation hasn't been set up for this Projectile Type!");
                 break;
 
 

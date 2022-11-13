@@ -82,7 +82,7 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
 
     private void Start()
     {
-        GetComponentInChildren<DetectionHandler>().ModifyDetectorRange(_detectorRange);
+        GetComponentInChildren<DetectionHandler>()?.ModifyDetectorRange(_detectorRange);
     }
 
     private void Update()

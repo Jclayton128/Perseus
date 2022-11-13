@@ -267,7 +267,7 @@ MonoBehaviour:
   _upgradeDescription: Upgrading increase rockets per volley and speed.
   WeaponType: 4
   _projectileType: 3
-  _normalDamage: 3
+  _normalDamage: 4
   _shieldBonusDamage: 0
   _ionDamage: 0
   _knockBackAmount: 1

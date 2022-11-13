@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class EnemyInfoHolder : MonoBehaviour, IScannable
+public class ShipInfoHolder : MonoBehaviour, IScannable
 {
-    public enum EnemyType { Unassigned0, Dummy1, Warper2, Hammer3, Maker4, Mite5,
+    public enum ShipType { Unassigned0, Dummy1, Warper2, Hammer3, Maker4, Mite5,
         Stalker6, Fencer7, Rocker8, Scrapper9, Trundler10 }
 
 
@@ -16,7 +16,7 @@ public class EnemyInfoHolder : MonoBehaviour, IScannable
     [ShowInInspector] private int _threatScore = 1;
     public int ThreatScore => _threatScore;
 
-    [ShowInInspector] public EnemyType EType = EnemyType.Unassigned0;
+    [ShowInInspector] public ShipType EType = ShipType.Unassigned0;
     [ShowInInspector] public bool LivesAmongAsteroidsOnly = false;
     [ShowInInspector] public bool LivesInNebulaOnly = false;
     [ShowInInspector] public string ScannerName = "default name";

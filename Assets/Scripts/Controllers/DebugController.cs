@@ -177,7 +177,7 @@ public class DebugController : MonoBehaviour
 
     private void SetupEnemyLabels()
     {
-        EnemyInfoHolder.EnemyType[] types = _enemyLibrary.GetAllLoadedEnemyTypes_Debug();
+        ShipInfoHolder.ShipType[] types = _enemyLibrary.GetAllLoadedEnemyTypes_Debug();
         _spawnEnemyLabels[0].transform.parent.parent.gameObject.SetActive(true);
         for (int i = 0; i < types.Length; i++)
         {
@@ -406,8 +406,8 @@ public class DebugController : MonoBehaviour
 
     public void SpawnEnemy_Debug(int enemyTypeAsInt)
     {
-        EnemyInfoHolder.EnemyType etype =
-            (EnemyInfoHolder.EnemyType)enemyTypeAsInt;
+        ShipInfoHolder.ShipType etype =
+            (ShipInfoHolder.ShipType)enemyTypeAsInt;
         _levelController.SpawnSingleLevelEnemy_Debug(etype);
     }
 
