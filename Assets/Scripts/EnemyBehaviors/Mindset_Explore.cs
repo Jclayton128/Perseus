@@ -105,8 +105,8 @@ public class Mindset_Explore : Mindset
                 break;
 
             case ExploreOptions.HoldPosition:
-                newTargetPosition = transform.position;
-                _mindsetHandler.SetTargetPosition(newTargetPosition, 0, true);
+                //newTargetPosition = transform.position;
+                //_mindsetHandler.SetTargetPosition(newTargetPosition, 0, true);
                 break;
 
         }

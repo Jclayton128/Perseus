@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MindsetHandler : MonoBehaviour, IPlayerSeeking
 {
+
     ActorMovement _movement;
     EnergyHandler _energyHandler;
     HealthHandler _health;

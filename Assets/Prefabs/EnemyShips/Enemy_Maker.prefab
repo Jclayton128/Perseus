@@ -31,6 +31,10 @@ PrefabInstance:
       propertyPath: _thrustProfileIncreaseRate
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 541473733763605937, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _fightWeaponUse
       value: 1

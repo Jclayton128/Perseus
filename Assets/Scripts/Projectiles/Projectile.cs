@@ -12,7 +12,7 @@ public abstract class Projectile : MonoBehaviour
     {
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
         PlayerTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
-        EnemyBolt10, EnemyMissile11, EnemyMine12, Enemy13, Enemy14, Enemy15, Enemy16, Enemy17,
+        EnemyBolt10, EnemyMissile11, EnemyMine12, EnemyRocket13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }
 
@@ -21,8 +21,14 @@ public abstract class Projectile : MonoBehaviour
     protected Rigidbody2D _rb;
     protected WeaponHandler _launchingWeaponHandler;
 
+    //settings
+    [Tooltip("Only deliver damage when the projectile is about to be removed, ie a rocket" +
+        "when it is detonating. Direct hits will reduce penetration but not deliver any damage.")]
+    [SerializeField] protected bool _deliversDamageOnlyAtExpiration = false;
+    public bool DeliversDamageOnlyAtExpiration => _deliversDamageOnlyAtExpiration;
+
     //state
-    [SerializeField] float _lifetimeRemaining = 0;
+    float _lifetimeRemaining = 0;
     float _resilienceRemaining = 1; //Hits it can take from PD turret or number of penetrations allowed
     public ProjectileType PType;
 
@@ -165,7 +171,8 @@ public abstract class Projectile : MonoBehaviour
         _resilienceRemaining--;
         if (_resilienceRemaining <= 0)
         {
-            _poolCon.ReturnDeadProjectile(this);
+            ExecuteLifetimeExpirationSequence();
+            //_poolCon.ReturnDeadProjectile(this);
         }
     }
 

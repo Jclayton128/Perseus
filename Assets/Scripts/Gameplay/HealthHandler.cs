@@ -222,7 +222,10 @@ public class HealthHandler : MonoBehaviour
             if (Time.time < _timeToAllowDamageAgain) return;
             ReceivingDamagePack?.Invoke(pb.DamagePack);
             ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
-            ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
+            if (pb.DeliversDamageOnlyAtExpiration == false)
+            {
+                ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
+            }            
             pb.DecrementPenetrationOnImpact();
         }
     }

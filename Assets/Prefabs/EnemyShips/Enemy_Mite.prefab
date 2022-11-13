@@ -39,6 +39,10 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.minScalar
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 541473733763605937, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _fightWeaponUse
       value: 2
@@ -130,6 +134,10 @@ PrefabInstance:
     - target: {fileID: 3452306029984838462, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _reactTimeframe
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _isShip
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxHullPoints

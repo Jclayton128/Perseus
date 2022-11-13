@@ -4916,6 +4916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606c643b819a082478b31d7ac103e72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deliversDamageOnlyAtExpiration: 1
   PType: 11
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 2c02eb8f501bf774cb2b1983171bef5a, type: 3}

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 {
+    //MindsetHandler _mindsetHandler;
+
     //settings
     [Header("Base Rocket Parameters")]
     [SerializeField] float _missileTurnRate = 40f;
@@ -112,7 +114,18 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
     public Vector3 GetTargetPosition()
     {
-        Vector3 pos = CUR.FindRandomPointWithinDistance(_inputCon.LookDirection,_maxMissRange);
+        Vector3 pos;
+
+        if (_isPlayer)
+        {
+            pos = CUR.FindRandomPointWithinDistance(_inputCon.LookDirection, _maxMissRange);
+        }
+        else
+        {
+            if (!_mindsetHandler) _mindsetHandler = GetComponentInParent<MindsetHandler>();
+            return _mindsetHandler.PlayerPosition;
+        }
+        
         return pos;
     }
 

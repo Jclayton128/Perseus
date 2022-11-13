@@ -4912,7 +4912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1102c94fefd43f4478e52b3de1e5e7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetimeRemaining: 0
+  _deliversDamageOnlyAtExpiration: 1
   PType: 1
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 2c02eb8f501bf774cb2b1983171bef5a, type: 3}

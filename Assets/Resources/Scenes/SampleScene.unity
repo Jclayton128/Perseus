@@ -19130,6 +19130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 5867531201207933844, guid: 7652f087802cb2f41ab8ad372a7dc663, type: 3}
+  - {fileID: 3069115516707697164, guid: f82a9cf5ce1949f40825a818dfd4814d, type: 3}
   - {fileID: 3557419019999438709, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
   - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
   - {fileID: 2796412785005916749, guid: 787ce16dcea83f246812e3a122873dcc, type: 3}
@@ -42430,6 +42431,7 @@ MonoBehaviour:
   - {fileID: 2501287643560770377, guid: 338199f47aff9b742bce9d224a9b7390, type: 3}
   - {fileID: 4810833131604385186, guid: a6222f30365e7424ebce0a1fe70a99b2, type: 3}
   - {fileID: 6817956585010561410, guid: fc41a420b4ec4954198ae30b154b3576, type: 3}
+  - {fileID: 190920791535231148, guid: ff594938625f277408b85bcb6afa329d, type: 3}
 --- !u!114 &2102641480
 MonoBehaviour:
   m_ObjectHideFlags: 0
