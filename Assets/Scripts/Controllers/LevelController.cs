@@ -17,6 +17,10 @@ public class LevelController : MonoBehaviour
     public Action WarpingOutFromOldLevel;
     public Action WarpingIntoNewLevel;
     public Action<Level> WarpedIntoNewLevel;
+    /// <summary>
+    ///  int 1: current sector count. int 2: number of enemies spawned on level.
+    /// </summary>
+    public Action<int, int> SpawnedLevelEnemies;
 
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
@@ -221,7 +225,7 @@ public class LevelController : MonoBehaviour
 
     public void SpawnEnemiesInNewSector()
     {
-        int budget = _runController.GetThreatBudget() ;
+        int budget = _runController.CurrentThreatBudget;
         List<GameObject> enemiesToMake =
             _enemyLibrary.CreateMenuFromBudgetAndLevel(budget, _currentLevel);
 
@@ -233,6 +237,8 @@ public class LevelController : MonoBehaviour
             GameObject newEnemy = Instantiate(enemy, pos, rot);
             RegisterEnemy(newEnemy);
         }
+
+        SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, _enemiesOnLevel.Count);
     }
     private void AssignRewardSystemToRandomEnemy()
     {

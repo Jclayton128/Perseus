@@ -9,38 +9,35 @@ public class RunController : MonoBehaviour
 
     //state
 
-    int _currentLevelNumber = 0;
+    int _currentSectorCount = 0;
+    public int CurrentSectorCount => _currentSectorCount;
     int _currentThreatBudget = 0;
+    public int CurrentThreatBudget => _currentThreatBudget;
 
     public void ResetRunStats()
     {
-        _currentLevelNumber = 0;
+        _currentSectorCount = 0;
         _currentThreatBudget = 0;
 
     }
 
     public void IncrementSectorCount()
     {
-        _currentLevelNumber++;
+        _currentSectorCount++;
 
         //TODO do a more clever threat budget increase per level?
         _currentThreatBudget++;
-    }
-
-    public int GetThreatBudget()
-    {
-        return _currentThreatBudget;
     }
 
     public string GetGameoverText(bool wasGameoverForced)
     {
         if (wasGameoverForced)
         {
-            if (_currentLevelNumber <= 2)
+            if (_currentSectorCount <= 2)
             {
                 return "The nebula claimed another unwitting victim. Another try?";
             }
-            if (_currentLevelNumber <= 5)
+            if (_currentSectorCount <= 5)
             {
                 return "The nebula was always hungry. Another try?";
             }

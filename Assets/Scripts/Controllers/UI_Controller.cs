@@ -151,6 +151,15 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Radar")]
     [SerializeField] RadarSector[] _radarSectors = null;
 
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] GameObject _sectorBriefPanel = null;
+
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] TextMeshProUGUI _sectorCountTMP = null;
+
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] TextMeshProUGUI _vesselCountTMP = null;
+
     #endregion
 
     PlayerStateHandler _playerStateHandler;
@@ -184,6 +193,18 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Meta Menu")]
     [SerializeField] float _metaMenuDeployTime = 1.2f;
 
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] float _sectorBriefDisplayTime = 4f;
+
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] float _sectorBriefFadeoutTime = 1f;
+
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] string _sectorCountBlurb = "Entering Sector ";
+
+    [FoldoutGroup("SectorBrief")]
+    [SerializeField] string _vesselCountBlurb = "Threats Detected: ";
+
 
     //state
     IInstallable _currentUpgradeableSelection;
@@ -193,6 +214,8 @@ public class UI_Controller : MonoBehaviour
     Tween _upgradeWingsTween_right;
     Tween _topMetaTween;
     Tween _bottomMetaTween;
+    Tween _sectorCountFadeTween;
+    Tween _vesselCountFadeTween;
     Vector3 _lookIndicatorRotation = Vector3.zero;
 
     #region Initialization
@@ -206,6 +229,7 @@ public class UI_Controller : MonoBehaviour
         InitializeSystemWeaponIcons();
         InitializeShipSelection();
         InitializeScanner();
+        GetComponent<LevelController>().SpawnedLevelEnemies += FlashDisplaySectorBrief;
     }
 
     private void ReactToPlayerSpawning(GameObject player)
@@ -860,7 +884,25 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-    #endregion    
+    #endregion
+
+    #region Sector Brief
+
+    public void FlashDisplaySectorBrief(int sectorCount, int vesselsCount)
+    {
+        _sectorCountFadeTween.Kill();
+        _vesselCountFadeTween.Kill();
+        _sectorCountTMP.text = _sectorCountBlurb + sectorCount;
+        _sectorCountTMP.color = Color.white;
+        _vesselCountTMP.text = _vesselCountBlurb + vesselsCount;
+        _vesselCountTMP.color = Color.white;
+        _sectorCountFadeTween = _sectorCountTMP.DOFade(0, _sectorBriefFadeoutTime).
+            SetDelay(_sectorBriefDisplayTime);
+        _vesselCountFadeTween = _vesselCountTMP.DOFade(0, _sectorBriefFadeoutTime).
+            SetDelay(_sectorBriefDisplayTime);
+    }
+
+    #endregion
 
     #region Public Gets
     public int GetMaxSystems()
