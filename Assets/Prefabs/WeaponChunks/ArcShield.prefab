@@ -163,8 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: b97b8fea06048774996838fb75be7780, type: 3}
   _name: Arc Shield
-  _description: Melee weapon that cause knockback, normal, and ion damage on impact
-  _upgradeDescription: Increases damage and cooldown rate
+  _description: Directional shield that cause damage, ionization, and knockback on
+    contact
+  _upgradeDescription: Upgrading increases damage and cooldown rate
   WeaponType: 14
   _projectileType: 0
   _normalDamage: 4
@@ -185,7 +186,7 @@ MonoBehaviour:
   _arcShieldPrefab: {fileID: 1149342279754515068, guid: abd5c249aa0a18d43972e32247ed1169, type: 3}
   _shieldTime: 5
   _coolRate: 0.5
-  _normalDamageMultiplier_Upgrade: 1.5
+  _normalDamageMultiplier_Upgrade: 1.25
   _cooldownRateMultiplier_Upgrade: 1.5
   _emitColor_full: {r: 0, g: 1, b: 0, a: 1}
   _emitColor_empty: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
