@@ -151,6 +151,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Radar")]
     [SerializeField] RadarSector[] _radarSectors = null;
 
+    [FoldoutGroup("Radar")]
+    [SerializeField] TextMeshProUGUI _threatCountTMP = null;
+
     [FoldoutGroup("SectorBrief")]
     [SerializeField] GameObject _sectorBriefPanel = null;
 
@@ -165,6 +168,7 @@ public class UI_Controller : MonoBehaviour
     PlayerStateHandler _playerStateHandler;
     PlayerSystemHandler _playerSystemHandler;
     GameController _gameController;
+    LevelController _levelController;
     PlayerShipLibrary _playerShipLibrary;
     AudioController _audioCon;
     InputController _inputCon;
@@ -229,7 +233,9 @@ public class UI_Controller : MonoBehaviour
         InitializeSystemWeaponIcons();
         InitializeShipSelection();
         InitializeScanner();
-        GetComponent<LevelController>().SpawnedLevelEnemies += FlashDisplaySectorBrief;
+        _levelController = GetComponent<LevelController>();
+        _levelController.SpawnedLevelEnemies += FlashDisplaySectorBrief;
+        _levelController.EnemyLevelCountChanged += UpdateRadarThreatCount;
     }
 
     private void ReactToPlayerSpawning(GameObject player)
@@ -882,6 +888,12 @@ public class UI_Controller : MonoBehaviour
                 DetectedStrongSignal?.Invoke();
             }
         }
+
+    }
+
+    private void UpdateRadarThreatCount(int threatCount)
+    {
+        _threatCountTMP.text = threatCount.ToString();
     }
 
     #endregion

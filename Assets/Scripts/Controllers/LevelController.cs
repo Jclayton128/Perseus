@@ -21,6 +21,7 @@ public class LevelController : MonoBehaviour
     ///  int 1: current sector count. int 2: number of enemies spawned on level.
     /// </summary>
     public Action<int, int> SpawnedLevelEnemies;
+    public Action<int> EnemyLevelCountChanged;
 
     public enum AsteroidAmounts { None, Sparse, Medium, Heavy };
     public enum NebulaAmounts { None, Sparse, Medium, Heavy };
@@ -40,7 +41,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] Color _filterColor = Color.white;
     Tween _filterTween;
 
-    List<GameObject> _enemiesOnLevel = new List<GameObject>();
+    List<EnemyRegistrationHandler> _enemiesOnLevel = new List<EnemyRegistrationHandler>();
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
@@ -172,7 +173,7 @@ public class LevelController : MonoBehaviour
 
 
     #region Registers
-    private void RegisterEnemy(GameObject enemy)
+    private void RegisterEnemy(EnemyRegistrationHandler enemy)
 
     {
         if (_enemiesOnLevel.Contains(enemy))
@@ -181,6 +182,7 @@ public class LevelController : MonoBehaviour
         }
         else
         {
+            enemy.Initialize(this);
             _enemiesOnLevel.Add(enemy);
         }
     }
@@ -219,7 +221,7 @@ public class LevelController : MonoBehaviour
         Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyGameObjectOfType(ShipInfoHolder.ShipType.Dummy1),
             tutorialEnemyPosition, rot);
-        RegisterEnemy(newEnemy);
+        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
 
     }
 
@@ -235,17 +237,18 @@ public class LevelController : MonoBehaviour
                 _enemySpawnRadius_max * ArenaRadius, _enemySpawnRadius_min * ArenaRadius);
             Quaternion rot = Quaternion.identity;
             GameObject newEnemy = Instantiate(enemy, pos, rot);
-            RegisterEnemy(newEnemy);
+            RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
         }
 
         SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, _enemiesOnLevel.Count);
+        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
     }
     private void AssignRewardSystemToRandomEnemy()
     {
         if (_enemiesOnLevel.Count == 0) return;
 
         int rand = UnityEngine.Random.Range(0, _enemiesOnLevel.Count);
-        GameObject chosenEnemy = _enemiesOnLevel[rand];
+        GameObject chosenEnemy = _enemiesOnLevel[rand].gameObject;
 
         RewardSystemHolder rsh = chosenEnemy.AddComponent<RewardSystemHolder>();
         rsh.Initialize(this);
@@ -272,7 +275,7 @@ public class LevelController : MonoBehaviour
         Vector2 pos = CUR.FindRandomPointWithinDistance(Vector2.zero, ArenaRadius);
         Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(enemy, pos, rot);
-        RegisterEnemy(newEnemy);
+        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
         return newEnemy;
     }
 
@@ -282,7 +285,7 @@ public class LevelController : MonoBehaviour
         float randRot = UnityEngine.Random.Range(-179, 179);
         Quaternion rot = Quaternion.Euler(0, 0, randRot);
         GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
-        RegisterEnemy(newEnemy);
+        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
         return newEnemy;
     }
 
@@ -387,8 +390,19 @@ public class LevelController : MonoBehaviour
         _crateOnLevel = go;
     }
 
-    
 
+
+
+    #endregion
+
+
+    #region Enemy Public Manager Methods
+
+    public void DeregisterDeadEnemy(EnemyRegistrationHandler deadEnemy)
+    {
+        _enemiesOnLevel.Remove(deadEnemy);
+        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+    }
 
     #endregion
 
