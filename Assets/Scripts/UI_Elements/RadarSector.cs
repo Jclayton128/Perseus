@@ -10,7 +10,7 @@ public class RadarSector : MonoBehaviour
     [SerializeField] Image[] dotLevels = null;
 
     //param
-    Color _radarGreen = new Color(0.2195399f, 0.95f, .2134212f);
+    [SerializeField] Color _radarGreen = new Color(0.2195399f, 0.95f, .2134212f);
     Color _radarYellow = Color.yellow;
     Color _radarRed = Color.red;
 
