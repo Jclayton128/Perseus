@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Radar : MonoBehaviour
 {
+    public Action RadarScanned;
+
     //init
     RadarScreen _rs;
     //Rigidbody2D _rb;
@@ -63,6 +65,7 @@ public class Radar : MonoBehaviour
             //DrainIntensityFromSectors();
             Scan();
             _timeForNextScan = Time.time + _timeBetweenScans;
+            RadarScanned?.Invoke();
         }
 
         MoveCurrentIntensityToActualIntensity();

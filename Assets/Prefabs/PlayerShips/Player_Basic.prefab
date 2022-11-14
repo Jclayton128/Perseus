@@ -826,6 +826,7 @@ GameObject:
   - component: {fileID: 7228614650402551077}
   - component: {fileID: 7454526910713461675}
   - component: {fileID: 9205144473536377220}
+  - component: {fileID: 3001536722575825571}
   m_Layer: 7
   m_Name: Player_Basic
   m_TagString: Player
@@ -962,7 +963,7 @@ MonoBehaviour:
   ShouldTurnRight: 0
   _accelClosureDecision: 10
   _minAngleOffDesiredSteeringToAccel: 10
-  _thrust: 300
+  _thrust: 600
   _turnRate: 180
   _decelDragRate: -1
   _normalDragRate: 0
@@ -5807,6 +5808,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &3001536722575825571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089745778583505210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262f48d90eca1d44f913ff084d27fa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _knowledgeRange: 10
+  _wormholeKnowledgeState: 
 --- !u!1001 &280958097
 PrefabInstance:
   m_ObjectHideFlags: 0

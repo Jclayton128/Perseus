@@ -152,7 +152,13 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] RadarSector[] _radarSectors = null;
 
     [FoldoutGroup("Radar")]
+    [SerializeField] Image _radarBackground = null;
+
+    [FoldoutGroup("Radar")]
     [SerializeField] TextMeshProUGUI _threatCountTMP = null;
+
+    [FoldoutGroup("Dugout")]
+    [SerializeField] Image[] _wormholeImages = null;
 
     [FoldoutGroup("SectorBrief")]
     [SerializeField] GameObject _sectorBriefPanel = null;
@@ -209,6 +215,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("SectorBrief")]
     [SerializeField] string _vesselCountBlurb = "Threats Detected: ";
 
+    [FoldoutGroup("Dugout")]
+    [SerializeField] float _dugoutRadius = 93f;
+
 
     //state
     IInstallable _currentUpgradeableSelection;
@@ -221,6 +230,8 @@ public class UI_Controller : MonoBehaviour
     Tween _sectorCountFadeTween;
     Tween _vesselCountFadeTween;
     Vector3 _lookIndicatorRotation = Vector3.zero;
+    List<(float, float)> _wormholeIconState = new List<(float, float)>();
+    Color _wormholeIconColor;
 
     #region Initialization
     private void Awake()
@@ -236,6 +247,18 @@ public class UI_Controller : MonoBehaviour
         _levelController = GetComponent<LevelController>();
         _levelController.SpawnedLevelEnemies += FlashDisplaySectorBrief;
         _levelController.EnemyLevelCountChanged += UpdateRadarThreatCount;
+        InitializeDugout();
+    }
+
+    private void InitializeDugout()
+    {
+        _wormholeIconColor = _wormholeImages[0].color;
+        _wormholeIconColor.a = 0;
+        foreach (var wormholeIcon in _wormholeImages)
+        {
+            wormholeIcon.color = _wormholeIconColor;
+            _wormholeIconState.Add((0, 0));
+        }
     }
 
     private void ReactToPlayerSpawning(GameObject player)
@@ -894,6 +917,31 @@ public class UI_Controller : MonoBehaviour
     private void UpdateRadarThreatCount(int threatCount)
     {
         _threatCountTMP.text = threatCount.ToString();
+    }
+
+    #endregion
+
+    #region Dugout
+
+    public void UpdateDugoutState(List<(float,float)> newData)
+    {
+        _wormholeIconState = newData;
+        UpdateDugoutUI();
+    }
+
+    private void UpdateDugoutUI()
+    {
+        if (_wormholeIconState.Count == 0) return;
+        for (int i = 0; i < _wormholeIconState.Count; i++)
+        {
+            float x =
+                -(float)Mathf.Sin(_wormholeIconState[i].Item1 * Mathf.Deg2Rad) * _dugoutRadius;
+            float y =
+                (float)Mathf.Cos(_wormholeIconState[i].Item1 * Mathf.Deg2Rad) * _dugoutRadius;
+            _wormholeImages[i].rectTransform.anchoredPosition = new Vector2(x, y);
+            _wormholeIconColor.a = _wormholeIconState[i].Item2;
+            _wormholeImages[i].color = _wormholeIconColor;
+        }
     }
 
     #endregion

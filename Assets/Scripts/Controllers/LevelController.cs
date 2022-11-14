@@ -45,6 +45,8 @@ public class LevelController : MonoBehaviour
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
+    [SerializeField] List<Vector2> _wormholeLocationsOnLevel = new List<Vector2>();
+    public List<Vector2> WormholeLocations => _wormholeLocationsOnLevel;
     GameObject _crateOnLevel;
 
     WormholeHandler _selectedWormhole = null;
@@ -296,6 +298,7 @@ public class LevelController : MonoBehaviour
             WormholeHandler wh = Instantiate(_wormholePrefab, 
                 positions[i], Quaternion.identity).GetComponent<WormholeHandler>();
             _wormholesOnLevel.Add(wh);
+            _wormholeLocationsOnLevel.Add(wh.transform.position);
             wh.Initialize(_levelLibrary.GetRandomLevel());
             wh.OnPlayerEnterWormhole += ReactToPlayerEnteringWormhole;
             wh.OnPlayerExitWormhole += ReactToPlayerExitingWormhome;
@@ -314,6 +317,7 @@ public class LevelController : MonoBehaviour
                 existingPoints, _minSeparationBetweenWormholes);
             WormholeHandler wh = Instantiate(_wormholePrefab, pos, Quaternion.identity).GetComponent<WormholeHandler>();
             _wormholesOnLevel.Add(wh);
+            _wormholeLocationsOnLevel.Add(wh.transform.position);
             existingPoints.Add(wh.transform.position);
             wh.Initialize(_levelLibrary.GetRandomLevel());
             wh.OnPlayerEnterWormhole += ReactToPlayerEnteringWormhole;
@@ -354,6 +358,7 @@ public class LevelController : MonoBehaviour
             Destroy(_wormholesOnLevel[i].gameObject);
         }
         _wormholesOnLevel.Clear();
+        _wormholeLocationsOnLevel.Clear();
     }
 
     #endregion
