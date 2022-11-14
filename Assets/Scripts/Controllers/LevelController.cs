@@ -45,9 +45,10 @@ public class LevelController : MonoBehaviour
     List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
-    [SerializeField] List<Vector2> _wormholeLocationsOnLevel = new List<Vector2>();
+    List<Vector2> _wormholeLocationsOnLevel = new List<Vector2>();
     public List<Vector2> WormholeLocations => _wormholeLocationsOnLevel;
     GameObject _crateOnLevel;
+    public GameObject CrateOnLevel => _crateOnLevel;
 
     WormholeHandler _selectedWormhole = null;
     float _timeToSelectWormhole = 0;

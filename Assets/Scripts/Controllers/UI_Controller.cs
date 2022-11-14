@@ -160,6 +160,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("Dugout")]
     [SerializeField] Image[] _wormholeImages = null;
 
+    [FoldoutGroup("Dugout")]
+    [SerializeField] Image _crateImage = null;
+
     [FoldoutGroup("SectorBrief")]
     [SerializeField] GameObject _sectorBriefPanel = null;
 
@@ -231,7 +234,9 @@ public class UI_Controller : MonoBehaviour
     Tween _vesselCountFadeTween;
     Vector3 _lookIndicatorRotation = Vector3.zero;
     List<(float, float)> _wormholeIconState = new List<(float, float)>();
+    (float, float) _crateIconState = (0, 0);
     Color _wormholeIconColor;
+    Color _crateIconColor;
 
     #region Initialization
     private void Awake()
@@ -259,6 +264,9 @@ public class UI_Controller : MonoBehaviour
             wormholeIcon.color = _wormholeIconColor;
             _wormholeIconState.Add((0, 0));
         }
+        _crateIconColor = _crateImage.color;
+        _crateIconColor.a = 0;
+        _crateImage.color = _crateIconColor;
     }
 
     private void ReactToPlayerSpawning(GameObject player)
@@ -923,13 +931,15 @@ public class UI_Controller : MonoBehaviour
 
     #region Dugout
 
-    public void UpdateDugoutState(List<(float,float)> newData)
+    public void UpdateDugoutState(List<(float,float)> newWormholeData, (float,float) crateData)
     {
-        _wormholeIconState = newData;
-        UpdateDugoutUI();
+        _wormholeIconState = newWormholeData;
+        _crateIconState = crateData;
+        UpdateDugoutWormholesUI();
+        UpdateDugoutCrateUI();
     }
 
-    private void UpdateDugoutUI()
+    private void UpdateDugoutWormholesUI()
     {
         if (_wormholeIconState.Count == 0) return;
         for (int i = 0; i < _wormholeIconState.Count; i++)
@@ -942,6 +952,20 @@ public class UI_Controller : MonoBehaviour
             _wormholeIconColor.a = _wormholeIconState[i].Item2;
             _wormholeImages[i].color = _wormholeIconColor;
         }
+    }
+
+    private void UpdateDugoutCrateUI()
+    {
+        //if (_crateIconState.Item2 <= 0) return;
+        
+        float x =
+            -(float)Mathf.Sin(_crateIconState.Item1 * Mathf.Deg2Rad) * _dugoutRadius;
+        float y =
+            (float)Mathf.Cos(_crateIconState.Item1 * Mathf.Deg2Rad) * _dugoutRadius;
+        _crateImage.rectTransform.anchoredPosition = new Vector2(x, y);
+        _crateIconColor.a = _crateIconState.Item2;
+        _crateImage.color = _crateIconColor;       
+
     }
 
     #endregion
