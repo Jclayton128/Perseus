@@ -336,7 +336,7 @@ public class LevelController : MonoBehaviour
         WarpingOutFromOldLevel?.Invoke();
         ClearAllEnemiesFromLevel();
         ClearAllWormholesFromLevel();
-        
+        Destroy(_crateOnLevel);
     }
 
 

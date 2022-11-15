@@ -75,7 +75,7 @@ public class RadarProfileHandler : MonoBehaviour
     public void Cloak()
     {
         _isCloaked = true;
-        CurrentRadarProfile = 0f;
+        _radarProfileCollider.enabled = false;
         foreach (SpriteRenderer sr in _spriteRenderers)
         {
             sr.color = halftone;
@@ -85,6 +85,7 @@ public class RadarProfileHandler : MonoBehaviour
     public void Decloak()
     {
         _isCloaked = false;
+        _radarProfileCollider.enabled = true;
         foreach (SpriteRenderer sr in _spriteRenderers)
         {
             sr.color = Color.white;

@@ -19,9 +19,6 @@ public class StealthCockpitSH : SystemHandler
     float _cloakFactor = 0;
     Color _cloakColor = Color.white;
 
-
-
-
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
         base.IntegrateSystem(connectedSID);

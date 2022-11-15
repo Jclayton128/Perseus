@@ -116,6 +116,12 @@ public class EnergyHandler : MonoBehaviour
         EnergyRegenChanged?.Invoke(_energyGainRate.ToString("F1"), Color.white);
     }
 
+    public void ModifyMaxEnergyLevel(float amountToAdd)
+    {
+        _maxEnergyPoints += amountToAdd;
+        EnergyPointsChanged?.Invoke(CurrentEnergy, _maxEnergyPoints);
+    }
+
     #endregion
 
 
