@@ -77,12 +77,16 @@ public class Scanner : MonoBehaviour
         }
         else
         {
-            counterStatus = "";
-            _uiController.UpdateScanner(null, null, counterStatus);
+            ClearScannerUI();
         }
 
 
         
+    }
+
+    private void ClearScannerUI()
+    {
+        _uiController.UpdateScanner(null, null, "");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -139,6 +143,12 @@ public class Scanner : MonoBehaviour
     private void DecrementCurrentScan()
     {
         if (GameController.IsPaused) return;
+        if (_scannablesInRange.Count == 0)
+        {
+            ClearScannerUI();
+            return;
+        }
+
         _indexOfCurrentScan--;
         if (_indexOfCurrentScan < 0)
         {
@@ -152,6 +162,12 @@ public class Scanner : MonoBehaviour
     private void IncrementCurrentScan()
     {
         if (GameController.IsPaused) return;
+        if (_scannablesInRange.Count == 0)
+        {
+            ClearScannerUI();
+            return;
+        }
+
         _indexOfCurrentScan++;
         if (_indexOfCurrentScan > _scannablesInRange.Count - 1)
         {
