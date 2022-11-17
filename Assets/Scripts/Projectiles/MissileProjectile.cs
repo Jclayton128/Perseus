@@ -34,7 +34,7 @@ public class MissileProjectile : Projectile
     float _timeForNextTargetScan;
     bool _hasHitTargetPosition = false;
 
-    public override void Initialize(PoolController poolController)
+    public override void Initialize(ProjectilePoolController poolController)
     {
         base.Initialize(poolController);
         _sr = GetComponent<SpriteRenderer>();

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public abstract class WeaponHandler : MonoBehaviour, IInstallable
 {
-    protected PoolController _poolCon;
+    protected ProjectilePoolController _poolCon;
     protected InputController _inputCon;
     protected AudioSource _hostAudioSource;
     protected AudioController _playerAudioSource;
@@ -80,7 +80,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     {
         _inputCon = FindObjectOfType<InputController>();
         _rb = GetComponentInParent<Rigidbody2D>();
-        _poolCon = _inputCon.GetComponent<PoolController>();
+        _poolCon = _inputCon.GetComponent<ProjectilePoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
         _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();

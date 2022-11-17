@@ -42443,6 +42443,7 @@ GameObject:
   - component: {fileID: 2102641483}
   - component: {fileID: 2102641484}
   - component: {fileID: 2102641485}
+  - component: {fileID: 2102641486}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -42726,7 +42727,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2102641472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e5801e109c6a74b993a765692cb181, type: 3}
+  m_Script: {fileID: 11500000, guid: b08c923588b897247a2fb12c3b77d54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _projectilePrefabs:
@@ -42855,6 +42856,19 @@ MonoBehaviour:
   _tutorialFontColor: {r: 1, g: 1, b: 1, a: 1}
   _tutorialPanelColor: {r: 0.2358, g: 0.2358, b: 0.2358, a: 0.22745098}
   _tutorialPanelDeployTime: 1
+--- !u!114 &2102641486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102641472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebeb33cd9cec03d46ae4925ad36cca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _asteroidPrefab: {fileID: 3311378229529702471, guid: 345aa389b46f9ae45b0539df41aa17db, type: 3}
 --- !u!1 &2102927340
 GameObject:
   m_ObjectHideFlags: 0

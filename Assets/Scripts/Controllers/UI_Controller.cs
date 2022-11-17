@@ -710,7 +710,6 @@ public class UI_Controller : MonoBehaviour
 
         if (icon)
         {
-            Debug.Log("scanner pikcup");
             _scanImage.sprite = icon;
             _scanImage.color = Color.white;
             _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);

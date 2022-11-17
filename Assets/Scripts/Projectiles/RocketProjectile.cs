@@ -21,7 +21,7 @@ public class RocketProjectile : Projectile, IProximityFuzed
     bool _hasHitTargetPosition = false;
     int layerMask_PlayerNeutralEnemy = (1 << 7) | (1 << 9) | (1 << 11);
 
-    public override void Initialize(PoolController poolController)
+    public override void Initialize(ProjectilePoolController poolController)
     {
         base.Initialize(poolController);
         _particleController = poolController.GetComponent<ParticleController>();

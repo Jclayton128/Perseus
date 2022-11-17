@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolController : MonoBehaviour
+public class ProjectilePoolController : MonoBehaviour
 {   
     [SerializeField] GameObject[] _projectilePrefabs = null;
     SystemWeaponLibrary _sysLib;

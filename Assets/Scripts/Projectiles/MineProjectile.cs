@@ -24,7 +24,7 @@ public class MineProjectile : Projectile, IPlayerSeeking
     [SerializeField] float _timeToDetonate = Mathf.Infinity;
     Sprite _warningSprite;
     [SerializeField] float _playerRange = 0;
-    public override void Initialize(PoolController poolController)
+    public override void Initialize(ProjectilePoolController poolController)
     {
         base.Initialize(poolController);
         _sr = GetComponent<SpriteRenderer>();

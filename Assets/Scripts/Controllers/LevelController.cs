@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
     //Refs
     GameController _gameController;
     RunController _runController;
+    AsteroidPoolController _asteroidPoolController;
     SystemWeaponLibrary _systemWeaponLibrary;
     EnemyLibrary _enemyLibrary;
     LevelLibrary _levelLibrary;
@@ -60,6 +61,7 @@ public class LevelController : MonoBehaviour
     {
         _gameController = GetComponent<GameController>();
         _runController = GetComponent<RunController>();
+        _asteroidPoolController = GetComponent<AsteroidPoolController>();
         _gameController.PlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
         _levelLibrary = FindObjectOfType<LevelLibrary>();
@@ -127,10 +129,8 @@ public class LevelController : MonoBehaviour
         SpawnWormholes(3);
         SpawnEnemiesInNewSector();         // Populate Enemies according threat budget, add to list
         AssignRewardSystemToRandomEnemy();
-        if (_currentLevel.AsteroidAmount > 0)
-        {
-            // Populate Asteroids and add to list
-        }
+
+        _asteroidPoolController.SpawnInitialAsteroids(_currentLevel);
         if (_currentLevel.NebulaAmount > 0)
         {
 

@@ -105,12 +105,16 @@ public class HealthHandler : MonoBehaviour
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
         if (!_isShip) return;
-        if (_movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
+        if (!_movement || _movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
 
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
-        _ipem = _ionizationParticles.emission;
-        _ipem.rateOverTime = IonFactor * _ionizationGlory;
+        if (_ionizationParticles)
+        {
+            _ipem = _ionizationParticles.emission;
+            _ipem.rateOverTime = IonFactor * _ionizationGlory;
+        }
+
 
         ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
@@ -370,6 +374,18 @@ public class HealthHandler : MonoBehaviour
     {
         _maxHullPoints += hullAddition;
         HullPoints += hullAddition;
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+    }
+
+    /// <summary>
+    /// Set the maximum hull level and current hull level to this specific amount. Not the same
+    /// as AdjustHullMaximum!
+    /// </summary>
+    /// <param name="hullAddition"></param>
+    public void SetHullMaximumAndCurrent(float newMaxHull)
+    {
+        _maxHullPoints = newMaxHull;
+        HullPoints = _maxHullPoints;
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
 

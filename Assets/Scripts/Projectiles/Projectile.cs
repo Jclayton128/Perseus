@@ -17,7 +17,7 @@ public abstract class Projectile : MonoBehaviour
     }
 
     //init
-    protected PoolController _poolCon;
+    protected ProjectilePoolController _poolCon;
     protected Rigidbody2D _rb;
     protected WeaponHandler _launchingWeaponHandler;
 
@@ -36,7 +36,7 @@ public abstract class Projectile : MonoBehaviour
     public Vector2 ImpactHeading;
 
     //This is called once per game session per pooled weapon object.
-    public virtual void Initialize(PoolController poolController)
+    public virtual void Initialize(ProjectilePoolController poolController)
     {
         _poolCon = poolController;
         _rb = GetComponent<Rigidbody2D>();  
