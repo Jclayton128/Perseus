@@ -166,14 +166,18 @@ MonoBehaviour:
   _sprites_Medium:
   - {fileID: 21300000, guid: 6a29fce26494658488a357669c29a051, type: 3}
   - {fileID: 21300000, guid: 5ef8279b4d2c4594f8631d20421a0eea, type: 3}
-  _sprites_Small: []
-  _contents: 020000000200000002000000
+  _sprites_Small:
+  - {fileID: 21300000, guid: f8c508c0a3d2fd3448eb152593ab4a1b, type: 3}
+  - {fileID: 21300000, guid: 576e9d210d2389048a3f45d44e2e278d, type: 3}
+  _contents: 02000000020000000200000000000000
   _radius:
   - 0.55
   - 0.29
   - 0.18
+  - 0.1
   _hull:
   - 10
   - 5
   - 2
+  - 1
   _initialDriftMaxSpeed: 3

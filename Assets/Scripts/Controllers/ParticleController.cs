@@ -67,17 +67,28 @@ public class ParticleController : MonoBehaviour
 
     public void ReturnAllParticles()
     {
-        for (int i = _activeShieldParticles.Count; i > 0; i--)
+        if (_activeShieldParticles.Count > 0)
         {
-            ReturnParticle(_activeShieldParticles[i]);
+            for (int i = _activeShieldParticles.Count-1; i > 0; i--)
+            {
+                ReturnParticle(_activeShieldParticles[i]);
+            }
         }
-        for (int i = _activeHullParticles.Count; i > 0; i--)
+
+        if (_activeHullParticles.Count > 0)
         {
-            ReturnParticle(_activeHullParticles[i]);
+            for (int i = _activeHullParticles.Count-1; i > 0; i--)
+            {
+                ReturnParticle(_activeHullParticles[i]);
+            }
         }
-        for (int i = _activeBlastParticles.Count; i > 0; i--)
+
+        if (_activeBlastParticles.Count > 0)
         {
-            ReturnParticle(_activeBlastParticles[i]);
+            for (int i = _activeBlastParticles.Count-1; i > 0; i--)
+            {
+                ReturnParticle(_activeBlastParticles[i]);
+            }
         }
     }
 

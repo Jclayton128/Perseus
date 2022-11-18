@@ -19,7 +19,7 @@ public class ProjectilePoolController : MonoBehaviour
     private void Awake()
     {
         _sysLib = FindObjectOfType<SystemWeaponLibrary>();
-        GetComponent<LevelController>().WarpingOutFromOldLevel += ReturnAllProjectiles;
+        //GetComponent<LevelController>().WarpingOutFromOldLevel += ClearProjectiles;
     }
 
     private void Start()
@@ -85,13 +85,13 @@ public class ProjectilePoolController : MonoBehaviour
         deadProjectile.gameObject.SetActive(false);
     }
 
-    private void ReturnAllProjectiles()
+    public void ClearProjectiles()
     {
         var keyList = new List<Projectile.ProjectileType>(_activePools.Keys);
         foreach (var key in keyList)
         {
             List<Projectile> ps = _activePools[key];
-            for (int i = ps.Count -1; i > 0; i--)
+            for (int i = ps.Count -1; i >= 0; i--)
             {
                 ReturnDeadProjectile(ps[i]);
             }
@@ -99,5 +99,4 @@ public class ProjectilePoolController : MonoBehaviour
 
     }
 
-    
-}
+ }

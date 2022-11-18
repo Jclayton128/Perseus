@@ -59,9 +59,7 @@ public class ScrapController : MonoBehaviour
 
     }
 
-
-    [ContextMenu("Clear Out All Scraps")]
-    public void ClearOutAllScraps()
+    public void ClearScraps()
     {
         for (int i = _activeScraps.Count -1; i >= 0; i--)
         {

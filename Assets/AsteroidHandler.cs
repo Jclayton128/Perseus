@@ -69,11 +69,15 @@ public class AsteroidHandler : MonoBehaviour
     public void HandleAsteroidDeath()
     {
         Vector3 pos = Vector3.zero;// UnityEngine.Random.insideUnitCircle.normalized;
-        for(int i = 0; i <= _contents[(int)_size]; i++)
+        if (_size != Size.Small)
         {
-            _asteroidPoolController.SpawnSingleAsteroid((Size)((int)_size +1),
-                transform.position + pos);
+            for (int i = 0; i <= _contents[(int)_size]; i++)
+            {
+                _asteroidPoolController.SpawnSingleAsteroid((Size)((int)_size + 1),
+                    transform.position + pos);
+            }
         }
+
 
         _asteroidPoolController.ReturnAsteroidToPool(this);
     }

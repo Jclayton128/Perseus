@@ -93,7 +93,6 @@ public class AsteroidPoolController : MonoBehaviour
         if (_pooledAsteroids.Count == 0)
         {
             newAsteroid = Instantiate(_asteroidPrefab).GetComponent<AsteroidHandler>();
-            _activeAsteroids.Add(newAsteroid);
             newAsteroid.Initialize(this);
         }
         else
@@ -101,7 +100,7 @@ public class AsteroidPoolController : MonoBehaviour
             newAsteroid = _pooledAsteroids.Dequeue();
             newAsteroid.gameObject.SetActive(true);
         }
-
+        _activeAsteroids.Add(newAsteroid);
         return newAsteroid;
     }
 

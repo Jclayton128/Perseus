@@ -8,10 +8,12 @@ public class LevelController : MonoBehaviour
     //Refs
     GameController _gameController;
     RunController _runController;
+    ScrapController _scrapController;
     AsteroidPoolController _asteroidPoolController;
     SystemWeaponLibrary _systemWeaponLibrary;
     EnemyLibrary _enemyLibrary;
     LevelLibrary _levelLibrary;
+    ProjectilePoolController _projectilePoolController;
     PlayerSystemHandler _playerSystemHandler;
     CircleEdgeCollider2D _arenaEdgeCollider;
 
@@ -61,6 +63,8 @@ public class LevelController : MonoBehaviour
     {
         _gameController = GetComponent<GameController>();
         _runController = GetComponent<RunController>();
+        _scrapController = GetComponent<ScrapController>();
+        _projectilePoolController = GetComponent<ProjectilePoolController>();
         _asteroidPoolController = GetComponent<AsteroidPoolController>();
         _gameController.PlayerSpawned += ReactToPlayerSpawned;
         _enemyLibrary = FindObjectOfType<EnemyLibrary>();
@@ -334,6 +338,9 @@ public class LevelController : MonoBehaviour
     private void ClearLevel()
     {
         WarpingOutFromOldLevel?.Invoke();
+        _asteroidPoolController.ClearAsteroids();
+        _projectilePoolController.ClearProjectiles();
+        _scrapController.ClearScraps();
         ClearAllEnemiesFromLevel();
         ClearAllWormholesFromLevel();
         Destroy(_crateOnLevel);
