@@ -8,12 +8,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 6249412893955380731}
     m_Modifications:
     - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
+      propertyPath: _normalDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
       propertyPath: _activationCost
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
       propertyPath: _projectileType
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
+      propertyPath: _knockBackAmount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
       propertyPath: _missileTurnRate
@@ -29,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
       propertyPath: _missileSnakeAmount
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4681195912202637571, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
       propertyPath: m_RootOrder

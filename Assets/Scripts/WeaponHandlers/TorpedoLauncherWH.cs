@@ -92,12 +92,12 @@ public class TorpedoLauncherWH : WeaponHandler, IMissileLauncher
         if (_isPlayer)
         {
             //Only locks on to actual enemy ships, and no neutrals (ie, asteroids)
-            _legalTarget_layerMask = (1 << 9);
+            _legalTarget_layerMask = LayerLibrary.EnemyLayerMask;
         }
         else
         {
             // 7 is PlayerShip
-            _legalTarget_layerMask = 1 << 7;
+            _legalTarget_layerMask = LayerLibrary.PlayerLayerMask;
         }
 
 

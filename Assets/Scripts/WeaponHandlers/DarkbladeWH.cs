@@ -11,7 +11,6 @@ public class DarkbladeWH : WeaponHandler
     [SerializeField] float _beamLength = 3f;
     [SerializeField] float _beamLengthIncrease_Upgrade = 0.5f;
     [SerializeField] float _beamDamageIncrease_Upgrade = 5f;
-    int _enemyLayerMask = 1 << 9; //TODO Caution - this makes this weapon ignore physics layer changes!
 
     //state
     Vector3 _dir;
@@ -32,7 +31,9 @@ public class DarkbladeWH : WeaponHandler
     {
         _dir = _muzzle.transform.up * _beamLength;
         float _effectiveRange;
-        RaycastHit2D rh2d = Physics2D.Linecast(_muzzle.position, _muzzle.position + _dir, _enemyLayerMask);
+        RaycastHit2D rh2d = Physics2D.Linecast(_muzzle.position,
+            _muzzle.position + _dir,
+            LayerLibrary.EnemyNeutralLayerMask);
         if (rh2d.collider != null)
         {            
             _effectiveRange = rh2d.distance;

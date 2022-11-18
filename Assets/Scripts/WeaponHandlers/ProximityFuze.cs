@@ -9,27 +9,23 @@ public class ProximityFuze : MonoBehaviour
     [SerializeField] bool _targetsEnemy = false;
     [SerializeField] bool _targetsNeutral = false;
 
-    int _playerLayer = 7;
-    int _enemyLayer = 9;
-    int _neutralLayer = 11;
-    int _layerMask;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int tgt = collision.gameObject.layer;
 
-        if (_targetsPlayer && tgt == _playerLayer)
+        if (_targetsPlayer && tgt == LayerLibrary.PlayerLayer)
         {
             TriggerProximityFuze(); 
             return;
         }
-        if (_targetsEnemy && tgt == _enemyLayer)
+        if (_targetsEnemy && tgt == LayerLibrary.EnemyLayer)
         {
             TriggerProximityFuze();
             return;
         }
-        if (_targetsNeutral && tgt == _neutralLayer)
+        if (_targetsNeutral && tgt == LayerLibrary.NeutralLayer)
         {
             TriggerProximityFuze();
             return;
@@ -38,7 +34,6 @@ public class ProximityFuze : MonoBehaviour
 
     private void TriggerProximityFuze()
     {
-        Debug.Log("detonate via proximity fuze");
         SendMessageUpwards("DetonateViaProximityFuze", SendMessageOptions.RequireReceiver);
     }
 

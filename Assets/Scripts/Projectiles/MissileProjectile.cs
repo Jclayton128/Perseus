@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileProjectile : Projectile
+public class MissileProjectile : Projectile, IProximityFuzed
 {
     SpriteRenderer _sr;
+    ParticleController _particleController;
 
     //settings
     [SerializeField] Sprite _lockedOnSprite;
@@ -17,7 +18,7 @@ public class MissileProjectile : Projectile
     float _turnRate;
     float _speed;
 
-    float _timeBetweenTargetScans = 0.1f;
+    float _timeBetweenTargetScans = 0.02f;
     float _scanOriginOffset_near = 4.0f; //full radius
     float _scanOriginOffset_far = 10f; //4x radius
     float _scanRadius;
@@ -39,6 +40,7 @@ public class MissileProjectile : Projectile
         base.Initialize(poolController);
         _sr = GetComponent<SpriteRenderer>();
         _startingSprite = _sr.sprite;
+        _particleController = FindObjectOfType<ParticleController>();
     }
 
     protected override void SetupInstanceSpecifics()
@@ -91,6 +93,7 @@ public class MissileProjectile : Projectile
 
     private void UpdateScanTargetTransform()
     {
+        Debug.Log($"Scanning for {_legalTarget_LayerMask}. PLM: {LayerLibrary.PlayerLayerMask}" );
         //look for target transform 
         Collider2D coll = Physics2D.OverlapCircle(
             transform.position + (transform.up * _scanOriginOffset_near * _scanRadius),
@@ -168,7 +171,15 @@ public class MissileProjectile : Projectile
 
     protected override void ExecuteLifetimeExpirationSequence()
     {
-        ExecuteGenericExpiration_Fizzle();
+        _particleController.
+            RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
+            DamagePack.NormalDamage,
+            transform.position);
+        ExecuteGenericExpiration_Explode(DamagePack.NormalDamage, LayerLibrary.PlayerEnemyNeutralLayerMask);
     }
 
+    public void DetonateViaProximityFuze()
+    {
+        ExecuteLifetimeExpirationSequence();
+    }
 }

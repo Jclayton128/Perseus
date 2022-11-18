@@ -59,12 +59,12 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
         // 11 is NeutralShip
         if (_isPlayer)
         {
-            _legalTarget_layerMask = (1 << 9) | (1 << 11);
+            _legalTarget_layerMask = LayerLibrary.EnemyNeutralLayerMask;
         }
         else
         {
             // 7 is PlayerShip
-            _legalTarget_layerMask = 1 << 7;
+            _legalTarget_layerMask = LayerLibrary.PlayerLayerMask;
         }
 
     }

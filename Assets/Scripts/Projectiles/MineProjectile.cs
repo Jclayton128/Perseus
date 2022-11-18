@@ -16,8 +16,7 @@ public class MineProjectile : Projectile, IPlayerSeeking
     [SerializeField] float _detonationRange = 3f;
     [SerializeField] float _damageRange = 2.5f;
     [SerializeField] float _detonationDelay = 0.5f;
-    // 7, 9, 11 = Player, Enemy, and Neutral Ships
-    int layerMask_PlayerNeutralEnemy = (1 << 7) | (1 << 9) | (1 << 11);
+
 
     //state
     bool _isDetonating = false;
@@ -76,7 +75,8 @@ public class MineProjectile : Projectile, IPlayerSeeking
             RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
             _damageRange,
             transform.position);
-        ExecuteGenericExpiration_Explode(_damageRange, layerMask_PlayerNeutralEnemy);
+        ExecuteGenericExpiration_Explode(_damageRange, 
+            LayerLibrary.PlayerEnemyNeutralLayerMask);
     }
 
 

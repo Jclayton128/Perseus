@@ -16,7 +16,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
     [SerializeField] int _rocketCount_Upgrade = 2;
     [SerializeField] float _rocketSpeed_Upgrade = 20f;
 
-    int _legalTarget_layerMask = (1 << 7) | (1<<9) | (1 <<11);
+    int _legalTarget_layerMask = LayerLibrary.PlayerEnemyNeutralLayerMask;
 
     #region Weapon Handler
     public override object GetUIStatus()

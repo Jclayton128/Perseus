@@ -18,7 +18,6 @@ public class BeamTurretWH : WeaponHandler
     [SerializeField] float _expendRate = 2.0f;
     float _particlePerFrame = 1f;
     [SerializeField] float _maxRange = 10f;
-    int _enemyLayerMask = 1 << 9; //TODO Caution - this makes this weapon ignore physics layer changes!
     float _minChargeFactorToFire = 0.5f;
 
     //state
@@ -103,7 +102,9 @@ public class BeamTurretWH : WeaponHandler
         _dir = _turretMuzzle.transform.up * _maxRange;
         
 
-        RaycastHit2D rh2d = Physics2D.Linecast(_turretMuzzle.position, _turretMuzzle.position + _dir, _enemyLayerMask);
+        RaycastHit2D rh2d = Physics2D.Linecast(_turretMuzzle.position,
+            _turretMuzzle.position + _dir,
+            LayerLibrary.EnemyNeutralLayerMask);
         if (rh2d.collider != null)
         {
             //Debug.DrawLine(_turretMuzzle.position, rh2d.point, Color.red, 0.1f);

@@ -19,7 +19,6 @@ public class RocketProjectile : Projectile, IProximityFuzed
     Vector3 _targetPosition;
     float _angleToTarget;
     bool _hasHitTargetPosition = false;
-    int layerMask_PlayerNeutralEnemy = (1 << 7) | (1 << 9) | (1 << 11);
 
     public override void Initialize(ProjectilePoolController poolController)
     {
@@ -89,7 +88,8 @@ public class RocketProjectile : Projectile, IProximityFuzed
                RequestBlastParticles(Mathf.RoundToInt(DamagePack.NormalDamage),
                DamagePack.NormalDamage,
                transform.position);
-        ExecuteGenericExpiration_Explode(DamagePack.NormalDamage, layerMask_PlayerNeutralEnemy);
+        ExecuteGenericExpiration_Explode(DamagePack.NormalDamage,
+            LayerLibrary.PlayerEnemyNeutralLayerMask);
     }
 
     public void DetonateViaProximityFuze()
