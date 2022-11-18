@@ -308,6 +308,14 @@ public class LevelController : MonoBehaviour
             wh.OnPlayerEnterWormhole += ReactToPlayerEnteringWormhole;
             wh.OnPlayerExitWormhole += ReactToPlayerExitingWormhome;
         }
+
+        int breaker = 0;
+        while (_wormholeLocationsOnLevel.Count < 3)
+        {
+            _wormholeLocationsOnLevel.Add(Vector3.one * 999f);
+            breaker++;
+            if (breaker > 10) break;
+        }
     }
 
     public void SpawnWormholes(int count)

@@ -55,6 +55,7 @@ public class DugoutHandler : MonoBehaviour
 
     private void UpdateKnowledgeOnRadarScan()
     {
+        
         for (int i = 0; i < _wormholeState.Count; i++)
         {
             Vector2 dir = _levelCon.WormholeLocations[i] - (Vector2)transform.position;
@@ -67,8 +68,8 @@ public class DugoutHandler : MonoBehaviour
             if (_wormholeKnowledgeState[i] == 1)
             {
                 float angle = Vector2.SignedAngle(Vector2.up, dir);
-                float distFactor =  (_levelCon.ArenaRadius - dir.magnitude) / _levelCon.ArenaRadius * _wormholeKnowledgeState[i];
-                distFactor = Mathf.Lerp(0.5f, 1f, distFactor);
+                float distFactor =  (_knowledgeRange - dir.magnitude) / _knowledgeRange * _wormholeKnowledgeState[i];
+                distFactor = Mathf.Lerp(0.33f, 1f, distFactor);
 
                 _wormholeState[i] = (angle, distFactor);
             }
@@ -89,8 +90,8 @@ public class DugoutHandler : MonoBehaviour
             if (_crateKnowledgeState == 1)
             {
                 float angle = Vector2.SignedAngle(Vector2.up, cDir);
-                float distFactor = (_levelCon.ArenaRadius - cDir.magnitude) / _levelCon.ArenaRadius * _crateKnowledgeState;
-                distFactor = Mathf.Lerp(0.5f, 1f, distFactor);
+                float distFactor = (_knowledgeRange - cDir.magnitude) / _knowledgeRange * _crateKnowledgeState;
+                distFactor = Mathf.Lerp(0.33f, 1f, distFactor);
 
                 _crateState = (angle, distFactor);
             }

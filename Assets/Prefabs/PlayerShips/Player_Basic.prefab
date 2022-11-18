@@ -5820,7 +5820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262f48d90eca1d44f913ff084d27fa69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knowledgeRange: 10
+  _knowledgeRange: 30
   _wormholeKnowledgeState: 
 --- !u!1001 &280958097
 PrefabInstance:

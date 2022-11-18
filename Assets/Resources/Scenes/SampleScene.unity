@@ -19626,6 +19626,7 @@ GameObject:
   - component: {fileID: 973215307}
   - component: {fileID: 973215308}
   - component: {fileID: 973215309}
+  - component: {fileID: 973215310}
   m_Layer: 0
   m_Name: Library
   m_TagString: Untagged
@@ -19705,10 +19706,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 5867531201207933844, guid: 7652f087802cb2f41ab8ad372a7dc663, type: 3}
+  - {fileID: 2796412785005916749, guid: 787ce16dcea83f246812e3a122873dcc, type: 3}
   - {fileID: 3069115516707697164, guid: f82a9cf5ce1949f40825a818dfd4814d, type: 3}
   - {fileID: 3557419019999438709, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
   - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
-  - {fileID: 2796412785005916749, guid: 787ce16dcea83f246812e3a122873dcc, type: 3}
   - {fileID: 833342898894309947, guid: 621eb8e4acdff264e9751dd143f82193, type: 3}
   - {fileID: 6658415473265941888, guid: a38ee4960e6226e40a2a4edf016f4efd, type: 3}
   - {fileID: 8886479856476907708, guid: e6b64b9805bc85345933326fc5c97097, type: 3}
@@ -19976,6 +19977,18 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+--- !u!114 &973215310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973215303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2537906eff3ac64409e66348701df36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &977142425
 GameObject:
   m_ObjectHideFlags: 0
@@ -39738,7 +39751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.72400004, g: 0.7050795, b: 0.37937602, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

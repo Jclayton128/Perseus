@@ -59,11 +59,6 @@ public class PlayerSystemHandler : MonoBehaviour
         LoadStartingWeapons();
     }
 
-    private void Awa()
-    {
-
-    }
-
 
     private void LoadStartingSystems()
     {

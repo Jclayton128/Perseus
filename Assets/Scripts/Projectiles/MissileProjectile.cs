@@ -93,7 +93,7 @@ public class MissileProjectile : Projectile, IProximityFuzed
 
     private void UpdateScanTargetTransform()
     {
-        Debug.Log($"Scanning for {_legalTarget_LayerMask}. PLM: {LayerLibrary.PlayerLayerMask}" );
+        //Debug.Log($"Scanning for {_legalTarget_LayerMask}. PLM: {LayerLibrary.PlayerLayerMask}" );
         //look for target transform 
         Collider2D coll = Physics2D.OverlapCircle(
             transform.position + (transform.up * _scanOriginOffset_near * _scanRadius),
