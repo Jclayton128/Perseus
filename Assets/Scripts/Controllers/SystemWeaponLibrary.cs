@@ -147,7 +147,7 @@ public class SystemWeaponLibrary : MonoBehaviour
     public WeaponType GetRandomUninstalledSecondaryWeaponType(List<WeaponType> installedWeaponTypes)
     {
         List<WeaponType> uninstalledWeaponTypes = new List<WeaponType>();
-
+        Debug.Log($"weapon types installed when asked: {installedWeaponTypes.Count}");
         foreach (var wh in _allWeapons)
         {
             if (!installedWeaponTypes.Contains(wh.WeaponType) && wh.IsSecondary)

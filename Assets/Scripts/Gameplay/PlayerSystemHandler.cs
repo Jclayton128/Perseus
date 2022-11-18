@@ -55,12 +55,13 @@ public class PlayerSystemHandler : MonoBehaviour
         _energyHandler = GetComponent<EnergyHandler>();
         _healthHandler = GetComponent<HealthHandler>();
 
-    }
-
-    private void Start()
-    {
         LoadStartingSystems();
         LoadStartingWeapons();
+    }
+
+    private void Awa()
+    {
+
     }
 
 
