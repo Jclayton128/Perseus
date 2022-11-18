@@ -467,6 +467,11 @@ public class UI_Controller : MonoBehaviour
     public void ShowHideTAB(bool shouldShow)
     {
         _tabTMP.text = (shouldShow) ? "TAB" : "";
+        if (shouldShow)
+        {
+            _tabTMP.DOColor(Color.red, 2f).SetEase(Ease.Flash, 6);
+            _tabTMP.rectTransform.DOShakeAnchorPos(1.2f, 1f).SetEase(Ease.InOutSine);
+        }
     }
 
     #endregion
