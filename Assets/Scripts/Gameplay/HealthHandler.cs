@@ -25,6 +25,8 @@ public class HealthHandler : MonoBehaviour
     public event Action<Vector2> ReceivingThreatVector = null;
     public event System.Action<DamagePack> ReceivingDamagePack = null;
     public event System.Action<DamagePack> ReceivingShieldDamage = null;
+
+
     public event System.Action<DamagePack> ReceivingHullDamage = null;
 
     #endregion
@@ -126,6 +128,14 @@ public class HealthHandler : MonoBehaviour
     {
         HullPoints = _maxHullPoints;
         ShieldPoints = _maxShieldPoints;
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
+    }
+
+    internal void ResetShieldsToMax()
+    {
+        ShieldPoints = _maxShieldPoints;
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
     }
 
     #region Flow

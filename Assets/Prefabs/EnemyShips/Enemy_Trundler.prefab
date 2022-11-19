@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _detectorRange
-      value: -1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _thrust
@@ -34,6 +34,10 @@ PrefabInstance:
     - target: {fileID: 1270348748403635888, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.592
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: FightMovement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _fightMovement

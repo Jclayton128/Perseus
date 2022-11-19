@@ -19721,9 +19721,9 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 5867531201207933844, guid: 7652f087802cb2f41ab8ad372a7dc663, type: 3}
   - {fileID: 2796412785005916749, guid: 787ce16dcea83f246812e3a122873dcc, type: 3}
+  - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
   - {fileID: 3069115516707697164, guid: f82a9cf5ce1949f40825a818dfd4814d, type: 3}
   - {fileID: 3557419019999438709, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
-  - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
   - {fileID: 833342898894309947, guid: 621eb8e4acdff264e9751dd143f82193, type: 3}
   - {fileID: 6658415473265941888, guid: a38ee4960e6226e40a2a4edf016f4efd, type: 3}
   - {fileID: 8886479856476907708, guid: e6b64b9805bc85345933326fc5c97097, type: 3}
@@ -19762,6 +19762,7 @@ MonoBehaviour:
   - {fileID: 4008633754966471592, guid: fe76a4527eecdea4c85e2a908d8521d5, type: 3}
   - {fileID: 1357919580726889231, guid: aafa9fe2c8a5c9a40a8805646bd9725d, type: 3}
   - {fileID: 5450211034550464930, guid: 39e0dec8d80210942b4de77031b69b7a, type: 3}
+  - {fileID: 4008633754966471592, guid: 2f0dc2c475dfd1f4c9125979fd5e8e5d, type: 3}
 --- !u!114 &973215309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42915,7 +42916,7 @@ MonoBehaviour:
   _upgradeWingTraverseDistance: 480
   _metaMenuTraverseDistance: 480
   _metaMenuDeployTime: 1.2
-  _sectorBriefDisplayTime: 4
+  _sectorBriefDisplayTime: 2.5
   _sectorBriefFadeoutTime: 1
   _sectorCountBlurb: 'Entering Sector '
   _vesselCountBlurb: 'Threats Detected: '

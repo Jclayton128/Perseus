@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class MagnetonCoreSH : SystemHandler
 {
     HealthHandler _playerHealth;
+    LevelController _levelController;
 
     [SerializeField] float _shieldMaxAddition = 20f;
     float _originalShieldRegenRate;
@@ -20,7 +22,13 @@ public class MagnetonCoreSH : SystemHandler
         _playerHealth.AdjustShieldMaximum(_shieldMaxAddition);
         _playerHealth.AdjustShieldHealRate(-99f);
 
-        
+        _levelController = FindObjectOfType<LevelController>();
+        _levelController.WarpedIntoNewLevel += RechargeShield;
+    }
+
+    private void RechargeShield(Level obj)
+    {
+        _playerHealth.ResetShieldsToMax();
     }
 
     public override void DeintegrateSystem()

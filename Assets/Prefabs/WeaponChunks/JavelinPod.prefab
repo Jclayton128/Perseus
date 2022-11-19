@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5441288554850904482
 Transform:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   _name: Javelin Pod
   _description: Cheap, rapid-fire rockets with a minimal guidance pack. Useful for
     keeping enemies at bay.
-  _upgradeDescription: Upgrading improves the speed and turn rate (more houndy!)
+  _upgradeDescription: Upgrading improves the damage and turn rate (more houndy!)
   WeaponType: 13
   _projectileType: 6
   _normalDamage: 2
@@ -273,8 +273,8 @@ MonoBehaviour:
   _knockBackAmount: 2
   _scrapBonus: 0
   _projectileLifetime: 2
-  _projectileSpeed: 10
-  _activationCost: 15
+  _projectileSpeed: 8
+  _activationCost: 3
   _profileIncreaseOnActivation: 1
   _activationSounds: []
   _firingSounds: []
@@ -285,5 +285,6 @@ MonoBehaviour:
   _missileTurnRate: 30
   _missileSnakeAmount: 1
   _missileScanRadius: 0.25
-  _missileSpeedAddition_Upgrade: 20
+  _missileDamageAddition_Upgrade: 1
+  _missileSpeedAddition_Upgrade: 0
   _missileTurnRateAddition_Upgrade: 30

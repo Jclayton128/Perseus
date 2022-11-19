@@ -13,6 +13,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     [SerializeField] float _missileScanRadius = 0.25f;
 
     [Header("Upgrade Parameters")]
+    [SerializeField] float _missileDamageAddition_Upgrade = 0;
     [SerializeField] float _missileSpeedAddition_Upgrade = 20f;
     [SerializeField] float _missileTurnRateAddition_Upgrade = 30f;
 
@@ -49,6 +50,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
 
     protected override void ImplementWeaponUpgrade()
     {
+        _normalDamage += _missileDamageAddition_Upgrade;
         _projectileSpeed += _missileSpeedAddition_Upgrade;
         _missileTurnRateAddition_Upgrade += _missileTurnRateAddition_Upgrade;
     }

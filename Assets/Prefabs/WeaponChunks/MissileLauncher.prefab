@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5441288554850904482
 Transform:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   _upgradeDescription: Upgrading increases its speed and turn rate
   WeaponType: 2
   _projectileType: 1
-  _normalDamage: 3
+  _normalDamage: 7
   _shieldBonusDamage: 0
   _ionDamage: 0
   _knockBackAmount: 3
@@ -284,5 +284,6 @@ MonoBehaviour:
   _missileTurnRate: 100
   _missileSnakeAmount: 10
   _missileScanRadius: 0.25
+  _missileDamageAddition_Upgrade: 0
   _missileSpeedAddition_Upgrade: 2
   _missileTurnRateAddition_Upgrade: 30
