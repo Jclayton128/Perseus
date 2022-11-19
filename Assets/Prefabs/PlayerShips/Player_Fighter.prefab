@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: _startingWeapons.Array.data[1]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _thrust
+      value: 375
+      objectReference: {fileID: 0}
     - target: {fileID: 2148845601266606514, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -69,8 +73,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: Armed with a trusty blaster and shotgun, this is designed for close
-        combat
+      value: Armed with a repeating blaster and shield, the Fighter is built for
+        close combat
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name

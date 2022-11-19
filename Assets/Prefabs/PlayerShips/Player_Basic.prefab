@@ -956,7 +956,7 @@ MonoBehaviour:
   - {fileID: 2291206457893564455}
   - {fileID: 3691665194677790910}
   IsPlayer: 1
-  IsMouseSteering: 1
+  IsMouseSteering: 0
   ShouldAccelerate: 0
   ShouldDecelerate: 0
   ShouldTurnLeft: 0

@@ -358,19 +358,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
-  _name: Beam Turret
-  _description: Manually-steered turret that fires a very powerful, very noticeable
-    shield-destroying beam
+  _name: Flenser Turret
+  _description: Manually-aimed beam turret with a powerful shield-destroying ability,
+    but low normal damage.
   _upgradeDescription: Upgrading increases the beam lifetime and recharge rate.
   WeaponType: 11
   _projectileType: 0
-  _normalDamage: 0
+  _normalDamage: 1
   _shieldBonusDamage: 10
   _ionDamage: 0
   _knockBackAmount: 0
   _scrapBonus: 0
+  _projectileLifetime: 0.5
+  _projectileSpeed: 10.1
   _activationCost: 10
-  _sustainCostRate: 0
   _profileIncreaseOnActivation: 40
   _activationSounds:
   - {fileID: 8300000, guid: f8cbd2046f0cb7143b75cc98904cc2a8, type: 3}

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2424564359368766527
+--- !u!1001 &350159213417450648
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,28 +8,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingSystems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _startingWeapons.Array.data[0]
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _startingWeapons.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _startingWeapons.Array.data[2]
-      value: 9
+      propertyPath: _startingSystems.Array.data[0]
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingSystems.Array.data[1]
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingWeapons.Array.data[0]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingWeapons.Array.data[1]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _thrust
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _turnRate
-      value: 140
+      value: 375
       objectReference: {fileID: 0}
     - target: {fileID: 2148845601266606514, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_RootOrder
@@ -75,25 +79,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _energyGainRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
-      propertyPath: _maxEnergyPoints
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _name
-      value: Ranger
+      value: Fighter
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: With 2 turrets, the Ranger is ready for ranged battles.
+      value: Armed with a repeating blaster and shield, the Fighter is built for
+        close combat
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name
-      value: Player_Ranger
+      value: Player_Wizard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}

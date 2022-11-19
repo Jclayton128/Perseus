@@ -23,6 +23,7 @@ public class PlayerStateHandler : MonoBehaviour
     //State
     int _scrapCollected = 0;
     int _currentUpgradePoints = 0;
+    int _currentShipLevel = 0;
     int _scrapNeededForNextUpgradeLevel;
     float _scrapFactor = 0;
     float _timeForNextPossibleUpgradeMenuToggle = -1;
@@ -35,7 +36,8 @@ public class PlayerStateHandler : MonoBehaviour
         {
             _uiController = FindObjectOfType<UI_Controller>();
             _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints, false);
-            _uiController.ModifyScrapAmount(0, 0);
+            _uiController.ModifyScrapAmount(0);
+            _uiController.ModifyCurrentShipLevel(_currentShipLevel);
             _uiController.ShowHideTAB(false);
         }
 
@@ -83,7 +85,7 @@ public class PlayerStateHandler : MonoBehaviour
         }
 
         _scrapFactor = (float)_scrapCollected / (float)_scrapNeededForNextUpgradeLevel;
-        _uiController.ModifyScrapAmount(_scrapFactor, _scrapCollected);
+        _uiController.ModifyScrapAmount(_scrapFactor);
     }
 
     public void GainScrap(int amountToGain)
@@ -97,9 +99,11 @@ public class PlayerStateHandler : MonoBehaviour
     private void GainUpgradePointViaScrapPickup()
     {
         int overage = _scrapCollected - _scrapNeededForNextUpgradeLevel;
+        _currentShipLevel++;
         _currentUpgradePoints++;
         _scrapCollected = overage;
         _uiController.ShowHideTAB(true);
+        _uiController.ModifyCurrentShipLevel(_currentShipLevel);
         _uiController.ModifyUpgradePointsAvailable(_currentUpgradePoints, true);
         _scrapNeededForNextUpgradeLevel += _scrapsPerLevelMod;
 

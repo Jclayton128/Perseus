@@ -279,7 +279,7 @@ MonoBehaviour:
   _activationSounds: []
   _firingSounds: []
   _deactivationSounds: []
-  IsSecondary: 1
+  IsSecondary: 0
   _isPermanent: 0
   _maxUpgradeLevel: 5
   _missileTurnRate: 30

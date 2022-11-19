@@ -73,10 +73,10 @@ public class UI_Controller : MonoBehaviour
     [SerializeField] Image _scrapBarFill = null;
 
     [FoldoutGroup("Scrap & Upgrade Points")]
-    [SerializeField] TextMeshProUGUI _scrapAmountTMP = null;
+    [SerializeField] TextMeshProUGUI _upgradePointsAvailableTMP = null;
 
     [FoldoutGroup("Scrap & Upgrade Points")]
-    [SerializeField] TextMeshProUGUI _levelTMP = null;
+    [SerializeField] TextMeshProUGUI _currentShipLevelTMP = null;
 
     [FoldoutGroup("Scrap & Upgrade Points")]
     [SerializeField] TextMeshProUGUI _tabTMP = null;
@@ -439,14 +439,13 @@ public class UI_Controller : MonoBehaviour
 
     #region Scrap and Upgrade Points
 
-    public void ModifyScrapAmount(float scrapFillFactor, int totalScrapAmount)
+    public void ModifyScrapAmount(float scrapFillFactor)
     {
         if (scrapFillFactor < 0 || scrapFillFactor > 1f)
         {
             Debug.LogError("Invalid Scrap fill factor");
         }
 
-        _scrapAmountTMP.text = totalScrapAmount.ToString();
         float before = _scrapBarFill.fillAmount;
         _scrapBarFill.fillAmount = Mathf.Lerp(_minScrapFactor, _maxScrapFactor, scrapFillFactor);
         
@@ -463,9 +462,21 @@ public class UI_Controller : MonoBehaviour
         {
             UpgradePointsIncreased?.Invoke();
             _audioCon.PlayUIClip(AudioLibrary.ClipID.GainUpgradePoint);
+            _upgradePointsAvailableTMP.DOColor(Color.red, 2f).SetEase(Ease.Flash, 6);
+            _upgradePointsAvailableTMP.rectTransform.DOShakeAnchorPos(1.2f, 1f).SetEase(Ease.InOutSine);
+        }
+        else
+        {
+            _upgradePointsAvailableTMP.color = Color.white;
         }
 
-        _levelTMP.text = newLevel.ToString();
+        _upgradePointsAvailableTMP.text = newLevel.ToString();
+       
+    }
+
+    public void ModifyCurrentShipLevel(int currentLevel)
+    {
+        _currentShipLevelTMP.text = currentLevel.ToString();
     }
 
     public void ShowHideTAB(bool shouldShow)

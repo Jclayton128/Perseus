@@ -18,7 +18,7 @@ public class ActorMovement : MonoBehaviour
     public bool IsPlayer = false;
 
     [ShowIf("IsPlayer")]
-    public bool IsMouseSteering = true;
+    public bool IsMouseSteering = false;
 
     public bool ShouldAccelerate;
     public bool ShouldDecelerate;
