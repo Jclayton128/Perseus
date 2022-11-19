@@ -19,6 +19,12 @@ public class TutorialStep : ScriptableObject
         FireSecondary,
         ScrollSecondary,
         Timed,
+        OnKillEnemy,
+        OnScan,
+        OnWarpIntoNewLevel,
+        OpenUpgradeMenu,
+        CrateSeen,
+        Ionized
     }
 
     public enum Location
@@ -32,8 +38,16 @@ public class TutorialStep : ScriptableObject
         Hidden
     }
 
+    public enum Outcome
+    {
+        Nothing,
+        WeakenEnemy,
+        UnlockWormhole
+    }
+
     [SerializeField] Location _location = Location.BottomMiddle;
     [SerializeField] CompletionCriteria _completionCriteria = CompletionCriteria.None;
+    [SerializeField] Outcome _outcome = Outcome.Nothing;
     [SerializeField] [Multiline(3), HideLabel] string _tutorialText = "Default tutorial step";
 
 
@@ -50,5 +64,10 @@ public class TutorialStep : ScriptableObject
     public CompletionCriteria GetCompletionCriteria()
     {
         return _completionCriteria;
+    }
+
+    public Outcome GetOutcome()
+    {
+        return _outcome;
     }
 }

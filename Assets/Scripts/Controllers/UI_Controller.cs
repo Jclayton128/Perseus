@@ -184,6 +184,10 @@ public class UI_Controller : MonoBehaviour
     public Action ScrapLevelIncreased;
     public Action UpgradePointsIncreased;
     public Action DetectedStrongSignal;
+    public Action ScannerScannedSomething;
+    public Action ScannerScannedCrate;
+    public Action UpgradeMenuOpened;
+    public Action Ionized;
 
     public enum Context { None, Start, Core, End };
 
@@ -229,8 +233,8 @@ public class UI_Controller : MonoBehaviour
     Tween _upgradeWingsTween_left;
     Tween _upgradeWingsTween_right;
     Tween _topMetaTween;
-    Tween _bottomMetaTween;
-    Tween _sectorCountFadeTween;
+    Tween _bottomMetaTween; 
+     Tween _sectorCountFadeTween;
     Tween _vesselCountFadeTween;
     Vector3 _lookIndicatorRotation = Vector3.zero;
     List<(float, float)> _wormholeIconState = new List<(float, float)>();
@@ -495,6 +499,7 @@ public class UI_Controller : MonoBehaviour
 
         ClearSelection();
         DeploySelectors();
+        UpgradeMenuOpened?.Invoke();
     }
 
 
@@ -718,6 +723,7 @@ public class UI_Controller : MonoBehaviour
             _scanImage.sprite = icon;
             _scanImage.color = Color.white;
             _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
+            ScannerScannedSomething?.Invoke();
         }
         else
         {
@@ -735,6 +741,7 @@ public class UI_Controller : MonoBehaviour
     public void UpdateCrateScannerSelectable(IInstallable crate)
     {
         _crateScannerThing = crate;
+        ScannerScannedCrate?.Invoke();
     }
 
     //This should be called by the special Crate Scan Selector
@@ -890,6 +897,11 @@ public class UI_Controller : MonoBehaviour
     {
         _ionBar_CCW.SetFactor(currentValue / maxValue);
         _ionBar_CW.SetFactor(currentValue/maxValue);
+
+        if (currentValue > 0.05f)
+        {
+            Ionized?.Invoke();
+        }
     }
 
     private void HandleEnergyPointsChanged(float currentValue, float maxValue)
@@ -918,7 +930,7 @@ public class UI_Controller : MonoBehaviour
         {
             _radarSectors[i].SetIntensityLevel(intensities[i]);
             
-            if (intensities[i] >= 0.5f) //Magic number is for a signal of 50% power.
+            if (intensities[i] >= 0.2f) //Magic number is for a signal of 50% power.
             {
                 DetectedStrongSignal?.Invoke();
             }
@@ -981,11 +993,14 @@ public class UI_Controller : MonoBehaviour
         _sectorCountFadeTween.Kill();
         _vesselCountFadeTween.Kill();
         _sectorCountTMP.text = _sectorCountBlurb + sectorCount;
-        _sectorCountTMP.color = Color.white;
+        _sectorCountTMP.color = new Color(1, 1, 1, 0);
         _vesselCountTMP.text = _vesselCountBlurb + vesselsCount;
-        _vesselCountTMP.color = Color.white;
+        _vesselCountTMP.color = new Color(1, 1, 1, 0);
+
+        _sectorCountTMP.DOFade(1, _sectorBriefFadeoutTime);
         _sectorCountFadeTween = _sectorCountTMP.DOFade(0, _sectorBriefFadeoutTime).
             SetDelay(_sectorBriefDisplayTime);
+        _vesselCountTMP.DOFade(1, _sectorBriefFadeoutTime);
         _vesselCountFadeTween = _vesselCountTMP.DOFade(0, _sectorBriefFadeoutTime).
             SetDelay(_sectorBriefDisplayTime);
     }

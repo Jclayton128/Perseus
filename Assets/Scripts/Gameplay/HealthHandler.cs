@@ -351,7 +351,7 @@ public class HealthHandler : MonoBehaviour
     {
         _shieldHealRate += shieldHealRateAddition;
         _shieldHealRate = Mathf.Clamp(_shieldHealRate, 0, 99);
-        ShieldRegenChanged(_shieldHealRate.ToString("F1"), Color.white);
+        ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
 
     }
 
@@ -363,6 +363,7 @@ public class HealthHandler : MonoBehaviour
     {
         _maxShieldPoints += shieldMaxAddition;
         _maxShieldPoints = Mathf.Clamp(_maxShieldPoints, 0, 999);
+        ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
         ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
     }
 

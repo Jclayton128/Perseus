@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
 
     public void EndGameOnPlayerChoice()
     {
+        _levelController.ClearLevel();
         Destroy(_player);
         _player = null;
         _camCon.FocusCameraOnTarget(null);

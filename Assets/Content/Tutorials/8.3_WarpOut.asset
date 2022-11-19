@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d16e446837e5544a9b26dd6fdc6c6e9, type: 3}
-  m_Name: 2_TutorialStep_Decel
+  m_Name: 8.3_WarpOut
   m_EditorClassIdentifier: 
-  _location: 4
-  _completionCriteria: 2
-  _tutorialText: Press S to Decelerate
+  _location: 5
+  _completionCriteria: 10
+  _outcome: 0
+  _tutorialText: The counter here shows the enemies left in this new Sector. You
+    don't need to destroy everything.

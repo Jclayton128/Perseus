@@ -84,9 +84,9 @@ public class LevelController : MonoBehaviour
 
     public void StartGameWithTutorial()
     {
-        ClearLevel();
         _currentLevel = _tutorialLevel;
         BuildTutorialLevel();
+        Debug.Log($"Entering level: {_currentLevel.name} ");
     }
 
     public void StartGameWithRegular()
@@ -110,10 +110,12 @@ public class LevelController : MonoBehaviour
     {
         Vector2[] tutorialWormholePosition = new Vector2[1] {new Vector2(0,30f)};
         SpawnWormholes(1, tutorialWormholePosition);
+        _wormholesOnLevel[0].gameObject.SetActive(false);
         SpawnTutorialEnemy();
     }
     private void WarpIntoNewLevel()
     {
+        WarpingIntoNewLevel?.Invoke();
         _runController.IncrementSectorCount();
 
         _gameController.Player.transform.position = Vector3.zero;
@@ -122,7 +124,7 @@ public class LevelController : MonoBehaviour
         _filterTween = DOTween.To(() => _filterSR.color, x => _filterSR.color = x, Color.clear, 0.5f);
 
         _currentLevel = _levelLibrary.GetRandomLevel();
-        Debug.Log($"Entering new level: {_currentLevel.name} ");
+        Debug.Log($"Entering level: {_currentLevel.name} ");
         WarpedIntoNewLevel?.Invoke(_currentLevel);
         //Player should listen in to this^ to recharge energy, shields, and systems, and reduce profile
 
@@ -190,19 +192,8 @@ public class LevelController : MonoBehaviour
         else
         {
             enemy.Initialize(this);
+            //Debug.Log("added " + enemy);
             _enemiesOnLevel.Add(enemy);
-        }
-    }
-
-    private void RegisterAsteroid(GameObject asteroid)
-    {
-        if (_asteroidsOnLevel.Contains(asteroid))
-        {
-            Debug.Log($"already registered this asteroid: {asteroid}");
-        }
-        else
-        {
-            _asteroidsOnLevel.Add(asteroid);
         }
     }
 
@@ -224,12 +215,13 @@ public class LevelController : MonoBehaviour
 
     public void SpawnTutorialEnemy()
     {
-        Vector2 tutorialEnemyPosition = new Vector2(10f, 10f);
+        Vector2 tutorialEnemyPosition = new Vector2(15f, 15f);
         Quaternion rot = Quaternion.identity;
         GameObject newEnemy = Instantiate(_enemyLibrary.GetEnemyGameObjectOfType(ShipInfoHolder.ShipType.Dummy1),
             tutorialEnemyPosition, rot);
         RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
-
+        SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, _enemiesOnLevel.Count);
+        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
     }
 
     public void SpawnEnemiesInNewSector()
@@ -295,7 +287,6 @@ public class LevelController : MonoBehaviour
         RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
         return newEnemy;
     }
-
     public void SpawnWormholes(int count, Vector2[] positions)
     {
         for (int i = 0; i < count; i++)
@@ -343,7 +334,7 @@ public class LevelController : MonoBehaviour
 
     #region Clearing Level
 
-    private void ClearLevel()
+    public void ClearLevel()
     {
         WarpingOutFromOldLevel?.Invoke();
         _asteroidPoolController.ClearAsteroids();
@@ -360,7 +351,8 @@ public class LevelController : MonoBehaviour
     {
         for (int i = _enemiesOnLevel.Count - 1; i >= 0; i--)
         {
-            Destroy(_enemiesOnLevel[i]);
+            Debug.Log($"Destroying enemy #{i} out of {_enemiesOnLevel.Count}");
+            Destroy(_enemiesOnLevel[i].gameObject);
             _enemiesOnLevel.Remove(_enemiesOnLevel[i]);
         }
     }
@@ -428,6 +420,20 @@ public class LevelController : MonoBehaviour
     #endregion
 
     #region Helpers
+
+    /// <summary>
+    /// This is used to making the tutorial enemy vulnerable
+    /// </summary>
+    public void WeakenTutorialEnemy()
+    {
+        _enemiesOnLevel[0].GetComponent<HealthHandler>().AdjustShieldMaximum(-90);
+        _enemiesOnLevel[0].GetComponent<HealthHandler>().AdjustShieldHealRate(-99);
+    }
+
+    public void UnlockTutorialWormhole()
+    {
+        _wormholesOnLevel[0].gameObject.SetActive(true);
+    }
 
     #endregion
 

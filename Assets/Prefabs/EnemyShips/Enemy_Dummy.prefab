@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
-      value: w
+      value: Enemy_Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467043, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_RootOrder
@@ -146,15 +146,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxHullPoints
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _shieldHealRate
-      value: 0.1
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxShieldPoints
-      value: 4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: EType
@@ -162,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: ScannerName
-      value: Dummy
+      value: Quintain
       objectReference: {fileID: 0}
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: ThreatScore
