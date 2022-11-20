@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _fightWeaponUse
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _decisionRangeFactor
