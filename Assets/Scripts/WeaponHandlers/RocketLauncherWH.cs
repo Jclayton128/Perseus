@@ -53,7 +53,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
             //_projectileLifetime = rand * (_inputCon._mousePos - transform.position).magnitude / _projectileSpeed;
 
             Quaternion sector = Quaternion.Euler(0, 0,
-                (i * spreadSubdivided) - (_degreeSpread / 2f) + transform.eulerAngles.z);
+                (i * spreadSubdivided) - (_degreeSpread / 2f) + _muzzle.eulerAngles.z);
             Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
 
             pb.transform.rotation = sector;

@@ -8,10 +8,14 @@ public abstract class Projectile : MonoBehaviour
     //Goal for this is to receive any target point/transform and manage the RigidBody to get there
     //Also manages lifetime of the weapon
     
+    /// <summary>
+    /// The ProjectileType define what the project looks like, as well as its physics layer.
+    /// Its actual behavior is governed by which Projectile script is assigned to it.
+    /// </summary>
     public enum ProjectileType //Each PType must unique to a single weapon, even if different PTypes look similar/same
     {
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
-        PlayerTorpedo5, PlayerJavelin6, Player7, Player8, Player9,
+        PlayerTorpedo5, PlayerJavelin6, PlayerShieldBlast7, Player8, Player9,
         EnemyBolt10, EnemyMissile11, EnemyMine12, EnemyRocket13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }
@@ -67,28 +71,28 @@ public abstract class Projectile : MonoBehaviour
             case ProjectileType.PlayerBolt0:
                 if (_launchingWeaponHandler.GetComponent<IBoltLauncher>() == null)
                 {
-                    Debug.LogError("Bolts must be launched by IBoltLaunchers!");
+                    Debug.Log("Bolts must be launched by IBoltLaunchers!");
                 }
                 break;
 
             case ProjectileType.PlayerMissile1:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Smart Missiles must be launched by IMissileLaunchers!");
+                    Debug.Log("Smart Missiles must be launched by IMissileLaunchers!");
                 }
                 break;
 
             case ProjectileType.PlayerRocket3:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Rockets must be launched by IMissileLaunchers!");
+                    Debug.Log("Rockets must be launched by IMissileLaunchers!");
                 }
                 break;
 
             case ProjectileType.PlayerTorpedo5:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Torpedos must be launched by IMissileLaunchers!");
+                    Debug.Log("Torpedos must be launched by IMissileLaunchers!");
                 }
                 break;
 
@@ -98,7 +102,7 @@ public abstract class Projectile : MonoBehaviour
             case ProjectileType.EnemyMissile11:
                 if (_launchingWeaponHandler.GetComponent<IMissileLauncher>() == null)
                 {
-                    Debug.LogError("Smart Missiles must be launched by IMissileLaunchers!");
+                    Debug.Log("Smart Missiles must be launched by IMissileLaunchers!");
                 }
                 break;
 

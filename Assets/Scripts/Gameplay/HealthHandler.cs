@@ -232,9 +232,9 @@ public class HealthHandler : MonoBehaviour
         Projectile pb;
         if (weaponImpact.TryGetComponent<Projectile>(out pb))
         {
+            ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
             if (Time.time < _timeToAllowDamageAgain) return;
             ReceivingDamagePack?.Invoke(pb.DamagePack);
-            ReceivingThreatVector?.Invoke(pb.GetNormalizedVectorAtImpact());
             if (pb.DeliversDamageOnlyAtExpiration == false)
             {
                 ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());

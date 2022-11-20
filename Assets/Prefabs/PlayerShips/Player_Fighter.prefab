@@ -8,8 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingSystems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _startingSystems.Array.data[0]
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.data[0]
