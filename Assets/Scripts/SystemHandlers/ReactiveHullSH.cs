@@ -39,10 +39,6 @@ public class ReactiveHullSH : SystemHandler
     }
 
 
-    public override void DeintegrateSystem()
-    {
-        base.DeintegrateSystem();
-    }
 
 
     public override object GetUIStatus()

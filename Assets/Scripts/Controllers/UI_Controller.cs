@@ -56,6 +56,9 @@ public class UI_Controller : MonoBehaviour
     [FoldoutGroup("SHEI")]
     [SerializeField] TextMeshProUGUI _shieldRegenTMP = null;
 
+    [FoldoutGroup("SHEI")]
+    [SerializeField] TextMeshProUGUI _hullStatusTMP = null;
+
     [FoldoutGroup("CrateScan")]
     [SerializeField] Image _scanImage = null;
 
@@ -895,6 +898,7 @@ public class UI_Controller : MonoBehaviour
     private void HandleHullPointsChanged(float currentValue, float maxValue)
     {
         _hullBar.SetFactor(currentValue / maxValue);
+        _hullStatusTMP.text = $"{Mathf.RoundToInt(currentValue)}/{Mathf.RoundToInt(maxValue)}";
     }
 
     private void HandleShieldRegenChanged(string amountAsString, Color color)

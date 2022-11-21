@@ -173,7 +173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: ReactiveHull
+      value: NanoscaleHull
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Sprite
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706f0645c2aea534ea0882e1e36f9f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4981080039851542169
+--- !u!114 &5022133586372331438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,61 +273,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6170776657282345782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734d714647d047d4784d60622de266fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c120544f9717f947b5569341ebef7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: d825aedabe15f5a4db02067f241e69bb, type: 3}
-  _name: Reactive Hull
-  _description: Upon receiving sufficient damage, this hull emits a blast of particles
-    in retaliation.
-  _upgradeDescription: Upgrading lowers damage threshold and increases particle count.
-  SystemType: 13
+  _name: Nanoscale Hull
+  _description: Hull nanites knit together when warping into a Sector. Hull damage
+    is slightly repaired when jumping, and an undamaged Hull becomes stronger.
+  _upgradeDescription: Upgrading grants a higher repair or improvement factor when
+    warping.
+  SystemType: 15
   SystemLocation: 4
   _maxUpgradeLevel: 5
-  _reactionThreshold: 5
-  _reactionDecreaseRate: 1
-  _reactionEmptyColor: {r: 1, g: 0, b: 0, a: 1}
-  _reactionFullColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _reactionThresholdSubtract_Upgrade: 0.5
-  _reactionThresholdDecreaseMultiplier_Upgrade: 0.8
-  _mostRecentThreatVector: {x: 0, y: 0}
---- !u!114 &7601113961979341410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6170776657282345782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cecd35db516513488cb8a2c261481a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _name: default name
-  _description: default description
-  _upgradeDescription: upgrade description
-  WeaponType: 0
-  _projectileType: 7
-  _normalDamage: 1
-  _shieldBonusDamage: 2
-  _ionDamage: 3
-  _knockBackAmount: 3
-  _scrapBonus: 0
-  _projectileLifetime: 0.4
-  _projectileSpeed: 10
-  _activationCost: 0
-  _profileIncreaseOnActivation: 1
-  _activationSounds: []
-  _firingSounds: []
-  _deactivationSounds: []
-  IsSecondary: 0
-  _isPermanent: 0
-  _maxUpgradeLevel: 5
-  _missileTurnRate: 0
-  _snakeAmount: 0
-  _rocketCount: 4
-  _maxMissRange: 0
-  _degreeSpread: 30
-  _rocketCount_Upgrade: 2
-  _rocketSpeed_Upgrade: 20
+  _hullRegeneration_Install: 1.5
+  _hullRegenerationAddition_Upgrade: 1

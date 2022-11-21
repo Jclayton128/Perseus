@@ -20,6 +20,8 @@ public class HealthHandler : MonoBehaviour
     Rigidbody2D _rb;
     UI_Controller _UIController;
     [SerializeField] ParticleSystem _ionizationParticles = null;
+
+
     ParticleSystem.EmissionModule _ipem;
 
     public event Action<Vector2> ReceivingThreatVector = null;
@@ -71,6 +73,7 @@ public class HealthHandler : MonoBehaviour
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float HullPoints { get; protected set; } = 1;
 
+    public float MaxHullPoints => _maxHullPoints;
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float ShieldPoints { get; protected set; } = 0;
 
@@ -400,6 +403,12 @@ public class HealthHandler : MonoBehaviour
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
 
+    internal void AdjustCurrentHullPoints(float amountToAdd)
+    {
+        HullPoints += amountToAdd;
+        HullPoints = Mathf.Clamp(HullPoints, 0, _maxHullPoints);
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+    }
     #endregion
 
     #region Public Gets
