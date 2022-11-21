@@ -64,6 +64,7 @@ public class HealthHandler : MonoBehaviour
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Points of ionization healed per second. Max Ionization Amount is equal to total Hull Points.")]
     [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
+    public float IonHealRate => _ionHealRate;
 
     float _damageInvulnerabilityDuration = 0.2f;
     #endregion;
@@ -409,6 +410,14 @@ public class HealthHandler : MonoBehaviour
         HullPoints = Mathf.Clamp(HullPoints, 0, _maxHullPoints);
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
+
+    public void AdjustIonHealRate(float amountToAdd)
+    {
+        _ionHealRate += amountToAdd;
+    }
+
+
+
     #endregion
 
     #region Public Gets

@@ -6,7 +6,7 @@ using System;
 public class SystemWeaponLibrary : MonoBehaviour
 {
     public enum SystemType { None, AfterburnerEngine, BlinkEngine, IonEngine, AntennaeCP, StealthPodCP, CompositeCP,
-        PDTurretTail, MineDropperTail, ProjectorTail, DroneBayWings, VampireWings, WreckroWings,
+        PDTurretTail, DeionizerTail, ProjectorTail, DroneBayWings, VampireWings, WreckroWings,
         ReactiveHull, HeavyArmorHull, NanoscaleHull, EmergencyCoreLINT, ShieldCoreLINT, MagnetonCoreLINT,
         BatteriesRINT, RamscoopRINT, RemoteProcessorRINT}
 
