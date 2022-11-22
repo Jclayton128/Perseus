@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface IScannable
 {
-    public string ScanName();
+    public string GetScanName();
 
-    public Sprite ScanIcon();
+    public Sprite GetScanIcon();
 
     public SystemWeaponLibrary.SystemType ScanSystemType();
 

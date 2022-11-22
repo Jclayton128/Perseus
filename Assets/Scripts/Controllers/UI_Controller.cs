@@ -729,14 +729,12 @@ public class UI_Controller : MonoBehaviour
         _lookDirector.localRotation = Quaternion.Euler(_lookIndicatorRotation);
     }
 
-    public void UpdateScanner(Sprite icon, string crateName, string counterStatus)
+    public void UpdateScanner(Sprite icon, string scannedName, string counterStatus)
     {
-
         if (icon)
         {
             _scanImage.sprite = icon;
             _scanImage.color = Color.white;
-            _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
             ScannerScannedSomething?.Invoke();
         }
         else
@@ -744,9 +742,9 @@ public class UI_Controller : MonoBehaviour
             _scanImage.color = Color.clear;
         } 
 
-        if (crateName != null)
+        if (scannedName != null)
         {
-            _scanNameTMP.text = crateName;
+            _scanNameTMP.text = scannedName;
         }
 
         _scanCounterTMP.text = counterStatus;
@@ -768,7 +766,6 @@ public class UI_Controller : MonoBehaviour
     {
         InitializeScanner();
         _crateScannerThing = null;
-        _audioCon.PlayUIClip(AudioLibrary.ClipID.ScannerDrop);
     }
 
     #endregion

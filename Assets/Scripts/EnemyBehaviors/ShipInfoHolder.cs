@@ -22,12 +22,12 @@ public class ShipInfoHolder : MonoBehaviour, IScannable
     [ShowInInspector] public string ScannerName = "default name";
 
 
-    public string ScanName()
+    public string GetScanName()
     {
         return ScannerName;
     }
 
-    public Sprite ScanIcon()
+    public Sprite GetScanIcon()
     {
         return GetComponent<SpriteRenderer>().sprite;
     }

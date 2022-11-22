@@ -2,179 +2,132 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class Scanner : MonoBehaviour
 {
     UI_Controller _uiController;
-    GameController _gameController;
     InputController _inputController;
+    AudioController _audioController;
     SystemWeaponLibrary _systemWeaponLibrary;
     [SerializeField] GameObject _scanReticlePrefab = null;
-    [ShowInInspector] List<IScannable> _scannablesInRange = new List<IScannable>();
 
     //settings
     int _scannableLayer = 6;
+    [SerializeField] float _scanRange = 10f;
+    [SerializeField] float _minTimeBetweenScans = 0.5f;
 
     //state
-    int _indexOfCurrentScan = -1;
+    IInstallable _scannedInstallable;
+    IScannable _scannedThing;
+    IScannable _previousScannedThing;
     GameObject _scanReticle;
+    float _timeForNextScan = 0;
 
     private void Awake()
     {
         _uiController = FindObjectOfType<UI_Controller>();
-        _gameController = _uiController.GetComponent<GameController>();
         _inputController = _uiController.GetComponent<InputController>();
-        _inputController.ScanDecremented += DecrementCurrentScan;
-        _inputController.ScanIncremented += IncrementCurrentScan;
+        _audioController = _uiController.GetComponent<AudioController>();
         _systemWeaponLibrary = FindObjectOfType<SystemWeaponLibrary>();
+        _inputController.LookDirChanged += HandleLookDirectionChanged;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void HandleLookDirectionChanged(Vector2 throwawayVec, float throwawayFloat)
     {
-        if (collision.gameObject.layer == _scannableLayer) // Crate
-        {
-            IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
-            if (scannedThing != null && !_scannablesInRange.Contains(scannedThing))
-            {
-                _scannablesInRange.Add(scannedThing);
-                //TODO add subtle 'gained scan info' audio clip
-                if (_indexOfCurrentScan < 0)
-                {
-                    _indexOfCurrentScan = 0;
-                    _scanReticle = Instantiate(_scanReticlePrefab, collision.transform);
-                }
-                PushScannedObjectToUI();
-            }
+        if (Time.time < _timeForNextScan) return;
 
+        _timeForNextScan = Time.time + _minTimeBetweenScans;
+
+        _previousScannedThing = _scannedThing;
+        _scannedThing = RaycastInLookDirection();
+
+        if (_scannedThing != _previousScannedThing)
+        {
+            PushScannedThingToUI();
+            AttachReticleToScannedThing();
+            _audioController.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
         }
+        else if (_previousScannedThing != null && _scannedThing == null)
+        {
+            _audioController.PlayUIClip(AudioLibrary.ClipID.ScannerDrop);
+        }
+
     }
 
-    private void PushScannedObjectToUI()
+    private void AttachReticleToScannedThing()
     {
-        string counterStatus;
-        if (_indexOfCurrentScan >= 0)
+        if (_scannedThing != null)
         {
-            string currentName = _scannablesInRange[_indexOfCurrentScan].ScanName();
-            Sprite currentIcon = _scannablesInRange[_indexOfCurrentScan].ScanIcon();
+            if (!_scanReticle) _scanReticle = Instantiate(_scanReticlePrefab);
 
-            counterStatus = $"{_indexOfCurrentScan + 1} of {_scannablesInRange.Count}";
-            _uiController.UpdateScanner(currentIcon, currentName, counterStatus);
-
-            if (_scannablesInRange[_indexOfCurrentScan] is SystemCrateHandler sch)
-            {
-                if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
-                {
-                    IInstallable crate = _systemWeaponLibrary.GetWeaponHandler(sch.WeaponInCrate);
-                    _uiController.UpdateCrateScannerSelectable(crate);
-                }
-
-                if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
-                {
-                    IInstallable crate = _systemWeaponLibrary.GetSystemHandler(sch.SystemInCrate);
-                    _uiController.UpdateCrateScannerSelectable(crate);
-                }
-            }
+            _scanReticle.transform.parent = _scannedThing.GetScanTransform();
+            _scanReticle.transform.localPosition = Vector3.zero;
         }
         else
         {
-            ClearScannerUI();
-        }
-
-
-        
-    }
-
-    private void ClearScannerUI()
-    {
-        _uiController.UpdateScanner(null, null, "");
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == _scannableLayer)
-        {
-            IScannable scannedThing = collision.gameObject.GetComponentInParent<IScannable>();
-            if (_scannablesInRange.Contains(scannedThing))
+            if (_scanReticle)
             {
-                _scannablesInRange.Remove(scannedThing);
-                //TODO add subtle 'lost scan info' audio clip
-                if (_scannablesInRange.Count > 0)
-                {
-                    _indexOfCurrentScan = 0;
-                    _scanReticle.transform.parent = _scannablesInRange[_indexOfCurrentScan].GetScanTransform();
-                    _scanReticle.transform.localPosition = Vector2.zero;
-                    PushScannedObjectToUI();
-                }
-                else
-                {
-                    _indexOfCurrentScan = -1;
-                    Destroy(_scanReticle);
-                    _uiController.ClearCrateScan();
-                }  
-
+                _scanReticle.transform.parent = null;
+                _scanReticle.transform.position = new Vector2(999, 999);
             }
+        }
+    }
 
+    private IScannable RaycastInLookDirection()
+    {
+        var hit = Physics2D.CircleCast(transform.position, 2f,
+            _inputController.LookDirection, _scanRange, 1<< _scannableLayer);
+        Debug.DrawLine(transform.position,
+            (Vector2)transform.position + (_inputController.LookDirection * _scanRange), Color.yellow);
+        
+        IScannable hitscan;
+        if (hit && hit.transform.TryGetComponent<IScannable>(out hitscan))
+        {
+            if (hitscan is SystemCrateHandler sch)
+            {
+                if (sch.WeaponInCrate != SystemWeaponLibrary.WeaponType.None)
+                {
+                    _scannedInstallable = _systemWeaponLibrary.GetWeaponHandler(sch.WeaponInCrate);
+                    _uiController.UpdateCrateScannerSelectable(_scannedInstallable);
+                }
+                else if (sch.SystemInCrate != SystemWeaponLibrary.SystemType.None)
+                {
+                    _scannedInstallable = _systemWeaponLibrary.GetSystemHandler(sch.SystemInCrate);
+                    _uiController.UpdateCrateScannerSelectable(_scannedInstallable);                    
+                }
+            }
+            return hitscan;
+        }
+        else
+        {
+            _scannedInstallable = null;
+            return null;
         }
 
+    }
+
+    private void PushScannedThingToUI()
+    {
+        if (_scannedThing != null)
+        {
+            _uiController.UpdateScanner(_scannedThing.GetScanIcon(), _scannedThing.GetScanName(), "ray");
+        }
+        else
+        {
+            _uiController?.ClearCrateScan();
+        }
     }
 
     public void DestroyScannedCrateAfterInstall()
     {
-        if (_indexOfCurrentScan < 0) return;
-        IScannable destroyedThing = _scannablesInRange[_indexOfCurrentScan];
-        _scannablesInRange.RemoveAt(_indexOfCurrentScan);
-        Destroy(_scanReticle);
-        destroyedThing.DestroyScannable();
-        
-        if (_scannablesInRange.Count > 0)
+        if (_scanReticle)
         {
-            _indexOfCurrentScan = 0;
-            PushScannedObjectToUI();
+            _scanReticle.transform.parent = null;
+            _scanReticle.transform.position = new Vector3(999, 999, 0);
         }
-        else
-        {
-            _indexOfCurrentScan = -1;
-            PushScannedObjectToUI();
-        }
-        
-
+        _scannedThing?.DestroyScannable();
+        PushScannedThingToUI();
     }
 
-    private void DecrementCurrentScan()
-    {
-        if (GameController.IsPaused) return;
-        if (_scannablesInRange.Count == 0)
-        {
-            ClearScannerUI();
-            return;
-        }
-
-        _indexOfCurrentScan--;
-        if (_indexOfCurrentScan < 0)
-        {
-            _indexOfCurrentScan = _scannablesInRange.Count - 1;
-        }
-        _scanReticle.transform.parent = _scannablesInRange[_indexOfCurrentScan].GetScanTransform();
-        _scanReticle.transform.localPosition = Vector2.zero;
-        PushScannedObjectToUI();
-    }
-
-    private void IncrementCurrentScan()
-    {
-        if (GameController.IsPaused) return;
-        if (_scannablesInRange.Count == 0)
-        {
-            ClearScannerUI();
-            return;
-        }
-
-        _indexOfCurrentScan++;
-        if (_indexOfCurrentScan > _scannablesInRange.Count - 1)
-        {
-            _indexOfCurrentScan = 0;
-        }
-        _scanReticle.transform.parent = _scannablesInRange[_indexOfCurrentScan].GetScanTransform();
-        _scanReticle.transform.localPosition = Vector2.zero;
-        PushScannedObjectToUI();
-    }
 }

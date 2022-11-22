@@ -22,12 +22,12 @@ public class SystemCrateHandler : MonoBehaviour, IScannable
         _crateName = crateName;
     }
 
-    public string ScanName()
+    public string GetScanName()
     {
         return _crateName;
     }
 
-    public Sprite ScanIcon()
+    public Sprite GetScanIcon()
     {
         return _iconSprite.sprite;
     }

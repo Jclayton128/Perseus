@@ -48,12 +48,12 @@ public class WormholeHandler : MonoBehaviour, IScannable
         }
     }
 
-    public string ScanName()
+    public string GetScanName()
     {
         return _associatedLevel.LevelName;
     }
 
-    public Sprite ScanIcon()
+    public Sprite GetScanIcon()
     {
         return _associatedLevel.Icon;
     }
