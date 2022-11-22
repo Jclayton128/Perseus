@@ -99,14 +99,12 @@ public class TorpedoLauncherWH : WeaponHandler, IMissileLauncher
             // 7 is PlayerShip
             _legalTarget_layerMask = LayerLibrary.PlayerLayerMask;
         }
-
-
-
     }
 
     public Transform GetTargetTransform()
     {
-        Transform t = CUR.FindNearestGameObjectOnLayer(_inputCon._mousePos, _legalTarget_layerMask,
+        Transform t = CUR.FindNearestGameObjectOnLayer(
+            (Vector2)transform.position + (_inputCon.LookDirection * 5f), _legalTarget_layerMask,
             _maxSearchDistanceOnFire)?.transform;
         return t;
     }

@@ -39,12 +39,16 @@ public class InputController : MonoBehaviour
     [SerializeField] float _mousePosSensitivity = 0.2f;
     [SerializeField] float _lookDirChangeThreshold = 0.95f;
     [SerializeField] float _lookDirChangeSpeed = 1f;
-    [SerializeField] float _lookDirMultiplier = 100f;
 
     //state
     public Vector3 _mousePos;
     [SerializeField] private Vector2 _lookDir_Commanded = Vector2.one;
+    
+
     private Vector2 _lookDir_Driven = Vector2.one;
+    /// <summary>
+    /// Normalize Vector2 of look direction, based on right stick or player-to-mouse dir
+    /// </summary>
     public Vector2 LookDirection => _lookDir_Driven;
     float _lookAngle = 0;
     public float LookAngle => _lookAngle;
@@ -200,7 +204,7 @@ public class InputController : MonoBehaviour
         _lookDir_Driven = Vector3.RotateTowards(_lookDir_Driven, _lookDir_Commanded,
             _lookDirChangeSpeed * Time.unscaledDeltaTime,
             0);
-        _lookDir_Driven = _lookDir_Driven.normalized * _lookDirMultiplier;
+        _lookDir_Driven = _lookDir_Driven.normalized;
         _lookAngle = Vector3.SignedAngle(Vector3.up, _lookDir_Driven, Vector3.forward);
         LookDirChanged?.Invoke(_lookDir_Driven, _lookAngle);
 
