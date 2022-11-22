@@ -33,6 +33,8 @@ public class ArcShieldWH : WeaponHandler
         return _factor;
     }
 
+    
+
     protected override void ActivateInternal()
     {
         if (_hostEnergyHandler.CheckEnergy(_activationCost) && _factor >= 1f)
@@ -78,8 +80,8 @@ public class ArcShieldWH : WeaponHandler
                 Instantiate(_arcShieldPrefab, transform.position, Quaternion.identity).
                 GetComponent<ArcShieldHandler>();
             _arcShieldHandler.SetDamagePack(_damagePack);
+            _arcShieldHandler.ToggleStatus(false);
         }
-
     }
 
     private void Update()
@@ -122,14 +124,23 @@ public class ArcShieldWH : WeaponHandler
         {
             _color = _emitColor_full;
         }
-        _connectedWID.UpdateUI(_factor, _color);
+        _connectedWID?.UpdateUI(_factor, _color);
     }
 
     private void UpdateFacingAndPosition()
     {
-        _arcShieldHandler.transform.position = transform.position;
-        _rotation.z = _inputController.LookAngle;
-        _arcShieldHandler.transform.rotation = Quaternion.Euler(_rotation);
+        if (_isPlayer)
+        {
+            _arcShieldHandler.transform.position = transform.position;
+            _rotation.z = _inputController.LookAngle;
+            _arcShieldHandler.transform.rotation = Quaternion.Euler(_rotation);
+        }
+        else
+        {
+            _arcShieldHandler.transform.position = transform.position;
+            _arcShieldHandler.transform.rotation = transform.rotation;
+        }
+
     }
     private void OnDestroy()
     {

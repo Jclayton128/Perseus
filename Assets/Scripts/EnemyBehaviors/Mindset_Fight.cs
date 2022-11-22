@@ -20,6 +20,7 @@ public class Mindset_Fight : Mindset
     [SerializeField] float _decisionRangeFactor = 1f;
 
     [SerializeField] float _minBoresightErrorToFire = 5f;
+
     //state
     [SerializeField] float _decisionRange;
 
@@ -74,7 +75,7 @@ public class Mindset_Fight : Mindset
     private void UpdateWeaponry()
     {
         Vector2 dir = _mindsetHandler.PlayerPosition - (Vector2)transform.position;
-        bool isInRange = (dir).magnitude < _decisionRange;
+        bool isInRange = (dir).magnitude <= _decisionRange;
         float angleOffComputedSteering = Vector3.SignedAngle(transform.up, dir, Vector3.forward);
         bool isInAngle = Mathf.Abs(angleOffComputedSteering) < _minBoresightErrorToFire;
 

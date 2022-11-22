@@ -44,11 +44,11 @@ public class ArcShieldHandler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!_isOn) return;
-
+        Debug.Log("shield coll...");
         HealthHandler hh;
         if (collision.gameObject.TryGetComponent<HealthHandler>(out hh))
         {
-            //Debug.Log("shield bash!");
+            Debug.Log("shield bash!");
             Vector2 dir = collision.transform.position - transform.position;
             //Debug.Log($"Normal: {_damagePack.NormalDamage}. Ion: {_damagePack.IonDamage}." +
             //    $"Knock: {_damagePack.KnockbackAmount}");
