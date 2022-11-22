@@ -27,9 +27,9 @@ public class HealthHandler : MonoBehaviour
     public event Action<Vector2> ReceivingThreatVector = null;
     public event System.Action<DamagePack> ReceivingDamagePack = null;
     public event System.Action<DamagePack> ReceivingShieldDamage = null;
-
-
+    public event Action<float> ReceivedShieldDamage = null;
     public event System.Action<DamagePack> ReceivingHullDamage = null;
+    public event Action<float> ReceivedHullDamage = null;
 
     #endregion
 
@@ -278,11 +278,13 @@ public class HealthHandler : MonoBehaviour
             ReceivingShieldDamage?.Invoke(incomingDamage);
             float shieldDamage = incomingDamage.NormalDamage + incomingDamage.ShieldBonusDamage;
             ReceiveShieldDamage(shieldDamage, impactPosition, impactHeading);
+            ReceivedShieldDamage?.Invoke(shieldDamage);
             incomingDamage.NormalDamage = carryoverHullDamage;
             if (incomingDamage.NormalDamage > 0)
             {
                 ReceivingHullDamage?.Invoke(incomingDamage);
                 ReceiveHullDamage(incomingDamage.NormalDamage, incomingDamage.ScrapBonus, impactPosition, impactHeading);
+                ReceivedHullDamage?.Invoke(incomingDamage.NormalDamage);
             }
         }
 

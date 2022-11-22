@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActorMovement : MonoBehaviour
 {
     InputController _inputCon;
+    HealthHandler _healthHandler;
     EnergyHandler _hostEnergyHandler;
     Rigidbody2D _rb;
     [SerializeField] ParticleSystem[] _engineParticles = null;
@@ -63,11 +64,20 @@ public class ActorMovement : MonoBehaviour
     float _speed_Current = 0;
     float _manualDragMagnitude = 0;
     Vector2 _manualDragVector = Vector2.zero;
+    public float BoostMultiplier = 1;
+
+    /// <summary>
+    /// This catches effects of both ionization and BoostMultiplier in single variable 
+    /// that is referenced by both turning and accel
+    /// </summary>
+    float _performanceFactor = 1;
+
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _hostEnergyHandler = GetComponent<EnergyHandler>();
+        _healthHandler = GetComponent<HealthHandler>();
         if (IsPlayer)
         {
             _inputCon = FindObjectOfType<InputController>();
@@ -203,6 +213,7 @@ public class ActorMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _performanceFactor = Mathf.Lerp(1, 0.5f, _healthHandler.IonFactor) * BoostMultiplier;
         UpdateAccelDecel();
         UpdateTurning();
         UpdateManualDrag();
@@ -224,13 +235,17 @@ public class ActorMovement : MonoBehaviour
             {             
                 if (IsPlayer)
                 {
-                    _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+                    _rb.AddForce(transform.up *
+                        (_thrust * _performanceFactor)
+                        * Time.fixedDeltaTime);
                     _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
                     _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate * Time.fixedDeltaTime);
                 }
                 else
                 {
-                    _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
+                    _rb.AddForce(transform.up *
+                        (_thrust * _performanceFactor) *
+                        Time.fixedDeltaTime);
                     _radarProfileHandler?.AddToCurrentRadarProfile(
                         Time.fixedDeltaTime * _thrustProfileIncreaseRate);
                     _hostEnergyHandler?.SpendEnergy(
@@ -253,8 +268,10 @@ public class ActorMovement : MonoBehaviour
     {
         _angleOffComputedSteering =
                 Vector3.SignedAngle(_computedSteering, transform.up, transform.forward);
-        float angleWithTurnDamper = Mathf.Clamp(_angleOffComputedSteering, -10, 10);
-        float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / 10, -_turnRate, _turnRate);
+        float angleWithTurnDamper = Mathf.Clamp(_angleOffComputedSteering, -10f, 10f);
+        float currentTurnRate = Mathf.Clamp(-_turnRate * angleWithTurnDamper / 10f,
+            -_turnRate * _performanceFactor,
+            _turnRate * _performanceFactor);
         if (_angleOffComputedSteering > 0.02)
         {
             _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, currentTurnRate, _turningForce * Time.deltaTime);
