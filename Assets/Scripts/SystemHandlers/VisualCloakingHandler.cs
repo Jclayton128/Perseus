@@ -51,7 +51,7 @@ public class VisualCloakingHandler : MonoBehaviour
         if (_isSupposedToBeCloaked) return;
 
         _cloakColorTween.Kill();
-        _cloakColorTween = _sr.DOFade(0, _cloakTime);
+        _cloakColorTween = _sr.DOColor(Color.black, _cloakTime); //_sr.DOFade(0, _cloakTime);
     }
 
     private void Decloak()
@@ -59,7 +59,7 @@ public class VisualCloakingHandler : MonoBehaviour
         if (!_isSupposedToBeCloaked) return;
 
         _cloakColorTween.Kill();
-        _cloakColorTween = _sr.DOFade(1, _cloakTime);
+        _cloakColorTween = _sr.DOColor(Color.white, _cloakTime);//_sr.DOFade(1, _cloakTime);
     }
 
 

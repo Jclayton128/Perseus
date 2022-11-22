@@ -256,5 +256,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0cb4234fa1b7d4a9df79fc6547a895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cloakDecloakThreshold: 7
+  _cloakDecloakThreshold: 4
   _cloakTime: 1
