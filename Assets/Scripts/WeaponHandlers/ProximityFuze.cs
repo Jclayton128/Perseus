@@ -9,7 +9,13 @@ public class ProximityFuze : MonoBehaviour
     [SerializeField] bool _targetsEnemy = false;
     [SerializeField] bool _targetsNeutral = false;
 
-
+    private void Start()
+    {
+        if (GetComponentInParent<IProximityFuzed>() == null)
+        {
+            Debug.Log($"This ({transform.parent.name}) doesn't implement IProximityFuzed but has a proximity fuze");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,7 +40,7 @@ public class ProximityFuze : MonoBehaviour
 
     private void TriggerProximityFuze()
     {
-        SendMessageUpwards("DetonateViaProximityFuze", SendMessageOptions.RequireReceiver);
+        SendMessageUpwards("DetonateViaProximityFuze", SendMessageOptions.DontRequireReceiver);
     }
 
 

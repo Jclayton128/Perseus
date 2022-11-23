@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3522121166919442402, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: ShouldChangeThreatCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _detectorRange
       value: 3

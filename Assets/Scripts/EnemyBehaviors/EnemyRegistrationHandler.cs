@@ -7,6 +7,9 @@ public class EnemyRegistrationHandler : MonoBehaviour
     HealthHandler hh;
     LevelController _levelController;
 
+    //state
+    public bool ShouldChangeThreatCount = true;
+
     private void Awake()
     {
         hh = GetComponent<HealthHandler>();

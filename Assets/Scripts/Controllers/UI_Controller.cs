@@ -244,6 +244,11 @@ public class UI_Controller : MonoBehaviour
     (float, float) _crateIconState = (0, 0);
     Color _wormholeIconColor;
     Color _crateIconColor;
+    [SerializeField] bool _isUpgradeMenuDeployed = false;
+    float _upgradeMenuRetractedDefaultXPos_LeftWing;
+    float _upgradeMenuRetractedDefaultXPos_RightWing;
+    [SerializeField] bool _isMetaMenuDeployed = true;
+
 
     #region Initialization
     private void Awake()
@@ -260,6 +265,8 @@ public class UI_Controller : MonoBehaviour
         _levelController.SpawnedLevelEnemies += FlashDisplaySectorBrief;
         _levelController.EnemyLevelCountChanged += UpdateRadarThreatCount;
         InitializeDugout();
+        _upgradeMenuRetractedDefaultXPos_LeftWing = _leftUpgradeWing.rectTransform.anchoredPosition.x;
+        _upgradeMenuRetractedDefaultXPos_RightWing = _rightUpgradeWing.rectTransform.anchoredPosition.x;
     }
 
     private void InitializeDugout()
@@ -365,11 +372,12 @@ public class UI_Controller : MonoBehaviour
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         
         _audioCon.PlayUIClip(AudioLibrary.ClipID.MetaPanelSlide);
-        
+        _isMetaMenuDeployed = true;
     }
 
     public void RetractMetaMenu()
     {
+        if (_isMetaMenuDeployed == false) return;
         _shipChoiceImage.color = Color.clear;
 
         _topMetaTween.Kill();
@@ -382,6 +390,7 @@ public class UI_Controller : MonoBehaviour
             _bottomMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance,
             _metaMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
+        _isMetaMenuDeployed = false;
         _audioCon.PlayUIClip(AudioLibrary.ClipID.MetaPanelSlide);
     }
 
@@ -391,6 +400,7 @@ public class UI_Controller : MonoBehaviour
             _topMetaWing.rectTransform.anchoredPosition.y -_metaMenuTraverseDistance);
         _bottomMetaWing.rectTransform.anchoredPosition = new Vector2(0,
             _bottomMetaWing.rectTransform.anchoredPosition.y + _metaMenuTraverseDistance);
+        _isMetaMenuDeployed = true;
     }
 
     public void HandleStartNewGamePress()
@@ -499,38 +509,45 @@ public class UI_Controller : MonoBehaviour
 
     public void DeployUpgradeMenu()
     {
+        if (_isMetaMenuDeployed) return;
+
         _currentUpgradeableSelection = null;
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
         _upgradeWingsTween_left = _leftUpgradeWing.rectTransform.DOAnchorPosX(
-            _leftUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
+            _upgradeMenuRetractedDefaultXPos_LeftWing + _upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _upgradeWingsTween_right = _rightUpgradeWing.rectTransform.DOAnchorPosX(
-            _rightUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
+            _upgradeMenuRetractedDefaultXPos_RightWing -_upgradeWingTraverseDistance,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         _audioCon.PlayUIClip(AudioLibrary.ClipID.UpgradePanelSlide);
-
+        _isUpgradeMenuDeployed = true;
         ClearSelection();
         DeploySelectors();
+        _gameController.PauseGame(0.7f);
         UpgradeMenuOpened?.Invoke();
     }
 
 
     public void RetractUpgradeMenu()
     {
+        if (_isUpgradeMenuDeployed == false) return;
         _upgradeWingsTween_left.Kill();
         _upgradeWingsTween_right.Kill();
 
         _leftUpgradeWing.rectTransform.DOAnchorPosX(
-            _leftUpgradeWing.rectTransform.anchoredPosition.x -_upgradeWingTraverseDistance,
+            _upgradeMenuRetractedDefaultXPos_LeftWing,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
         _rightUpgradeWing.rectTransform.DOAnchorPosX(
-            _rightUpgradeWing.rectTransform.anchoredPosition.x + _upgradeWingTraverseDistance,
+            _upgradeMenuRetractedDefaultXPos_RightWing,
             _upgradeMenuDeployTime).SetEase(Ease.InOutQuad).SetUpdate(true);
 
         _audioCon.PlayUIClip(AudioLibrary.ClipID.UpgradePanelSlide);
+        _isUpgradeMenuDeployed = false;
+
+        _gameController.UnpauseGame();
         RetractSelectors();
     }
 

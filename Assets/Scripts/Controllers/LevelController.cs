@@ -45,7 +45,6 @@ public class LevelController : MonoBehaviour
     Tween _filterTween;
 
     List<EnemyRegistrationHandler> _enemiesOnLevel = new List<EnemyRegistrationHandler>();
-    List<GameObject> _asteroidsOnLevel = new List<GameObject>();
     List<GameObject> _nebulaOnLevel = new List<GameObject>();
     List<WormholeHandler> _wormholesOnLevel = new List<WormholeHandler>();
     List<Vector2> _wormholeLocationsOnLevel = new List<Vector2>();
@@ -194,6 +193,10 @@ public class LevelController : MonoBehaviour
             enemy.Initialize(this);
             //Debug.Log("added " + enemy);
             _enemiesOnLevel.Add(enemy);
+            if (enemy.ShouldChangeThreatCount)
+            {
+                EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+            }
         }
     }
 
@@ -221,7 +224,7 @@ public class LevelController : MonoBehaviour
             tutorialEnemyPosition, rot);
         RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
         SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, _enemiesOnLevel.Count);
-        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+        //EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
     }
 
     public void SpawnEnemiesInNewSector()
@@ -239,7 +242,7 @@ public class LevelController : MonoBehaviour
         }
 
         SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, _enemiesOnLevel.Count);
-        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+        //EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
     }
     private void AssignRewardSystemToRandomEnemy()
     {
@@ -283,7 +286,7 @@ public class LevelController : MonoBehaviour
         float randRot = UnityEngine.Random.Range(-179, 179);
         Quaternion rot = Quaternion.Euler(0, 0, randRot);
         GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
-        //RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>()); //Don't register minions
+        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>()); //Don't register minions
         return newEnemy;
     }
     public void SpawnWormholes(int count, Vector2[] positions)
@@ -413,7 +416,11 @@ public class LevelController : MonoBehaviour
     public void DeregisterDeadEnemy(EnemyRegistrationHandler deadEnemy)
     {
         _enemiesOnLevel.Remove(deadEnemy);
-        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+        if (deadEnemy.ShouldChangeThreatCount)
+        {
+            EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
+        }
+
     }
 
     #endregion
