@@ -10,10 +10,12 @@ public class WarpGateWH : WeaponHandler
     [SerializeField] GameObject _blinkInParticleFXPrefab = null;
 
     //settings
-    [SerializeField] float _spotExtendRate = 2f;
+    [SerializeField] float _spotExtendRate = 1f;
     [SerializeField] float _spotExtension_Min = 3.0f;
     [SerializeField] float _spotExtension_Max = 10f;
     [SerializeField] int _novaCount = 10;
+    [SerializeField] float _spotExtendRateAddition_Upgrade = 0.5f;
+    [SerializeField] float _activationCostMultiplier_Upgrade = 0.8f;
 
     //state
     bool _isExtending = false;
@@ -97,7 +99,8 @@ public class WarpGateWH : WeaponHandler
 
     protected override void ImplementWeaponUpgrade()
     {
-        
+        _activationCost *= _activationCostMultiplier_Upgrade;
+        _spotExtendRate += _spotExtendRateAddition_Upgrade;
     }
 
     protected override void InitializeWeaponSpecifics()

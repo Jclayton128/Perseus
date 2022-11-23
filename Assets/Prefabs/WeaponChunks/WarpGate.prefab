@@ -84,11 +84,11 @@ MonoBehaviour:
   _projectileType: 8
   _normalDamage: 0
   _shieldBonusDamage: 0
-  _ionDamage: 10
+  _ionDamage: 3
   _knockBackAmount: 0
   _scrapBonus: 0
   _projectileLifetime: 0.7
-  _projectileSpeed: 5
+  _projectileSpeed: 3
   _activationCost: 10
   _profileIncreaseOnActivation: 1
   _activationSounds: []
@@ -102,4 +102,6 @@ MonoBehaviour:
   _spotExtendRate: 2
   _spotExtension_Min: 1.5
   _spotExtension_Max: 10
-  _novaCount: 10
+  _novaCount: 20
+  _spotExtendRateAddition_Upgrade: 0.5
+  _activationCostMultiplier_Upgrade: 0.8
