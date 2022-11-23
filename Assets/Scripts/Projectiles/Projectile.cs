@@ -15,7 +15,7 @@ public abstract class Projectile : MonoBehaviour
     public enum ProjectileType //Each PType must unique to a single weapon, even if different PTypes look similar/same
     {
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
-        PlayerTorpedo5, PlayerJavelin6, PlayerShieldBlast7, Player8, Player9,
+        PlayerTorpedo5, PlayerJavelin6, PlayerShieldBlast7, PlayerWarpBlast8, Player9,
         EnemyBolt10, EnemyMissile11, EnemyMine12, EnemyRocket13, Enemy14, Enemy15, Enemy16, Enemy17,
         Enemy18, Enemy19
     }

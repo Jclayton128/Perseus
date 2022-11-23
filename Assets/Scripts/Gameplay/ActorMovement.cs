@@ -384,6 +384,10 @@ public class ActorMovement : MonoBehaviour
 
     #endregion
 
+    public void SetDesiredSteering(Vector2 newDesiredSteering)
+    {
+        _desiredSteering = newDesiredSteering;
+    }
     private void OnDestroy()
     {
         if (!_inputCon) _inputCon = FindObjectOfType<InputController>();

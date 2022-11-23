@@ -19920,6 +19920,7 @@ MonoBehaviour:
   - {fileID: 1956077029239354867, guid: ef99901869d27e54caa3888044e3ed8d, type: 3}
   - {fileID: -4160023869044057807, guid: 392e7dc0c019fc34186f0241b0b03b35, type: 3}
   - {fileID: -2202094065509427462, guid: e5db1f9a5f731be4eabbf7b4f37cb963, type: 3}
+  - {fileID: 6190751960104961599, guid: edb5baf94e31beb4b8bf6081c92b5c93, type: 3}
 --- !u!4 &973215305
 Transform:
   m_ObjectHideFlags: 0
@@ -43371,6 +43372,8 @@ MonoBehaviour:
   _sectorCountBlurb: 'Entering Sector '
   _vesselCountBlurb: 'Threats Detected: '
   _dugoutRadius: 93
+  _isUpgradeMenuDeployed: 0
+  _isMetaMenuDeployed: 1
 --- !u!114 &2102641479
 MonoBehaviour:
   m_ObjectHideFlags: 0
