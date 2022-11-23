@@ -15,15 +15,9 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
     [SerializeField] float _activationCostMultiplier_Upgrade = .9f;
 
     //state
-    [SerializeField] int minionCounter_debug;
     protected int _currentSpawnCount = 0;
     Vector2Int _spawnCount = new Vector2Int(0, 0);
     [SerializeField] List<IMinionShip> _minions = new List<IMinionShip> ();
-
-    private void Update()
-    {
-        minionCounter_debug = _minions.Count;
-    }
 
     public override object GetUIStatus()
     {
@@ -86,7 +80,7 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
 
     private void KillAllMinionsUponMothershipDeath()
     {
-        for (int i = _minions.Count-1; i > 0; i--)
+        for (int i = _minions.Count-1; i >= 0; i--)
         {
             _minions[i].KillMinionUponMothershipDeath();
         }

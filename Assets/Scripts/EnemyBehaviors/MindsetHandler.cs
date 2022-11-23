@@ -37,7 +37,7 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
 
     Vector2 _playerPosition = Vector2.zero;
     public Vector2 PlayerPosition => _playerPosition;
-
+    public float PlayerRange { get; private set; } = Mathf.Infinity;
 
     Vector2 _playerVelocity = Vector2.zero;
     public Vector2 PlayerVelocity => _playerVelocity;
@@ -121,6 +121,7 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
     {
         _playerPosition = playerPosition;
         _playerVelocity = playerVelocity;
+        PlayerRange = ((Vector2)transform.position - playerPosition).magnitude;
         _targetAge = 0;
     }
 

@@ -130,4 +130,8 @@ public class Scanner : MonoBehaviour
         PushScannedThingToUI();
     }
 
+    private void OnDestroy()
+    {
+        _inputController.LookDirChanged -= HandleLookDirectionChanged;
+    }
 }

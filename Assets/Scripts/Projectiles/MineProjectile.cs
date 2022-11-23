@@ -22,7 +22,7 @@ public class MineProjectile : Projectile, IPlayerSeeking
     bool _isDetonating = false;
     [SerializeField] float _timeToDetonate = Mathf.Infinity;
     Sprite _warningSprite;
-    [SerializeField] float _playerRange = 0;
+    public float PlayerRange { get; private set; } = Mathf.Infinity;
     public override void Initialize(ProjectilePoolController poolController)
     {
         base.Initialize(poolController);
@@ -36,7 +36,7 @@ public class MineProjectile : Projectile, IPlayerSeeking
     protected override void SetupInstanceSpecifics()
     {
         _isDetonating = false;
-        _playerRange = _maxDetectionRange;
+        PlayerRange = _maxDetectionRange;
         _sr.sprite = _safeSprite;
         _timeToDetonate = Mathf.Infinity;
         GetComponent<HealthHandler>().ResetCurrentHullAndShieldLevels();
@@ -82,9 +82,9 @@ public class MineProjectile : Projectile, IPlayerSeeking
 
     public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)
     {
-        _playerRange = (playerPosition - (Vector2)transform.position).magnitude;
-        _sr.sprite = GetSpriteBasedOnPlayerRange(_playerRange);
-        if (!_isDetonating && _playerRange < _detonationRange)
+        PlayerRange = (playerPosition - (Vector2)transform.position).magnitude;
+        _sr.sprite = GetSpriteBasedOnPlayerRange(PlayerRange);
+        if (!_isDetonating && PlayerRange < _detonationRange)
         {
             BeginDetonationSequence();
             //Invoke(nameof(Detonate), _detonationDelay);

@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IPlayerSeeking
 {
+    public float  PlayerRange { get; }
+
     public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity);
 }

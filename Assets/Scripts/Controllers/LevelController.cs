@@ -226,9 +226,8 @@ public class LevelController : MonoBehaviour
 
     public void SpawnEnemiesInNewSector()
     {
-        int budget = _runController.CurrentThreatBudget;
         List<GameObject> enemiesToMake =
-            _enemyLibrary.CreateMenuFromBudgetAndLevel(budget, _currentLevel);
+            _enemyLibrary.CreateMenuFromBudgetAndLevel(_runController.CurrentThreatBudget, _currentLevel);
 
         foreach (var enemy in enemiesToMake)
         {
@@ -284,7 +283,7 @@ public class LevelController : MonoBehaviour
         float randRot = UnityEngine.Random.Range(-179, 179);
         Quaternion rot = Quaternion.Euler(0, 0, randRot);
         GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
-        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>());
+        //RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>()); //Don't register minions
         return newEnemy;
     }
     public void SpawnWormholes(int count, Vector2[] positions)
@@ -351,7 +350,7 @@ public class LevelController : MonoBehaviour
     {
         for (int i = _enemiesOnLevel.Count - 1; i >= 0; i--)
         {
-            Debug.Log($"Destroying enemy #{i} out of {_enemiesOnLevel.Count}");
+            //Debug.Log($"Destroying enemy #{i} out of {_enemiesOnLevel.Count}");
             Destroy(_enemiesOnLevel[i].gameObject);
             _enemiesOnLevel.Remove(_enemiesOnLevel[i]);
         }

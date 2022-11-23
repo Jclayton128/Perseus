@@ -5080,7 +5080,6 @@ MonoBehaviour:
   _projectileLifetime: 0.5
   _projectileSpeed: 15
   _activationCost: 3
-  _sustainCostRate: 0
   _profileIncreaseOnActivation: 1
   _activationSounds:
   - {fileID: 8300000, guid: 9191eef9e8c14054485d74ad719b29f0, type: 3}
@@ -5089,7 +5088,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7b058b56ddeff184586d784679a7252e, type: 3}
   - {fileID: 8300000, guid: 2f717586686835c4a822e477900777bf, type: 3}
   _deactivationSounds: []
-  IsSecondary: 1
-  _isPermanent: 0
+  IsSecondary: 0
+  _isPermanent: 1
   _maxUpgradeLevel: 4
   _chargeLevel: 0

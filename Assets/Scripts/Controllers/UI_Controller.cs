@@ -402,6 +402,7 @@ public class UI_Controller : MonoBehaviour
     public void HandleExitToMenuPress()
     {
         _gameController.EndGameOnPlayerChoice();
+        RetractUpgradeMenu();
         _audioCon.PlayUIClip(AudioLibrary.ClipID.ButtonClickUp);
     }
 

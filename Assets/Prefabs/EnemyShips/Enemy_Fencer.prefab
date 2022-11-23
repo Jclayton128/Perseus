@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3966891009192315291, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.77
+      objectReference: {fileID: 0}
     - target: {fileID: 4369122852220722554, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: m_Name
       value: MineLayer

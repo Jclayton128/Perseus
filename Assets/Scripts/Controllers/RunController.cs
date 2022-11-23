@@ -17,7 +17,7 @@ public class RunController : MonoBehaviour
     public void ResetRunStats()
     {
         _currentSectorCount = 0;
-        _currentThreatBudget = 0;
+        _currentThreatBudget = _startingThreatBudget;
 
     }
 

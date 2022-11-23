@@ -116,7 +116,7 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
 
         if (_isPlayer)
         {
-            pos = CUR.FindRandomPointWithinDistance(_inputCon.LookDirection, _maxMissRange);
+            pos = CUR.FindRandomPointWithinDistance((Vector2)transform.position + _inputCon.LookDirection, _maxMissRange);
         }
         else
         {
