@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7539192683361084409
+--- !u!1 &1063021975
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,36 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1252127309783256225}
-  - component: {fileID: 1567431569612780063}
+  - component: {fileID: 1063021976}
+  - component: {fileID: 1063021977}
   m_Layer: 0
-  m_Name: wingGreen_7
+  m_Name: beam0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1252127309783256225
+--- !u!4 &1063021976
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7539192683361084409}
-  m_LocalRotation: {x: 0, y: 0, z: 0.1578392, w: 0.9874649}
-  m_LocalPosition: {x: 0.368, y: -0.225, z: 0}
+  m_GameObject: {fileID: 1063021975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.176, y: -0.458, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8541397726584079436}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.163}
---- !u!212 &1567431569612780063
+  m_Father: {fileID: 5805530833456651203}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1063021977
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7539192683361084409}
+  m_GameObject: {fileID: 1063021975}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -69,20 +69,20 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
-  m_SortingOrder: 42
-  m_Sprite: {fileID: 21300000, guid: 41addd11f7ced424db892d5690f9061f, type: 3}
+  m_SortingLayer: 4
+  m_SortingOrder: 35
+  m_Sprite: {fileID: 21300000, guid: 7305a155843e4e84bbaf797f98291e8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.42, y: 0.74}
+  m_Size: {x: 0.43, y: 0.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8035761911034377125
+--- !u!1 &4617616258012304912
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,36 +90,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5077123386944585621}
-  - component: {fileID: 6841711428840958059}
+  - component: {fileID: 7364090333955682567}
+  - component: {fileID: 693938696363761251}
   m_Layer: 0
-  m_Name: wingGreen_6
+  m_Name: beam0_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5077123386944585621
+--- !u!4 &7364090333955682567
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035761911034377125}
-  m_LocalRotation: {x: -0, y: -0, z: -0.15783876, w: 0.9874649}
-  m_LocalPosition: {x: -0.368, y: -0.225, z: 0}
+  m_GameObject: {fileID: 4617616258012304912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.176, y: -0.458, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8541397726584079436}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.163}
---- !u!212 &6841711428840958059
+  m_Father: {fileID: 5805530833456651203}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &693938696363761251
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035761911034377125}
+  m_GameObject: {fileID: 4617616258012304912}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -151,45 +151,37 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1587654815
-  m_SortingLayer: 3
-  m_SortingOrder: 42
-  m_Sprite: {fileID: 21300000, guid: 41addd11f7ced424db892d5690f9061f, type: 3}
+  m_SortingLayer: 4
+  m_SortingOrder: 35
+  m_Sprite: {fileID: 21300000, guid: 7305a155843e4e84bbaf797f98291e8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.42, y: 0.74}
+  m_Size: {x: 0.43, y: 0.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &7606435255467332821
+--- !u!1001 &5735119594654141274
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 90110716234075882, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: HeavyArmor
+      value: AfterburnerEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b7b31bcc615233449802ed6091b4701d, type: 3}
+    - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: m_SortingOrder
-      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -238,55 +230,44 @@ PrefabInstance:
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 706088b96dfd8a14f9548a41a1b9dd86, type: 3}
-    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: MassToAdd
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 7305a155843e4e84bbaf797f98291e8c, type: 3}
     - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: SystemType
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: SystemLocation
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440987510910252128, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-      propertyPath: LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
---- !u!1 &7160824456917864158 stripped
+--- !u!1 &5005781315591180625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-  m_PrefabInstance: {fileID: 7606435255467332821}
+  m_PrefabInstance: {fileID: 5735119594654141274}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8541397726584079436 stripped
+--- !u!4 &5805530833456651203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
-  m_PrefabInstance: {fileID: 7606435255467332821}
+  m_PrefabInstance: {fileID: 5735119594654141274}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1852466164385898703
+--- !u!114 &-7878786508239175541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7160824456917864158}
+  m_GameObject: {fileID: 5005781315591180625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 182b34c6b3fc4af47a5e9a3cecb264b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 084d8d9e484e7aa41918111247eaa5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 41addd11f7ced424db892d5690f9061f, type: 3}
-  _name: Heavy Hull
-  _description: default description
-  _upgradeDescription: upgrade description
-  SystemType: 14
-  SystemLocation: 4
+  _icon: {fileID: 21300000, guid: b1f44f5f57dcd7d40b7bc1bba791de2a, type: 3}
+  _name: Afterburner
+  _description: Improves mobility by dumping raw energy into the exhaust. Inefficient
+    but effective.
+  _upgradeDescription: Upgrading increases thrust output and energy efficiency
+  SystemType: 1
+  SystemLocation: 0
   _maxUpgradeLevel: 5
+  _thrustEnergyCostRate_Initial: 2
+  _thrustEnergyCostRate_Upgrade: 0.25
+  _thrustIncrease_Initial: 100
+  _thrustIncrease_Upgrade: 60

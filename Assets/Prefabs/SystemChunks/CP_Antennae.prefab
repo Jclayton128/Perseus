@@ -337,7 +337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: Antennae
+      value: AntennaeCockpit
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Enabled
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: eafa254de55d2e64183a898f2dd7b51a, type: 3}
-  _name: Antenna Array
+  _name: Sensor Cockpit
   _description: Improved signal reception decreases radar direction error and increases
     visual range.
   _upgradeDescription: Upgrading further decreases radar error and increases sight
