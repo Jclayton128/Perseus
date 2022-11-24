@@ -5317,7 +5317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08c6d95149275448933590afd425af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 1b947aeab9de1c945ab9c4489ded1870, type: 3}
+  _icon: {fileID: 21300000, guid: 5a603c097e8ea8a41be91e06ab6f14e9, type: 3}
   _name: Stealth Cockpit
   _description: Creates a temporary null field that renders the ship invisible upon
     warping into a new sector.

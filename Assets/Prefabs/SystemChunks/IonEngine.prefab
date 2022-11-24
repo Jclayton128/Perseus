@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d21075e0f934e408f3c9ba80e53cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 729fe00ea376abf49af3fcaaf6ddd70d, type: 3}
+  _icon: {fileID: 21300000, guid: 54c5bb4cc5bb3be469aa29e0881cdf15, type: 3}
   _name: Ion Engine
   _description: Cool-burning, high-efficiency engine with modest speed increase.
     Useful for maintaining stealth.
@@ -255,3 +255,4 @@ MonoBehaviour:
   SystemType: 3
   SystemLocation: 0
   _maxUpgradeLevel: 5
+  _decreaseInThrustProfileRate_Upgrade: 2

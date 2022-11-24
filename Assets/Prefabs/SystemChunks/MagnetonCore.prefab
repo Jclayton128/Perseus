@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cf171b0a8f3fb4cbb7f50d58a143f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 5fb0e8b1e87dfee4a9b0b69fedcdbfbf, type: 3}
+  _icon: {fileID: 21300000, guid: 9fe850fa0a9e6784ab63645643dfd42f, type: 3}
   _name: Magneton Core
   _description: Greatly increase maximum shield level, but reduces shield regen to
     zero. Shields only regen during warp to new sector.

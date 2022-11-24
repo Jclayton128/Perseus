@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063a481837e8d3942a7953d224f86a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: a3ba84daf088b31479b8ba6d0276050b, type: 3}
+  _icon: {fileID: 21300000, guid: 1d7a2b68dd5c8c843a29e50c164b9530, type: 3}
   _name: Booster Tail
   _description: As damage is received, extra power is diverted to the engine, providing
     a temporary mobility boost.

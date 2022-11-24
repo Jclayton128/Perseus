@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac09dd2fd10e6cf48bf8f8293fc9d4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 8fe3b5fe0245a834f9fa3048ffe38423, type: 3}
+  _icon: {fileID: 21300000, guid: 87b91bad93584d8409fd99a815f8de7a, type: 3}
   _name: Blink Engine
   _description: Auto-blinks the ship away from danger any time the shield fails.
     Must recharge between uses.
@@ -187,3 +187,4 @@ MonoBehaviour:
   _minBlinkRange: 2
   _maxBlinkRange: 5
   _rechargeRateAddition_Upgrade: 0.1
+  _currentCharge: 1

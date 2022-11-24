@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab1b3873be24544787803ff3d1c1295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 6e8a053d517e4f24b8af9c152bfdbf81, type: 3}
+  _icon: {fileID: 21300000, guid: eafa254de55d2e64183a898f2dd7b51a, type: 3}
   _name: Antenna Array
   _description: Improved signal reception decreases radar direction error and increases
     visual range.
@@ -432,3 +432,6 @@ MonoBehaviour:
   SystemType: 4
   SystemLocation: 1
   _maxUpgradeLevel: 5
+  _errorReduction_Upgrade: 7
+  _radiusIncrease_Upgrade: 5
+  _cameraFovToAdd_Upgrade: 5

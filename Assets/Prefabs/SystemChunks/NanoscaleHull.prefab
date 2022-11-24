@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c120544f9717f947b5569341ebef7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: d825aedabe15f5a4db02067f241e69bb, type: 3}
+  _icon: {fileID: 21300000, guid: b06afc4e1c52bc84880557b8cba5a022, type: 3}
   _name: Nanoscale Hull
   _description: Hull nanites knit together when warping into a Sector. Hull damage
     is slightly repaired when jumping, and an undamaged Hull becomes stronger.
