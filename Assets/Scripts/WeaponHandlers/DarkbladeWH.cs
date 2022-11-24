@@ -11,6 +11,7 @@ public class DarkbladeWH : WeaponHandler
     [SerializeField] float _beamLength = 3f;
     [SerializeField] float _beamLengthIncrease_Upgrade = 0.5f;
     [SerializeField] float _beamDamageIncrease_Upgrade = 5f;
+    [SerializeField] float _beamWidth = 0.4f;
 
     //state
     Vector3 _dir;
@@ -30,9 +31,11 @@ public class DarkbladeWH : WeaponHandler
     private void FireBeam()
     {
         _dir = _muzzle.transform.up * _beamLength;
-        float _effectiveRange;
-        RaycastHit2D rh2d = Physics2D.Linecast(_muzzle.position,
-            _muzzle.position + _dir,
+        RaycastHit2D rh2d = Physics2D.CircleCast(
+            _muzzle.position,
+            _beamWidth,
+            _dir,
+            _beamLength,
             LayerLibrary.EnemyNeutralLayerMask);
         if (rh2d.collider != null)
         {            
