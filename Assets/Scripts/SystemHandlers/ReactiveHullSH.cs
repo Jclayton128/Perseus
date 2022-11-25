@@ -33,7 +33,7 @@ public class ReactiveHullSH : SystemHandler
         _healthHandler.ReceivingThreatVector += HandleNewThreatVector;
         _energyHandler = GetComponentInParent<EnergyHandler>();
         _weaponHandler = transform.root.GetComponentInChildren<RocketLauncherWH>();
-        _muzzle = transform.root.GetComponentInChildren<MuzzleTag>().transform;
+        _muzzle = _weaponHandler.GetComponentInChildren<MuzzleTag>().transform;
         bool isPlayer = GetComponentInParent<ActorMovement>().IsPlayer;
         _weaponHandler.Initialize(_energyHandler, isPlayer, null);
     }
