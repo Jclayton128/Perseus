@@ -171,6 +171,26 @@ PrefabInstance:
       propertyPath: _maxShieldPoints
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _deathSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _deathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b152fc44400974349a72d3e39c4f322c, type: 3}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _deathSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f8236a191043f242b36a61c43dffc81, type: 3}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _deathSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 59e2c7ddc91d38e408024d8a0dccbef9, type: 3}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _deathSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 23634b26f9c31f14f893c0eac9412140, type: 3}
     - target: {fileID: 7494439780592425772, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0

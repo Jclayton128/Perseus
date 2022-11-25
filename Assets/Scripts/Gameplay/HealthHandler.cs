@@ -6,6 +6,7 @@ using System;
 
 public class HealthHandler : MonoBehaviour
 {
+    AudioSource _audioSourceAsEnemy;
     public Action<float, float> ShieldPointChanged;
     public Action<float, float> HullPointsChanged;
     public Action<float, float> IonFactorChanged;
@@ -42,7 +43,7 @@ public class HealthHandler : MonoBehaviour
     //instance settings
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maximum (and starting) Hull Points")]
-    [SerializeField] [Range(.1f, 100)] float _maxHullPoints = 10;
+    [SerializeField][Range(.1f, 100)] float _maxHullPoints = 10;
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Emits hull damage FX when receiving hull damage. Should be FALSE for asteroids.")]
@@ -55,18 +56,20 @@ public class HealthHandler : MonoBehaviour
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Maxium (and starting) Shield Points")]
-    [SerializeField] [Range(0, 100)] float _maxShieldPoints = 0;
+    [SerializeField][Range(0, 100)] float _maxShieldPoints = 0;
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Points of shielding healed per second.")]
-    [SerializeField] [Range(0, 100)] float _shieldHealRate = 0;
+    [SerializeField][Range(0, 100)] float _shieldHealRate = 0;
 
     [FoldoutGroup("Starting Stats")]
     [Tooltip("Points of ionization healed per second. Max Ionization Amount is equal to total Hull Points.")]
-    [SerializeField] [Range(0, 10)] float _ionHealRate = 0;
+    [SerializeField][Range(0, 10)] float _ionHealRate = 0;
     public float IonHealRate => _ionHealRate;
 
     float _damageInvulnerabilityDuration = 0.2f;
+
+    [SerializeField] AudioClip[] _deathSounds = null;
     #endregion;
 
     #region State
@@ -83,7 +86,7 @@ public class HealthHandler : MonoBehaviour
     //[BoxGroup("Current Stats")]
     [ShowInInspector] public float IonFactor = 0;
     Color _shieldRegenColor;
-
+    bool _isPlayer = false;
     int _scrapValue;
     float _timeToAllowShieldDamageFX = 0;
     float _timeToAllowShieldRegen = 0;
@@ -91,7 +94,7 @@ public class HealthHandler : MonoBehaviour
     float _gatheredHullDamageForSingleParticleRelease = 0;
     float _timeToAllowDamageAgain = 0; //This is give the BlinkEngine a moment to work.
 
-    
+
     /// <summary>
     /// If this is TRUE, when this HealthHandler hits zero, the game session ends. Good for the player,
     /// or someother kind of mission essential ship.
@@ -119,6 +122,16 @@ public class HealthHandler : MonoBehaviour
         {
             _ipem = _ionizationParticles.emission;
             _ipem.rateOverTime = IonFactor * _ionizationGlory;
+        }
+
+        if (!GetComponent<ActorMovement>().IsPlayer)
+        {
+            _audioSourceAsEnemy = GetComponent<AudioSource>();
+            _isPlayer = false;
+        }
+        else
+        {
+            _isPlayer = true;
         }
 
 
@@ -160,17 +173,19 @@ public class HealthHandler : MonoBehaviour
             Die();
             return true;
         }
-        
+
         return false;
     }
 
     private void Die()
     {
         Dying?.Invoke();
+
         if (!_shouldEndGameSessionUponDeath)
         {
-            if (_isShip)
+            if (_isShip && !_isPlayer)
             {
+                PlayRandomDeathSound();
                 SpawnScrapUponDeath();
             }
         }
@@ -180,6 +195,14 @@ public class HealthHandler : MonoBehaviour
         }
 
         if (_isShip) Destroy(gameObject);
+    }
+
+    private void PlayRandomDeathSound()
+    {
+        Debug.Log("should play death sound");
+        if (_deathSounds.Length == 0 || !_audioSourceAsEnemy) return;
+        int rand = UnityEngine.Random.Range(0, _deathSounds.Length);
+        _audioSourceAsEnemy.PlayOneShot(_deathSounds[rand]);
     }
 
     private void SpawnScrapUponDeath()

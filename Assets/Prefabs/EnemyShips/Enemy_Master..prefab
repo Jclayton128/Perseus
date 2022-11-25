@@ -4960,6 +4960,8 @@ MonoBehaviour:
   _maxShieldPoints: 10
   _shieldHealRate: 0.25
   _ionHealRate: 0
+  _deathSounds:
+  - {fileID: 8300000, guid: 23634b26f9c31f14f893c0eac9412140, type: 3}
   IonFactor: 0
 --- !u!114 &1804585079
 MonoBehaviour:
@@ -4990,6 +4992,7 @@ MonoBehaviour:
   _normalDragRate: 0
   _thrustProfileIncreaseRate: 15
   _thrustEnergyCostRate: 0
+  BoostMultiplier: 1
 --- !u!114 &2293803639130907992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d79091cdfba846b8c4f0c99774b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShouldChangeThreatCount: 1
 --- !u!1 &3315883583338026687
 GameObject:
   m_ObjectHideFlags: 0
