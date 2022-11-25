@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: BatteryReactor
+      value: Reactor_Battery
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2726452638a39b46b279980f73cecd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 5fb0e8b1e87dfee4a9b0b69fedcdbfbf, type: 3}
+  _icon: {fileID: 21300000, guid: 3eee8cb44e71d2f41a4c30764b98d3d7, type: 3}
   _name: Battery Reactor
   _description: Improved storage drastically increases max energy level.
   _upgradeDescription: Upgrading will further increase your max energy reserves.

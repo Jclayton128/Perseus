@@ -43481,7 +43481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7438fe9ff69ecd6458f0c7b8e876062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingThreatBudget: 5
+  _startingThreatBudget: 3
 --- !u!114 &2102641485
 MonoBehaviour:
   m_ObjectHideFlags: 0
