@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ArcShieldWH : WeaponHandler
 {
     InputController _inputController;
     ArcShieldHandler _arcShieldHandler;
+    AudioSource _shieldAudioSource;
 
     //settings
     [SerializeField] GameObject _arcShieldPrefab = null;
@@ -26,6 +28,7 @@ public class ArcShieldWH : WeaponHandler
     float _emitTime = 0;
     float _factor = 1;
     Color _color = Color.white;
+    Tween _audioTween;
 
 
     public override object GetUIStatus()
@@ -44,6 +47,10 @@ public class ArcShieldWH : WeaponHandler
             _timeToDeactivate = Time.time + _shieldTime;
             _emitTime = 0;
             _factor = 1;
+
+            _audioTween.Kill();
+            _shieldAudioSource.volume = 1;
+            _shieldAudioSource.Play();
         }
     }
 
@@ -56,6 +63,7 @@ public class ArcShieldWH : WeaponHandler
     {
         _isEmitting = false;
         _arcShieldHandler.ToggleStatus(false);
+        FadeoutAudioLoop();
     }
 
     protected override void ImplementWeaponUpgrade()
@@ -82,6 +90,25 @@ public class ArcShieldWH : WeaponHandler
             _arcShieldHandler.SetDamagePack(_damagePack);
             _arcShieldHandler.ToggleStatus(false);
         }
+
+        if (_activationSounds.Length > 0)
+        {
+            _shieldAudioSource = GetComponent<AudioSource>();
+            _shieldAudioSource.clip = _activationSounds[0];
+            _shieldAudioSource.Stop();
+        }        
+    }
+
+    private void FadeoutAudioLoop()
+    {
+        _audioTween.Kill();
+        _audioTween = _shieldAudioSource.DOFade(0, 0.5f);
+        Invoke(nameof(_shieldAudioSource), 0.5f);
+    }
+
+    private void StopAudioAfterDelay()
+    {
+        _shieldAudioSource.Stop();
     }
 
     private void Update()

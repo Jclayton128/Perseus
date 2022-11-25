@@ -236,7 +236,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     public void Activate()
     {
         if (!GameController.IsPaused) ActivateInternal();
-        if (_invokesAutosteerWhenActivated) _actorMovement.IsMouseSteering = true;
+        if (_invokesAutosteerWhenActivated && _actorMovement) _actorMovement.IsMouseSteering = true;
     }
 
     public void Deactivate()
@@ -244,7 +244,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         if (GameController.IsPaused) DeactivateInternal(true);
         else DeactivateInternal(false);
 
-        if (_invokesAutosteerWhenActivated) _actorMovement.IsMouseSteering = false;
+        if (_invokesAutosteerWhenActivated && _actorMovement) _actorMovement.IsMouseSteering = false;
     }
     protected abstract void ActivateInternal();
 

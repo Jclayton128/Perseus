@@ -93,7 +93,7 @@ public class HealthHandler : MonoBehaviour
     float _timeToAllowHullDamageFX = 0;
     float _gatheredHullDamageForSingleParticleRelease = 0;
     float _timeToAllowDamageAgain = 0; //This is give the BlinkEngine a moment to work.
-
+    bool _isDying = false;
 
     /// <summary>
     /// If this is TRUE, when this HealthHandler hits zero, the game session ends. Good for the player,
@@ -124,14 +124,14 @@ public class HealthHandler : MonoBehaviour
             _ipem.rateOverTime = IonFactor * _ionizationGlory;
         }
 
-        if (!GetComponent<ActorMovement>().IsPlayer)
+        if (GetComponent<ActorMovement>().IsPlayer)
         {
-            _audioSourceAsEnemy = GetComponent<AudioSource>();
-            _isPlayer = false;
+            _isPlayer = true;
         }
         else
         {
-            _isPlayer = true;
+            _audioSourceAsEnemy = GetComponent<AudioSource>();
+            _isPlayer = false;
         }
 
 
@@ -179,15 +179,15 @@ public class HealthHandler : MonoBehaviour
 
     private void Die()
     {
+        if (_isDying) return;
+        _isDying = true;
+
         Dying?.Invoke();
 
         if (!_shouldEndGameSessionUponDeath)
         {
-            if (_isShip && !_isPlayer)
-            {
-                PlayRandomDeathSound();
-                SpawnScrapUponDeath();
-            }
+            if (_isShip) SpawnScrapUponDeath();
+            if (!_isPlayer) PlayRandomDeathSoundIfPossible();
         }
         else
         {
@@ -197,9 +197,9 @@ public class HealthHandler : MonoBehaviour
         if (_isShip) Destroy(gameObject);
     }
 
-    private void PlayRandomDeathSound()
+    private void PlayRandomDeathSoundIfPossible()
     {
-        Debug.Log("should play death sound");
+        if (_audioSourceAsEnemy == null) _audioSourceAsEnemy = GetComponent<AudioSource>();
         if (_deathSounds.Length == 0 || !_audioSourceAsEnemy) return;
         int rand = UnityEngine.Random.Range(0, _deathSounds.Length);
         _audioSourceAsEnemy.PlayOneShot(_deathSounds[rand]);

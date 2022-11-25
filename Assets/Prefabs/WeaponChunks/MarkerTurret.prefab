@@ -287,19 +287,13 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 4
   _activationSounds: []
   _firingSounds:
-  - {fileID: 8300000, guid: e79339e3565d3ac4ab47eebc1bda559c, type: 3}
-  - {fileID: 8300000, guid: d6778434b44b77b4db3a310fe5c43036, type: 3}
-  - {fileID: 8300000, guid: 4652df60bcd759e41ab9722b2ac4573a, type: 3}
-  - {fileID: 8300000, guid: 5e9faf40bcc34d640a6a89dc43628b43, type: 3}
-  - {fileID: 8300000, guid: 5d6a504a68b2b734788edaa12fa692c7, type: 3}
-  - {fileID: 8300000, guid: 3cbc1eb41548ef7498dcead606d4c6cc, type: 3}
-  - {fileID: 8300000, guid: 199f3a0ee57ae9947b690bd92672118f, type: 3}
-  - {fileID: 8300000, guid: 367e1c6363fb033499a233c5c8635716, type: 3}
-  - {fileID: 8300000, guid: 6599defdbe4091145bd8f0e4176e6935, type: 3}
+  - {fileID: 8300000, guid: b39a1de731a67984c9d1638724115512, type: 3}
+  - {fileID: 8300000, guid: 160404db7784fb54997d4b568f8caf1f, type: 3}
+  - {fileID: 8300000, guid: 9ee41c0f7624ece459e1816c8121e57a, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
   _turretMuzzle: {fileID: 1599807124452228561}
   _minModeToggle: 0.25
   _timeBetweenShots: 0.25

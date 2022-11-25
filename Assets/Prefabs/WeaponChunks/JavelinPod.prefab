@@ -277,12 +277,14 @@ MonoBehaviour:
   _activationCost: 3
   _profileIncreaseOnActivation: 1
   _activationSounds: []
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 6529edfdb4d6ba1458f939bfae39ffe7, type: 3}
+  - {fileID: 8300000, guid: 4b354b000aacf684090f26e49d33fc5d, type: 3}
+  - {fileID: 8300000, guid: 0ff553416d0c5054f921e0793963355f, type: 3}
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 1
-  _maxUpgradeLevel: 5
   _missileTurnRate: 30
   _missileSnakeAmount: 1
   _missileScanRadius: 0.25

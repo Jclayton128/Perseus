@@ -5085,8 +5085,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9191eef9e8c14054485d74ad719b29f0, type: 3}
   - {fileID: 8300000, guid: f8cbd2046f0cb7143b75cc98904cc2a8, type: 3}
   _firingSounds:
-  - {fileID: 8300000, guid: 7b058b56ddeff184586d784679a7252e, type: 3}
-  - {fileID: 8300000, guid: 2f717586686835c4a822e477900777bf, type: 3}
+  - {fileID: 8300000, guid: d7b1d74f8aa83fe4190856d6d328476e, type: 3}
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 1

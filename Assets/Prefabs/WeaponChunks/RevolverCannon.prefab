@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053517911361098866, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_Name
-      value: Revolver
+      value: RevolverCannon
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -273,14 +273,13 @@ MonoBehaviour:
   _knockBackAmount: 10
   _scrapBonus: 0
   _projectileLifetime: 10
+  _projectileSpeed: 10.1
   _activationCost: 0
-  _sustainCostRate: 0
   _profileIncreaseOnActivation: 70
   _activationSounds: []
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 845cd882555ff1444979a8ae57a4c19a, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
-  _shotLifetime: 10
-  _shotSpeed: 10
+  _invokesAutosteerWhenActivated: 0

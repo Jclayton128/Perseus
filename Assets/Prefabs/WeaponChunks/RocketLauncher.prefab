@@ -261,10 +261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 79f675caa4820cf4ea246783f644d5a9, type: 3}
-  _name: Rockets
-  _description: Swarming missiles that fly toward a target point. Effective for crowd
-    control.
-  _upgradeDescription: Upgrading increase rockets per volley and speed.
+  _name: Swarm Rockets
+  _description: Nasty swarm of area damage dealers that fly towards the look direction.
+    Effective for crowd control.
+  _upgradeDescription: Upgrading increases rockets per volley and speed.
   WeaponType: 4
   _projectileType: 3
   _normalDamage: 4
@@ -277,11 +277,14 @@ MonoBehaviour:
   _activationCost: 5
   _profileIncreaseOnActivation: 20
   _activationSounds: []
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 153ec8e883213854dbe10544c195a731, type: 3}
+  - {fileID: 8300000, guid: 423ad90775efab947bf710f58bb128cd, type: 3}
+  - {fileID: 8300000, guid: 5f9c07e4f8a870e4f851b0a1f8255110, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
   _missileTurnRate: 150
   _snakeAmount: 15
   _rocketCount: 3
