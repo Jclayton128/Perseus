@@ -281,6 +281,7 @@ MonoBehaviour:
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 0
+  _invokesAutosteerWhenActivated: 1
   _maxUpgradeLevel: 5
   _missileTurnRate: 30
   _missileSnakeAmount: 1

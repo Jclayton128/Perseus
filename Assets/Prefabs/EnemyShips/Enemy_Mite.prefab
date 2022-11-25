@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: _projectileLifetime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+      propertyPath: _invokesAutosteerWhenActivated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3092739481744609522, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
       propertyPath: m_RootOrder
       value: 5

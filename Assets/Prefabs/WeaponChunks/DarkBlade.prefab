@@ -212,7 +212,6 @@ MonoBehaviour:
   _projectileLifetime: -1
   _projectileSpeed: -1
   _activationCost: 15
-  _sustainCostRate: 0
   _profileIncreaseOnActivation: 0
   _activationSounds: []
   _firingSounds:
@@ -228,8 +227,10 @@ MonoBehaviour:
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 1
+  _invokesAutosteerWhenActivated: 0
   _maxUpgradeLevel: 5
   _beamFX: {fileID: 9093641688725695630, guid: b889bb9195e4580478607e15a580db92, type: 3}
   _beamLength: 3
   _beamLengthIncrease_Upgrade: 0.5
   _beamDamageIncrease_Upgrade: 5
+  _beamWidth: 0.4

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WarpGateWH : WeaponHandler
 {
-    ActorMovement _actorMovement;
     [SerializeField] GameObject _spotPrefab = null;
     [SerializeField] GameObject _blinkInParticleFXPrefab = null;
 
@@ -105,6 +104,5 @@ public class WarpGateWH : WeaponHandler
 
     protected override void InitializeWeaponSpecifics()
     {
-        _actorMovement = GetComponentInParent<ActorMovement>();
     }
 }

@@ -263,6 +263,7 @@ MonoBehaviour:
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 1
+  _invokesAutosteerWhenActivated: 1
   _maxUpgradeLevel: 5
   _spoolUpTime: 6
   _BestTimeBetweenShots: 0.25

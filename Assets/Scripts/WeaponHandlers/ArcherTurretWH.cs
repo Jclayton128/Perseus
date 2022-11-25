@@ -5,22 +5,23 @@ using UnityEngine;
 public class ArcherTurretWH : WeaponHandler, IBoltLauncher
 {
     //settings
-    float _maxCharge = 10f;
-    float _chargeRate = 2f;
+    float _chargeRate = .3f;
     bool _isCharging;
     ParticleSystem _particleSystem;
     ParticleSystem.EmissionModule _psem;
+    [SerializeField] float _chargeRateAddition_Upgrade = .1f;
+    [SerializeField] float _weaponSpeedMultiplier_Upgrade = 1.2f;
 
     //state
-    public float _chargeLevel = 0;
+    float _chargeFactor = 0;
     Color _chargeColor;
 
     private void Update()
     {
         if (_isCharging)
         {
-            _chargeLevel += _chargeRate * Time.deltaTime;
-            _chargeLevel = Mathf.Clamp(_chargeLevel, 0, _maxCharge);
+            _chargeFactor += _chargeRate * Time.deltaTime;
+            _chargeFactor = Mathf.Clamp(_chargeFactor, 0, 1);
 
             _hostEnergyHandler.SpendEnergy(_activationCost * Time.deltaTime);
 
@@ -36,8 +37,8 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     }
     private void UpdateUI()
     {
-        _chargeColor = Color.Lerp(Color.red, Color.green, _chargeLevel / _maxCharge);
-        _connectedWID?.UpdateUI(_chargeLevel / _maxCharge, _chargeColor);
+        _chargeColor = Color.Lerp(Color.red, Color.green, _chargeFactor );
+        _connectedWID?.UpdateUI(_chargeFactor, _chargeColor);
     }
 
     protected override void ActivateInternal()
@@ -59,7 +60,7 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
         
         _isCharging = false;
         _psem.rateOverTime = 0f;
-        _chargeLevel = 0;
+        _chargeFactor = 0;
         UpdateUI();
     }
 
@@ -68,7 +69,7 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
 
-        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation*_chargeFactor);
 
         if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
@@ -78,23 +79,28 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     public override DamagePack GetDamagePackForProjectile()
     {
         DamagePack dp =
-            new DamagePack(_chargeLevel * 3f, _shieldBonusDamage, _ionDamage, _knockBackAmount, _scrapBonus);
+            new DamagePack(_chargeFactor * _normalDamage,
+            _chargeFactor * _shieldBonusDamage,
+            _chargeFactor * _ionDamage,
+            _chargeFactor * _knockBackAmount,
+            _chargeFactor * _scrapBonus);
         return dp;
     }
 
     public override float GetLifetimeForProjectile()
     {
-        return _chargeLevel * 2f;
+        return _projectileLifetime;
     }
 
     public override object GetUIStatus()
     {
-        return _chargeLevel;
+        return _chargeFactor;
     }
 
     protected override void ImplementWeaponUpgrade()
     {
-        
+        _projectileSpeed *= _weaponSpeedMultiplier_Upgrade;
+        _chargeRate += _chargeRateAddition_Upgrade;
     }
 
     protected override void InitializeWeaponSpecifics()

@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 public abstract class WeaponHandler : MonoBehaviour, IInstallable
 {
     protected ProjectilePoolController _poolCon;
+    protected ActorMovement _actorMovement;
     protected InputController _inputCon;
     protected AudioSource _hostAudioSource;
     protected AudioController _playerAudioSource;
@@ -68,10 +69,10 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     [Tooltip("If true, this weapon can never be scrapped.")]
     [SerializeField] protected bool _isPermanent = false;
-
+    [SerializeField] protected bool _invokesAutosteerWhenActivated = false;
     protected bool _isPlayer;
     protected WeaponIconDriver _connectedWID;
-    [SerializeField] protected int _maxUpgradeLevel = 5;
+    protected int _maxUpgradeLevel = 5;
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
     protected bool _isInstalled = false;
 
@@ -86,21 +87,19 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();
         _isPlayer = isPlayer;
 
+
         if (!_isPlayer)
         {
             _mindsetHandler = GetComponentInParent<MindsetHandler>();
+            _hostAudioSource = GetComponentInParent<AudioSource>();
         }
 
         _isInstalled = true;
 
         if (_isPlayer)
         {
-
+            _actorMovement = GetComponentInParent<ActorMovement>();
             _playerAudioSource = _inputCon.GetComponent<AudioController>();
-        }
-        else
-        {
-            _hostAudioSource = GetComponentInParent<AudioSource>();
         }
 
         _connectedWID = wid;
@@ -237,12 +236,15 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     public void Activate()
     {
         if (!GameController.IsPaused) ActivateInternal();
+        if (_invokesAutosteerWhenActivated) _actorMovement.IsMouseSteering = true;
     }
 
     public void Deactivate()
     {
         if (GameController.IsPaused) DeactivateInternal(true);
         else DeactivateInternal(false);
+
+        if (_invokesAutosteerWhenActivated) _actorMovement.IsMouseSteering = false;
     }
     protected abstract void ActivateInternal();
 
