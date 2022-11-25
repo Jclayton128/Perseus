@@ -53,12 +53,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2363114265929812265, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Name
-      value: PBlaster
+      value: PBolt
       objectReference: {fileID: 0}
     - target: {fileID: 6678518615658740022, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1d16c767032ad5e4e9c7cdab424a5a46, type: 3}
+    - target: {fileID: 9197158280952756739, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
+      propertyPath: m_Size.x
+      value: 0.28
+      objectReference: {fileID: 0}
     - target: {fileID: 9197158280952756739, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_IsTrigger
       value: 1
