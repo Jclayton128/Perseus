@@ -33,6 +33,7 @@ public class BlinkEngineSH : SystemHandler
     public override void DeintegrateSystem()
     {
         base.DeintegrateSystem();
+        _healthHandler.ReceivingHullDamage -= ExecuteDamageReflex;
     }
 
     public override object GetUIStatus()
