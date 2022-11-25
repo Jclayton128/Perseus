@@ -23,6 +23,7 @@ public class EnemyRegistrationHandler : MonoBehaviour
 
     private void HandleDying()
     {
-        _levelController.DeregisterDeadEnemy(this);
+        //Initialize may not have been run for a minion ship, hence the ?. operator
+        _levelController?.DeregisterDeadEnemy(this);
     }
 }

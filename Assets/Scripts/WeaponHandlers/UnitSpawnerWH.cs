@@ -39,8 +39,7 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
     {
         IMinionShip newMinion =
             _levelController.SpawnSingleShipAtPoint(_spawnSType, _muzzle.position).GetComponent<IMinionShip>();
-        
-        newMinion.InitializeWithAssignedMothership(this, transform);        
+        newMinion.InitializeWithAssignedMothership(this, transform);
         _minions.Add(newMinion);
     }
 
@@ -82,7 +81,13 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
     {
         for (int i = _minions.Count-1; i >= 0; i--)
         {
+            if (_minions[i] == null) continue;
             _minions[i].KillMinionUponMothershipDeath();
         }
+    }
+
+    private void OnDestroy()
+    {
+        KillAllMinionsUponMothershipDeath();
     }
 }

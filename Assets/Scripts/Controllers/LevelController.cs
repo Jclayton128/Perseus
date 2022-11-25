@@ -182,8 +182,8 @@ public class LevelController : MonoBehaviour
 
     #region Registers
     private void RegisterEnemy(EnemyRegistrationHandler enemy)
-
     {
+        //if (enemy == null) Debug.Log($"Attempt to register an enemy was null");
         if (_enemiesOnLevel.Contains(enemy))
         {
             Debug.Log($"already registered this enemy: {enemy}");
@@ -193,10 +193,7 @@ public class LevelController : MonoBehaviour
             enemy.Initialize(this);
             //Debug.Log("added " + enemy);
             _enemiesOnLevel.Add(enemy);
-            if (enemy.ShouldChangeThreatCount)
-            {
-                EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
-            }
+            EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
         }
     }
 
@@ -286,7 +283,10 @@ public class LevelController : MonoBehaviour
         float randRot = UnityEngine.Random.Range(-179, 179);
         Quaternion rot = Quaternion.Euler(0, 0, randRot);
         GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
-        RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>()); //Don't register minions
+        if (newEnemy.GetComponent<EnemyRegistrationHandler>().ShouldChangeThreatCount)
+        {
+            RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>()); //Don't register minions
+        }        
         return newEnemy;
     }
     public void SpawnWormholes(int count, Vector2[] positions)
@@ -353,10 +353,12 @@ public class LevelController : MonoBehaviour
     {
         for (int i = _enemiesOnLevel.Count - 1; i >= 0; i--)
         {
+            if (_enemiesOnLevel[i] == null) continue;
             //Debug.Log($"Destroying enemy #{i} out of {_enemiesOnLevel.Count}");
             Destroy(_enemiesOnLevel[i].gameObject);
             _enemiesOnLevel.Remove(_enemiesOnLevel[i]);
         }
+        _enemiesOnLevel.Clear();
     }
 
     public void ClearAllWormholesFromLevel()
@@ -415,11 +417,9 @@ public class LevelController : MonoBehaviour
 
     public void DeregisterDeadEnemy(EnemyRegistrationHandler deadEnemy)
     {
+        if (deadEnemy == null || !_enemiesOnLevel.Contains(deadEnemy)) return;
         _enemiesOnLevel.Remove(deadEnemy);
-        if (deadEnemy.ShouldChangeThreatCount)
-        {
-            EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
-        }
+        EnemyLevelCountChanged?.Invoke(_enemiesOnLevel.Count);
 
     }
 
