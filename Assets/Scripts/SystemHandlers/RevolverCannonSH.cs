@@ -30,6 +30,10 @@ public class RevolverCannonSH : WeaponHandler
             _chargeStatus.x--;
             UpdateUI();
         }
+        else
+        {
+            if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomDeactivationClip());
+        }
     }
 
     private void Fire()

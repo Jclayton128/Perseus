@@ -92,11 +92,12 @@ MonoBehaviour:
   _activationCost: 10
   _profileIncreaseOnActivation: 1
   _activationSounds: []
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 8b7365f55ab99c848bf2d1ca517cadbb, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
   _spotPrefab: {fileID: 7355385148693737078, guid: 5064cf9aa62eabd4d959a9f6569324f7, type: 3}
   _blinkInParticleFXPrefab: {fileID: 7094645671175686317, guid: 5b31552667e92d44cbf07016d1bf0be5, type: 3}
   _spotExtendRate: 2

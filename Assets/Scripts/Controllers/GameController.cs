@@ -119,7 +119,8 @@ public class GameController : MonoBehaviour
         //// Tween a float called myFloat to 52 in 1 second
         //DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0, timeframe).SetUpdate(true);
 
-        Invoke(nameof(PauseGame), timeframe);
+        //Invoke(nameof(PauseGame), timeframe);
+        PauseGame();
     }
 
     public void UnpauseGame()

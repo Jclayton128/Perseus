@@ -66,6 +66,9 @@ public class DarkbladeWH : WeaponHandler
         ParticleSystem ps = Instantiate(_beamFX, pos, rot).GetComponent<ParticleSystem>();
         ParticleSystem.ShapeModule shape = ps.shape;
         shape.radius = _effectiveRange / 2f;
+
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
+        else _hostAudioSource.PlayOneShot(GetRandomFireClip());
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)

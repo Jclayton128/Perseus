@@ -251,20 +251,15 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 4
   _activationSounds: []
   _firingSounds:
-  - {fileID: 8300000, guid: e79339e3565d3ac4ab47eebc1bda559c, type: 3}
-  - {fileID: 8300000, guid: d6778434b44b77b4db3a310fe5c43036, type: 3}
-  - {fileID: 8300000, guid: 4652df60bcd759e41ab9722b2ac4573a, type: 3}
-  - {fileID: 8300000, guid: 5e9faf40bcc34d640a6a89dc43628b43, type: 3}
-  - {fileID: 8300000, guid: 5d6a504a68b2b734788edaa12fa692c7, type: 3}
-  - {fileID: 8300000, guid: 3cbc1eb41548ef7498dcead606d4c6cc, type: 3}
-  - {fileID: 8300000, guid: 199f3a0ee57ae9947b690bd92672118f, type: 3}
-  - {fileID: 8300000, guid: 367e1c6363fb033499a233c5c8635716, type: 3}
-  - {fileID: 8300000, guid: 6599defdbe4091145bd8f0e4176e6935, type: 3}
+  - {fileID: 8300000, guid: 4520b9be7b874cc4bba80854f9564722, type: 3}
+  - {fileID: 8300000, guid: a3189cf86b6b3364dba5f2ff8dbd301b, type: 3}
+  - {fileID: 8300000, guid: 1998a298c0f9e3a4dbdca1104e2cca95, type: 3}
+  - {fileID: 8300000, guid: 47fa166a23ff14a44b701cb550f99cf1, type: 3}
+  - {fileID: 8300000, guid: 9675213dc7b0b8448b647db79dae438b, type: 3}
   _deactivationSounds: []
   IsSecondary: 0
   _isPermanent: 1
   _invokesAutosteerWhenActivated: 1
-  _maxUpgradeLevel: 5
   _spoolUpTime: 6
   _BestTimeBetweenShots: 0.25
   _fireRateModifier_Initial: 0.33

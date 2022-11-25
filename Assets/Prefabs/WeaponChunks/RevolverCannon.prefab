@@ -279,7 +279,10 @@ MonoBehaviour:
   _activationSounds: []
   _firingSounds:
   - {fileID: 8300000, guid: 845cd882555ff1444979a8ae57a4c19a, type: 3}
-  _deactivationSounds: []
+  _deactivationSounds:
+  - {fileID: 8300000, guid: a8496f10048739744a20459d9978248b, type: 3}
+  - {fileID: 8300000, guid: 5dec8e3f0b248114e8b3fc6ba27acea2, type: 3}
+  - {fileID: 8300000, guid: 777d8eb185243a047af51db29ffff860, type: 3}
   IsSecondary: 1
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0

@@ -92,6 +92,8 @@ public class WarpGateWH : WeaponHandler
 
         }
 
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
+        else _hostAudioSource.PlayOneShot(GetRandomFireClip());
 
 
     }

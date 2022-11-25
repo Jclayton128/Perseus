@@ -22,11 +22,11 @@ public class SystemSelectorDriver : MonoBehaviour
     {
         if (!_deploysDown)
         {
-            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad);
+            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
         }
         else
         {
-            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad);
+            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
         }
     }
 
@@ -34,11 +34,11 @@ public class SystemSelectorDriver : MonoBehaviour
     {
         if (!_deploysDown)
         {
-            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad);
+            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
         }
         else
         {
-            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad);
+            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
         }
     }
 
