@@ -46,7 +46,6 @@ public class RocketLauncherWH : WeaponHandler, IMissileLauncher
     private void Fire()
     {
         float spreadSubdivided = _degreeSpread / _rocketCount;       
-
         for (int i = 0; i < _rocketCount; i++)
         {
             float rand = Random.Range(0.9f, 1.1f);

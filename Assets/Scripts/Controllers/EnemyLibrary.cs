@@ -54,10 +54,14 @@ public class EnemyLibrary : MonoBehaviour
             startingEnemyList, remainingBudget);
                 
 
-        if (startingEnemyList.Count == 0)
+        if (allowedEnemyList.Count == 0)
         {
-            Debug.LogError("No enemies on the menu to choose from!");
+            Debug.LogError("No in-budget enemies to choose from!");
             return null;
+        }
+        else
+        {
+            Debug.Log($"allowed enemy menu has {allowedEnemyList.Count} things");
         }
 
         //Populate the actual enemy list
@@ -73,7 +77,7 @@ public class EnemyLibrary : MonoBehaviour
             //Review the allowed menu list and remove anything that exceeds budget
             allowedEnemyList = TrimEnemiesByBudget(allowedEnemyList, remainingBudget);
 
-            if (remainingBudget <= 0) break;
+            if (remainingBudget <= 0 || allowedEnemyList.Count == 0) break;
         }
 
         return menu;

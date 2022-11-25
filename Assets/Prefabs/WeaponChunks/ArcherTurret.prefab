@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3e20d5b01d473428c44305918921f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  _icon: {fileID: 21300000, guid: c709b1f26840aab4793fd14f4b14242e, type: 3}
   _name: 'Archer '
   _description: A powerful, manually-aimed turret. Hold to charge, release to fire.
   _upgradeDescription: Upgrading increase charge rate and projectile speed

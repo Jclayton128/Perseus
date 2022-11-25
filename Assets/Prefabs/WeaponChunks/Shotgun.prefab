@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609e4e67cfa036642928d01be6ea139c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: fd1f06ee5a568d646be484b43bc72919, type: 3}
+  _icon: {fileID: 21300000, guid: 3f5d461ead669cb459af8d6fa36bfe5c, type: 3}
   _name: Shotgun
   _description: Shotgun description
   _upgradeDescription: Upgrading makes it more shotgun!
@@ -227,7 +227,6 @@ MonoBehaviour:
   _projectileLifetime: 0.6
   _projectileSpeed: 10
   _activationCost: 0.5
-  _sustainCostRate: 0
   _profileIncreaseOnActivation: 1
   _activationSounds: []
   _firingSounds:
@@ -238,7 +237,9 @@ MonoBehaviour:
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
   _degreeSpread: 30
   _chargeRate: 3.3
+  _maxCharge: 5
+  _minChargeToFire: 3
   _chargeLevel: 0

@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195d089b8b3758e46a104c5b492a3b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 98ab04bb85aa0b64788885d2816209c2, type: 3}
+  _icon: {fileID: 21300000, guid: 00598b8fc8d9e3244848476233249e98, type: 3}
   _name: Flenser Turret
   _description: Manually-aimed beam turret with a powerful shield-destroying ability,
     but low normal damage.
@@ -383,7 +383,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7b058b56ddeff184586d784679a7252e, type: 3}
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
   _turretMuzzle: {fileID: 528075328982006342}
   _maxCharge: 3
   _maxChargeIncrease_Upgrade: 0.5

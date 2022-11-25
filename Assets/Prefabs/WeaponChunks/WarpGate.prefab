@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009d28ed0f7b736478ce5cc8fefd02b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 42a7e10873e984b47a39c8f7eada2680, type: 3}
+  _icon: {fileID: 21300000, guid: 9c129bd4930916c45b0aaddf8099bb2f, type: 3}
   _name: Warp Gate
   _description: Rips a hole in spacetime, allowing for controlled blinks. Exiting
     emits serious ionization.

@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54381d5cf134724ea8bc2b113f1400b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 619d855a8342f9b4ea7c7818a7c97bd3, type: 3}
+  _icon: {fileID: 21300000, guid: 7c83d9ecbcd885c4b8c2a7ac7436109b, type: 3}
   _name: Javelin Pod
   _description: Cheap, rapid-fire rockets with a minimal guidance pack. Useful for
     keeping enemies at bay.

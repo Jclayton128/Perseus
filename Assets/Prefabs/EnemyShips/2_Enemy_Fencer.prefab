@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -694096584363138200, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: _normalDamage
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -694096584363138200, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: _knockBackAmount
@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -694096584363138200, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: _shieldBonusDamage
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2975548982831552488, guid: bd189b35feaa3394fb1429d3a4583b36, type: 3}
       propertyPath: m_RootOrder

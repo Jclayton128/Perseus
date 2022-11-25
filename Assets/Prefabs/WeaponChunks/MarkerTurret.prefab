@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836b80a300cf9204fadea1620fb5567c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: d36a1f97d459b0d4cacfb4c6eebba3b7, type: 3}
+  _icon: {fileID: 21300000, guid: c709b1f26840aab4793fd14f4b14242e, type: 3}
   _name: Marker Turret
   _description: This light turret ionizes its target, reducing its energy and shield
     regen.
