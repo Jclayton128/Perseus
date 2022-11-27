@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 4
   _completionCriteria: 3
-  _tutorialText: Press A/D to Turn
+  _outcome: 0
+  _tutorialText: A/D strafes left or right. Your ship auto-turns to face the look
+    direction, set by your mouse.

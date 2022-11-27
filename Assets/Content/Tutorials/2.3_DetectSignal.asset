@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 5
   _completionCriteria: 10
-  _tutorialText: Your actions may increase your own signal level and attract enemies.
+  _outcome: 0
+  _tutorialText: Your actions increase your own signal level, attracting enemies.
     Your signal level is shown in all sectors.
