@@ -10,6 +10,8 @@ public class WormholeHandler : MonoBehaviour, IScannable
     public Action<WormholeHandler> OnPlayerEnterWormhole; //Level Controller should hook into these
     public Action<WormholeHandler> OnPlayerExitWormhole;
 
+    public bool IsInstallable { get; } = false;
+
     //state
     public Level _associatedLevel;
     Rigidbody2D _playerRB;

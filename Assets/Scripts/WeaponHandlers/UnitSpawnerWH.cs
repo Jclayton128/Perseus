@@ -81,8 +81,7 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
     {
         for (int i = _minions.Count-1; i >= 0; i--)
         {
-            if (_minions[i] == null) continue;
-            _minions[i].KillMinionUponMothershipDeath();
+            if (_minions[i] != null) _minions[i].KillMinionUponMothershipDeath();
         }
     }
 

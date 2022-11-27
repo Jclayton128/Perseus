@@ -13,6 +13,8 @@ public class SystemCrateHandler : MonoBehaviour, IScannable
     [ShowInInspector] public SystemWeaponLibrary.SystemType SystemInCrate { get; private set; } =
     SystemWeaponLibrary.SystemType.None;
 
+    public bool IsInstallable { get; } = true;
+
     public void Initialize(Sprite icon, SystemWeaponLibrary.WeaponType weaponInCrate,
         SystemWeaponLibrary.SystemType systemInCrate, string crateName)
     {

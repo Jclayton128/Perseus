@@ -16,6 +16,8 @@ public class ShipInfoHolder : MonoBehaviour, IScannable
     [ShowInInspector] private int _threatScore = 1;
     public int ThreatScore => _threatScore;
 
+    public bool IsInstallable { get; } = false;
+
     [ShowInInspector] public ShipType EType = ShipType.Unassigned0;
     [ShowInInspector] public bool LivesAmongAsteroidsOnly = false;
     [ShowInInspector] public bool LivesInNebulaOnly = false;

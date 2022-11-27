@@ -10,7 +10,7 @@ public class Scanner : MonoBehaviour
     InputController _inputController;
     AudioController _audioController;
     SystemWeaponLibrary _systemWeaponLibrary;
-    [SerializeField] GameObject _scanReticlePrefab = null;
+    [SerializeField] ScanReticleHandler _scanReticlePrefab = null;
 
     //settings
     int _scannableLayer = 6;
@@ -21,7 +21,7 @@ public class Scanner : MonoBehaviour
     IInstallable _scannedInstallable;
     IScannable _scannedThing;
     IScannable _previousScannedThing;
-    GameObject _scanReticle;
+    ScanReticleHandler _scanReticle;
     float _timeForNextScan = 0;
 
     private void Awake()
@@ -44,8 +44,9 @@ public class Scanner : MonoBehaviour
 
         if (_scannedThing != _previousScannedThing)
         {
-            PushScannedThingToUI();
             AttachReticleToScannedThing();
+            PushScannedThingToUI();
+
             _audioController.PlayUIClip(AudioLibrary.ClipID.ScannerPickup);
         }
         else if (_previousScannedThing != null && _scannedThing == null)
@@ -112,6 +113,9 @@ public class Scanner : MonoBehaviour
         if (_scannedThing != null)
         {
             _uiController.UpdateScanner(_scannedThing.GetScanIcon(), _scannedThing.GetScanName(), "ray");
+
+            if (_scannedThing.IsInstallable) _scanReticle?.ToggleTabTip(true);
+            else _scanReticle?.ToggleTabTip(false);
         }
         else
         {

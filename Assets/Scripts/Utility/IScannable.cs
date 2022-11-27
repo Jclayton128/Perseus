@@ -8,6 +8,8 @@ public interface IScannable
 
     public Sprite GetScanIcon();
 
+    public bool IsInstallable { get; }
+
     public SystemWeaponLibrary.SystemType ScanSystemType();
 
     public SystemWeaponLibrary.WeaponType ScanWeaponType();

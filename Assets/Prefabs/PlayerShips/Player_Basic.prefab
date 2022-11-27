@@ -969,6 +969,7 @@ MonoBehaviour:
   _normalDragRate: 0
   _thrustProfileIncreaseRate: 15
   _thrustEnergyCostRate: 0
+  _strafeCommanded: 0
   BoostMultiplier: 1
 --- !u!114 &3577009792823772659
 MonoBehaviour:
@@ -1036,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58cb409f160dd34187d2f6afa3a8cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanReticlePrefab: {fileID: 1752788121067917300, guid: a248e3bbd2a57384d8ecf5531c6d29a9, type: 3}
+  _scanReticlePrefab: {fileID: -8895365367722007842, guid: a248e3bbd2a57384d8ecf5531c6d29a9, type: 3}
   _scanRange: 10
   _minTimeBetweenScans: 0.5
 --- !u!198 &7454526910713461675
