@@ -195,6 +195,8 @@ public class InputController : MonoBehaviour
         }
     }
 
+ 
+
     private void OnToggleUpgradeMenu(InputValue value)
     {
         UpgradeMenuToggled?.Invoke();

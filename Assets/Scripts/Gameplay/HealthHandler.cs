@@ -110,7 +110,7 @@ public class HealthHandler : MonoBehaviour
         _scrapController = _particleController.GetComponent<ScrapController>();
         _UIController = _particleController.GetComponent<UI_Controller>();
 
-        ResetCurrentHullAndShieldLevels();
+        //ResetCurrentHullAndShieldLevels();
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
 
         if (!_isShip) return;
@@ -135,10 +135,15 @@ public class HealthHandler : MonoBehaviour
         }
 
 
-        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
-        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
-        IonFactorChanged?.Invoke(IonFactor, 1);
-        ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
+        //ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
+        //HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+        //IonFactorChanged?.Invoke(IonFactor, 1);
+        //ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
+    }
+
+    private void Start()
+    {
+        ResetCurrentHullAndShieldLevels();
     }
 
     public void ResetCurrentHullAndShieldLevels()

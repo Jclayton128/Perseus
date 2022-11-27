@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class DebugController : MonoBehaviour
 {
@@ -59,6 +60,28 @@ public class DebugController : MonoBehaviour
     {
         _playerSystemsHandler = player.GetComponent<PlayerSystemHandler>();
         _playerStateHandler = _playerSystemsHandler.GetComponent<PlayerStateHandler>();
+    }
+
+    void OnToggleDebugMenu(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            _currentDebugPanel++;
+            if (_currentDebugPanel >= _subpanels.Length)
+            {
+                _currentDebugPanel = -1;
+            }
+
+            foreach (var panel in _subpanels)
+            {
+                panel.SetActive(false);
+            }
+
+            if (_currentDebugPanel >= 0)
+            {
+                _subpanels[_currentDebugPanel].SetActive(true);
+            }
+        }
     }
 
     private void Update()

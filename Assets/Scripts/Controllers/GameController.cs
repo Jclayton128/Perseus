@@ -103,6 +103,11 @@ public class GameController : MonoBehaviour
         PauseGame(0.7f);
     }
 
+    private void PlayPlayerDeathSequence()
+    {
+
+    }
+
     #region Time Scale
 
     public void PauseGame()

@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleDebugMenu",
+                    "type": "Button",
+                    "id": "52391e61-ee99-41a2-ba0f-5aaeae477795",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -452,6 +461,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Decel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3974405-bb73-470d-9ddc-e96860e438b6",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleDebugMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
