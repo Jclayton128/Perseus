@@ -58,7 +58,7 @@ public class ActorMovement : MonoBehaviour
     float _closure;
     Vector2 _closureDir;
     Vector2 _driftDir;
-
+    [SerializeField] float _strafeCommanded = 0;
     Vector2 _closureVec;
     Vector2 _driftVec;
     float _speed_Current = 0;
@@ -88,6 +88,7 @@ public class ActorMovement : MonoBehaviour
             _inputCon.TurnLeftChanged += HandleTurningLeft;
             _inputCon.TurnRightChanged += HandleTurningRight;
             _inputCon.MKeySelected += HandleTurnModeToggle;
+            _inputCon.StrafeCommanded += HandleStrafeCommanded;
 
             _radarProfileHandler = GetComponentInChildren<RadarProfileHandler>();
             
@@ -98,15 +99,17 @@ public class ActorMovement : MonoBehaviour
         } 
     }
 
+
     #region Flow
 
     private void Update()
     {
         if (IsPlayer)
         {
-            if (IsMouseSteering) ConverMouseIntoDesiredSteering();
-            else UpdateSteering();
-            _computedSteering = _desiredSteering;
+            //UpdateSteering();
+            //if (IsMouseSteering) ConverMouseIntoDesiredSteering();
+            //else 
+            _computedSteering = _inputCon.LookDirection;
         }
         else
         {
@@ -156,27 +159,27 @@ public class ActorMovement : MonoBehaviour
     }
 
 
-    private void ConverMouseIntoDesiredSteering()
-    {
-        _desiredSteering = _inputCon._mousePos - transform.position;
-    }
+    //private void UpdateLookDirIntoDesiredSteering()
+    //{
+    //    _desiredSteering = (Vector2)transform.position + _inputCon.LookDirection;
+    //}
 
-    private void UpdateSteering()
-    {
-        if (ShouldTurnLeft)
-        {
-            _desiredSteering = Vector3.RotateTowards(_desiredSteering, -transform.right,
-                _turnRate*Mathf.Deg2Rad * Time.deltaTime, 180f);
-            return;
-        }
-        if (ShouldTurnRight)
-        {
-            _desiredSteering = Vector3.RotateTowards(_desiredSteering, transform.right,
-                _turnRate * Mathf.Deg2Rad * Time.deltaTime, 180f);
-            return;
-        }
+    //private void UpdateSteering()
+    //{
+    //    if (ShouldTurnLeft)
+    //    {
+    //        _desiredSteering = Vector3.RotateTowards(_desiredSteering, -transform.right,
+    //            _turnRate*Mathf.Deg2Rad * Time.deltaTime, 180f);
+    //        return;
+    //    }
+    //    if (ShouldTurnRight)
+    //    {
+    //        _desiredSteering = Vector3.RotateTowards(_desiredSteering, transform.right,
+    //            _turnRate * Mathf.Deg2Rad * Time.deltaTime, 180f);
+    //        return;
+    //    }
 
-    }
+    //}
 
 
     private void UpdateAccelDecelDecision()
@@ -217,6 +220,18 @@ public class ActorMovement : MonoBehaviour
         UpdateAccelDecel();
         UpdateTurning();
         UpdateManualDrag();
+        UpdateStrafe();
+    }
+
+    private void UpdateStrafe()
+    {
+        if (Mathf.Abs(_strafeCommanded) > Mathf.Epsilon)
+        {
+            _rb.AddForce((Vector2)transform.right *
+                 _strafeCommanded * _performanceFactor * _thrust/2f *
+                 Time.fixedDeltaTime);
+        }
+
     }
 
     private void UpdateManualDrag()
@@ -335,6 +350,11 @@ public class ActorMovement : MonoBehaviour
         IsMouseSteering = !IsMouseSteering;
     }
 
+    private void HandleStrafeCommanded(float strafeCommanded)
+    {
+        _strafeCommanded = strafeCommanded;
+    }
+
 
     #endregion
 
@@ -401,6 +421,7 @@ public class ActorMovement : MonoBehaviour
             _inputCon.TurnLeftChanged -= HandleTurningLeft;
             _inputCon.TurnRightChanged -= HandleTurningRight;
             _inputCon.MKeySelected -= HandleTurnModeToggle;
+            _inputCon.StrafeCommanded -= HandleStrafeCommanded;
         }
 
     }

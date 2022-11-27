@@ -107,7 +107,7 @@ public class ActorMovement_Translational : MonoBehaviour
             if (_hostEnergyHandler.CheckEnergy(_thrustEnergyCostRate))
             {
                 _rb.AddForce(transform.up * (_thrust) * Time.fixedDeltaTime);
-                _radarProfileHandler.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
+                _radarProfileHandler?.AddToCurrentRadarProfile(Time.fixedDeltaTime * _thrustProfileIncreaseRate);
                 _hostEnergyHandler.SpendEnergy(_thrustEnergyCostRate * Time.fixedDeltaTime);
             }
 

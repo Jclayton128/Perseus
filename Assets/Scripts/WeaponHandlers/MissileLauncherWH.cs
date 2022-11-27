@@ -80,7 +80,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     {
         if (_isPlayer)
         {
-            return _inputCon._mousePos;
+            return (Vector2)transform.position + (_inputCon.LookDirection * 100f);
         }
         else
         {

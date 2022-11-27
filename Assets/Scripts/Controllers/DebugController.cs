@@ -63,24 +63,24 @@ public class DebugController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            _currentDebugPanel++;
-            if (_currentDebugPanel >= _subpanels.Length)
-            {
-                _currentDebugPanel = -1;
-            }
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    _currentDebugPanel++;
+        //    if (_currentDebugPanel >= _subpanels.Length)
+        //    {
+        //        _currentDebugPanel = -1;
+        //    }
 
-            foreach (var panel in _subpanels)
-            {
-                panel.SetActive(false);
-            }
+        //    foreach (var panel in _subpanels)
+        //    {
+        //        panel.SetActive(false);
+        //    }
 
-            if (_currentDebugPanel >= 0)
-            {
-                _subpanels[_currentDebugPanel].SetActive(true);
-            }
-        }
+        //    if (_currentDebugPanel >= 0)
+        //    {
+        //        _subpanels[_currentDebugPanel].SetActive(true);
+        //    }
+        //}
     }
 
     private void SetupToggleLabels()
