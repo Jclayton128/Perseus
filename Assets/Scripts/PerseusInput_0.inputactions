@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Decel",
+                    "type": "Button",
+                    "id": "7fb95a0e-89c3-4e0d-9c9f-ebc6d2faa678",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -432,6 +441,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "ToggleUpgradeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ffd50e4-10e9-4a0e-8b17-b8ebb37ddf9d",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Decel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

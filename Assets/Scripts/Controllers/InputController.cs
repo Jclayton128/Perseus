@@ -148,6 +148,16 @@ public class InputController : MonoBehaviour
         else if (_playerInput.currentControlScheme == ("Gamepad"))
         {
             _lookDir_Commanded = look;
+            
+            //if (look.magnitude > 99f)  // Set this magic number to less than one for look-magnitude based throttle
+            //{
+            //    AccelStarted?.Invoke();
+            //}
+            //else
+            //{
+            //    AccelEnded?.Invoke();
+            //}
+
             //if (look.magnitude < Mathf.Epsilon)
             //{
             //    _lookDir_Commanded = prev;
@@ -161,6 +171,12 @@ public class InputController : MonoBehaviour
         {
             _lookDir_Commanded = Vector2.up;
         }
+    }
+
+    void OnDecel(InputValue value)
+    {
+        if (value.isPressed) DecelStarted?.Invoke();
+        if (!value.isPressed) DecelEnded?.Invoke();
     }
 
     void OnScrollSecondary(InputValue value)
@@ -184,39 +200,35 @@ public class InputController : MonoBehaviour
         UpgradeMenuToggled?.Invoke();
     }
 
-    private void UpdateKeyboardInput_Translation()
-    {
-        _desiredTranslation = Vector2.zero;
-        if (Input.GetKey(KeyCode.W))
-        {
-            _desiredTranslation.y += 1f;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _desiredTranslation.y -= 1f;
-        }
-        _desiredTranslation.y =
-            Mathf.Clamp(_desiredTranslation.y ,- 1f, 1f);
+    //private void UpdateKeyboardInput_Translation()
+    //{
+    //    _desiredTranslation = Vector2.zero;
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        _desiredTranslation.y += 1f;
+    //    }
+    //    if (Input.GetKey(KeyCode.S))
+    //    {
+    //        _desiredTranslation.y -= 1f;
+    //    }
+    //    _desiredTranslation.y =
+    //        Mathf.Clamp(_desiredTranslation.y ,- 1f, 1f);
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            _desiredTranslation.x -= 1f;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _desiredTranslation.x += 1f;
-        }
-        _desiredTranslation.x =
-            Mathf.Clamp(_desiredTranslation.x ,- 1f, 1f);
+    //    if (Input.GetKey(KeyCode.A))
+    //    {
+    //        _desiredTranslation.x -= 1f;
+    //    }
+    //    if (Input.GetKey(KeyCode.D))
+    //    {
+    //        _desiredTranslation.x += 1f;
+    //    }
+    //    _desiredTranslation.x =
+    //        Mathf.Clamp(_desiredTranslation.x ,- 1f, 1f);
 
 
-        DesiredTranslateChanged?.Invoke(_desiredTranslation.normalized);
+    //    DesiredTranslateChanged?.Invoke(_desiredTranslation.normalized);
         
-    }
-
-
-
-   
+    //}   
 
     //private void UpdateLookDirection()
     //{

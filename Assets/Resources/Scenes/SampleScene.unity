@@ -43118,12 +43118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3ad5962e2ea8547adbee3ecdc4b9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mousePosSensitivity: 0.1
-  _lookDirChangeThreshold: 0.999
-  _lookDirChangeSpeed: 6
+  _lookDirChangeSpeed: 3
   _moveSensitivity: 0.2
-  _lookDir_Commanded: {x: 1, y: 1}
-  _lookDir_Driven: {x: 1, y: 1}
 --- !u!4 &2102641474
 Transform:
   m_ObjectHideFlags: 0
