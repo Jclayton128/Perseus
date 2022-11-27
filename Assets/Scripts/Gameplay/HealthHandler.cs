@@ -196,6 +196,7 @@ public class HealthHandler : MonoBehaviour
         }
         else
         {
+            SpawnScrapUponDeath();
             FindObjectOfType<GameController>().EndGameOnPlayerDeath();
         }
 

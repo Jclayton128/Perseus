@@ -8,7 +8,7 @@ public class AudioLibrary : SerializedMonoBehaviour
 {
     public enum ClipID { ButtonClickDown, ButtonClickUp, ButtonClickNegative, MetaPanelSlide, PanelCollide,
     ScannerPickup, ScannerDrop, WeaponToggle, InstallSystem, UpgradeSystem, ScrapSystem, GainScrap,
-    GainUpgradePoint, UpgradePanelSlide, SelectSystem }
+    GainUpgradePoint, UpgradePanelSlide, SelectSystem, PlayerDeath }
     public Dictionary<ClipID, AudioClip> _clipsByID = new Dictionary<ClipID, AudioClip>();
 
     public AudioClip GetClip(ClipID clipID)

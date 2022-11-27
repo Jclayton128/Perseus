@@ -14,17 +14,21 @@ public class GameController : MonoBehaviour
     PlayerShipLibrary _playerShipLibrary;
     RunController _runStatsController;
     TutorialController _tutorialController;
+    AudioController _audioController;
     public Action<GameObject> PlayerSpawned;
+
+
+    //settings
+    [SerializeField] float _deathDwellTime = 5f;
+
 
     //state
     GameObject _player;
 
-    public GameObject Player
-    {
-        get => _player;
-    }
+    public GameObject Player => _player;
 
-    Tween _pauseTween;
+    Tween _timescaleTween;
+
 
     public static bool IsPaused { get; private set; } = false;
 
@@ -35,6 +39,7 @@ public class GameController : MonoBehaviour
         _runStatsController = GetComponent<RunController>();
         _tutorialController = GetComponent<TutorialController>();
         _levelController = GetComponent<LevelController>();
+        _audioController = GetComponent<AudioController>();
         _playerShipLibrary = FindObjectOfType<PlayerShipLibrary>();
     }
 
@@ -95,24 +100,38 @@ public class GameController : MonoBehaviour
 
     public void EndGameOnPlayerDeath()
     {
+        BeginPlayerDeathSequence();
+    }
+
+    private void BeginPlayerDeathSequence()
+    {
+        _camCon.FocusCameraOnPlayerDeathZoom(_deathDwellTime);
+
+        _timescaleTween.Kill();
+        //Slow timescale to half over 1 real-time second.
+        _timescaleTween =
+            DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.5f, 1f).SetUpdate(true);
+
+        _audioController.PlayUIClip(AudioLibrary.ClipID.PlayerDeath);
+        Invoke(nameof(FinalizePlayerDeath), _deathDwellTime * 0.5f);
+    }
+
+
+    private void FinalizePlayerDeath()
+    {
         _player = null;
-        _camCon.FocusCameraOnTarget(null);
+        _camCon.ResetZoomToStarting();
         _uiController.SetIntroText(_runStatsController.GetGameoverText(true));
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
         PauseGame(0.7f);
     }
 
-    private void PlayPlayerDeathSequence()
-    {
-
-    }
-
     #region Time Scale
 
     public void PauseGame()
     {
-        _pauseTween.Kill();
+        _timescaleTween.Kill();
         IsPaused = true;
         Time.timeScale = 0f;
     }
@@ -130,7 +149,7 @@ public class GameController : MonoBehaviour
 
     public void UnpauseGame()
     {
-        _pauseTween.Kill();
+        _timescaleTween.Kill();
         IsPaused = false;
         Time.timeScale = 1f;
     }

@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
     CinemachineVirtualCamera _cvc;
+
+    //settings
+    [SerializeField] float _deathZoomZoominTime = 1.0f;
+    [SerializeField] float _deathZoomZoomedInFOV = 80f;
+    const float _startingFOV = 100f;
+
+    //state
+    Tween _zoomTween;
 
     private void Awake()
     {
@@ -27,7 +36,25 @@ public class CameraController : MonoBehaviour
 
     public void ModifyCameraFOV(float FOVtoAdd)
     {
+        _zoomTween.Kill();
         _cvc.m_Lens.FieldOfView += FOVtoAdd;
+    }
+
+    public void FocusCameraOnPlayerDeathZoom(float dwellTime)
+    {
+        FocusCameraOnTarget(null);
+        _zoomTween.Kill();
+        _zoomTween =
+            DOTween.To(() => _cvc.m_Lens.FieldOfView, x => _cvc.m_Lens.FieldOfView = x,
+            _deathZoomZoomedInFOV,
+            _deathZoomZoominTime).SetUpdate(true);
+
+    }
+
+    public void ResetZoomToStarting()
+    {
+        _zoomTween.Kill();
+        _cvc.m_Lens.FieldOfView = _startingFOV;
     }
 
     //private void Start()

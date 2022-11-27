@@ -437,6 +437,7 @@ public class UI_Controller : MonoBehaviour
         ClearAllSystemSlots();
         ClearAllSecondaryWeaponSlots();
         ClearPrimaryWeaponSlot();
+        
     }
 
     public void SetIntroText(string text)

@@ -43146,6 +43146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fecca0ea52c904fb7a0a1f08d2a015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deathDwellTime: 5
 --- !u!114 &2102641476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43158,6 +43159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f38383ee0c6c844e97da1dd2c7ab592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deathZoomZoominTime: 1
+  _deathZoomZoomedInFOV: 80
 --- !u!114 &2102641477
 MonoBehaviour:
   m_ObjectHideFlags: 0
