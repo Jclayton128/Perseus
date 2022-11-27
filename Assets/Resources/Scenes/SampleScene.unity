@@ -2113,7 +2113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &71951344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4252,7 +4252,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: -Thr
+  m_Text: Force Damage
 --- !u!222 &216666675
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14022,7 +14022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &607036610
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16977,7 +16977,7 @@ GameObject:
   - component: {fileID: 777525874}
   - component: {fileID: 777525873}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ForceDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17046,7 +17046,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 777525874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2102641477}
+        m_TargetAssemblyTypeName: DebugController, Assembly-CSharp
+        m_MethodName: ForceDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &777525874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20021,6 +20033,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7e3f2bebee18d4b4d849c676852bdd06, type: 3}
     - {fileID: 8300000, guid: e668532980f312f469ef8334deb55994, type: 3}
     - {fileID: 8300000, guid: da0bfb6840c4bf840824414018de94c2, type: 3}
+    - {fileID: 8300000, guid: 45683b3127e02cc46b54fe6c2c6df78e, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -20045,7 +20058,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 14
+      Data: 15
     - Name: 
       Entry: 7
       Data: 
@@ -20211,6 +20224,18 @@ MonoBehaviour:
     - Name: $v
       Entry: 10
       Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 15
+    - Name: $v
+      Entry: 10
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -43159,8 +43184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f38383ee0c6c844e97da1dd2c7ab592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathZoomZoominTime: 1
-  _deathZoomZoomedInFOV: 80
+  _deathZoomZoominTime: 5
+  _deathZoomZoomedInFOV: 60
 --- !u!114 &2102641477
 MonoBehaviour:
   m_ObjectHideFlags: 0

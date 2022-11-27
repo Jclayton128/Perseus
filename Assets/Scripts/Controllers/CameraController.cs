@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
 
     public void FocusCameraOnPlayerDeathZoom(float dwellTime)
     {
-        FocusCameraOnTarget(null);
+        //FocusCameraOnTarget(null);
         _zoomTween.Kill();
         _zoomTween =
             DOTween.To(() => _cvc.m_Lens.FieldOfView, x => _cvc.m_Lens.FieldOfView = x,

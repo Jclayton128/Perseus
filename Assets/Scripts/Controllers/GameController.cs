@@ -52,9 +52,6 @@ public class GameController : MonoBehaviour
     public void SetupNewGame()
     {
 
-        //Spawn Player
-        //Retract Meta Menu
-        //Create First Level
         GameObject playerPrefab = _playerShipLibrary.GetSelectedPlayerShipPrefab();
 
         if (playerPrefab == null)
@@ -65,8 +62,6 @@ public class GameController : MonoBehaviour
 
         _player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         PlayerSpawned?.Invoke(_player);
-
-  
 
         _runStatsController.ResetRunStats();     
 
@@ -84,6 +79,7 @@ public class GameController : MonoBehaviour
         }
         //TODO snap the camera to something interesting?
         _camCon.FocusCameraOnTarget(_player.transform);
+        _camCon.ResetZoomToStarting();
     }
 
     public void EndGameOnPlayerChoice()
@@ -91,7 +87,7 @@ public class GameController : MonoBehaviour
         _levelController.ClearLevel();
         Destroy(_player);
         _player = null;
-        _camCon.FocusCameraOnTarget(null);
+        //_camCon.FocusCameraOnTarget(null);
         _uiController.SetIntroText(_runStatsController.GetGameoverText(false));
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
@@ -119,8 +115,8 @@ public class GameController : MonoBehaviour
 
     private void FinalizePlayerDeath()
     {
+        Destroy(_player.gameObject);
         _player = null;
-        _camCon.ResetZoomToStarting();
         _uiController.SetIntroText(_runStatsController.GetGameoverText(true));
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();

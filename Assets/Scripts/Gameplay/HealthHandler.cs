@@ -191,16 +191,24 @@ public class HealthHandler : MonoBehaviour
 
         if (!_shouldEndGameSessionUponDeath)
         {
-            if (_isShip) SpawnScrapUponDeath();
+            if (_isShip)
+            {
+                _particleController.RequestHullDamageParticles((int)_maxHullPoints, transform.position, Vector3.forward);
+                SpawnScrapUponDeath();
+            }
+
             if (!_isPlayer) PlayRandomDeathSoundIfPossible();
+
         }
         else
         {
+            _particleController.RequestHullDamageParticles((int)_maxHullPoints, transform.position, Vector3.forward);
             SpawnScrapUponDeath();
+            transform.gameObject.SetActive(false);
             FindObjectOfType<GameController>().EndGameOnPlayerDeath();
         }
 
-        if (_isShip) Destroy(gameObject);
+        if (_isShip && !_isPlayer) Destroy(gameObject);
     }
 
     private void PlayRandomDeathSoundIfPossible()

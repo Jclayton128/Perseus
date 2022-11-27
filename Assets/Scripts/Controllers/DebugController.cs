@@ -427,6 +427,14 @@ public class DebugController : MonoBehaviour
 
     #region Level Tools
 
+    public void ForceDamage()
+    {
+        if (_gameController.Player)
+        {
+            DamagePack dp = new DamagePack(10, 0, 0, 0, 0);
+            _gameController.Player.GetComponent<HealthHandler>().ReceiveNonProjectileDamage(dp, Vector2.one, Vector2.one);
+        }
+    }
     public void SpawnEnemy_Debug(int enemyTypeAsInt)
     {
         ShipInfoHolder.ShipType etype =

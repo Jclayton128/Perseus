@@ -130,8 +130,17 @@ public class ParticleController : MonoBehaviour
 
         ParticleSystem ps;
         Quaternion rot = Quaternion.LookRotation(impactHeading, Vector3.forward);
+        
+        Vector3 modSpawnPos;
+        if (impactHeading.magnitude > Mathf.Epsilon)
+        {
+            modSpawnPos = spawnPosition + (impactHeading.normalized * 0.3f);
+        }
+        else
+        {
+             modSpawnPos = spawnPosition;
+        }
 
-        Vector3 modSpawnPos = spawnPosition + (impactHeading.normalized * 0.3f);
 
         if (_pooledHullParticles.Count == 0)
         {
