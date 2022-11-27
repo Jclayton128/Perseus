@@ -30,8 +30,8 @@ public class MinionShipHandler : MonoBehaviour, IMinionShip
 
     private void HandleMinionAspectsOfDying()
     {
-        _particleController.RequestBlastParticles(5, 3f, transform.position);
-        _mothership.RemoveDeadMinion(this);
+        _particleController?.RequestBlastParticles(5, 3f, transform.position);
+        _mothership?.RemoveDeadMinion(this);
         Destroy(gameObject);
     }
 
