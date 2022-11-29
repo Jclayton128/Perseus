@@ -527,6 +527,7 @@ public class UI_Controller : MonoBehaviour
         _isUpgradeMenuDeployed = true;
         ClearSelection();
         DeploySelectors();
+        ShowHideTAB(false);
         _gameController.PauseGame(0.7f);
         UpgradeMenuOpened?.Invoke();
     }
@@ -627,19 +628,19 @@ public class UI_Controller : MonoBehaviour
         if (isInstalled && selectionInfo.Item5 < 0)
         {
             //Installed and no further levels to upgrade
-            _selectionUpgradeCostTMP.text = "-";
-            _upgradeExplainerTMP.text = "No more Upgrades Allowed";
+            _selectionUpgradeCostTMP.text = "";
+            _upgradeExplainerTMP.text = "Upgrade Limit Reached";
         }
         else if (isInstalled == false)
         {
             //Not installed
-            _selectionUpgradeCostTMP.text = "-";
+            _selectionUpgradeCostTMP.text = "";
             _upgradeExplainerTMP.text = "";
         }
         else
         {
             //Must be that installed and still has more upgrades possible
-            _selectionUpgradeCostTMP.text = selectionInfo.Item5.ToString();
+            _selectionUpgradeCostTMP.text = $"-{selectionInfo.Item5.ToString()}";
             bool canAffordUpgrade = _playerStateHandler.CheckUpgradePoints(selectionInfo.Item5);
             _selectionUpgradeCostTMP.color = (canAffordUpgrade) ? Color.white : Color.red;
             _upgradeExplainerTMP.text = "";
@@ -661,12 +662,12 @@ public class UI_Controller : MonoBehaviour
         bool isScrappable = _currentUpgradeableSelection.CheckIfScrappable();
 
         _installButton.interactable = (isInstallable.Item1 && canAffordInstall);
-        _installTMP.text = (isInstallable.Item1) ? "1" : "-";
+        _installTMP.text = (isInstallable.Item1) ? "-1" : "";
         _installTMP.color = (!canAffordInstall && isInstallable.Item1) ? Color.red : Color.white;
 
         _scrapButton.interactable = isScrappable;
         string amount = _currentUpgradeableSelection.GetScrapRefundAmount().ToString();
-        _scrapRefundTMP.text = (isScrappable) ? amount : "-";
+        _scrapRefundTMP.text = (isScrappable) ? $"+{amount}" : "";
         _scrapExplainerTMP.text = (!isScrappable && isInstalled) ? "Cannot Scrap Permanent System/Weapon" : "";
 
     }

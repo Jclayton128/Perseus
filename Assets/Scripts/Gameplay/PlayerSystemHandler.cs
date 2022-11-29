@@ -90,16 +90,15 @@ public class PlayerSystemHandler : MonoBehaviour
         (bool, string) outcome;
         if (_secondaryWeaponsOnBoard.Count >= _maxWeapons)
         {
-            Debug.Log("unable to hold any more weapons");
             outcome.Item1 = false;
-            outcome.Item2 = "Max Weapons Reached";
+            outcome.Item2 = "No Available Weapon Slots";
             return outcome;
         }
 
         if (_secondaryWeaponsOnBoard.Contains(wh))
         {
             outcome.Item1 = false;
-            outcome.Item2 = "No Duplicate Weapons";
+            outcome.Item2 = "Identical Weapon Already Installed";
             return outcome;
         }
 
@@ -116,7 +115,7 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             //Debug.LogError("unable to hold any more systems");
             outcome.Item1 = false;
-            outcome.Item2 = "Max Systems Reached";
+            outcome.Item2 = "No Available System Slots";
             return outcome;
         }
 
@@ -124,7 +123,7 @@ public class PlayerSystemHandler : MonoBehaviour
         {
             //Debug.LogError($"Ship already contains a system in {sh.SystemLocation}");
             outcome.Item1 = false;
-            outcome.Item2 = "Already have a similar system";
+            outcome.Item2 = "Similar System Already Installed";
             return outcome;
         }
 
