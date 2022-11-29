@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 
 public class InputController : MonoBehaviour
 {
     PlayerInput _playerInput;
-
+    EventSystem _eventSystem;
     public Action<Vector2> DesiredTranslateChanged;
     public Action AccelStarted;
     public Action AccelEnded;
@@ -61,6 +62,7 @@ public class InputController : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         GetComponent<GameController>().PlayerSpawned += HandlePlayerSpawned;
+        _eventSystem = FindObjectOfType<EventSystem>(); 
     }
 
     private void HandlePlayerSpawned(GameObject newPlayer)
@@ -94,13 +96,45 @@ public class InputController : MonoBehaviour
 
     void OnFirePrimary(InputValue value)
     {
-        LeftMouseChanged?.Invoke(value.isPressed);
+        bool isPressedHere = value.isPressed;
+        if (isPressedHere)
+        {
+            if (_eventSystem.IsPointerOverGameObject())
+            {
+                //Debug.Log("Over game object");
+            }
+            else
+            {
+                //Debug.Log("Not Over game object");
+                LeftMouseChanged?.Invoke(isPressedHere);
+            }
+        }
+        else
+        {
+            LeftMouseChanged?.Invoke(isPressedHere);
+        }
     }
 
     void OnFireSecondary(InputValue value)
     {
-        RightMouseChanged?.Invoke(value.isPressed);
-        
+        bool isPressedHere = value.isPressed;
+        if (isPressedHere)
+        {
+            if (_eventSystem.IsPointerOverGameObject())
+            {
+                //Debug.Log("Over game object");
+            }
+            else
+            {
+                //Debug.Log("Not Over game object");
+                RightMouseChanged?.Invoke(isPressedHere);
+            }
+        }
+        else
+        {
+            RightMouseChanged?.Invoke(isPressedHere);
+        }
+
     }
 
     void OnMove(InputValue value)
