@@ -20605,6 +20605,7 @@ MonoBehaviour:
   - {fileID: 833342898894309947, guid: 621eb8e4acdff264e9751dd143f82193, type: 3}
   - {fileID: 6658415473265941888, guid: a38ee4960e6226e40a2a4edf016f4efd, type: 3}
   - {fileID: 8886479856476907708, guid: e6b64b9805bc85345933326fc5c97097, type: 3}
+  - {fileID: 6949589758991457435, guid: 255181c9cba373946b0648e668c167e5, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44758,7 +44759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7438fe9ff69ecd6458f0c7b8e876062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingThreatBudget: 3
+  _startingThreatBudget: 1
 --- !u!114 &2102641485
 MonoBehaviour:
   m_ObjectHideFlags: 0

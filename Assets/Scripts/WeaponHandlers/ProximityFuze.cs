@@ -26,7 +26,8 @@ public class ProximityFuze : MonoBehaviour
             TriggerProximityFuze(); 
             return;
         }
-        if (_targetsEnemy && tgt == LayerLibrary.EnemyLayer)
+        if (_targetsEnemy &&
+            (tgt == LayerLibrary.EnemyLayer || tgt == LayerLibrary.SpecialEnemyLayer))
         {
             TriggerProximityFuze();
             return;

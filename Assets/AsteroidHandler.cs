@@ -24,6 +24,8 @@ public class AsteroidHandler : MonoBehaviour
     
     //state
     Size _size;
+    bool _isClaimed = false;
+    public bool IsClaimed => _isClaimed;
 
     public void Initialize(AsteroidPoolController apc)
     {
@@ -78,10 +80,26 @@ public class AsteroidHandler : MonoBehaviour
             }
         }
 
-
         _asteroidPoolController.ReturnAsteroidToPool(this);
     }
     
+    public void ClaimAsteroid()
+    {
+        if (_isClaimed)
+        {
+            Debug.LogError("Asteroid is already claimed!");
+            return;
+        }
+
+        _isClaimed = true;
+        transform.position += new Vector3(0, 0, .11f);
+    }
+
+    public void DeclaimAsteroid()
+    {
+        _isClaimed = false;
+        transform.position -= new Vector3(0, 0, .11f);
+    }
 
 
 

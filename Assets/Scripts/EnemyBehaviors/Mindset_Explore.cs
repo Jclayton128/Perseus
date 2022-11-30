@@ -21,7 +21,7 @@ public class Mindset_Explore : Mindset
     RandomCloseDependentMove, HoldPosition}
 
     //state
-    [SerializeField] ExploreOptions _exploreBehavior = ExploreOptions.RandomCloseMove;
+    public ExploreOptions ExploreBehavior = ExploreOptions.RandomCloseMove;
 
     [Tooltip("For Close moves, this is the no-further-than range. For far moves, this is " +
         "the no-closer-than range.")]
@@ -52,8 +52,16 @@ public class Mindset_Explore : Mindset
 
     public void SetDependentTransform(Transform dependentTransform)
     {
-        _dependentTransform = dependentTransform;
-        _mindsetHandler.SetTargetPosition(_dependentTransform.position, 0, false);
+        if (dependentTransform == null)
+        {
+            _mindsetHandler.SetTargetPosition(transform.position, 0, false);
+        }
+        else
+        {
+            _dependentTransform = dependentTransform;
+            _mindsetHandler.SetTargetPosition(_dependentTransform.position, 0, false);
+        }
+
     }
 
     public override void EnterMindset()
@@ -76,12 +84,20 @@ public class Mindset_Explore : Mindset
             //Debug.Log("generating new point to explore");
             UpdateTargetPosition();
         }
+
+        if (ExploreBehavior == ExploreOptions.RandomCloseDependentMove &&
+            _dependentTransform &&
+            ((_mindsetHandler.TargetPosition - (Vector2)_dependentTransform.position).magnitude > _range))
+        {
+            UpdateTargetPosition();
+        }
+
     }
 
     private void UpdateTargetPosition()
     {
         Vector2 newTargetPosition = Vector2.zero;
-        switch (_exploreBehavior)
+        switch (ExploreBehavior)
         {
             case ExploreOptions.RandomCloseMove:
                 newTargetPosition = FindRandomCloseMove();
@@ -231,11 +247,16 @@ public class Mindset_Explore : Mindset
 
         return cardinalDirection;
     }
+
     private Vector2 FindRandomCloseDependentMove()
     {
         Vector2 pos = CUR.FindRandomPositionWithinRangeBandAndWithinArena(
             _dependentTransform.position, 0, _range,
             Vector2.zero, _levelController.ArenaRadius);
+
+        pos += _dependentTransform.GetComponent<Rigidbody2D>().velocity/3f;
+
         return pos;
     }
+
 }

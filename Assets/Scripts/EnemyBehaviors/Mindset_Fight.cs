@@ -11,7 +11,7 @@ public class Mindset_Fight : Mindset
 
     public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement}
     public enum FightWeaponUse { FireWhenAccurate, FireContinuously,
-        FireContinuouslyIfSeePlayer}
+        FireContinuouslyIfSeePlayer, NeverFire}
 
     [SerializeField] public FightMovements FightMovement = FightMovements.Contact;
     [SerializeField] FightWeaponUse _fightWeaponUse = FightWeaponUse.FireWhenAccurate;
@@ -74,6 +74,8 @@ public class Mindset_Fight : Mindset
 
     private void UpdateWeaponry()
     {
+        if (_fightWeaponUse == FightWeaponUse.NeverFire) return;
+
         Vector2 dir = _mindsetHandler.PlayerPosition - (Vector2)transform.position;
         bool isInRange = (dir).magnitude <= _decisionRange;
         float angleOffComputedSteering = Vector3.SignedAngle(transform.up, dir, Vector3.forward);
@@ -85,6 +87,7 @@ public class Mindset_Fight : Mindset
                 FireWhenAccurate(isInRange, isInAngle);
                 break;
         }
+
 
     }
 
