@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,14 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     [SerializeField] float _weaponSpeedMultiplier_Upgrade = 1.2f;
 
     //state
+    TurretSteerer _turretSteerer;
     float _chargeFactor = 0;
     Color _chargeColor;
 
     private void Update()
     {
+        UpdateFacing();
+
         if (_isCharging)
         {
             _chargeFactor += _chargeRate * Time.deltaTime;
@@ -34,6 +38,13 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
             UpdateUI();
         }
 
+    }
+    private void UpdateFacing()
+    {
+        if (_isPlayer)
+        {
+            _turretSteerer.SetLookAngle(_inputCon.LookAngle);
+        }
     }
     private void UpdateUI()
     {
@@ -107,5 +118,6 @@ public class ArcherTurretWH : WeaponHandler, IBoltLauncher
     {
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         _psem = _particleSystem.emission;
+        _turretSteerer = GetComponentInChildren<TurretSteerer>();
     }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class TurretSteerer : MonoBehaviour, ITurret
 {
-
+    InputController _ic;
     //settings
     [SerializeField] float _turretTurnRate = 50f;
 
     //state
-    [SerializeField] float _lookAngle = 0;
+    float _lookAngle = 0;
 
   
     private void Update()
@@ -20,6 +20,7 @@ public class TurretSteerer : MonoBehaviour, ITurret
 
     private void UpdateTurretFacingToLookAngle()
     {
+        if (!_ic) _ic = FindObjectOfType<InputController>();    
         //Vector3 targetDir = _inputCon.LookDirection;
         //float angleToTargetFromNorth = Vector3.SignedAngle(targetDir, Vector2.up, transform.forward);
         Quaternion angleToPoint = Quaternion.Euler(0, 0, _lookAngle);

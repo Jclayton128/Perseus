@@ -186,4 +186,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646672bb38d88684abf03d81ba494d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turretPrefab: {fileID: 0}
+  _turretPrefab: {fileID: 6820736381641151243, guid: 29170fc7634da984691a3cc1587675c7, type: 3}

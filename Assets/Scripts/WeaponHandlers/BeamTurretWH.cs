@@ -50,6 +50,7 @@ public class BeamTurretWH : WeaponHandler
     }
     protected override void ActivateInternal()
     {
+        if (_isBeaming) return;
         if (_hostEnergyHandler.CheckEnergy(_activationCost) && _chargeFactor > _minChargeFactorToFire)
         {
             _hostEnergyHandler.SpendEnergy(_activationCost);
@@ -123,7 +124,7 @@ public class BeamTurretWH : WeaponHandler
         {
             rh2d = Physics2D.Linecast(_turretMuzzle.position,
                 _turretMuzzle.position + _dir,
-                LayerLibrary.PlayerLayerMask);
+                LayerLibrary.PlayerEnemyLayerMask);
         }
 
         if (rh2d.collider != null)

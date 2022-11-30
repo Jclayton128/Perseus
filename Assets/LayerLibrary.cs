@@ -5,9 +5,11 @@ using UnityEngine;
 public class LayerLibrary : MonoBehaviour
 {
     public static int PlayerEnemyNeutralLayerMask =>
-        (1 << 7) | (1 << 9) | (1 << 11) | (1 << SpecialEnemyLayer);
+        (1 << PlayerLayer) | (1 << EnemyLayer) | (1 << NeutralLayer) | (1 << SpecialEnemyLayer);
     public static int PlayerLayerMask => (1 << PlayerLayer);
-    public static int EnemyLayerMask => (9 << EnemyLayer) | (1 << SpecialEnemyLayer);
+    public static int EnemyLayerMask => (1 << EnemyLayer) | (1 << SpecialEnemyLayer);
+
+    public static int PlayerEnemyLayerMask => PlayerLayerMask | EnemyLayerMask;
     public static int EnemyNeutralLayerMask =>
         (1 << EnemyLayer) | (1 << NeutralLayer) | (1 << SpecialEnemyLayer);
 
