@@ -8,6 +8,7 @@ public class BeamTurretWH : WeaponHandler
 {
     AudioSource _onboardAudioSource;
 
+
     //settings
     [SerializeField] Transform _turretMuzzle = null;
     [SerializeField] float _maxCharge = 3f;
@@ -29,7 +30,7 @@ public class BeamTurretWH : WeaponHandler
     float _effectiveRange;
     Vector3 _midway;
     HealthHandler _targetHealthHandler;
-
+    TurretSteerer _turretSteerer;
     DamagePack _damagePack;
 
     float _currentCharge;
@@ -54,7 +55,7 @@ public class BeamTurretWH : WeaponHandler
             _hostEnergyHandler.SpendEnergy(_activationCost);
             FireBeam();
             //_playerAudioSource.PlayGameplayClipForPlayer(GetRandomActivationClip());
-            _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+            _hostRadarProfileHandler?.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
             _isBeaming = true;
         }
     }
@@ -75,6 +76,8 @@ public class BeamTurretWH : WeaponHandler
 
     private void Update()
     {
+        UpdateFacing();
+
         if (_isBeaming)
         {
             _currentCharge -= _expendRate * Time.deltaTime;
@@ -97,14 +100,32 @@ public class BeamTurretWH : WeaponHandler
         }
     }
 
+    private void UpdateFacing()
+    {
+        if (_isPlayer)
+        {
+            _turretSteerer.SetLookAngle(_inputCon.LookAngle);
+        }
+    }
+
     private void UpdateBeam()
     {
         _dir = _turretMuzzle.transform.up * _maxRange;
-        
 
-        RaycastHit2D rh2d = Physics2D.Linecast(_turretMuzzle.position,
-            _turretMuzzle.position + _dir,
-            LayerLibrary.EnemyNeutralLayerMask);
+        RaycastHit2D rh2d;
+        if (_isPlayer)
+        {
+            rh2d = Physics2D.Linecast(_turretMuzzle.position,
+                _turretMuzzle.position + _dir,
+                LayerLibrary.EnemyNeutralLayerMask);
+        }
+        else
+        {
+            rh2d = Physics2D.Linecast(_turretMuzzle.position,
+                _turretMuzzle.position + _dir,
+                LayerLibrary.PlayerLayerMask);
+        }
+
         if (rh2d.collider != null)
         {
             //Debug.DrawLine(_turretMuzzle.position, rh2d.point, Color.red, 0.1f);
@@ -158,5 +179,6 @@ public class BeamTurretWH : WeaponHandler
         _currentCharge = _maxCharge;
         _onboardAudioSource = GetComponent<AudioSource>();
         _onboardAudioSource.clip = GetRandomFireClip();
+        _turretSteerer = GetComponentInChildren<TurretSteerer>();
     }
 }

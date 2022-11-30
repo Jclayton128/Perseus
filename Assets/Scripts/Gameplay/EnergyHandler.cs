@@ -37,15 +37,18 @@ public class EnergyHandler : MonoBehaviour
     {
         _movement = GetComponent<ActorMovement>();
         _health = GetComponent<HealthHandler>();
-        _health.IonFactorChanged += HandleIonFactorChange;
-
-        if (_movement == null || _health == null)
+        if (_health)
         {
-            Debug.LogError("This component needs a Movement and Health alongside it!");
-            return;
+            _health.IonFactorChanged += HandleIonFactorChange;
+            _uicontroller = FindObjectOfType<UI_Controller>();
         }
 
-        _uicontroller = FindObjectOfType<UI_Controller>();
+        //if (_movement == null || _health == null)
+        //{
+        //    Debug.LogError("This component needs a Movement and Health alongside it!");
+        //    return;
+        //}
+
     }
 
     private void Start()
@@ -71,7 +74,15 @@ public class EnergyHandler : MonoBehaviour
         }
         else
         {
-            _currentEnergy += _energyGainRate * (1 - _health.IonFactor) * Time.deltaTime;
+            if (_health)
+            {
+                _currentEnergy += _energyGainRate * (1 - _health.IonFactor) * Time.deltaTime;
+            }
+            else
+            {
+                _currentEnergy += _energyGainRate * Time.deltaTime;
+            }
+
             _currentEnergy = Mathf.Clamp(CurrentEnergy, 0, _maxEnergyPoints);
             EnergyPointsChanged?.Invoke(CurrentEnergy, _maxEnergyPoints);
         }        
