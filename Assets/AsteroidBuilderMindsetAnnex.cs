@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidDetector : MonoBehaviour
+public class AsteroidBuilderMindsetAnnex : MonoBehaviour
 {
     Mindset_Explore _mindsetExplore;
     AsteroidHandler _currentAsteroidHome;
@@ -13,8 +13,12 @@ public class AsteroidDetector : MonoBehaviour
     [SerializeField] GameObject _turretPrefab = null;
     float _timeBetweenAsteroidScans = 1f;
     float _asteroidScanRange = 10f;
+    float _asteroidConstructionRate = 1f;
+    float _asteroidConstructionRange = 1f;
+    [SerializeField] float _timeRequiredToConstructAsteroid = 5f;
 
     //state
+    float _timeSpentOnCurrentAsteroid = 0;
     float _timeForNextAsteroidScan;
 
 
@@ -33,12 +37,38 @@ public class AsteroidDetector : MonoBehaviour
         if (_currentAsteroidHome)
         {
             //Work on the turret
+            UpdateAsteroidConstruction();
+
         }
         else
         {
             //Look for new asteroid
             UpdateAsteroidScan();
         }
+    }
+
+    private void UpdateAsteroidConstruction()
+    {
+        if ((_currentAsteroidHome.transform.position - transform.position).magnitude < _asteroidConstructionRange)
+        {
+            _timeSpentOnCurrentAsteroid += Time.deltaTime * _asteroidConstructionRate;
+            if (_timeSpentOnCurrentAsteroid >= _timeRequiredToConstructAsteroid)
+            {
+                ConstructAsteroid();
+                _timeSpentOnCurrentAsteroid = 0;
+            }
+        }
+    }
+
+    private void ConstructAsteroid()
+    {
+        
+        GameObject newTurret = Instantiate(_turretPrefab, _currentAsteroidHome.transform);
+        _currentAsteroidHome.ConstructAndDeclaimAsteroid();
+
+        _currentAsteroidHealth.Dying -= HandleDyingAsteroid;
+        _currentAsteroidHealth = null;
+        _currentAsteroidHome = null;
     }
 
     private void UpdateAsteroidScan()
@@ -57,12 +87,15 @@ public class AsteroidDetector : MonoBehaviour
 
         if (coll && coll.TryGetComponent<AsteroidHandler>(out _currentAsteroidHome))
         {
-            Debug.Log("found a home!");
             _currentAsteroidHome.ClaimAsteroid();
             _currentAsteroidHealth = _currentAsteroidHome.GetComponent<HealthHandler>();
             _currentAsteroidHealth.Dying += HandleDyingAsteroid;
             _mindsetExplore.ExploreBehavior = Mindset_Explore.ExploreOptions.RandomCloseDependentMove;
             _mindsetExplore.SetDependentTransform(_currentAsteroidHome.transform);
+        }
+        else
+        {
+            _mindsetExplore.ExploreBehavior = Mindset_Explore.ExploreOptions.RandomFarMove;
         }
     }
 

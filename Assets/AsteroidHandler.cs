@@ -101,6 +101,11 @@ public class AsteroidHandler : MonoBehaviour
         transform.position -= new Vector3(0, 0, .11f);
     }
 
+    public void ConstructAndDeclaimAsteroid()
+    {
+        // actually...nothing should happen here.
+    }
+
 
 
 }

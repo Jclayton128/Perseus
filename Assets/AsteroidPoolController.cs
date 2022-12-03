@@ -28,12 +28,12 @@ public class AsteroidPoolController : MonoBehaviour
 
             case LevelController.AsteroidAmounts.Sparse:
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Medium, pos);
                 }
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Small, pos);
@@ -41,17 +41,17 @@ public class AsteroidPoolController : MonoBehaviour
                 break;
 
             case LevelController.AsteroidAmounts.Medium:
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Big, pos);
                 }
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 12; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Medium, pos);
                 }
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Small, pos);
@@ -59,17 +59,17 @@ public class AsteroidPoolController : MonoBehaviour
                 break;
 
             case LevelController.AsteroidAmounts.Heavy:
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 14; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Huge, pos);
                 }
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 14; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Big, pos);
                 }
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 14; i++)
                 {
                     pos = _levelController.ArenaRadius * UnityEngine.Random.insideUnitCircle;
                     SpawnSingleAsteroid(AsteroidHandler.Size.Medium, pos);

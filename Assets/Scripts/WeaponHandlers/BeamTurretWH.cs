@@ -124,7 +124,7 @@ public class BeamTurretWH : WeaponHandler
         {
             rh2d = Physics2D.Linecast(_turretMuzzle.position,
                 _turretMuzzle.position + _dir,
-                LayerLibrary.PlayerEnemyLayerMask);
+                LayerLibrary.PlayerLayerMask);
         }
 
         if (rh2d.collider != null)
