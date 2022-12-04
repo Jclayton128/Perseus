@@ -5,18 +5,24 @@ using System;
 
 public class DetectionHandler : MonoBehaviour
 {
-    public Action<Vector3, Vector3> PlayerTransformLocated;
+    /// <summary>
+    /// 1st payload is player location, 2nd payload is player velocity
+    /// </summary>
+    public Action<Vector3, Vector3> PlayerTransformUpdated;
+    public Action<float> PlayerDistanceUpdated;
+    public Action<Vector3, Vector3> PlayerTransformLost;
 
     MindsetHandler _mindsetHandler;
-    IPlayerSeeking _playerSeeker;
+    //IPlayerSeeking _playerSeeker;
     CircleCollider2D _circleCollider;
 
     //state
     Rigidbody2D _playerRB;
+    float _distToPlayer = Mathf.Infinity;
     
     private void Awake()
     {
-        _playerSeeker = GetComponentInParent<IPlayerSeeking>();
+        //_playerSeeker = GetComponentInParent<IPlayerSeeking>();
         _circleCollider = GetComponent<CircleCollider2D>();
     }
 
@@ -25,28 +31,38 @@ public class DetectionHandler : MonoBehaviour
         if (collision.transform.root.tag == "Player")
         {
             _playerRB = collision.GetComponentInParent<Rigidbody2D>();
-            PlayerTransformLocated?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerTransformUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.transform.root.tag == "Player")
         {
-            PlayerTransformLocated?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerTransformLost?.Invoke(_playerRB.position, _playerRB.velocity);
             _playerRB = null;
 
         }
     }
 
-    private void Update()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (_playerRB != null)
+        if (collision.transform.root.tag == "Player")
         {
-            _playerSeeker.ReportPlayer(_playerRB.position,_playerRB.velocity);
-
+            _distToPlayer = (_playerRB.position - (Vector2)transform.position).magnitude;
+            PlayerDistanceUpdated?.Invoke(_distToPlayer);
+            PlayerTransformUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
         }
-
     }
+
+    //private void Update()
+    //{
+    //    if (_playerRB != null)
+    //    {
+    //        _playerSeeker.ReportPlayer(_playerRB.position,_playerRB.velocity);
+
+    //    }
+
+    //}
 
     public void ModifyDetectorRange(float newDetectorRange)
     {

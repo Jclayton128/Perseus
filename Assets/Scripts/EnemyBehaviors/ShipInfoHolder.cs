@@ -19,8 +19,6 @@ public class ShipInfoHolder : MonoBehaviour, IScannable
     public bool IsInstallable { get; } = false;
 
     [ShowInInspector] public ShipType EType = ShipType.Unassigned0;
-    [ShowInInspector] public bool LivesAmongAsteroidsOnly = false;
-    [ShowInInspector] public bool LivesInNebulaOnly = false;
     [ShowInInspector] public string ScannerName = "default name";
 
 

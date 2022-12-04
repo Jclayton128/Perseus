@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MindsetHandler : MonoBehaviour, IPlayerSeeking
+public class MindsetHandler : MonoBehaviour
 {
 
     ActorMovement _movement;
@@ -11,7 +11,7 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
     HealthHandler _health;
     WeaponHandler _weaponHandler;
     LevelController _levelController;
-
+    DetectionHandler _detectionHandler;
 
     public Mindset_Explore ExploreMindset { get; private set; }
     public Mindset_Fight FightMindset { get; private set; }
@@ -58,8 +58,9 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
         _health = GetComponent<HealthHandler>();
         _health.ReceivingDamagePack += HandleReceivingDamage;
 
-        _weaponHandler = GetComponentInChildren<WeaponHandler>();
-        _weaponHandler?.Initialize(_energyHandler, false, null);
+        _detectionHandler = GetComponentInChildren<DetectionHandler>();
+        _detectionHandler.PlayerTransformUpdated += HandlePlayerTransformUpdated;
+        _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdated;
 
         SystemHandler[] shs = GetComponentsInChildren<SystemHandler>();
         foreach (SystemHandler sh in shs)
@@ -117,13 +118,25 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
         _shouldLeadTargetPos = shouldLeadTarget;
     }
 
-    public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)
+    public void HandlePlayerTransformUpdated(Vector3 pos, Vector3 vel)
     {
-        _playerPosition = playerPosition;
-        _playerVelocity = playerVelocity;
-        PlayerRange = ((Vector2)transform.position - playerPosition).magnitude;
+        _playerPosition = pos;
+        _playerVelocity = vel;
         _targetAge = 0;
     }
+
+    private void HandlePlayerDistanceUpdated(float dist)
+    {
+        PlayerRange = dist;
+    }
+
+    //public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)
+    //{
+    //    _playerPosition = playerPosition;
+    //    _playerVelocity = playerVelocity;
+    //    PlayerRange = ((Vector2)transform.position - playerPosition).magnitude;
+    //    _targetAge = 0;
+    //}
 
     private void HandleReceivingDamage(DamagePack dp)
     {
@@ -134,7 +147,7 @@ public class MindsetHandler : MonoBehaviour, IPlayerSeeking
     [ContextMenu("Set New Detector Range")]
     private void SetDetectorRange()
     {
-        GetComponentInChildren<DetectionHandler>().ModifyDetectorRange(_detectorRange);
+        _detectionHandler.ModifyDetectorRange(_detectorRange);
     }
 
 

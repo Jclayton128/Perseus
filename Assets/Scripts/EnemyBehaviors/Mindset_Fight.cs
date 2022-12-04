@@ -7,7 +7,7 @@ public class Mindset_Fight : Mindset
 {
     MindsetHandler _mindsetHandler;
     LevelController _levelController;
-    WeaponHandler _weaponHandler;
+    WeaponHandler[] _weaponHandlers;
 
     public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement}
     public enum FightWeaponUse { FireWhenAccurate, FireContinuously,
@@ -29,8 +29,15 @@ public class Mindset_Fight : Mindset
     {
         _mindsetHandler = mindsetHandlerRef;
         _levelController = levelConRef;
-        _weaponHandler = GetComponentInChildren<WeaponHandler>();
-        if (_weaponHandler) _decisionRange = _weaponHandler.GetMaxWeaponRange() * _decisionRangeFactor;
+
+        EnergyHandler eh = GetComponent<EnergyHandler>();
+        _weaponHandlers = GetComponentsInChildren<WeaponHandler>();
+        foreach (var wh in _weaponHandlers)
+        {
+            wh.Initialize(eh, false, null);
+        }
+
+        if (_weaponHandlers[0]) _decisionRange = _weaponHandlers[0].GetMaxWeaponRange() * _decisionRangeFactor;
         else _decisionRange = 1;
     }
 
@@ -41,18 +48,27 @@ public class Mindset_Fight : Mindset
 
     public override void ExitMindset()
     {
-        _weaponHandler.Deactivate();
+        foreach (var wh in _weaponHandlers)
+        {
+            wh.Deactivate();
+        }
     }
     public void Update()
     {
         if (_fightWeaponUse == FightWeaponUse.FireContinuously)
         {
-            _weaponHandler.Activate();
+            foreach (var wh in _weaponHandlers)
+            {
+                wh.Activate();
+            }
         }
         if (_fightWeaponUse == FightWeaponUse.FireContinuouslyIfSeePlayer &&
             _mindsetHandler.TargetAge < 0.1f)
         {
-            _weaponHandler.Activate();
+            foreach (var wh in _weaponHandlers)
+            {
+                wh.Activate();
+            }
         }
     }
 
@@ -95,11 +111,17 @@ public class Mindset_Fight : Mindset
     {
         if (isInRange && isInAngle)
         {
-            _weaponHandler.Activate();
+            foreach (var wh in _weaponHandlers)
+            {
+                wh.Activate();
+            }
         }
         else
         {
-            _weaponHandler.Deactivate();
+            foreach (var wh in _weaponHandlers)
+            {
+                wh.Deactivate();
+            }
         }
     }
 

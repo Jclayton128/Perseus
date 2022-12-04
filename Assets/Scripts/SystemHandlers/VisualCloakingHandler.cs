@@ -6,7 +6,7 @@ using DG.Tweening;
 public class VisualCloakingHandler : MonoBehaviour
 {
     SpriteRenderer _sr;
-    IPlayerSeeking _playerSeeker;
+    DetectionHandler _detectionHandler;
 
     //settings
     [SerializeField] float _cloakDecloakThreshold = 7f;
@@ -18,12 +18,14 @@ public class VisualCloakingHandler : MonoBehaviour
     private void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
-        _playerSeeker = GetComponent<IPlayerSeeking>();
+        _detectionHandler = GetComponentInChildren<DetectionHandler>();
+        _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdate;
+        _detectionHandler.PlayerTransformLost += HandlePlayerTransformLost;
     }
 
-    private void Update()
+    private void HandlePlayerDistanceUpdate(float dist)
     {
-        if (_playerSeeker.PlayerRange > _cloakDecloakThreshold)
+        if (dist > _cloakDecloakThreshold)
         {
             Cloak();
             _isSupposedToBeCloaked = true;
@@ -34,6 +36,11 @@ public class VisualCloakingHandler : MonoBehaviour
             Decloak();
             _isSupposedToBeCloaked = false;
         }
+    }
+
+    private void HandlePlayerTransformLost(Vector3 trash, Vector3 trash2)
+    {
+        Cloak();
     }
 
     private void Cloak()
