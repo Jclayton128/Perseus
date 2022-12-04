@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scanReticlePrefab: {fileID: -8895365367722007842, guid: a248e3bbd2a57384d8ecf5531c6d29a9, type: 3}
   _scanRange: 10
-  _minTimeBetweenScans: 0.5
+  _minTimeBetweenScans: 2
 --- !u!198 &7454526910713461675
 ParticleSystem:
   m_ObjectHideFlags: 0
