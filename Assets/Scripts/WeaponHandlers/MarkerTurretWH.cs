@@ -7,14 +7,15 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
     [SerializeField] Transform _turretMuzzle = null;
 
     //settings
-    [SerializeField] float _minModeToggle = 0.25f;
-    [SerializeField] float _timeBetweenShots = 0.25f;
+    [SerializeField] float _minModeToggle = 0.01f;
+    [SerializeField] float _timeBetweenShots = 0.5f;
 
     [Header("Upgrade Settings")]
     [SerializeField] float _shotSpeedIncrease_Upgrade = 1.0f;
     [SerializeField] float _ionizationIncrease_Upgrade = 0.5f;
 
     //state
+    TurretSteerer _turretSteerer;
     bool _isFiring = false;
     float _timeOfNextShot = 0;
     float _timeToToggleModes = 0;
@@ -49,6 +50,8 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
 
     private void Update()
     {
+        UpdateFacing();
+
         if (_isFiring && Time.time >= _timeOfNextShot)
         {
             if (_hostEnergyHandler.CheckEnergy(_activationCost))
@@ -64,6 +67,15 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
             _timeOfNextShot = Time.time + _timeBetweenShots;
         }
     }
+
+    private void UpdateFacing()
+    {
+        if (_isPlayer)
+        {
+            _turretSteerer.SetLookAngle(_inputCon.LookAngle);
+        }
+    }
+
     private void Fire()
     {
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _turretMuzzle);
@@ -89,6 +101,6 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
 
     protected override void InitializeWeaponSpecifics()
     {
-        //none needed
+        _turretSteerer = GetComponentInChildren<TurretSteerer>();
     }
 }

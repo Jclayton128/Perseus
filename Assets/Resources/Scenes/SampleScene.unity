@@ -4945,8 +4945,8 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
@@ -5499,7 +5499,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 4000
+    maxNumParticles: 500
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5645,7 +5645,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 60
+      value: 50
       mode: 0
       spread: 0
       speed:
@@ -5874,7 +5874,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 500
+        scalar: 1500
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -29359,7 +29359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f153a8af18ce7c4f95105d8d29b22a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 60
+  Radius: 50
   NumPoints: 32
 --- !u!68 &1482744669
 EdgeCollider2D:
@@ -29377,39 +29377,39 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0, y: 60}
-  - {x: 11.70542, y: 58.847115}
-  - {x: 22.961008, y: 55.43277}
-  - {x: 33.334213, y: 49.888176}
-  - {x: 42.426407, y: 42.426407}
-  - {x: 49.88818, y: 33.33421}
-  - {x: 55.43277, y: 22.961006}
-  - {x: 58.84712, y: 11.705414}
-  - {x: 60, y: -0.0000026226833}
-  - {x: 58.847115, y: -11.70542}
-  - {x: 55.43277, y: -22.96101}
-  - {x: 49.888172, y: -33.33422}
-  - {x: 42.426407, y: -42.426407}
-  - {x: 33.33421, y: -49.88818}
-  - {x: 22.960997, y: -55.432777}
-  - {x: 11.705419, y: -58.84712}
-  - {x: -0.0000052453665, y: -60}
-  - {x: -11.705429, y: -58.847115}
-  - {x: -22.961006, y: -55.43277}
-  - {x: -33.334217, y: -49.888172}
-  - {x: -42.426414, y: -42.4264}
-  - {x: -49.888187, y: -33.3342}
-  - {x: -55.43278, y: -22.960987}
-  - {x: -58.847115, y: -11.705423}
-  - {x: -60, y: 0.00000071549283}
-  - {x: -58.847115, y: 11.705425}
-  - {x: -55.432766, y: 22.961016}
-  - {x: -49.88817, y: 33.334225}
-  - {x: -42.42639, y: 42.426422}
-  - {x: -33.334217, y: 49.888176}
-  - {x: -22.961006, y: 55.432774}
-  - {x: -11.705414, y: 58.84712}
-  - {x: 0.000010490733, y: 60}
+  - {x: 0, y: 50}
+  - {x: 9.754517, y: 49.03926}
+  - {x: 19.134172, y: 46.193974}
+  - {x: 27.778513, y: 41.57348}
+  - {x: 35.35534, y: 35.35534}
+  - {x: 41.573483, y: 27.77851}
+  - {x: 46.193974, y: 19.13417}
+  - {x: 49.039265, y: 9.754512}
+  - {x: 50, y: -0.0000021855694}
+  - {x: 49.03926, y: -9.754517}
+  - {x: 46.193974, y: -19.134176}
+  - {x: 41.57348, y: -27.778519}
+  - {x: 35.35534, y: -35.35534}
+  - {x: 27.77851, y: -41.573483}
+  - {x: 19.134163, y: -46.19398}
+  - {x: 9.754516, y: -49.039265}
+  - {x: -0.000004371139, y: -50}
+  - {x: -9.754524, y: -49.03926}
+  - {x: -19.13417, y: -46.193974}
+  - {x: -27.778515, y: -41.57348}
+  - {x: -35.355343, y: -35.35533}
+  - {x: -41.57349, y: -27.7785}
+  - {x: -46.193985, y: -19.134157}
+  - {x: -49.03926, y: -9.754519}
+  - {x: -50, y: 0.00000059624404}
+  - {x: -49.03926, y: 9.75452}
+  - {x: -46.193974, y: 19.13418}
+  - {x: -41.573475, y: 27.77852}
+  - {x: -35.355328, y: 35.35535}
+  - {x: -27.778515, y: 41.57348}
+  - {x: -19.13417, y: 46.193977}
+  - {x: -9.754512, y: 49.039265}
+  - {x: 0.000008742278, y: 50}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -34355,7 +34355,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: e41a64e8abeb78b4e8d9b1a56407a657, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34415,8 +34415,8 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -34969,7 +34969,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 2000
+    maxNumParticles: 500
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -35032,11 +35032,11 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
-    donutRadius: 7.12
+    radiusThickness: -0
+    donutRadius: 5
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 2}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -35115,7 +35115,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 60
+      value: 46
       mode: 0
       spread: 0
       speed:
@@ -35178,7 +35178,7 @@ ParticleSystem:
       speed:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 0.26
         minScalar: 1
         maxCurve:
           serializedVersion: 2
@@ -35344,7 +35344,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 100
+        scalar: 300
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -35401,9 +35401,9 @@ ParticleSystem:
     enabled: 0
     curve:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
-      minScalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -35454,7 +35454,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -35507,7 +35507,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -35911,7 +35911,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -36180,7 +36180,7 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.003
       minScalar: 0
       maxCurve:
         serializedVersion: 2

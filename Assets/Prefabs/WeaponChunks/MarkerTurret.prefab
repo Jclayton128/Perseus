@@ -271,14 +271,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: c709b1f26840aab4793fd14f4b14242e, type: 3}
   _name: Marker Turret
-  _description: This light turret ionizes its target, reducing its energy and shield
-    regen.
-  _upgradeDescription: Upgrading increases shot speed and ionization damage.
+  _description: This repeating turret ionizes its target, reducing its energy and
+    shield regen.
+  _upgradeDescription: Upgrading increases projectile speed and ionization damage.
   WeaponType: 9
   _projectileType: 0
-  _normalDamage: 2
+  _normalDamage: 1
   _shieldBonusDamage: 0
-  _ionDamage: 1
+  _ionDamage: 2
   _knockBackAmount: 0.3
   _scrapBonus: 0
   _projectileLifetime: 2
@@ -287,7 +287,6 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 4
   _activationSounds: []
   _firingSounds:
-  - {fileID: 8300000, guid: b39a1de731a67984c9d1638724115512, type: 3}
   - {fileID: 8300000, guid: 160404db7784fb54997d4b568f8caf1f, type: 3}
   - {fileID: 8300000, guid: 9ee41c0f7624ece459e1816c8121e57a, type: 3}
   _deactivationSounds: []
@@ -295,7 +294,7 @@ MonoBehaviour:
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0
   _turretMuzzle: {fileID: 1599807124452228561}
-  _minModeToggle: 0.25
-  _timeBetweenShots: 0.25
+  _minModeToggle: 0.01
+  _timeBetweenShots: 0.5
   _shotSpeedIncrease_Upgrade: 1
   _ionizationIncrease_Upgrade: 0.5
