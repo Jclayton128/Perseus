@@ -7,7 +7,7 @@ public class SystemWeaponLibrary : MonoBehaviour
 {
     public enum SystemType { None, AfterburnerEngine, BlinkEngine, IonEngine, AntennaeCP, StealthPodCP, CompositeCP,
         PDTurretTail, DeionizerTail, ProjectorTail, DroneBayWings, VampireWings, WreckroWings,
-        ReactiveHull, HeavyArmorHull, NanoscaleHull, EmergencyCoreLINT, ShieldCoreLINT, MagnetonCoreLINT,
+        ReactiveHull, HeavyArmorHull, NanoscaleHull, StaticCoreLINT, ShieldCoreLINT, MagnetonCoreLINT,
         BatteriesRINT, RamscoopRINT, RemoteProcessorRINT}
 
     public enum WeaponType

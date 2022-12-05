@@ -130,6 +130,12 @@ public class SystemIconDriver : MonoBehaviour
         _parameterTMP.text = newString;
     }
 
+    public void UpdateUI(string newString, Color color)
+    {
+        _parameterTMP.text = newString;
+        _parameterTMP.color = color;
+    }
+
     public void UpdateUI(float factor)
     {
         _parameterImageBar.fillAmount = factor;

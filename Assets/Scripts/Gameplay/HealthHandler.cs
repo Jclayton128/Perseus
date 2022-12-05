@@ -19,7 +19,6 @@ public class HealthHandler : MonoBehaviour
     ParticleController _particleController;
     ScrapController _scrapController;
     Rigidbody2D _rb;
-    UI_Controller _UIController;
     [SerializeField] ParticleSystem _ionizationParticles = null;
 
 
@@ -108,7 +107,6 @@ public class HealthHandler : MonoBehaviour
         _movement = GetComponent<ActorMovement>();
         _particleController = FindObjectOfType<ParticleController>();
         _scrapController = _particleController.GetComponent<ScrapController>();
-        _UIController = _particleController.GetComponent<UI_Controller>();
 
         //ResetCurrentHullAndShieldLevels();
         _scrapValue = Mathf.RoundToInt(_maxHullPoints);
@@ -250,6 +248,25 @@ public class HealthHandler : MonoBehaviour
             _shieldRegenColor);
     }
 
+
+    #endregion
+
+    #region Heal Damage
+
+    public void HealCurrentShieldPoints(float amountToHeal)
+    {
+        ShieldPoints += amountToHeal;
+        ShieldPoints = Mathf.Clamp(ShieldPoints, 0, _maxShieldPoints);
+        ShieldPointChanged?.Invoke(ShieldPoints, _maxShieldPoints);
+    }
+
+
+    internal void HealCurrentHullPoints(float amountToAdd)
+    {
+        HullPoints += amountToAdd;
+        HullPoints = Mathf.Clamp(HullPoints, 0, _maxHullPoints);
+        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
+    }
 
     #endregion
 
@@ -447,12 +464,6 @@ public class HealthHandler : MonoBehaviour
         HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
     }
 
-    internal void AdjustCurrentHullPoints(float amountToAdd)
-    {
-        HullPoints += amountToAdd;
-        HullPoints = Mathf.Clamp(HullPoints, 0, _maxHullPoints);
-        HullPointsChanged?.Invoke(HullPoints, _maxHullPoints);
-    }
 
     public void AdjustIonHealRate(float amountToAdd)
     {

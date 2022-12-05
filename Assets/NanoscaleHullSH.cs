@@ -33,7 +33,7 @@ public class NanoscaleHullSH : SystemHandler
         }
         else
         {
-            _healthHandler.AdjustCurrentHullPoints(_hullRegenerationAmount);
+            _healthHandler.HealCurrentHullPoints(_hullRegenerationAmount);
         }
 
     }
