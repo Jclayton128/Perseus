@@ -42,6 +42,8 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [FoldoutGroup("Damage Pack")]
     [SerializeField] protected float _ionDamage = 0;
     [FoldoutGroup("Damage Pack")]
+    [Tooltip("Positive knockback pushes the receiver in direction of projectile. " +
+        "Negative knockback reduces player velocity. -10 should completely stop the recipient.")]
     [SerializeField] protected float _knockBackAmount = 0;
     [FoldoutGroup("Damage Pack")]
     [SerializeField] protected float _scrapBonus = 0;
@@ -235,7 +237,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     public void Activate()
     {
-        if (gameObject.activeSelf == false) return;
+        if (enabled == false) return;
         if (!GameController.IsPaused) ActivateInternal();
         if (_invokesAutosteerWhenActivated && _actorMovement) _actorMovement.IsMouseSteering = true;
     }

@@ -390,6 +390,10 @@ public class HealthHandler : MonoBehaviour
         {
             _rb.AddForce(knockbackAmount * impactHeading, ForceMode2D.Impulse);
         }
+        else
+        {
+            _rb.velocity += _rb.velocity * knockbackAmount;
+        }
     }
 
     #endregion

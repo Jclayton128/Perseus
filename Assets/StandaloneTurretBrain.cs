@@ -29,7 +29,7 @@ public class StandaloneTurretBrain : MonoBehaviour
 
     private void Awake()
     {
-        _energyHandler = GetComponent<EnergyHandler>();
+        _energyHandler = GetComponentInParent<EnergyHandler>();
         _weaponHandler = GetComponentInChildren<WeaponHandler>();
         _weaponHandler.Initialize(_energyHandler, false, null);
         _turretSteerer = _weaponHandler.GetComponentInChildren<TurretSteerer>();

@@ -182,4 +182,9 @@ public class BeamTurretWH : WeaponHandler
         _onboardAudioSource.clip = GetRandomFireClip();
         _turretSteerer = GetComponentInChildren<TurretSteerer>();
     }
+
+    private void OnDisable()
+    {
+        _onboardAudioSource.Stop();
+    }
 }

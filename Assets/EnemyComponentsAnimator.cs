@@ -64,7 +64,7 @@ public class EnemyComponentsAnimator : MonoBehaviour
         _areComponentsDeployed = true;
         foreach (var wh in _weaponHandlers)
         {
-            wh.gameObject.SetActive(_areComponentsDeployed);
+            wh.enabled = (_areComponentsDeployed);
         }
     }
 
@@ -85,7 +85,7 @@ public class EnemyComponentsAnimator : MonoBehaviour
         _areComponentsDeployed = false;
         foreach (var wh in _weaponHandlers)
         {
-            wh.gameObject.SetActive(_areComponentsDeployed);
+            wh.enabled = (_areComponentsDeployed);
         }
     }
 

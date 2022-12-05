@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineProjectile : Projectile, IPlayerSeeking
+public class MineProjectile : Projectile
 {
     SpriteRenderer _sr;
     ParticleController _particleController;
     [SerializeField] Sprite _safeSprite = null;
+    DetectionHandler _detectionHandler;
 
     //settings
     float _drag = 2f;
@@ -17,26 +18,26 @@ public class MineProjectile : Projectile, IPlayerSeeking
     [SerializeField] float _damageRange = 2.5f;
     [SerializeField] float _detonationDelay = 0.5f;
 
-
     //state
     bool _isDetonating = false;
     [SerializeField] float _timeToDetonate = Mathf.Infinity;
     Sprite _warningSprite;
-    public float PlayerRange { get; private set; } = Mathf.Infinity;
+
     public override void Initialize(ProjectilePoolController poolController)
     {
         base.Initialize(poolController);
         _sr = GetComponent<SpriteRenderer>();
         _warningSprite = _sr.sprite;
-        _particleController = poolController.GetComponent<ParticleController>();    
-        GetComponentInChildren<DetectionHandler>().ModifyDetectorRange(_maxDetectionRange);
+        _particleController = poolController.GetComponent<ParticleController>();
+        _detectionHandler = GetComponentInChildren<DetectionHandler>();
+        _detectionHandler.ModifyDetectorRange(_maxDetectionRange);
+        _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdated;
         _rb.drag = _drag;
     }
 
     protected override void SetupInstanceSpecifics()
     {
         _isDetonating = false;
-        PlayerRange = _maxDetectionRange;
         _sr.sprite = _safeSprite;
         _timeToDetonate = Mathf.Infinity;
         GetComponent<HealthHandler>().ResetCurrentHullAndShieldLevels();
@@ -79,12 +80,10 @@ public class MineProjectile : Projectile, IPlayerSeeking
             LayerLibrary.PlayerEnemyNeutralLayerMask);
     }
 
-
-    public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)
+    private void HandlePlayerDistanceUpdated(float dist)
     {
-        PlayerRange = (playerPosition - (Vector2)transform.position).magnitude;
-        _sr.sprite = GetSpriteBasedOnPlayerRange(PlayerRange);
-        if (!_isDetonating && PlayerRange < _detonationRange)
+        _sr.sprite = GetSpriteBasedOnPlayerRange(dist);
+        if (!_isDetonating && dist < _detonationRange)
         {
             BeginDetonationSequence();
             //Invoke(nameof(Detonate), _detonationDelay);
