@@ -20,18 +20,22 @@ public class StaticCoreSH : SystemHandler
     //state
     [SerializeField] float _factor;
     Color _regenColor = Color.white;
-    float _regenBonusAmount = 0;
+    float _systemShieldRegenRate = 0;
     float _timeToUpdateUI = 0;
+    float _stockShieldRegen = 0;
 
     public override object GetUIStatus()
     {
-        return _regenBonusAmount.ToString("F1");
+        return null;
+        //return _regenBonusAmount.ToString("F1");
     }
 
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
         base.IntegrateSystem(connectedSID);
         _healthHandler = GetComponentInParent<HealthHandler>();
+        _stockShieldRegen = _healthHandler.GetShieldHealRate();
+        _healthHandler.SetShieldRegenRate(_systemShieldRegenRate);
         _rb = GetComponentInParent<Rigidbody2D>();        
     }
 
@@ -50,14 +54,15 @@ public class StaticCoreSH : SystemHandler
     private void UpdateShieldRegen()
     {
         _factor = 1 - Mathf.Clamp01(_rb.velocity.magnitude / _speedThreshold);
-        _regenBonusAmount = Mathf.Lerp(0, _maxRegenValue, _factor) ;
-        _healthHandler.HealCurrentShieldPoints(_regenBonusAmount * Time.deltaTime);
+        _systemShieldRegenRate = Mathf.Lerp(0, _maxRegenValue, _factor) ;
+        _healthHandler.SetShieldRegenRate(_systemShieldRegenRate);
+        //_healthHandler.HealCurrentShieldPoints(_regenBonusAmount * Time.deltaTime);
     }
 
     private void UpdateUI()
     {
-        _regenColor = Color.Lerp(_lowRegenColor, _highRegenColor, _factor);
-        _connectedID.UpdateUI(_regenBonusAmount.ToString("F1"), _regenColor);
+        //_regenColor = Color.Lerp(_lowRegenColor, _highRegenColor, _factor);
+        //_connectedID.UpdateUI(_regenBonusAmount.ToString("F1"), _regenColor);
     }
 
     protected override void ImplementSystemDowngrade()
@@ -69,5 +74,11 @@ public class StaticCoreSH : SystemHandler
     {
         _maxRegenValue *= _maxRegenMultiplier_Upgrade;
         _speedThreshold *= _speedThresholdMultiplier_Upgrade;
+    }
+
+    public override void DeintegrateSystem()
+    {
+        base.DeintegrateSystem();
+        _healthHandler.SetShieldRegenRate(_stockShieldRegen);
     }
 }

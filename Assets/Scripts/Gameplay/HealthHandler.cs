@@ -470,6 +470,12 @@ public class HealthHandler : MonoBehaviour
         _ionHealRate += amountToAdd;
     }
 
+    public void SetShieldRegenRate(float newRegenRate)
+    {
+        _shieldHealRate = newRegenRate;
+        _shieldHealRate = Mathf.Clamp(_shieldHealRate, 0, 99);
+        ShieldRegenChanged?.Invoke(_shieldHealRate.ToString("F1"), Color.white);
+    }
 
 
     #endregion

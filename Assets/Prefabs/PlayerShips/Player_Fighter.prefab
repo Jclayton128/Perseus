@@ -90,15 +90,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxHullPoints
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _shieldHealRate
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxShieldPoints
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name
