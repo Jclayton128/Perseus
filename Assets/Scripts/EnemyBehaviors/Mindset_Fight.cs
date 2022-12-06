@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Mindset_Fight : Mindset
 {
@@ -9,7 +10,12 @@ public class Mindset_Fight : Mindset
     LevelController _levelController;
     WeaponHandler[] _weaponHandlers;
 
-    public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement}
+    public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement, FlyToOffset}
+
+    [ShowIf("FightMovement", FightMovements.FlyToOffset)]
+    [Tooltip("The local offset (from the player) this enemy should fly towards")]
+    [SerializeField] Vector2 _offsetToFlyTo = Vector2.zero;
+    
     public enum FightWeaponUse { FireWhenAccurate, FireContinuously,
         FireContinuouslyIfSeePlayer, NeverFire}
 
@@ -23,6 +29,7 @@ public class Mindset_Fight : Mindset
 
     //state
     [SerializeField] float _decisionRange;
+    bool _wasJustActivatingWeapon = false;
 
 
     public override void InitializeMindset(MindsetHandler mindsetHandlerRef, LevelController levelConRef)
@@ -62,14 +69,28 @@ public class Mindset_Fight : Mindset
                 wh.Activate();
             }
         }
-        if (_fightWeaponUse == FightWeaponUse.FireContinuouslyIfSeePlayer &&
-            _mindsetHandler.TargetAge < 0.1f)
+        if (_fightWeaponUse == FightWeaponUse.FireContinuouslyIfSeePlayer)
         {
-            foreach (var wh in _weaponHandlers)
+            if (_mindsetHandler.TargetAge < 0.1f)
             {
-                wh.Activate();
+                foreach (var wh in _weaponHandlers)
+                {
+                    wh.Activate();
+
+                }
+                _wasJustActivatingWeapon = true;
+            }
+            else if (_wasJustActivatingWeapon)
+            {
+                foreach (var wh in _weaponHandlers)
+                {
+                    wh.Deactivate();
+                }
+                _wasJustActivatingWeapon = false;
             }
         }
+
+
     }
 
     public override void UpdateMindset()
@@ -143,6 +164,14 @@ public class Mindset_Fight : Mindset
             case FightMovements.StandoffLead:
                 newTargetPos = _mindsetHandler.PlayerPosition;
                 _mindsetHandler.SetTargetPosition(newTargetPos, _decisionRange, true);
+                break;
+
+            case FightMovements.FlyToOffset:
+                if (_mindsetHandler.PlayerTransform != null)
+                {
+                    newTargetPos = _mindsetHandler.PlayerTransform.TransformPoint(_offsetToFlyTo);
+                    _mindsetHandler.SetTargetPosition(newTargetPos, 0, false);
+                }               
                 break;
         }
     }

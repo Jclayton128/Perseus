@@ -12,7 +12,7 @@ public class MinionShipHandler : MonoBehaviour, IMinionShip
     {
         _particleController = FindObjectOfType<ParticleController>();
         _mothership = mothership;
-        GetComponentInChildren<DetectionHandler>().PlayerTransformUpdated += IssueAlertToMothership;
+        GetComponentInChildren<DetectionHandler>().PlayerPosVelUpdated += IssueAlertToMothership;
         _mindsetHandler = GetComponentInParent<MindsetHandler>();
         GetComponent<Mindset_Explore>().SetDependentTransform(mothershipTransform);
         GetComponent<HealthHandler>().Dying += HandleMinionAspectsOfDying;
@@ -25,7 +25,7 @@ public class MinionShipHandler : MonoBehaviour, IMinionShip
 
     public void AssignTarget(Vector3 targetPosition, Vector3 targetVelocity)
     {
-        _mindsetHandler.HandlePlayerTransformUpdated(targetPosition, targetVelocity);
+        _mindsetHandler.HandlePlayerPosVelUpdated(targetPosition, targetVelocity);
     }
 
     private void HandleMinionAspectsOfDying()

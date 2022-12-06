@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3780d823931d665428284fca2ed6d059, type: 3}
-  m_Name: EasyLevel 2
+  m_Name: Iron
   m_EditorClassIdentifier: 
-  LevelName: Lithium
+  LevelName: Iron
   Icon: {fileID: 21300000, guid: 384bd6222caaf404cb3d280b6341c11a, type: 3}
-  AsteroidAmount: 0
+  AsteroidAmount: 3
   NebulaAmount: 0
-  _possibleEnemies: 030000000700000004000000
+  _possibleEnemies: 0900000008000000

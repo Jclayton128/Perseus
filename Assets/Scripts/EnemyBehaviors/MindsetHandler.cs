@@ -42,6 +42,9 @@ public class MindsetHandler : MonoBehaviour
     Vector2 _playerVelocity = Vector2.zero;
     public Vector2 PlayerVelocity => _playerVelocity;
 
+    Transform _playerTransform = null;
+    public Transform PlayerTransform => _playerTransform;
+
 
     [SerializeField] float _targetAge = Mathf.Infinity; // how many seconds has it been since the player was detected
     public float TargetAge => _targetAge;
@@ -59,8 +62,10 @@ public class MindsetHandler : MonoBehaviour
         _health.ReceivingDamagePack += HandleReceivingDamage;
 
         _detectionHandler = GetComponentInChildren<DetectionHandler>();
-        _detectionHandler.PlayerTransformUpdated += HandlePlayerTransformUpdated;
+        _detectionHandler.PlayerPosVelUpdated += HandlePlayerPosVelUpdated;
         _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdated;
+        _detectionHandler.PlayerTransformFound += HandlePlayerTransformFound;
+        _detectionHandler.PlayerPosVelLost += HandlePlayerPosVelLost;
 
         SystemHandler[] shs = GetComponentsInChildren<SystemHandler>();
         foreach (SystemHandler sh in shs)
@@ -81,6 +86,7 @@ public class MindsetHandler : MonoBehaviour
         _activeMindset = ExploreMindset;
         _activeMindset.EnterMindset();
     }
+
 
     private void Start()
     {
@@ -118,7 +124,7 @@ public class MindsetHandler : MonoBehaviour
         _shouldLeadTargetPos = shouldLeadTarget;
     }
 
-    public void HandlePlayerTransformUpdated(Vector3 pos, Vector3 vel)
+    public void HandlePlayerPosVelUpdated(Vector3 pos, Vector3 vel)
     {
         _playerPosition = pos;
         _playerVelocity = vel;
@@ -128,6 +134,17 @@ public class MindsetHandler : MonoBehaviour
     private void HandlePlayerDistanceUpdated(float dist)
     {
         PlayerRange = dist;
+    }
+
+    private void HandlePlayerTransformFound(Transform obj)
+    {
+        _playerTransform = obj;
+    }
+
+
+    private void HandlePlayerPosVelLost(Vector3 arg1, Vector3 arg2)
+    {
+        _playerTransform = null;
     }
 
     //public void ReportPlayer(Vector2 playerPosition, Vector2 playerVelocity)

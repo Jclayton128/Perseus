@@ -38,7 +38,7 @@ public class EnemyComponentsAnimator : MonoBehaviour
         _deployTweens = new Tween[_deployableGameObjects.Length];
         _detectionHandler = GetComponentInChildren<DetectionHandler>();
         _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdated;
-        _detectionHandler.PlayerTransformLost += HandlePlayerLost;
+        _detectionHandler.PlayerPosVelLost += HandlePlayerLost;
     }
 
     private void Start()

@@ -8,9 +8,10 @@ public class DetectionHandler : MonoBehaviour
     /// <summary>
     /// 1st payload is player location, 2nd payload is player velocity
     /// </summary>
-    public Action<Vector3, Vector3> PlayerTransformUpdated;
+    public Action<Vector3, Vector3> PlayerPosVelUpdated;
     public Action<float> PlayerDistanceUpdated;
-    public Action<Vector3, Vector3> PlayerTransformLost;
+    public Action<Vector3, Vector3> PlayerPosVelLost;
+    public Action<Transform> PlayerTransformFound;
 
     MindsetHandler _mindsetHandler;
     //IPlayerSeeking _playerSeeker;
@@ -18,6 +19,7 @@ public class DetectionHandler : MonoBehaviour
 
     //state
     Rigidbody2D _playerRB;
+    Transform _playerTransform;
     float _distToPlayer = Mathf.Infinity;
     
     private void Awake()
@@ -31,14 +33,15 @@ public class DetectionHandler : MonoBehaviour
         if (collision.transform.root.tag == "Player")
         {
             _playerRB = collision.GetComponentInParent<Rigidbody2D>();
-            PlayerTransformUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerPosVelUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerTransformFound?.Invoke(collision.transform);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.transform.root.tag == "Player")
         {
-            PlayerTransformLost?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerPosVelLost?.Invoke(_playerRB.position, _playerRB.velocity);
             _playerRB = null;
 
         }
@@ -50,7 +53,7 @@ public class DetectionHandler : MonoBehaviour
         {
             _distToPlayer = (_playerRB.position - (Vector2)transform.position).magnitude;
             PlayerDistanceUpdated?.Invoke(_distToPlayer);
-            PlayerTransformUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
+            PlayerPosVelUpdated?.Invoke(_playerRB.position, _playerRB.velocity);
         }
     }
 

@@ -76,9 +76,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 54ff4e1c41d6de643983795f9217d1c5, type: 3}
   _name: Static Shield
-  _description: "Generates extra shield energy based on your speed; shields regen
-    faster while moving slower.\t"
-  _upgradeDescription: Upgrading raises the shield regen rate while moving slow
+  _description: Enhances max shield regen rate by tying it to speed; moving fast
+    lowers regen, while staying still greatly increases it.
+  _upgradeDescription: Upgrading raises the max shield regen rate while stationary
+    or slow
   SystemType: 16
   SystemLocation: 5
   _maxUpgradeLevel: 5

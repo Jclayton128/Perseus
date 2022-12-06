@@ -632,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxHullPoints
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _shieldHealRate

@@ -13,7 +13,7 @@ public class PlayerStateHandler : MonoBehaviour
     EnergyHandler _energyHandler;
 
     //Settings
-    int _scrapsPerLevelMod = 10;
+    int _scrapsPerLevelMod = 6;
     float _timeBetweenUpgradeMenuToggles = 0.9f; // Should be the same as the time to deploy the menu
     
     [SerializeField] float _shieldGainOnLevelUp = 1f;

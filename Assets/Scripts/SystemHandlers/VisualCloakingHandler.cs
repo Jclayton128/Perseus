@@ -20,7 +20,7 @@ public class VisualCloakingHandler : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _detectionHandler = GetComponentInChildren<DetectionHandler>();
         _detectionHandler.PlayerDistanceUpdated += HandlePlayerDistanceUpdate;
-        _detectionHandler.PlayerTransformLost += HandlePlayerTransformLost;
+        _detectionHandler.PlayerPosVelLost += HandlePlayerTransformLost;
     }
 
     private void HandlePlayerDistanceUpdate(float dist)

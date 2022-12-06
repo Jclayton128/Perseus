@@ -22,7 +22,7 @@ public class MarkerTurretWH : WeaponHandler, IBoltLauncher
 
     protected override void ActivateInternal()
     {
-        if (Time.time >= _timeToToggleModes)
+        if (!_isFiring && Time.time >= _timeToToggleModes)
         {
             _timeOfNextShot = Time.time + _minModeToggle;
             _timeToToggleModes = Time.time + _minModeToggle;

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 public class ShipInfoHolder : MonoBehaviour, IScannable
 {
     public enum ShipType { Unassigned0, Dummy1, Warper2, Hammer3, Maker4, Mite5,
-        Stalker6, Fencer7, Rocker8, Scrapper9, Trundler10 }
+        Stalker6, Fencer7, Rocker8, Scrapper9, Trundler10, Stinger11 }
 
 
     //state

@@ -16,6 +16,7 @@ public class DarkbladeWH : WeaponHandler
     //state
     Vector3 _dir;
     float _effectiveRange;
+    int _layerMask = 0;
 
 
     protected override void ActivateInternal()
@@ -24,7 +25,9 @@ public class DarkbladeWH : WeaponHandler
         {
             _hostEnergyHandler.SpendEnergy(_activationCost);
             FireBeam();
-            _playerAudioSource.PlayClipAtPlayer(GetRandomActivationClip());
+
+            if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomActivationClip());
+            else _hostAudioSource.PlayOneShot(GetRandomActivationClip());
         }
     }
 
@@ -36,7 +39,7 @@ public class DarkbladeWH : WeaponHandler
             _beamWidth,
             _dir,
             _beamLength,
-            LayerLibrary.EnemyNeutralLayerMask);
+            _layerMask) ;
         if (rh2d.collider != null)
         {            
             _effectiveRange = rh2d.distance;
@@ -90,5 +93,7 @@ public class DarkbladeWH : WeaponHandler
     protected override void InitializeWeaponSpecifics()
     {
         //none needed
+        if (_isPlayer) _layerMask = LayerLibrary.EnemyNeutralLayerMask;
+        else _layerMask = LayerLibrary.PlayerLayerMask;
     }
 }
