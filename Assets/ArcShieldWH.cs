@@ -26,7 +26,7 @@ public class ArcShieldWH : WeaponHandler
     bool _isEmitting = false;
     Vector3 _rotation = Vector3.zero;
     float _emitTime = 0;
-    float _factor = 1;
+    float _factor = 0;
     Color _color = Color.white;
     Tween _audioTween;
 
@@ -96,7 +96,9 @@ public class ArcShieldWH : WeaponHandler
             _shieldAudioSource = GetComponent<AudioSource>();
             _shieldAudioSource.clip = _activationSounds[0];
             _shieldAudioSource.Stop();
-        }        
+        }
+
+        _emitTime = _shieldTime; // Make the system start at empty for Hammers to look better
     }
 
     private void FadeoutAudioLoop()

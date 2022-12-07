@@ -329,16 +329,19 @@ public class LevelController : MonoBehaviour
         return newEnemy;
     }
 
-    public GameObject SpawnSingleShipAtPoint(ShipInfoHolder.ShipType shipType, Vector3 spawnPoint)
+    /// <summary>
+    /// This spawns a single enemy of a specific ShipType as a minion. Ships
+    /// added this way do not get tracked by Level Controller.
+    /// </summary>
+    /// <param name="shipType"></param>
+    /// <param name="spawnPoint"></param>
+    /// <returns></returns>
+    public GameObject SpawnMinionShipAtPoint(ShipInfoHolder.ShipType shipType, Vector3 spawnPoint)
     {
         GameObject enemy = _enemyLibrary.GetEnemyGameObjectOfType(shipType);
         float randRot = UnityEngine.Random.Range(-179, 179);
         Quaternion rot = Quaternion.Euler(0, 0, randRot);
-        GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);
-        if (newEnemy.GetComponent<EnemyRegistrationHandler>().ShouldChangeThreatCount)
-        {
-            RegisterEnemy(newEnemy.GetComponent<EnemyRegistrationHandler>(), true); //Don't register minions
-        }        
+        GameObject newEnemy = Instantiate(enemy, spawnPoint, rot);      
         return newEnemy;
     }
 

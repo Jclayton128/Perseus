@@ -8,7 +8,7 @@ public class MinionShipHandler : MonoBehaviour, IMinionShip
     MindsetHandler _mindsetHandler;
     ParticleController _particleController;
 
-    public void InitializeWithAssignedMothership(IMothership mothership, Transform mothershipTransform)
+    public void InitializeWithAssignedMothership(IMothership mothership, Transform mothershipTransform, Vector2 initialVel)
     {
         _particleController = FindObjectOfType<ParticleController>();
         _mothership = mothership;
@@ -16,6 +16,7 @@ public class MinionShipHandler : MonoBehaviour, IMinionShip
         _mindsetHandler = GetComponentInParent<MindsetHandler>();
         GetComponent<Mindset_Explore>().SetDependentTransform(mothershipTransform);
         GetComponent<HealthHandler>().Dying += HandleMinionAspectsOfDying;
+        GetComponent<Rigidbody2D>().velocity = initialVel;
     }
 
     private void IssueAlertToMothership(Vector3 targetPosition, Vector3 targetVelocity)

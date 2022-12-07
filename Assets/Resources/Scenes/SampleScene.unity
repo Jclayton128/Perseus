@@ -20988,7 +20988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefabs:
-  - {fileID: 4323377972221603521, guid: 7389fe01f4a4189478debc5b5548ca12, type: 3}
   - {fileID: 5288900001543504745, guid: 499b9a32a22b67a44838ea622140a36e, type: 3}
   - {fileID: 3034225003434905725, guid: 6e3349950857d2342b33f7e9df0a31ae, type: 3}
   - {fileID: 5867531201207933844, guid: 7652f087802cb2f41ab8ad372a7dc663, type: 3}
@@ -21000,6 +20999,8 @@ MonoBehaviour:
   - {fileID: 6658415473265941888, guid: a38ee4960e6226e40a2a4edf016f4efd, type: 3}
   - {fileID: 8886479856476907708, guid: e6b64b9805bc85345933326fc5c97097, type: 3}
   - {fileID: 6949589758991457435, guid: 255181c9cba373946b0648e668c167e5, type: 3}
+  - {fileID: 4323377972221603521, guid: 7389fe01f4a4189478debc5b5548ca12, type: 3}
+  - {fileID: 4323377972221603521, guid: 8c469a6c66d67994c96d33586ebb1509, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21020,6 +21021,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4d508f1f7131414d945aa4edd91bea4, type: 2}
   _allBossLevels:
   - {fileID: 11400000, guid: 9b5a4e0e994207b438b922331b9ad56f, type: 2}
+  - {fileID: 11400000, guid: 70e31e1ce1378934fb3a9e7435cc2163, type: 2}
   _asteroidPrefabs: []
   _nebulaPrefabs: []
   _wormholePrefabs: []

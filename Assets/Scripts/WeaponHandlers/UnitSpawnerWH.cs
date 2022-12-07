@@ -38,8 +38,8 @@ public class UnitSpawnerWH : WeaponHandler, IMothership
     private void Fire()
     {
         IMinionShip newMinion =
-            _levelController.SpawnSingleShipAtPoint(_spawnSType, _muzzle.position).GetComponent<IMinionShip>();
-        newMinion.InitializeWithAssignedMothership(this, transform);
+            _levelController.SpawnMinionShipAtPoint(_spawnSType, _muzzle.position).GetComponent<IMinionShip>();
+        newMinion.InitializeWithAssignedMothership(this, transform, transform.up * _projectileSpeed);
         _minions.Add(newMinion);
     }
 

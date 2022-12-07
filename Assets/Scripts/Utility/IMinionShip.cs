@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IMinionShip
 {
-    public void InitializeWithAssignedMothership(IMothership mothership, Transform mothershipTransform);
+    public void InitializeWithAssignedMothership(IMothership mothership, Transform mothershipTransform, 
+        Vector2 initialVelocity);
 
     public void AssignTarget(Vector3 targetPosition, Vector3 targetVelocity);
 
