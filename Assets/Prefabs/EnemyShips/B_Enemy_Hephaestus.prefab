@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
       propertyPath: _maxSpawnCount
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
       propertyPath: _activationCost
@@ -254,6 +254,14 @@ PrefabInstance:
     - target: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
       propertyPath: _projectileSpeed
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
+      propertyPath: _spawnCountIncrease_Upgrade
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
+      propertyPath: _activationCostMultiplier_Upgrade
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1769115674432078700, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
       propertyPath: m_RootOrder

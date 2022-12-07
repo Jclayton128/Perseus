@@ -57,15 +57,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _ionDamage
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _normalDamage
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.8
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _shotSpeedIncrease_Upgrade
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -125,8 +133,20 @@ PrefabInstance:
       value: HydraTurret_MarkerVariant_3
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _normalDamage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.8
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _shotSpeedIncrease_Upgrade
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -186,8 +206,20 @@ PrefabInstance:
       value: HydraTurret_MarkerVariant_2
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _normalDamage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.8
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _shotSpeedIncrease_Upgrade
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -447,8 +479,20 @@ PrefabInstance:
       value: HydraTurret_MarkerVariant_1
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _normalDamage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.8
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _shotSpeedIncrease_Upgrade
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}

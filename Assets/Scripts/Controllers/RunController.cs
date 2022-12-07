@@ -14,10 +14,14 @@ public class RunController : MonoBehaviour
     int _currentThreatBudget = 0;
     public int CurrentThreatBudget => _currentThreatBudget;
 
+    [SerializeField] int _currentBossCount = 0;
+    public int CurrentBossCount => _currentBossCount;
+
     public void ResetRunStats()
     {
         _currentSectorCount = 0;
         _currentThreatBudget = _startingThreatBudget;
+        _currentBossCount = 0;
 
     }
 
@@ -27,6 +31,8 @@ public class RunController : MonoBehaviour
 
         //TODO do a more clever threat budget increase per level?
         _currentThreatBudget++;
+
+        if (CheckIfIsBossLevel()) _currentBossCount++;
     }
 
     public string GetGameoverText(bool wasGameoverForced)
