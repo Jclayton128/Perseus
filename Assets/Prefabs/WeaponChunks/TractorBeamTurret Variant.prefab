@@ -89,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _knockBackAmount
-      value: -3
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _shieldBonusDamage

@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     RunController _runStatsController;
     TutorialController _tutorialController;
     AudioController _audioController;
+
     public Action<GameObject> PlayerSpawned;
 
 

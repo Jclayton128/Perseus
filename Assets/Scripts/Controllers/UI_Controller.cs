@@ -972,7 +972,8 @@ public class UI_Controller : MonoBehaviour
 
     private void UpdateRadarThreatCount(int threatCount)
     {
-        _threatCountTMP.text = threatCount.ToString();
+        if (threatCount >= 0) _threatCountTMP.text = threatCount.ToString();
+        else _threatCountTMP.text = "??";
     }
 
     #endregion
@@ -1026,8 +1027,17 @@ public class UI_Controller : MonoBehaviour
         _vesselCountFadeTween.Kill();
         _sectorCountTMP.text = _sectorCountBlurb + sectorCount;
         _sectorCountTMP.color = new Color(1, 1, 1, 0);
-        _vesselCountTMP.text = _vesselCountBlurb + vesselsCount;
+
+        if (vesselsCount >= 0)
+        {
+            _vesselCountTMP.text = _vesselCountBlurb + vesselsCount;
+        }
+        else
+        {
+            _vesselCountTMP.text = _vesselCountBlurb + "???";
+        }
         _vesselCountTMP.color = new Color(1, 1, 1, 0);
+
 
         _sectorCountTMP.DOFade(1, _sectorBriefFadeoutTime);
         _sectorCountFadeTween = _sectorCountTMP.DOFade(0, _sectorBriefFadeoutTime).

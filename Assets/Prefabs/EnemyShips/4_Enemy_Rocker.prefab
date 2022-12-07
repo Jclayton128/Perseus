@@ -504,10 +504,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TractorBeamTurret
       objectReference: {fileID: 0}
-    - target: {fileID: 5245030370960031508, guid: cec08e07c6ab5364f981a52aea79ebef, type: 3}
-      propertyPath: _knockBackAmount
-      value: -5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec08e07c6ab5364f981a52aea79ebef, type: 3}
 --- !u!4 &2968744836257985362 stripped
@@ -556,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
-      value: x_Enemy_Rocker
+      value: 4_Enemy_Rocker
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384466973, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Radius

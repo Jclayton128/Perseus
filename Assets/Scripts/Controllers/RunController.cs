@@ -6,9 +6,9 @@ public class RunController : MonoBehaviour
 {
     //settings
     [SerializeField] int _startingThreatBudget = 2;
+    int _levelsBetweenBosses = 3;
 
     //state
-
     int _currentSectorCount = 0;
     public int CurrentSectorCount => _currentSectorCount;
     int _currentThreatBudget = 0;
@@ -57,5 +57,23 @@ public class RunController : MonoBehaviour
     {
         _currentThreatBudget += amountToIncrease;
         Debug.Log("Budget increased. Current budget is now: " + _currentThreatBudget);
+    }
+
+    public bool CheckIfIsBossLevel()
+    {
+        if (_currentSectorCount % _levelsBetweenBosses == 0)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public bool CheckIfPreBossLevel()
+    {
+        if (_currentSectorCount % _levelsBetweenBosses == _levelsBetweenBosses - 1)
+        {
+            return true;
+        }
+        else return false;
     }
 }

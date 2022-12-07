@@ -9,6 +9,9 @@ public class TurretSteerer : MonoBehaviour, ITurret
     //settings
     [SerializeField] float _turretTurnRate = 50f;
 
+    [Tooltip("This is the maximum amount of degrees injected into a set lookangle")]
+    [SerializeField] float _inaccuracyAmount = 0f;
+
     //state
     float _lookAngle = 0;
 

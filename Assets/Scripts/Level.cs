@@ -19,4 +19,6 @@ public class Level : ScriptableObject
     [SerializeField] private List<ShipInfoHolder.ShipType> _possibleEnemies;
     public List<ShipInfoHolder.ShipType> PossibleEnemies => _possibleEnemies;
 
+    public Color BackgroundColor = Color.clear;
+
 }

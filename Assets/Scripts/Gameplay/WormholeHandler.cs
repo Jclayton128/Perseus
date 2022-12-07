@@ -13,13 +13,13 @@ public class WormholeHandler : MonoBehaviour, IScannable
     public bool IsInstallable { get; } = false;
 
     //state
-    public Level _associatedLevel;
+    public Level AssociatedLevel { get; private set; }
     Rigidbody2D _playerRB;
     Vector2 _inwardDir;
 
     public void Initialize(Level associatedLevel)
     {
-        _associatedLevel = associatedLevel;
+        AssociatedLevel = associatedLevel;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -52,12 +52,12 @@ public class WormholeHandler : MonoBehaviour, IScannable
 
     public string GetScanName()
     {
-        return _associatedLevel.LevelName;
+        return AssociatedLevel.LevelName;
     }
 
     public Sprite GetScanIcon()
     {
-        return _associatedLevel.Icon;
+        return AssociatedLevel.Icon;
     }
 
     public SystemWeaponLibrary.SystemType ScanSystemType()

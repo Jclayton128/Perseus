@@ -43,7 +43,8 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [SerializeField] protected float _ionDamage = 0;
     [FoldoutGroup("Damage Pack")]
     [Tooltip("Positive knockback pushes the receiver in direction of projectile. " +
-        "Negative knockback reduces player velocity. -10 should completely stop the recipient.")]
+        "Negative knockback sets the player velocity to velocity*knockback amount." +
+        " ie, -.5 cuts player speed in half")]
     [SerializeField] protected float _knockBackAmount = 0;
     [FoldoutGroup("Damage Pack")]
     [SerializeField] protected float _scrapBonus = 0;

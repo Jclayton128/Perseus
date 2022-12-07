@@ -42,6 +42,24 @@ public class EnemyLibrary : MonoBehaviour
         Debug.Log($"Created an menu with {_enemyGameObjects.Count} enemies");
     }
 
+    public List<GameObject> CreateMenuFromBossLevel(Level bossLevel)
+    {
+        List<GameObject> menu = new List<GameObject>();
+
+        if (bossLevel.PossibleEnemies.Count == 0)
+        {
+            Debug.LogError("No boss enemies to choose from on this level!");
+            return null;
+        }
+
+        foreach (var en in bossLevel.PossibleEnemies)
+        {
+            menu.Add(_enemyGameObjects[en]);
+        }
+
+        return menu;
+    }
+
     public List<GameObject> CreateMenuFromBudgetAndLevel(int totalBudget, Level level)
     {
         int remainingBudget = totalBudget;
@@ -121,4 +139,6 @@ public class EnemyLibrary : MonoBehaviour
     {
         return _loadedEnemies.ToArray();
     }
+
+
 }

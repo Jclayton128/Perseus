@@ -410,6 +410,7 @@ public class HealthHandler : MonoBehaviour
         else
         {
             _rb.velocity += _rb.velocity * knockbackAmount;
+
         }
     }
 
