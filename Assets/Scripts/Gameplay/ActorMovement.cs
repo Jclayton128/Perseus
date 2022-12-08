@@ -36,6 +36,7 @@ public class ActorMovement : MonoBehaviour
 
     [SerializeField] float _thrust;
     [SerializeField] float _turnRate;
+    float _turnRateMemory;
 
     [Tooltip("Negative drag rate defaults to thrust/100")]
     [SerializeField] float _decelDragRate = -1f;
@@ -97,7 +98,8 @@ public class ActorMovement : MonoBehaviour
         else
         {
             _mindsetHandler = GetComponent <MindsetHandler>();
-        } 
+        }
+        _turnRateMemory = _turnRate;
     }
 
 
@@ -374,6 +376,7 @@ public class ActorMovement : MonoBehaviour
     public void ModifyTurnRate(float amountToAdd)
     {
         _turnRate += amountToAdd;
+        _turnRateMemory += amountToAdd;
     }
 
     public void SetThrustEnergyCost(float newThrustCost)
@@ -405,12 +408,11 @@ public class ActorMovement : MonoBehaviour
 
     #endregion
 
-    public void SetDesiredSteeringOnWarpGate(Vector2 newDesiredSteering)
+    public void JumpToWarpGate(float signedAngle)
     {
-        _desiredSteering = newDesiredSteering;
-        float turnRateOriginal = _turnRate;
+        transform.rotation = Quaternion.Euler(0, 0, signedAngle);
         _turnRate = 0;
-        DOTween.To(() => _turnRate, x => _turnRate = x, turnRateOriginal, 2f).SetEase(Ease.InExpo);
+        DOTween.To(() => _turnRate, x => _turnRate = x, _turnRateMemory, 1f).SetEase(Ease.InExpo);
     }
     private void OnDestroy()
     {

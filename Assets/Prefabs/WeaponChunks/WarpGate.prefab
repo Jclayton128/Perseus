@@ -101,7 +101,7 @@ MonoBehaviour:
   _spotPrefab: {fileID: 7355385148693737078, guid: 5064cf9aa62eabd4d959a9f6569324f7, type: 3}
   _blinkInParticleFXPrefab: {fileID: 7094645671175686317, guid: 5b31552667e92d44cbf07016d1bf0be5, type: 3}
   _spotExtendRate: 2
-  _spotExtension_Min: 1.5
+  _spotExtension_Min: 2.5
   _spotExtension_Max: 10
   _novaCount: 20
   _spotExtendRateAddition_Upgrade: 0.5

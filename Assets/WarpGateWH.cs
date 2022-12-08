@@ -72,8 +72,10 @@ public class WarpGateWH : WeaponHandler
             LayerLibrary.EnemyLayerMask, 6f);
         if (target)
         {
-            _actorMovement.SetDesiredSteeringOnWarpGate(target.transform.position - transform.position);
-            transform.root.rotation = target.transform.rotation;
+            //transform.root.rotation = target.transform.rotation;
+            float dir = Vector3.SignedAngle(Vector2.up, target.transform.position - transform.position, Vector3.forward);
+            _actorMovement.JumpToWarpGate(dir);
+
         }
 
         float spreadSubdivided = 360f / _novaCount;
