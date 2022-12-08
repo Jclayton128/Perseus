@@ -34,5 +34,17 @@ public class AudioController : MonoBehaviour
 
     }
 
+    public void PlayClipAtPlayer(AudioClip clip, float volumeScale)
+    {
+        if (GameController.IsPaused == false)
+        {
+            _cameraAudioSource.PlayOneShot(clip, volumeScale);
+        }
+        else
+        {
+            Debug.Log("Can't play gameplay clips while paused");
+        }
+    }
+
 
 }

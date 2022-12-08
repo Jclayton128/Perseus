@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MissileLauncherWH : WeaponHandler, IMissileLauncher
 {
+
     //settings
     [Header("Base Missile Parameters")]
     [SerializeField] float _missileTurnRate = 180f;

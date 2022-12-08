@@ -60,11 +60,23 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     [FoldoutGroup("Audio")]
     [SerializeField] protected AudioClip[] _activationSounds = null;
 
+    [FoldoutGroup("Audio")]
+    [ShowIf("@_activationSounds.Length > 0")]
+    [SerializeField][Range(0, 1)] protected float _activationSoundVolume = 1;
+
     [FoldoutGroup("Audio")] [Tooltip("This option clips may be called internally by other WHs")]
     [SerializeField] protected AudioClip[] _firingSounds = null;
 
     [FoldoutGroup("Audio")]
+    [ShowIf("@_firingSounds.Length > 0")]
+    [SerializeField] [Range(0,1)] protected float _firingSoundVolume = 1;
+
+    [FoldoutGroup("Audio")]
     [SerializeField] protected AudioClip[] _deactivationSounds = null;
+
+    [FoldoutGroup("Audio")]
+    [ShowIf("@_deactivationSounds.Length > 0")]
+    [SerializeField][Range(0, 1)] protected float _deactivationSoundVolume = 1;
 
     PlayerStateHandler _playerStateHandler;
     protected Transform _muzzle;
