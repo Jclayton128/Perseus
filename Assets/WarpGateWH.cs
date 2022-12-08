@@ -69,10 +69,10 @@ public class WarpGateWH : WeaponHandler
         Instantiate(_blinkInParticleFXPrefab, _spot.transform.position, Quaternion.identity);
 
         GameObject target = CUR.FindNearestGameObjectOnLayer(_spot.transform,
-            LayerLibrary.EnemyLayerMask, 4f);
+            LayerLibrary.EnemyLayerMask, 6f);
         if (target)
         {
-            _actorMovement.SetDesiredSteering(target.transform.position - transform.position);
+            _actorMovement.SetDesiredSteeringOnWarpGate(target.transform.position - transform.position);
             transform.root.rotation = target.transform.rotation;
         }
 

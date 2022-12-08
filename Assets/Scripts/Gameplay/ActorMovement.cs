@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class ActorMovement : MonoBehaviour
 {
@@ -404,9 +405,12 @@ public class ActorMovement : MonoBehaviour
 
     #endregion
 
-    public void SetDesiredSteering(Vector2 newDesiredSteering)
+    public void SetDesiredSteeringOnWarpGate(Vector2 newDesiredSteering)
     {
         _desiredSteering = newDesiredSteering;
+        float turnRateOriginal = _turnRate;
+        _turnRate = 0;
+        DOTween.To(() => _turnRate, x => _turnRate = x, turnRateOriginal, 2f).SetEase(Ease.InExpo);
     }
     private void OnDestroy()
     {

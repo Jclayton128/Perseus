@@ -87,8 +87,8 @@ MonoBehaviour:
   _ionDamage: 3
   _knockBackAmount: 0
   _scrapBonus: 0
-  _projectileLifetime: 0.7
-  _projectileSpeed: 3
+  _projectileLifetime: 0.4
+  _projectileSpeed: 6
   _activationCost: 10
   _profileIncreaseOnActivation: 1
   _activationSounds: []
