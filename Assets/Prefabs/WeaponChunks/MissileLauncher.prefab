@@ -277,8 +277,7 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 15
   _activationSounds: []
   _firingSounds:
-  - {fileID: 8300000, guid: 4e1667a2657995041a88201124a9d461, type: 3}
-  - {fileID: 8300000, guid: 5b3b30c6a110fe041b6538941aec42df, type: 3}
+  - {fileID: 8300000, guid: 65049c85c0485b346bf26e00f6f806af, type: 3}
   _deactivationSounds: []
   IsSecondary: 1
   _isPermanent: 0

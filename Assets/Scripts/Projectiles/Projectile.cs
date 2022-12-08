@@ -24,12 +24,15 @@ public abstract class Projectile : MonoBehaviour
     protected ProjectilePoolController _poolCon;
     protected Rigidbody2D _rb;
     protected WeaponHandler _launchingWeaponHandler;
+    protected AudioSource _auso;
 
     //settings
     [Tooltip("Only deliver damage when the projectile is about to be removed, ie a rocket" +
         "when it is detonating. Direct hits will reduce penetration but not deliver any damage.")]
     [SerializeField] protected bool _deliversDamageOnlyAtExpiration = false;
     public bool DeliversDamageOnlyAtExpiration => _deliversDamageOnlyAtExpiration;
+    [SerializeField] AudioClip[] _detonateSounds = null;
+
 
     //state
     float _lifetimeRemaining = 0;
@@ -43,7 +46,8 @@ public abstract class Projectile : MonoBehaviour
     public virtual void Initialize(ProjectilePoolController poolController)
     {
         _poolCon = poolController;
-        _rb = GetComponent<Rigidbody2D>();  
+        _rb = GetComponent<Rigidbody2D>();
+        _auso = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -189,6 +193,7 @@ public abstract class Projectile : MonoBehaviour
     /// </summary>
     protected void ExecuteGenericExpiration_Fizzle()
     {
+        //Play a fizzle sound?
         _poolCon.ReturnDeadProjectile(this);
     }
 
@@ -207,6 +212,14 @@ public abstract class Projectile : MonoBehaviour
     protected void ExecuteGenericExpiration_Explode(float maxDamageRange,
         int vulnerableLayerMask)
     {
+        if (_detonateSounds.Length > 0)
+        {
+            Debug.Log("Kaboom sounds!");
+            AudioSource.PlayClipAtPoint(
+                (AudioClip)CUR.GetRandomFromCollection(_detonateSounds), transform.position);
+            //_auso.PlayOneShot();
+        } 
+
         if (maxDamageRange <=0 )
         {
             _poolCon.ReturnDeadProjectile(this);

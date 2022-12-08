@@ -4974,5 +4974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deliversDamageOnlyAtExpiration: 1
+  _detonateSounds:
+  - {fileID: 8300000, guid: 20ca844cd9716bb4fb54d7b858180b67, type: 3}
+  - {fileID: 8300000, guid: 39e72dca84902aa4293b0831c5b52ddf, type: 3}
   PType: 3
   ImpactHeading: {x: 0, y: 0}

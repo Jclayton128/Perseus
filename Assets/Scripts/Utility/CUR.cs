@@ -322,4 +322,32 @@ public static class CUR : object
 
     #endregion
 
+    #region Random Draw From Collection
+
+    public static object GetRandomFromCollection(object[] source)
+    {
+        if (source.Length == 0)
+        {
+            Debug.LogError("Source is empty!");
+            return null;
+        }
+
+        int rand = UnityEngine.Random.Range(0, source.Length);
+        return (source[rand]);
+    }
+
+    public static object GetRandomFromCollection(List<object> source)
+    {
+        if (source.Count == 0)
+        {
+            Debug.LogError("Source is empty!");
+            return null;
+        }
+
+        int rand = UnityEngine.Random.Range(0,source.Count);
+        return (source[rand]);
+    }
+
+    #endregion
+
 }

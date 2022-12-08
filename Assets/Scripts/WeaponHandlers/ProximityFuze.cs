@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class ProximityFuze : MonoBehaviour
         {
             Debug.Log($"This ({transform.parent.name}) doesn't implement IProximityFuzed but has a proximity fuze");
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,6 +45,5 @@ public class ProximityFuze : MonoBehaviour
     {
         SendMessageUpwards("DetonateViaProximityFuze", SendMessageOptions.DontRequireReceiver);
     }
-
 
 }

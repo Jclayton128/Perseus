@@ -8,9 +8,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 77988005761333148, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 77988005761333148, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 193562253237218133, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457015258912535721, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d16c767032ad5e4e9c7cdab424a5a46, type: 3}
     - target: {fileID: 6808520079009481910, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_Name
       value: EBlaster
