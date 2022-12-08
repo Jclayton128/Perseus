@@ -87,7 +87,7 @@ public class AsteroidHandler : MonoBehaviour
     {
         if (_isClaimed)
         {
-            Debug.LogError("Asteroid is already claimed!");
+            Debug.Log("Asteroid is already claimed!");
             return;
         }
 

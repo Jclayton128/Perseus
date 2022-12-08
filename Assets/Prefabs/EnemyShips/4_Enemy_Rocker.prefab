@@ -705,6 +705,44 @@ MonoBehaviour:
   - {x: 0, y: 0.57}
   _deployRetractTime: 0.5
   _playerDistanceExtendRetractThreshold: 5
+--- !u!114 &6589529697719482508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516496346127480756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f2d0f590d867b409ede7d82739c550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprites_Huge:
+  - {fileID: 21300000, guid: 58920bc89017a894dbc54907d85b0ed7, type: 3}
+  - {fileID: 21300000, guid: cd23aec8e5788ed42b05e23bdc5433b6, type: 3}
+  - {fileID: 21300000, guid: 0307dcec1bc24fd41b8158301b5d2168, type: 3}
+  - {fileID: 21300000, guid: 5c82d89b0dda59a4cb4c6b77141db3c5, type: 3}
+  _sprites_Big:
+  - {fileID: 21300000, guid: a5598f224ce4392458f738fde3e6524e, type: 3}
+  - {fileID: 21300000, guid: d15d362551708f34b80016a91b2ac389, type: 3}
+  _sprites_Medium:
+  - {fileID: 21300000, guid: 6a29fce26494658488a357669c29a051, type: 3}
+  - {fileID: 21300000, guid: 5ef8279b4d2c4594f8631d20421a0eea, type: 3}
+  _sprites_Small:
+  - {fileID: 21300000, guid: f8c508c0a3d2fd3448eb152593ab4a1b, type: 3}
+  - {fileID: 21300000, guid: 576e9d210d2389048a3f45d44e2e278d, type: 3}
+  _contents: 02000000020000000200000000000000
+  _radius:
+  - 0.55
+  - 0.29
+  - 0.18
+  - 0.1
+  _hull:
+  - 10
+  - 5
+  - 2
+  - 1
+  _initialDriftMaxSpeed: 3
 --- !u!1001 &7814314381706306097
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ public class AsteroidBuilderMindsetAnnex : MonoBehaviour
     private void ScanForAsteroid()
     {
         Collider2D coll = Physics2D.OverlapCircle(transform.position,
-            _asteroidScanRange, LayerLibrary.NeutralLayerMask, 0f, 0.1f);
+            _asteroidScanRange, LayerLibrary.EnemyNeutralLayerMask, 0f, 0.1f);
 
         if (coll && coll.TryGetComponent<AsteroidHandler>(out _currentAsteroidHome))
         {
