@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
-      value: 3_Enemy_Stinger
+      value: 4_Enemy_Stinger
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467042, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Sprite
@@ -133,11 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxHullPoints
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _shieldHealRate
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6043000668365207430, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxShieldPoints
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7494439780592425772, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,11 +196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
       propertyPath: _activationCost
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
       propertyPath: _projectileSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
+      propertyPath: _shieldBonusDamage
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2878271675614334264, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
       propertyPath: _projectileLifetime

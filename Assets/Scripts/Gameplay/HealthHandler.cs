@@ -109,7 +109,11 @@ public class HealthHandler : MonoBehaviour
         _scrapController = _particleController.GetComponent<ScrapController>();
 
         //ResetCurrentHullAndShieldLevels();
-        _scrapValue = Mathf.RoundToInt(_maxHullPoints);
+        //_scrapValue = Mathf.RoundToInt(_maxHullPoints);
+        var sih = GetComponent<ShipInfoHolder>();
+        if (sih) _scrapValue = Mathf.RoundToInt(sih.ThreatScore * 4f);
+        else _scrapValue = 0;
+
 
         if (!_isShip) return;
         if (!_movement || _movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
@@ -220,7 +224,6 @@ public class HealthHandler : MonoBehaviour
     private void SpawnScrapUponDeath()
     {
         Vector2 dir = UnityEngine.Random.onUnitSphere;
-        Debug.Log($"should spawn {_scrapValue} scraps");
         _scrapController.SpawnScraps(_scrapValue, ((Vector2)transform.position), dir);
     }
 
