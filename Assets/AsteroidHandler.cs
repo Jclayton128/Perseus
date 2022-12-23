@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,9 @@ public class AsteroidHandler : MonoBehaviour
     Size _size;
     bool _isClaimed = false;
     public bool IsClaimed => _isClaimed;
+
+    StandaloneTurretBrain _installedTurret;
+    public bool HasTurret => _installedTurret;
 
     public void Initialize(AsteroidPoolController apc)
     {
@@ -66,6 +70,29 @@ public class AsteroidHandler : MonoBehaviour
         _rb.velocity = UnityEngine.Random.insideUnitCircle * _initialDriftMaxSpeed;
         _healthHandler.SetHullMaximumAndCurrent(_hull[(int)size]);
         _collider.radius = _radius[(int)size];
+
+        DetectAndDestroyAnyTurretsInstalled();
+    }
+
+    private void DetectAndDestroyAnyTurretsInstalled()
+    {        
+        if (_installedTurret)
+        {
+            _installedTurret.gameObject.SetActive(false);
+        }
+    }
+
+    public void ActivateExistingTurret()
+    {
+        if (_installedTurret)
+        {
+            _installedTurret.gameObject.SetActive(true);
+        }
+    }
+
+    public void InstallNewTurret(StandaloneTurretBrain stb)
+    {
+        _installedTurret = stb;
     }
 
     public void HandleAsteroidDeath()
@@ -101,10 +128,6 @@ public class AsteroidHandler : MonoBehaviour
         transform.position -= new Vector3(0, 0, .11f);
     }
 
-    public void ConstructAndDeclaimAsteroid()
-    {
-        // actually...nothing should happen here.
-    }
 
 
 

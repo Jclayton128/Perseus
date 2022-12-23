@@ -26,7 +26,7 @@ public class LevelLibrary : MonoBehaviour
 
     private void ResetBossLevels()
     {
-        _remainingBossLevels = _allBossLevels;
+        _remainingBossLevels = new List<Level>(_allBossLevels);
     }
 
     public Level GetRandomLevel()
@@ -43,8 +43,8 @@ public class LevelLibrary : MonoBehaviour
     {
         if (_remainingBossLevels.Count == 0)
         {
-            Debug.LogError("No boss levels to choose from!");
-            return null;
+            Debug.LogWarning("No boss levels to choose from! Recycling through Bosses...");
+            _remainingBossLevels = new List<Level>(_allBossLevels);
         }
         Level lvl = _remainingBossLevels[Random.Range(0, _remainingBossLevels.Count)];
         return lvl;

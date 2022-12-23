@@ -62,9 +62,12 @@ public class AsteroidBuilderMindsetAnnex : MonoBehaviour
 
     private void ConstructAsteroid()
     {
-        
-        GameObject newTurret = Instantiate(_turretPrefab, _currentAsteroidHome.transform);
-        _currentAsteroidHome.ConstructAndDeclaimAsteroid();
+        if (_currentAsteroidHome.HasTurret) _currentAsteroidHome.ActivateExistingTurret();
+        else
+        {
+            GameObject newTurret = Instantiate(_turretPrefab, _currentAsteroidHome.transform);
+            _currentAsteroidHome.InstallNewTurret(newTurret.GetComponent<StandaloneTurretBrain>());
+        }
 
         _currentAsteroidHealth.Dying -= HandleDyingAsteroid;
         _currentAsteroidHealth = null;

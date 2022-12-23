@@ -55,6 +55,7 @@ public class LevelController : MonoBehaviour
     float _timeToSelectWormhole = 0;
 
     public float ArenaRadius => _arenaEdgeCollider.Radius;
+    GameObject _currentBoss;
 
 
     private void Awake()
@@ -76,6 +77,7 @@ public class LevelController : MonoBehaviour
     private void ReactToPlayerSpawned(GameObject player)
     {
         _playerSystemHandler = player.GetComponent<PlayerSystemHandler>();
+        _currentBoss = null;
     }
 
     #region Entry Points to Level sequences
@@ -232,8 +234,11 @@ public class LevelController : MonoBehaviour
         List<GameObject> enemiesToMake =
             _enemyLibrary.CreateMenuFromBossLevel(_nextLevel);
 
-        GameObject boss = Instantiate(enemiesToMake[0], Vector2.zero, Quaternion.identity);
-        RegisterEnemy(boss.GetComponent<EnemyRegistrationHandler>(), false);
+        _currentBoss = Instantiate(enemiesToMake[0], Vector2.zero, Quaternion.identity);
+        RegisterEnemy(_currentBoss.GetComponent<EnemyRegistrationHandler>(), false);
+
+        _currentBoss.GetComponent<HealthHandler>().Dying += HandleDyingBoss;
+
         enemiesToMake.RemoveAt(0);
         
         foreach (var enemy in enemiesToMake)
@@ -247,6 +252,15 @@ public class LevelController : MonoBehaviour
 
         SpawnedLevelEnemies?.Invoke(_runController.CurrentSectorCount, -1);
         EnemyLevelCountChanged?.Invoke(-1);
+    }
+
+    private void HandleDyingBoss()
+    {
+        _filterTween.Kill();
+        _filterTween = DOTween.To(() =>
+            _filterSR.color, x => _filterSR.color = x, Color.clear, 0.5f);
+        _currentBoss.GetComponent<HealthHandler>().Dying -= HandleDyingBoss;
+        _currentBoss = null;
     }
 
     private void SpawnEnemiesInNewSector()
