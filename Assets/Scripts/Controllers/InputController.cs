@@ -157,8 +157,8 @@ public class InputController : MonoBehaviour
         if (Mathf.Abs(move.x) > _moveSensitivity)
         {
             StrafeCommanded?.Invoke(move.x);
-            //TurnLeftChanged?.Invoke(true);
-            //TurnRightChanged?.Invoke(false);
+            TurnLeftChanged?.Invoke(true);
+            TurnRightChanged?.Invoke(false);
         }
         else
         {
