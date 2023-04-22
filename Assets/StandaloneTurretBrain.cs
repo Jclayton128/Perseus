@@ -16,16 +16,18 @@ public class StandaloneTurretBrain : MonoBehaviour
 
     //settings
     float _timeBetweenTargetScans = 0.5f;
-    float _targetScanRange = 12f;
     [SerializeField] bool _targetsPlayers = false;
     [SerializeField] bool _targetsEnemies = false;
+    [SerializeField] bool _leadsTarget = false;
 
     //state
+    float _targetScanRange;
     Vector2 dir;
     float _lookAngle;
     float _timeForNextScan = 0;
     int _layerMask;
     Transform _targetTransform;
+    Rigidbody2D _targetRigidbody;
 
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class StandaloneTurretBrain : MonoBehaviour
         if (_targetsPlayers && !_targetsEnemies) _layerMask = LayerLibrary.PlayerLayerMask;
         if (!_targetsPlayers && _targetsEnemies) _layerMask = LayerLibrary.EnemyLayerMask;
         if (_targetsPlayers && _targetsEnemies) _layerMask = LayerLibrary.PlayerEnemyLayerMask;
-
+        _targetScanRange = GetComponentInParent<MindsetHandler>().DetectorRange;
     }
 
     private void HandleHostDeath()
@@ -70,8 +72,18 @@ public class StandaloneTurretBrain : MonoBehaviour
 
     private void UpdateFacing()
     {
-        dir = _targetTransform.position - transform.position;
-        _lookAngle = Vector3.SignedAngle(Vector3.up, dir, Vector3.forward);
+        if (!_leadsTarget)
+        {
+            dir = _targetTransform.position - transform.position;
+            _lookAngle = Vector3.SignedAngle(Vector3.up, dir, Vector3.forward);
+        }
+        else
+        {
+            dir = _targetTransform.position - transform.position;
+            float leadTime = dir.magnitude / _weaponHandler.ProjectileSpeed;
+            Vector2 leadDist = leadTime * _targetRigidbody.velocity;
+            _lookAngle = Vector3.SignedAngle(Vector3.up, dir + leadDist, Vector3.forward);
+        }
         _turretSteerer.SetLookAngle(_lookAngle);
         _weaponHandler.Activate();
     }
@@ -79,7 +91,16 @@ public class StandaloneTurretBrain : MonoBehaviour
     private void UpdateScan()
     {
         Collider2D coll = Physics2D.OverlapCircle(transform.position, _targetScanRange, _layerMask);
-        if (coll) _targetTransform = coll.transform;
+        if (coll)
+        {
+            _targetTransform = coll.transform;
+            if (_leadsTarget)
+            {
+                _targetRigidbody = _targetTransform.GetComponent<Rigidbody2D>();
+            }
+
+        }
+
 
     }
 }

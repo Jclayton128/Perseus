@@ -1,83 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &811359223621820452
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5443510726252808567}
-    m_Modifications:
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.915
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.043
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3790653603342973296, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: m_Name
-      value: HydraTurret_MarkerVariant
-      objectReference: {fileID: 0}
-    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _ionDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _normalDamage
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _knockBackAmount
-      value: -0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _projectileSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _shotSpeedIncrease_Upgrade
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
---- !u!1001 &1239803669488572918
+--- !u!1001 &2947319030721305674
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -90,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.958
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.043
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.z
@@ -133,24 +56,32 @@ PrefabInstance:
       value: HydraTurret_MarkerVariant_3
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _normalDamage
-      value: 1.5
+      propertyPath: _ionDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _activationCost
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _shotSpeedIncrease_Upgrade
-      value: 3
+      propertyPath: _timeBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileLifetime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
---- !u!1001 &5800485435502335509
+--- !u!1001 &4518096253081045019
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -159,15 +90,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.552
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.483
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.z
@@ -203,23 +134,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3790653603342973296, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_Name
-      value: HydraTurret_MarkerVariant_2
+      value: HydraTurret_MarkerVariant_1
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _normalDamage
-      value: 1.5
+      propertyPath: _ionDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _activationCost
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _shotSpeedIncrease_Upgrade
-      value: 3
+      propertyPath: _timeBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileLifetime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -230,6 +169,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _detectorRange
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _turnRate
       value: 60
@@ -340,11 +283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293803639130907992, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _energyGainRate
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2293803639130907992, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _maxEnergyPoints
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3072237115753002881, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _huntOption
@@ -423,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ae0c5a3edb16a459e72d4c9dfe0d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &9151768014160654620
+--- !u!1001 &8713543347442600390
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -432,15 +375,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.544
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.483
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_LocalPosition.z
@@ -476,23 +419,112 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3790653603342973296, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: m_Name
-      value: HydraTurret_MarkerVariant_1
+      value: HydraTurret_MarkerVariant
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _normalDamage
-      value: 1.5
+      propertyPath: _ionDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _activationCost
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _knockBackAmount
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
-      propertyPath: _shotSpeedIncrease_Upgrade
-      value: 3
+      propertyPath: _timeBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileLifetime
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+--- !u!1001 &8720897748261656099
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5443510726252808567}
+    m_Modifications:
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410097891387683810, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790653603342973296, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: m_Name
+      value: HydraTurret_MarkerVariant_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _ionDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _activationCost
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _knockBackAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _timeBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
+      propertyPath: _projectileLifetime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}

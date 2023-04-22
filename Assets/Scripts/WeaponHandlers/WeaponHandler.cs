@@ -51,6 +51,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
 
     [SerializeField] protected float _projectileLifetime = 0.5f;
     [SerializeField] protected float _projectileSpeed = 10.1f;
+    public float ProjectileSpeed => _projectileSpeed;
 
     [Tooltip("Energy Cost to Activate the weapon")]
     [SerializeField] protected float _activationCost = 0;

@@ -20,7 +20,6 @@ public class ShielderMindsetAnnex : MonoBehaviour
     PhaseShieldHandler _currentShield;
     ParticleSystem.ShapeModule _shape;
     Vector3 _dir;
-    Vector3 _midway;
 
     private void Awake()
     {
@@ -60,6 +59,7 @@ public class ShielderMindsetAnnex : MonoBehaviour
         {
             _shieldBeam.Stop();
             UpdateTargetShipScan();
+            if (_currentShield) _currentShield.gameObject.SetActive(false);
         }
 
     }

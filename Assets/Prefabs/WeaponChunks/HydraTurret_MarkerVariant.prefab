@@ -116,3 +116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsPlayers: 1
   _targetsEnemies: 0
+  _leadsTarget: 1

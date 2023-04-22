@@ -22,6 +22,7 @@ public class MindsetHandler : MonoBehaviour
     [Tooltip("Radius of the player detector collider. If negative, that collider is disabled," +
         "and the player will never be detected.")]
     [SerializeField] float _detectorRange = 10f;
+    public float DetectorRange => _detectorRange;
 
     //state
     [SerializeField] Mindset _activeMindset;

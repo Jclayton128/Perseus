@@ -214,7 +214,6 @@ public abstract class Projectile : MonoBehaviour
     {
         if (_detonateSounds.Length > 0)
         {
-            Debug.Log("Kaboom sounds!");
             AudioSource.PlayClipAtPoint(
                 (AudioClip)CUR.GetRandomFromCollection(_detonateSounds), transform.position);
             //_auso.PlayOneShot();
