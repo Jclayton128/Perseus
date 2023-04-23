@@ -337,7 +337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: VampireModule
+      value: Wings_Vampire
       objectReference: {fileID: 0}
     - target: {fileID: 1214929937151208592, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Enabled
@@ -426,3 +426,5 @@ MonoBehaviour:
   SystemType: 11
   SystemLocation: 3
   _maxUpgradeLevel: 5
+  _startingShieldGainPerScrap: 1
+  _shieldGainPerScrap_Upgrade: 1.5

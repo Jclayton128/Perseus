@@ -88,6 +88,22 @@ PrefabInstance:
       value: Nimble, stealthy, and armed with a Dark Blade, the Ninja is ready for
         backstabbing.
       objectReference: {fileID: 0}
+    - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _ionHealRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _maxHullPoints
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _shieldHealRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _maxShieldPoints
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name
       value: Player_Thief

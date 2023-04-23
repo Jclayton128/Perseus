@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerStateHandler : MonoBehaviour
 {
+    public Action ScrapGained;
+
     UI_Controller _uiController;
     GameController _gameController;
     InputController _inputController;
@@ -77,6 +79,7 @@ public class PlayerStateHandler : MonoBehaviour
 
     public void GainScrap()
     {
+        ScrapGained?.Invoke();
         _scrapCollected++;
 
         if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
