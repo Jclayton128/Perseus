@@ -19,6 +19,7 @@ public class StandaloneTurretBrain : MonoBehaviour
     [SerializeField] bool _targetsPlayers = false;
     [SerializeField] bool _targetsEnemies = false;
     [SerializeField] bool _leadsTarget = false;
+    [SerializeField] float _backupDetectionRange = 12f;
 
     //state
     float _targetScanRange;
@@ -41,7 +42,11 @@ public class StandaloneTurretBrain : MonoBehaviour
         if (_targetsPlayers && !_targetsEnemies) _layerMask = LayerLibrary.PlayerLayerMask;
         if (!_targetsPlayers && _targetsEnemies) _layerMask = LayerLibrary.EnemyLayerMask;
         if (_targetsPlayers && _targetsEnemies) _layerMask = LayerLibrary.PlayerEnemyLayerMask;
-        _targetScanRange = GetComponentInParent<MindsetHandler>().DetectorRange;
+
+        var asdf = GetComponentInParent<MindsetHandler>();
+        if (asdf) _targetScanRange = asdf.DetectorRange;
+        else _targetScanRange = _backupDetectionRange;
+
     }
 
     private void HandleHostDeath()

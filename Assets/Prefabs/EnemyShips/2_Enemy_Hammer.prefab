@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: ScannerName
       value: Hammer
       objectReference: {fileID: 0}
+    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _threatScore
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7819680869571203382, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Radius
       value: 45

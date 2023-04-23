@@ -15,7 +15,7 @@ public class ShipInfoHolder : MonoBehaviour, IScannable
 
     [Tooltip("Threat Score is used by the Enemy Factory to determine how many enemies to create upon jumping to a new sector.")]
     [Range(0, 10)]
-    [ShowInInspector] private int _threatScore = 1;
+    [SerializeField] private int _threatScore;
     public int ThreatScore => _threatScore;
 
     public bool IsInstallable { get; } = false;

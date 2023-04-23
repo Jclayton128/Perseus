@@ -123,6 +123,10 @@ PrefabInstance:
       propertyPath: ScannerName
       value: Maker
       objectReference: {fileID: 0}
+    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _threatScore
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _closeEnough
       value: 3

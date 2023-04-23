@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _ionDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _activationCost
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _timeBetweenShots
@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileLifetime
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _ionDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _activationCost
@@ -150,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _timeBetweenShots
@@ -158,7 +158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileLifetime
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: ScannerName
       value: Medusa
       objectReference: {fileID: 0}
+    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _threatScore
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1939738846384466973, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
@@ -423,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _ionDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _activationCost
@@ -435,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _timeBetweenShots
@@ -443,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileLifetime
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
@@ -504,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _ionDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _activationCost
@@ -516,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileSpeed
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _timeBetweenShots
@@ -524,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419170974648301409, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}
       propertyPath: _projectileLifetime
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e3c95a27adc1e49a20345c405e0981, type: 3}

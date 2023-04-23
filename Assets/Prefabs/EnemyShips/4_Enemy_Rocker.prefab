@@ -429,6 +429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsPlayers: 1
   _targetsEnemies: 0
+  _leadsTarget: 0
+  _backupDetectionRange: 12
 --- !u!1001 &134792780408705506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -645,6 +647,10 @@ PrefabInstance:
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: ScannerName
       value: Rocker
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _threatScore
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: LivesAmongAsteroidsOnly
