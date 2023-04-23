@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 0900000014000000
-  lastScan: 638177138986644903
+  lastScan: 638178035700305380
   supportSerializedTypes:
   - TypeName: UnityEngine.AudioClip, UnityEngine.AudioModule
     IsCustom: 0
@@ -28,11 +28,29 @@ MonoBehaviour:
       UnityEngine.AudioModule]], mscorlib
     IsCustom: 0
     Emit: 1
+  - TypeName: System.Collections.Generic.Dictionary`2[[SystemWeaponLibrary+SystemLocation,
+      Assembly-CSharp],[SystemMountDescription, Assembly-CSharp]], mscorlib
+    IsCustom: 0
+    Emit: 1
   - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[AudioLibrary+ClipID,
+      Assembly-CSharp]], mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[SystemWeaponLibrary+SystemLocation,
       Assembly-CSharp]], mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: System.Collections.Generic.IEqualityComparer`1[[AudioLibrary+ClipID,
       Assembly-CSharp]], mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.IEqualityComparer`1[[SystemWeaponLibrary+SystemLocation,
+      Assembly-CSharp]], mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SystemMountDescription, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SystemWeaponLibrary+SystemLocation, Assembly-CSharp
     IsCustom: 0
     Emit: 1

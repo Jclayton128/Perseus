@@ -6,7 +6,7 @@ public class RunController : MonoBehaviour
 {
     //settings
     [SerializeField] int _startingThreatBudget = 2;
-    int _levelsBetweenBosses = 3;
+    int _levelsBetweenBosses = 10;
 
     //state
     int _currentSectorCount = 0;
