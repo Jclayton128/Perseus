@@ -273,16 +273,19 @@ MonoBehaviour:
   _knockBackAmount: 0
   _scrapBonus: 1
   _projectileLifetime: 30
-  _projectileSpeed: 3
+  _projectileSpeed: 4
   _activationCost: 10
   _profileIncreaseOnActivation: 40
   _activationSounds: []
+  _activationSoundVolume: 1
   _firingSounds: []
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 1
   _isPermanent: 0
-  _maxUpgradeLevel: 5
-  _missileTurnRate: 70
+  _invokesAutosteerWhenActivated: 0
+  _missileTurnRate: 180
   _startingResilience: 4
   _resilienceAddition_Upgrade: 2
   _lifetimeAddition_Upgrade: 10

@@ -298,7 +298,8 @@ public class HealthHandler : MonoBehaviour
             ReceivingDamagePack?.Invoke(pb.DamagePack);
             if (pb.DeliversDamageOnlyAtExpiration == false)
             {
-                ReceiveDamage(pb.DamagePack, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
+                DamagePack newDP = new DamagePack(pb.DamagePack);
+                ReceiveDamage(newDP, weaponImpact.transform.position, pb.GetNormalizedVectorAtImpact());
             }            
             pb.DecrementPenetrationOnImpact();
         }
