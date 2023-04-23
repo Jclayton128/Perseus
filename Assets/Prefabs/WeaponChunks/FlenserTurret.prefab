@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 224192949469094795, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.203
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224192949469094795, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 391027060436349402, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: m_RootOrder
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1190160963467541320, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: m_Name
-      value: TractorBeamTurret Variant
+      value: FlenserTurret
       objectReference: {fileID: 0}
     - target: {fileID: 2895815006829263250, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: m_SortingLayer

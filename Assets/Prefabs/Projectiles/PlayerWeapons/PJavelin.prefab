@@ -4825,11 +4825,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2054328011332903447, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.382
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2054328011332903447, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2054328011332903447, guid: a71b3cde5cc742b4fa1e8341498752bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4912,11 +4912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606c643b819a082478b31d7ac103e72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deliversDamageOnlyAtExpiration: 0
+  _detonateSounds: []
   PType: 6
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 79b9051a30ea7874ca03b6569a6dabb2, type: 3}
-  _closeEnough: 0.2
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _targetTransform: {fileID: 0}
-  _angleToTarget: 0
-  _hasHitTargetPosition: 0

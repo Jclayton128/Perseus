@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568825597256626950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.396, y: 0.002, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 528075328982006342}
   - {fileID: 8562931285525577134}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turretTurnRate: 180
+  _inaccuracyAmount: 0
 --- !u!212 &2895815006829263250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543628747912721107}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.556, z: 0}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224192949469094795}
@@ -5084,11 +5085,15 @@ MonoBehaviour:
   _activationSounds:
   - {fileID: 8300000, guid: 9191eef9e8c14054485d74ad719b29f0, type: 3}
   - {fileID: 8300000, guid: f8cbd2046f0cb7143b75cc98904cc2a8, type: 3}
+  _activationSoundVolume: 1
   _firingSounds:
   - {fileID: 8300000, guid: d7b1d74f8aa83fe4190856d6d328476e, type: 3}
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 0
   _isPermanent: 1
   _invokesAutosteerWhenActivated: 0
+  WeaponMountIndex: -1
   _chargeRateAddition_Upgrade: 0.1
   _weaponSpeedMultiplier_Upgrade: 1.2

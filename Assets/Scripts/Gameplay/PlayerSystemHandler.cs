@@ -12,8 +12,10 @@ public class PlayerSystemHandler : MonoBehaviour
     ActorMovement _playerHandler;
     EnergyHandler _energyHandler;
     HealthHandler _healthHandler;
+    MountHandler _mountHandler;
     UI_Controller _UICon;
     Scanner _crateScanner;
+
 
     //These are used to check for overlap between two weapons or two systems.
     Dictionary<SystemWeaponLibrary.WeaponType, GameObject> _weaponsOnBoard =
@@ -26,6 +28,7 @@ public class PlayerSystemHandler : MonoBehaviour
     int _maxSystems;
     int _maxWeapons;
 
+
     //These lists are to help with scrolling and shooting multiple primary systems at once
     List<SystemHandler> _systemsOnBoard = new List<SystemHandler>();
     public List<SystemWeaponLibrary.SystemType> SystemTypesOnBoard { get; private set; }
@@ -35,7 +38,7 @@ public class PlayerSystemHandler : MonoBehaviour
     List<WeaponHandler> _secondaryWeaponsOnBoard = new List<WeaponHandler>();
     public List<SystemWeaponLibrary.WeaponType> WeaponTypesOnBoard
         = new List<SystemWeaponLibrary.WeaponType>();
-    private void Awake()
+    private void Start()
     {
         _crateScanner = GetComponent<Scanner>();
         _syslib = FindObjectOfType<SystemWeaponLibrary>();
@@ -54,6 +57,8 @@ public class PlayerSystemHandler : MonoBehaviour
         _playerHandler = GetComponent<ActorMovement>();
         _energyHandler = GetComponent<EnergyHandler>();
         _healthHandler = GetComponent<HealthHandler>();
+        _mountHandler = GetComponent<MountHandler>();
+
 
         LoadStartingSystems();
         LoadStartingWeapons();
@@ -145,10 +150,15 @@ public class PlayerSystemHandler : MonoBehaviour
     private void GainWeapon(GameObject newWeapon)
     {
         if (newWeapon == null) return;
-        GameObject go = Instantiate<GameObject>(newWeapon, this.transform);
+
+        var mountIndex = _mountHandler.RequisitionWeaponMountIndex();
+        Transform mountLocation = _mountHandler.GetWeaponMountTransform(mountIndex);
+
+        GameObject go = Instantiate<GameObject>(newWeapon, mountLocation);
         WeaponHandler wh = go.GetComponent<WeaponHandler>();
         WeaponIconDriver wid = _UICon.IntegrateNewWeapon(wh);
         wh.Initialize(_energyHandler, true, wid);
+        wh.WeaponMountIndex = mountIndex;
         _weaponsOnBoard.Add(wh.WeaponType, go);
         WeaponTypesOnBoard.Add(wh.WeaponType);
 
@@ -181,7 +191,20 @@ public class PlayerSystemHandler : MonoBehaviour
         if (newSystem == null) return;
         GameObject go = Instantiate<GameObject>(newSystem, this.transform);
         SystemHandler sh = go.GetComponent<SystemHandler>();
-       
+
+        var smd = _mountHandler.GetSystemMountDescription(sh.SystemLocation);
+        go.transform.parent = smd.transform;
+        go.transform.localPosition = Vector3.zero;
+        if (smd.ShouldBeReflected)
+        {
+            var mirrorGO = Instantiate<GameObject>(newSystem, go.transform);
+            SystemHandler shkill = mirrorGO.GetComponent<SystemHandler>();
+            Destroy(shkill);
+            mirrorGO.transform.localPosition = smd.MirroredXPosition;
+            mirrorGO.transform.localScale = new Vector3(-1, 1, 1);
+ 
+        }
+
         _systemsOnBoardByLocation.Add(sh.SystemLocation, go);
         SystemIconDriver sid = _UICon.IntegrateNewSystem(sh);
         sh.IntegrateSystem(sid);
@@ -194,6 +217,7 @@ public class PlayerSystemHandler : MonoBehaviour
     public void RemoveWeapon(SystemWeaponLibrary.WeaponType weaponType)
     {
         WeaponHandler removedWeapon = _weaponsOnBoard[weaponType]?.GetComponent<WeaponHandler>();
+        _mountHandler.ReturnWeaponMount(removedWeapon.WeaponMountIndex);
 
         if (removedWeapon == null) return;
         if (removedWeapon.IsSecondary)
@@ -235,6 +259,7 @@ public class PlayerSystemHandler : MonoBehaviour
             _primaryWeaponsOnBoard.Remove(removedWeapon);
             _UICon.ClearPrimaryWeaponSlot();
         }
+
 
         Destroy(_weaponsOnBoard[weaponType]);
         _weaponsOnBoard.Remove(weaponType);

@@ -68,6 +68,7 @@ MonoBehaviour:
   _maxShieldPoints: 0
   _shieldHealRate: 0
   _ionHealRate: 0
+  _deathSounds: []
   IonFactor: 0
 --- !u!50 &7050571892159103194
 Rigidbody2D:

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786972755334579958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20899999, y: 0.23300001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 3092739481744609522}
@@ -183,11 +183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19
+      value: -0.038
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.587
+      value: 0.353
       objectReference: {fileID: 0}
     - target: {fileID: 8454547692484243368, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: _muzzle
@@ -250,16 +250,20 @@ MonoBehaviour:
   _activationCost: 1.5
   _profileIncreaseOnActivation: 4
   _activationSounds: []
+  _activationSoundVolume: 1
   _firingSounds:
   - {fileID: 8300000, guid: 4520b9be7b874cc4bba80854f9564722, type: 3}
   - {fileID: 8300000, guid: a3189cf86b6b3364dba5f2ff8dbd301b, type: 3}
   - {fileID: 8300000, guid: 1998a298c0f9e3a4dbdca1104e2cca95, type: 3}
   - {fileID: 8300000, guid: 47fa166a23ff14a44b701cb550f99cf1, type: 3}
   - {fileID: 8300000, guid: 9675213dc7b0b8448b647db79dae438b, type: 3}
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 0
   _isPermanent: 1
   _invokesAutosteerWhenActivated: 1
+  WeaponMountIndex: -1
   _spoolUpTime: 6
   _BestTimeBetweenShots: 0.25
   _fireRateModifier_Initial: 0.33

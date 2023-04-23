@@ -4913,6 +4913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deliversDamageOnlyAtExpiration: 0
+  _detonateSounds: []
   PType: 5
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 280882fe72b2e99408ad2ca12aea8f38, type: 3}

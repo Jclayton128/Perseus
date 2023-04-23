@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5441288554850904482
 Transform:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5101291237184386639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.645, y: 0.022, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7832339237061563566}
@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.343
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
@@ -277,14 +277,18 @@ MonoBehaviour:
   _activationCost: 3
   _profileIncreaseOnActivation: 1
   _activationSounds: []
+  _activationSoundVolume: 1
   _firingSounds:
   - {fileID: 8300000, guid: 6529edfdb4d6ba1458f939bfae39ffe7, type: 3}
   - {fileID: 8300000, guid: 4b354b000aacf684090f26e49d33fc5d, type: 3}
   - {fileID: 8300000, guid: 0ff553416d0c5054f921e0793963355f, type: 3}
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 0
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 1
+  WeaponMountIndex: -1
   _missileTurnRate: 30
   _missileSnakeAmount: 1
   _missileScanRadius: 0.25

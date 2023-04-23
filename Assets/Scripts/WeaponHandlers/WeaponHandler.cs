@@ -91,6 +91,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
     protected int _maxUpgradeLevel = 5;
     [ShowInInspector] public int CurrentUpgradeLevel { get; protected set; } = 1;
     protected bool _isInstalled = false;
+    public int WeaponMountIndex = -1;
 
     public void Initialize(EnergyHandler hostEnergyHandler, bool isPlayer,
         WeaponIconDriver wid)

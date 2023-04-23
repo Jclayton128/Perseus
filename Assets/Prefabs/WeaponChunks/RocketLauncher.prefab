@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5101291237184386639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.645, y: 0.022, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7832339237061563566}
@@ -230,11 +230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.639
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894287794442961043, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.566
+      value: 0.396
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44be43805213b0a4e8dcd4b1042298e2, type: 3}
@@ -277,14 +277,18 @@ MonoBehaviour:
   _activationCost: 5
   _profileIncreaseOnActivation: 20
   _activationSounds: []
+  _activationSoundVolume: 1
   _firingSounds:
   - {fileID: 8300000, guid: 153ec8e883213854dbe10544c195a731, type: 3}
   - {fileID: 8300000, guid: 423ad90775efab947bf710f58bb128cd, type: 3}
   - {fileID: 8300000, guid: 5f9c07e4f8a870e4f851b0a1f8255110, type: 3}
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 1
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0
+  WeaponMountIndex: -1
   _missileTurnRate: 150
   _snakeAmount: 15
   _rocketCount: 3

@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4049963575886113796}
-  m_LocalRotation: {x: 0, y: 0, z: -0.6066823, w: 0.7949444}
-  m_LocalPosition: {x: 0.401, y: -0.2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2147489752209484041}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -74.7}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6980624242402455191
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -275,8 +275,11 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 30
   _activationSounds:
   - {fileID: 8300000, guid: 40d51f300a9c14d4a931f26aa9b86c3c, type: 3}
+  _activationSoundVolume: 1
   _firingSounds: []
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 1
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0
