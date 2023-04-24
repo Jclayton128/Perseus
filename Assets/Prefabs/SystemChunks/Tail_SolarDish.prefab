@@ -257,7 +257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: Tail_Projector
+      value: Tail_SolarDish
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -336,9 +336,123 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 8748ab583fa109e4299f7d15b3e08d15, type: 3}
-  _name: Projector Tail
-  _description: Not implemented yet!
-  _upgradeDescription: upgrade description
+  _name: Solar Tail
+  _description: Releases a solar dish when warping into a new system. The dish greatly
+    boosts energy regen while near.
+  _upgradeDescription: Upgrading further enhances the energy regen boost
   SystemType: 9
   SystemLocation: 2
   _maxUpgradeLevel: 5
+  _energyBeamParticle: {fileID: 448788017567629368}
+  _solarDishPrefab: {fileID: 6386032735014172851, guid: a69ca15b6d05d05468aa3a3fb3d5feab, type: 3}
+  _energyBoostRange: 6
+  _baseEnergyBoostRate: 2
+  _dugoutIconForSolarDish: {fileID: 21300000, guid: 96fb5da5eb9addc4ea0b7b4e1f191a0c, type: 3}
+  _energyBoostRateMultiplier_Upgrade: 1.2
+  _energyBoostRangeMultiplier_Upgrade: 1.2
+--- !u!1001 &8649568518368373942
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1681606900350120428}
+    m_Modifications:
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695625, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695628, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: m_Name
+      value: SolarDishEnergyBeamFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 13274
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 52133
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key3.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+--- !u!198 &448788017567629368 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9093641688725695630, guid: f1926a652feb04a4783dd3622cb5058e, type: 3}
+  m_PrefabInstance: {fileID: 8649568518368373942}
+  m_PrefabAsset: {fileID: 0}

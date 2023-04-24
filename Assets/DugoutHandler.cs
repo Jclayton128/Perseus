@@ -50,7 +50,7 @@ public class DugoutHandler : MonoBehaviour
         _crateState = (0, 0);
         _crateKnowledgeState = 0;
         _uiCon.UpdateDugoutState(_wormholeState, _crateState);
-
+        _uiCon.ClearAllCustomDugoutIcons();
     }
 
     private void UpdateKnowledgeOnRadarScan()

@@ -244,10 +244,10 @@ public class UI_Controller : MonoBehaviour
     (float, float) _crateIconState = (0, 0);
     Color _wormholeIconColor;
     Color _crateIconColor;
-    [SerializeField] bool _isUpgradeMenuDeployed = false;
+    bool _isUpgradeMenuDeployed = false;
     float _upgradeMenuRetractedDefaultXPos_LeftWing;
     float _upgradeMenuRetractedDefaultXPos_RightWing;
-    [SerializeField] bool _isMetaMenuDeployed = true;
+    bool _isMetaMenuDeployed = true;
 
 
     #region Initialization
@@ -1015,6 +1015,47 @@ public class UI_Controller : MonoBehaviour
         _crateIconColor.a = _crateIconState.Item2;
         _crateImage.color = _crateIconColor;       
 
+    }
+
+    List<Image> _customDugoutImages = new List<Image>();
+
+    public Image CreateCustomDugoutIcon(float angleFromNorth, Sprite sprite)
+    {
+        Debug.Log("made new dugout icon");
+        Transform parent = _crateImage.transform.parent;
+        Image newIcon = Instantiate(_crateImage.gameObject, parent).GetComponent<Image>();
+        _customDugoutImages.Add(newIcon);
+        newIcon.sprite = sprite;
+        return newIcon;
+    }
+
+    public void UpdateDugoutCustom(Image imageToUpdate, float angleFromNorth, float distFactor)
+    {
+        if (_customDugoutImages.Contains(imageToUpdate))
+        {
+            float x =
+                -(float)Mathf.Sin(angleFromNorth * Mathf.Deg2Rad) * _dugoutRadius;
+            float y =
+                (float)Mathf.Cos(angleFromNorth * Mathf.Deg2Rad) * _dugoutRadius;
+            imageToUpdate.rectTransform.anchoredPosition = new Vector2(x, y);
+
+
+            imageToUpdate.color = new Color(1, 1, 1, distFactor);
+
+        }
+        else
+        {
+            Debug.Log("Custom icon isn't initialized");
+        }
+    }
+
+    public void ClearAllCustomDugoutIcons()
+    {
+        for (int i = _customDugoutImages.Count - 1; i >= 0; i--)
+        {
+            Destroy(_customDugoutImages[i].gameObject);
+        }
+        _customDugoutImages.Clear();
     }
 
     #endregion

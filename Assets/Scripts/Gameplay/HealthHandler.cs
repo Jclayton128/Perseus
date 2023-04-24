@@ -116,7 +116,7 @@ public class HealthHandler : MonoBehaviour
 
 
         if (!_isShip) return;
-        if (!_movement || _movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
+        if (_movement && _movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
 
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
@@ -126,7 +126,8 @@ public class HealthHandler : MonoBehaviour
             _ipem.rateOverTime = IonFactor * _ionizationGlory;
         }
 
-        if (GetComponent<ActorMovement>().IsPlayer)
+        ActorMovement am;
+        if (TryGetComponent<ActorMovement>(out am) && am.IsPlayer)
         {
             _isPlayer = true;
         }
@@ -243,7 +244,8 @@ public class HealthHandler : MonoBehaviour
         _ionizationPointsAbsorbed -= _ionHealRate * Time.deltaTime;
         _ionizationPointsAbsorbed = Mathf.Clamp(_ionizationPointsAbsorbed, 0, _maxHullPoints);
         IonFactor = (_ionizationPointsAbsorbed / _maxHullPoints);
-        _ipem.rateOverTime = IonFactor * _ionizationGlory;
+        
+        if (_ionizationParticles) _ipem.rateOverTime = IonFactor * _ionizationGlory;
 
         IonFactorChanged?.Invoke(IonFactor, 1);
         _shieldRegenColor = Color.Lerp(Color.white, Color.green, IonFactor);
