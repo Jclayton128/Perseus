@@ -1360,7 +1360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shieldGainOnLevelUp: 1
   _hullGainOnLevelUp: 1
-  _energyRegenGainOnLevelUp: 0.25
+  _energyMaxGainOnLevelUp: 3
+  _energyRegenGainOnLevelUp: 0.1
 --- !u!114 &2074364254
 MonoBehaviour:
   m_ObjectHideFlags: 0

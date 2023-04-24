@@ -7,6 +7,7 @@ public class RunController : MonoBehaviour
     //settings
     [SerializeField] int _startingThreatBudget = 2;
     int _levelsBetweenBosses = 10;
+    [SerializeField] int _budgetIncreasePerLevel = 3;
 
     //state
     int _currentSectorCount = 0;
@@ -30,7 +31,8 @@ public class RunController : MonoBehaviour
         _currentSectorCount++;
 
         //TODO do a more clever threat budget increase per level?
-        _currentThreatBudget++;
+        //_currentThreatBudget++;
+        ModifyRunBudget(_budgetIncreasePerLevel);
 
         if (CheckIfIsBossLevel()) _currentBossCount++;
     }
@@ -62,7 +64,6 @@ public class RunController : MonoBehaviour
     public void ModifyRunBudget(int amountToIncrease)
     {
         _currentThreatBudget += amountToIncrease;
-        Debug.Log("Budget increased. Current budget is now: " + _currentThreatBudget);
     }
 
     public bool CheckIfIsBossLevel()

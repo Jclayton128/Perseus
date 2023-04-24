@@ -399,9 +399,9 @@ MonoBehaviour:
   WeaponMountIndex: -1
   _missileTurnRate: 0
   _snakeAmount: 0
-  _rocketCount: 4
+  _rocketCount: 18
   _maxMissRange: 0
-  _degreeSpread: 30
+  _degreeSpread: 360
   _rocketCount_Upgrade: 2
   _rocketSpeed_Upgrade: 20
 --- !u!114 &2578241166111731501

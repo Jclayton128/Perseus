@@ -54,11 +54,9 @@ public class BlinkEngineSH : SystemHandler
     {
         if (_currentCharge < .99f) return;
 
-        //Debug.Log("blinking away");
-        //TODO cool blink audio sound
         _healthHandler.ActivateDamageInvulnerability();
         Instantiate(_blinkOutParticleFX, transform.position, Quaternion.identity);
-        transform.parent.position = CUR.FindRandomPositionWithinRangeBandAndWithinArena(transform.position,
+        transform.root.position = CUR.FindRandomPositionWithinRangeBandAndWithinArena(transform.position,
             _minBlinkRange, _maxBlinkRange, Vector3.zero, _levelController.ArenaRadius);
         Instantiate(_blinkInParticleFX, transform.position, Quaternion.identity);
 
