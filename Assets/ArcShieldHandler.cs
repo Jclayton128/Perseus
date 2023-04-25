@@ -8,10 +8,10 @@ public class ArcShieldHandler : MonoBehaviour
     [SerializeField] ParticleSystem _arcShieldParticle_World = null;
     Collider2D _arcShieldCollider;
 
-    DamagePack _damagePack;
+    protected DamagePack _damagePack;
 
     //state
-    bool _isOn = false;
+    protected bool _isOn = false;
 
 
     private void Awake()
@@ -41,7 +41,7 @@ public class ArcShieldHandler : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (!_isOn) return;
         //Debug.Log("shield coll...");

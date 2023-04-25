@@ -21155,6 +21155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefabs:
+  - {fileID: 7689606795253450829, guid: bb09dd07ec2404247a152849bf66ecbc, type: 3}
   - {fileID: 5288900001543504745, guid: 499b9a32a22b67a44838ea622140a36e, type: 3}
   - {fileID: 7369214356001963501, guid: 6baddddaa287b224a8b299b675959818, type: 3}
   - {fileID: 3034225003434905725, guid: 6e3349950857d2342b33f7e9df0a31ae, type: 3}
@@ -21163,12 +21164,12 @@ MonoBehaviour:
   - {fileID: 7221774128835624822, guid: 8dcdab9e580398a46b1e840f57e7fd5e, type: 3}
   - {fileID: 3069115516707697164, guid: f82a9cf5ce1949f40825a818dfd4814d, type: 3}
   - {fileID: 3557419019999438709, guid: 280b18811b6ec7e4985657a75f73bf57, type: 3}
-  - {fileID: 833342898894309947, guid: 621eb8e4acdff264e9751dd143f82193, type: 3}
   - {fileID: 6658415473265941888, guid: a38ee4960e6226e40a2a4edf016f4efd, type: 3}
   - {fileID: 8886479856476907708, guid: e6b64b9805bc85345933326fc5c97097, type: 3}
   - {fileID: 6949589758991457435, guid: 255181c9cba373946b0648e668c167e5, type: 3}
   - {fileID: 4323377972221603521, guid: 7389fe01f4a4189478debc5b5548ca12, type: 3}
   - {fileID: 4323377972221603521, guid: 8c469a6c66d67994c96d33586ebb1509, type: 3}
+  - {fileID: 7689606795253450829, guid: bb09dd07ec2404247a152849bf66ecbc, type: 3}
 --- !u!114 &973215307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46060,6 +46061,7 @@ MonoBehaviour:
   - {fileID: 8390517452212356601, guid: f442e2b88dd26c544bb3290135bc7360, type: 3}
   - {fileID: 6817956585010561410, guid: fc41a420b4ec4954198ae30b154b3576, type: 3}
   - {fileID: 190920791535231148, guid: ff594938625f277408b85bcb6afa329d, type: 3}
+  - {fileID: 4810833131604385186, guid: fab8648dc17143149baa928881226ee6, type: 3}
 --- !u!114 &2102641480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46142,7 +46144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7438fe9ff69ecd6458f0c7b8e876062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingThreatBudget: 1
+  _startingThreatBudget: 3
+  _budgetIncreasePerLevel: 3
   _currentBossCount: 0
 --- !u!114 &2102641485
 MonoBehaviour:
