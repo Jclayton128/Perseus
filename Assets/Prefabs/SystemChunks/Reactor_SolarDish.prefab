@@ -257,7 +257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: Tail_SolarDish
+      value: Reactor_SolarDish
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -340,16 +340,15 @@ MonoBehaviour:
   _description: Releases a solar dish when warping into a new system. The dish greatly
     boosts energy regen while near.
   _upgradeDescription: Upgrading further enhances the energy regen boost
-  SystemType: 9
-  SystemLocation: 2
+  SystemType: 21
+  SystemLocation: 6
   _maxUpgradeLevel: 5
   _energyBeamParticle: {fileID: 448788017567629368}
   _solarDishPrefab: {fileID: 6386032735014172851, guid: a69ca15b6d05d05468aa3a3fb3d5feab, type: 3}
   _energyBoostRange: 6
-  _baseEnergyBoostRate: 2
+  _energyBoostRate: 2
   _dugoutIconForSolarDish: {fileID: 21300000, guid: 96fb5da5eb9addc4ea0b7b4e1f191a0c, type: 3}
-  _energyBoostRateMultiplier_Upgrade: 1.2
-  _energyBoostRangeMultiplier_Upgrade: 1.2
+  _dishCountAddition_Upgrade: 1
 --- !u!1001 &8649568518368373942
 PrefabInstance:
   m_ObjectHideFlags: 0

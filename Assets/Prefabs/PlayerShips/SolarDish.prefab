@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 5304697363272790191}
   - component: {fileID: 6386032735014172851}
   - component: {fileID: 1311790899}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SolarDish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
