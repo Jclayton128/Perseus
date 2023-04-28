@@ -17,6 +17,7 @@ public class EnergyHandler : MonoBehaviour
     
     [HideIf("_usesBurstRecharge")]
     [SerializeField] float _energyGainRate = 1f;
+    public float EnergyGainRate => _energyGainRate;
 
     [Tooltip("Burst Recharge keeps energy at zero, and then instantly returns to full once " +
         "sufficient time has elapsed.")]
@@ -131,6 +132,12 @@ public class EnergyHandler : MonoBehaviour
     {
         _maxEnergyPoints += amountToAdd;
         EnergyPointsChanged?.Invoke(CurrentEnergy, _maxEnergyPoints);
+    }
+
+    public void SetEnergyRegenRate(float newEnergRegen)
+    {
+        _energyGainRate = newEnergRegen;
+        EnergyRegenChanged?.Invoke(_energyGainRate.ToString("F1"), Color.white);
     }
 
     #endregion
