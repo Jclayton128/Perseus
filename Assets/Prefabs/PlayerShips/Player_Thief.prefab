@@ -39,6 +39,10 @@ PrefabInstance:
       propertyPath: _turnRate
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 1449635983045557181, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _strafeThrust
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.Prefab
       value: 

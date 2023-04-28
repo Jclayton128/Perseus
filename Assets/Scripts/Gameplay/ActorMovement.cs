@@ -38,6 +38,8 @@ public class ActorMovement : MonoBehaviour
 
     [SerializeField] float _thrust;
     [SerializeField] float _turnRate;
+    [SerializeField] float _strafeThrust; //thrust /2f;
+    public float StrafeThrust => _strafeThrust;
     float _turnRateMemory;
 
     [Tooltip("Negative drag rate defaults to thrust/100")]
@@ -233,7 +235,7 @@ public class ActorMovement : MonoBehaviour
         if (Mathf.Abs(_strafeCommanded) > Mathf.Epsilon)
         {
             _rb.AddForce((Vector2)transform.right *
-                 _strafeCommanded * _performanceFactor * _thrust/2f *
+                 _strafeCommanded * _performanceFactor * _strafeThrust *
                  Time.fixedDeltaTime);
         }
 
@@ -408,6 +410,16 @@ public class ActorMovement : MonoBehaviour
     //    _rb.mass = _mass;
     //}
 
+    public void ModifyStrafe(float amountToAdd)
+    {
+        _strafeThrust += amountToAdd;
+    }
+
+    public void SetStrafe(float newStrafe)
+    {
+        _strafeThrust = newStrafe;
+    }
+
     public void ModifyTurnRate(float amountToAdd)
     {
         _turnRate += amountToAdd;
@@ -424,13 +436,30 @@ public class ActorMovement : MonoBehaviour
         _thrustEnergyCostRate += amountToAdd;
     }
 
-    public Color SwapParticleColor(Color newColor)
+    public Color SwapEngineParticleColor(Color newColor)
     {
         Color oldColor = Color.red;
         foreach (var ep in _engineParticles)
         {
             ParticleSystem.MainModule main = ep.main;
             oldColor = main.startColor.color;
+            main.startColor = newColor;
+        }
+        return oldColor;
+    }
+
+    public Color SwapStrafeParticleColor(Color newColor)
+    {
+        Color oldColor = Color.red;
+        foreach (var ep in _strafeParticles_exhaustingLeft)
+        {
+            ParticleSystem.MainModule main = ep.main;
+            oldColor = main.startColor.color;
+            main.startColor = newColor;
+        }
+        foreach (var ep in _strafeParticles_exhaustingRight)
+        {
+            ParticleSystem.MainModule main = ep.main;
             main.startColor = newColor;
         }
         return oldColor;

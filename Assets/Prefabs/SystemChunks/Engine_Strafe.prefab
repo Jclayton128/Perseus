@@ -91,7 +91,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787891852214245899, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_Name
-      value: Engine_Ion
+      value: Engine_Strafe
       objectReference: {fileID: 0}
     - target: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
       propertyPath: m_RootOrder
@@ -153,7 +153,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2235579174234149017, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
   m_PrefabInstance: {fileID: 8416919710039757573}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001717565859253831
+--- !u!114 &1205945894667879634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,15 +162,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9088757276696693006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d21075e0f934e408f3c9ba80e53cd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6579ac5aba5611a4885ecc0c5d1ae09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 54c5bb4cc5bb3be469aa29e0881cdf15, type: 3}
-  _name: Ion Engine
-  _description: Cool-burning, high-efficiency engine with modest speed increase.
-    Useful for maintaining stealth.
-  _upgradeDescription: Upgrading decreases your ship's profile increase while accelerating.
+  _name: Strafe Engines
+  _description: Routes main engine thrust to strafe ports, allowing much quicker
+    lateral movement. Useful for dodging.
+  _upgradeDescription: Upgrading further increases lateral movement.
   SystemType: 3
   SystemLocation: 0
   _maxUpgradeLevel: 5
-  _decreaseInThrustProfileRate_Upgrade: 2
+  _newStrafeColor: {r: 1, g: 1, b: 1, a: 0.8156863}
+  _strafeMultiplier_Upgrade: 0.3

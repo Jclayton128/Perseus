@@ -1412,6 +1412,7 @@ MonoBehaviour:
   _minAngleOffDesiredSteeringToAccel: 10
   _thrust: 600
   _turnRate: 180
+  _strafeThrust: 100
   _decelDragRate: -1
   _normalDragRate: 0
   _thrustProfileIncreaseRate: 15
@@ -6849,6 +6850,18 @@ PrefabInstance:
       value: 0.7294118
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.21568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: InitialModule.startSize.minMaxState
       value: 0
       objectReference: {fileID: 0}
@@ -7026,6 +7039,18 @@ PrefabInstance:
     - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.7294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.21759963
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2291206457618375862, guid: 1dc8dd52c97717746ba941a60c32604a, type: 3}
       propertyPath: InitialModule.startSize.minMaxState

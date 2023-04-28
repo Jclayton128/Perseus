@@ -15,14 +15,14 @@ public class IonEngineSH : SystemHandler
         base.IntegrateSystem(connectedSID);
         _hostActorMovement = GetComponentInParent<ActorMovement>();
         _hostActorMovement.ModifyThrustProfileIncreaseRate(-_decreaseInThrustProfileRate_Upgrade);
-        _oldEngineColor = _hostActorMovement.SwapParticleColor(Color.blue);
+        _oldEngineColor = _hostActorMovement.SwapEngineParticleColor(Color.blue);
     }
 
     public override void DeintegrateSystem()
     {
         base.DeintegrateSystem();
         _hostActorMovement.ModifyThrustProfileIncreaseRate(_decreaseInThrustProfileRate_Upgrade);
-        _hostActorMovement.SwapParticleColor(_oldEngineColor);
+        _hostActorMovement.SwapEngineParticleColor(_oldEngineColor);
     }
 
     public override object GetUIStatus()
