@@ -11,7 +11,7 @@ public class RamscoopReactorSH : SystemHandler
     [SerializeField] float _energyVelocityRateAddition_Upgrade = 1f;
 
     //state
-    float _currentEnergyVelocityRate = 1f;
+    float _currentEnergyVelocityRate;
     float _oldEnergyRegenRate;
 
     public override object GetUIStatus()
@@ -25,6 +25,7 @@ public class RamscoopReactorSH : SystemHandler
         _hostEnergyHandler = GetComponentInParent<EnergyHandler>();
         _hostRB = GetComponentInParent<Rigidbody2D>();
         _oldEnergyRegenRate = _hostEnergyHandler.EnergyGainRate;
+        _currentEnergyVelocityRate = _energyVelocityRateAddition_Upgrade;
     }
 
     public override void DeintegrateSystem()

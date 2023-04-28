@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: b1f44f5f57dcd7d40b7bc1bba791de2a, type: 3}
-  _name: Afterburner
+  _name: Burner Engine
   _description: Improves mobility by dumping raw energy into the exhaust. Inefficient
     but effective.
   _upgradeDescription: Upgrading increases thrust output and energy efficiency

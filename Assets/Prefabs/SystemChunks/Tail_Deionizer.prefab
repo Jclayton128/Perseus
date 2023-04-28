@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: ac2febad675a96842bc761a175ec1257, type: 3}
-  _name: Deionizer
+  _name: Deionizer Tail
   _description: Accelerates the deionizing process, reducing the time spent slowed
     by ionization.
   _upgradeDescription: Upgrading further accelerates the deionizing rate.

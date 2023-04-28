@@ -5080,7 +5080,7 @@ MonoBehaviour:
   _scrapBonus: 0
   _projectileLifetime: 1.5
   _projectileSpeed: 10
-  _activationCost: 3
+  _activationCost: 5
   _profileIncreaseOnActivation: 30
   _activationSounds:
   - {fileID: 8300000, guid: 9191eef9e8c14054485d74ad719b29f0, type: 3}
@@ -5095,5 +5095,5 @@ MonoBehaviour:
   _isPermanent: 1
   _invokesAutosteerWhenActivated: 0
   WeaponMountIndex: -1
-  _chargeRateAddition_Upgrade: 0.1
-  _weaponSpeedMultiplier_Upgrade: 1.2
+  _chargeRateAddition_Upgrade: 0.2
+  _weaponSpeedMultiplier_Upgrade: 1.3

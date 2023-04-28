@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _energyGainRate
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxEnergyPoints

@@ -257,9 +257,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: dcf73c94de6355f409eac15602fbd2a3, type: 3}
-  _name: Vampire Wings
-  _description: Not implemented yet!
-  _upgradeDescription: upgrade description
+  _name: Vampire Pods
+  _description: Waste material from collected scrap is converted into an instant
+    shield boost. Useful in close-range combat.
+  _upgradeDescription: Upgrading increases the shield boost per scrap
   SystemType: 11
   SystemLocation: 3
   _maxUpgradeLevel: 5

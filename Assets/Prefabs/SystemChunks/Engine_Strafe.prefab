@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 54c5bb4cc5bb3be469aa29e0881cdf15, type: 3}
-  _name: Strafe Engines
+  _name: Strafe Engine
   _description: Routes main engine thrust to strafe ports, allowing much quicker
     lateral movement. Useful for dodging.
   _upgradeDescription: Upgrading further increases lateral movement.
