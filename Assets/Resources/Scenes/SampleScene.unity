@@ -21114,6 +21114,7 @@ MonoBehaviour:
   - {fileID: 8070533066006283264, guid: 5576c990c16767c40a9c76ca0cd547d5, type: 3}
   - {fileID: 5764748240325834554, guid: 2dc344a28dc9e324f96b3388b37e977e, type: 3}
   - {fileID: 710263998831068034, guid: 3f388be64a601f940850fbbb7cb13504, type: 3}
+  - {fileID: 1852466164385898703, guid: 070e0c0fa6c48a54f87ceeb272023c72, type: 3}
   _allWeapons:
   - {fileID: 373910325916342289, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
   - {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}

@@ -11,14 +11,15 @@ public class RadarProfileHandler : MonoBehaviour
     CircleCollider2D _radarProfileCollider;
     
     //settings
-    float _highLevel = 30f; //At high level, this is the half-radius of the arena, meaning lots of enemies will see the player
+    float _highLevel_starting = 30f; //At high level, this is the half-radius of the arena, meaning lots of enemies will see the player
     float _lowLevel = 0.1f;
-    float _changeRate = 10f; //units per second.
+    float _changeRate = 6f; //units per second.
 
     //state
     public float CurrentRadarProfile;
     public float CurrentRadarProfileFactor;
     private float _baseRadarProfile;
+    float _highLevel_current;
 
     [SerializeField] bool _isCloaked = false;
     Color halftone = new Color(1, 1, 1, .5f);
@@ -34,7 +35,8 @@ public class RadarProfileHandler : MonoBehaviour
         _radarProfileCollider = GetComponent<CircleCollider2D>();
         _baseRadarProfile = CurrentRadarProfile;
 
-        _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();   
+        _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        _highLevel_current = _highLevel_starting;
     }
 
     private void Update()
@@ -52,7 +54,7 @@ public class RadarProfileHandler : MonoBehaviour
     {
         CurrentRadarProfile = Mathf.MoveTowards(CurrentRadarProfile,
             _baseRadarProfile, _changeRate * Time.deltaTime);
-        CurrentRadarProfileFactor = CurrentRadarProfile / _highLevel;
+        CurrentRadarProfileFactor = CurrentRadarProfile / _highLevel_starting;
     }
 
     public void SetProfileBaseRate(float amount)
@@ -68,8 +70,8 @@ public class RadarProfileHandler : MonoBehaviour
     {
         if (_isCloaked) return;
         CurrentRadarProfile += profileToAdd;
-        CurrentRadarProfile = Mathf.Clamp(CurrentRadarProfile, _lowLevel, _highLevel);
-        CurrentRadarProfileFactor = CurrentRadarProfile / _highLevel;
+        CurrentRadarProfile = Mathf.Clamp(CurrentRadarProfile, _lowLevel, _highLevel_current);
+        CurrentRadarProfileFactor = CurrentRadarProfile / _highLevel_starting;
     }
 
     public void Cloak()
@@ -90,5 +92,15 @@ public class RadarProfileHandler : MonoBehaviour
         {
             sr.color = Color.white;
         }
+    }
+
+    public void ModifyProfileMaximum(float multiplierToApply)
+    {
+        _highLevel_current *= multiplierToApply;
+    }
+
+    public void ResetProfileMaximum()
+    {
+        _highLevel_current = _highLevel_starting;
     }
 }

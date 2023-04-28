@@ -210,9 +210,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 41addd11f7ced424db892d5690f9061f, type: 3}
-  _name: Heavy Hull
-  _description: Not implemented yet!
-  _upgradeDescription: upgrade description
+  _name: Stealth Hull
+  _description: Special coating absorbs signal produced by the ship's actions, reducing
+    the max profile. Stealthy!
+  _upgradeDescription: Upgrading further reduces the ship's maximum profile.
   SystemType: 14
   SystemLocation: 4
   _maxUpgradeLevel: 5
+  _maxProfileMultiplier_Upgrade: 0.8
