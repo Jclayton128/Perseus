@@ -10,6 +10,8 @@ public class ActorMovement : MonoBehaviour
     EnergyHandler _hostEnergyHandler;
     Rigidbody2D _rb;
     [SerializeField] ParticleSystem[] _engineParticles = null;
+    [SerializeField] ParticleSystem[] _strafeParticles_exhaustingRight = null;
+    [SerializeField] ParticleSystem[] _strafeParticles_exhaustingLeft = null;
     RadarProfileHandler _radarProfileHandler;
     MindsetHandler _mindsetHandler;
 
@@ -356,6 +358,39 @@ public class ActorMovement : MonoBehaviour
     private void HandleStrafeCommanded(float strafeCommanded)
     {
         _strafeCommanded = strafeCommanded;
+        if (_strafeCommanded > Mathf.Epsilon)
+        {
+            foreach (var particle in _strafeParticles_exhaustingLeft)
+            {
+                particle.Play();
+            }
+            foreach (var particle in _strafeParticles_exhaustingRight)
+            {
+                particle.Stop();
+            }
+        }
+        else if (_strafeCommanded < -Mathf.Epsilon)
+        {
+            foreach (var particle in _strafeParticles_exhaustingLeft)
+            {
+                particle.Stop();
+            }
+            foreach (var particle in _strafeParticles_exhaustingRight)
+            {
+                particle.Play();
+            }
+        }
+        else
+        {
+            foreach (var particle in _strafeParticles_exhaustingLeft)
+            {
+                particle.Stop();
+            }
+            foreach (var particle in _strafeParticles_exhaustingRight)
+            {
+                particle.Stop();
+            }
+        }
     }
 
 
