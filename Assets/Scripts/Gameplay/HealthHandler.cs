@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using Cinemachine;
 
 public class HealthHandler : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class HealthHandler : MonoBehaviour
     ParticleController _particleController;
     ScrapController _scrapController;
     Rigidbody2D _rb;
+    CinemachineImpulseSource _cis;
     [SerializeField] ParticleSystem _ionizationParticles = null;
+
 
 
     ParticleSystem.EmissionModule _ipem;
@@ -116,7 +119,12 @@ public class HealthHandler : MonoBehaviour
 
 
         if (!_isShip) return;
-        if (_movement && _movement.IsPlayer) _shouldEndGameSessionUponDeath = true;
+        if (_movement && _movement.IsPlayer)
+        {
+            _shouldEndGameSessionUponDeath = true;
+            _cis = Camera.main.GetComponentInChildren<CinemachineImpulseSource>();
+        }
+
 
         _ionizationPointsAbsorbed = 0;
         IonFactor = 0;
@@ -332,6 +340,11 @@ public class HealthHandler : MonoBehaviour
 
         if (incomingDamage.NormalDamage > 0 || incomingDamage.ShieldBonusDamage > 0)
         {
+            if (_movement && _movement.IsPlayer)
+            {
+                _cis.GenerateImpulse(incomingDamage.NormalDamage);
+            }
+
             float carryoverHullDamage = incomingDamage.NormalDamage - 
                     Mathf.Clamp(ShieldPoints - incomingDamage.ShieldBonusDamage, 0 , 999);
 
