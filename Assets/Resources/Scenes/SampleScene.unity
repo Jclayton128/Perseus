@@ -21118,8 +21118,8 @@ MonoBehaviour:
   - {fileID: -2404765254068731198, guid: bd9a5fad16acd2b40b332ffec789c967, type: 3}
   - {fileID: 5764748240325834554, guid: 2dc344a28dc9e324f96b3388b37e977e, type: 3}
   _allWeapons:
-  - {fileID: 373910325916342289, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
   - {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+  - {fileID: 373910325916342289, guid: f59d769d94cf3e6408e4b06576da9a3a, type: 3}
   - {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
   - {fileID: -2118620994063847308, guid: aba734942111e094abb41c8830b5f778, type: 3}
   - {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
@@ -21131,6 +21131,7 @@ MonoBehaviour:
   - {fileID: -4160023869044057807, guid: 392e7dc0c019fc34186f0241b0b03b35, type: 3}
   - {fileID: -2202094065509427462, guid: e5db1f9a5f731be4eabbf7b4f37cb963, type: 3}
   - {fileID: 6190751960104961599, guid: edb5baf94e31beb4b8bf6081c92b5c93, type: 3}
+  - {fileID: 4493300341783572998, guid: 9c3bc857caf73d64289713ca7751cfe7, type: 3}
 --- !u!4 &973215305
 Transform:
   m_ObjectHideFlags: 0
@@ -26347,6 +26348,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1273992159}
   - component: {fileID: 1273992160}
+  - component: {fileID: 1273992162}
+  - component: {fileID: 1273992161}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -26404,6 +26407,63 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1010673855}
+--- !u!114 &1273992161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273992158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+--- !u!114 &1273992162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273992158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
 --- !u!1 &1276359577
 GameObject:
   m_ObjectHideFlags: 0

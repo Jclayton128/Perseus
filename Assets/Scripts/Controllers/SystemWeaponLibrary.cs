@@ -15,7 +15,7 @@ public class SystemWeaponLibrary : MonoBehaviour
         PBlaster0, PArcherTurret1, PMissile2, PShotgun3, PRockets4, PScrapedo5, 
         PHarpoon6, PDarkblade7, PFlakTurret8, PMarkerTurret9, PRevolver10, PBeamTurret11, 
         PTorpedo12, PJavelin13,PArcShield14, PWarpGate15,
-        Player16, Player17, Player18, Player19,
+        PSentryPod16, Player17, Player18, Player19,
         TrundlerBlaster20, Enemy21, Enemy22, Enemy23, Enemy24, Enemy25, Enemy26, Enemy27,
         Enemy28, Enemy29, Enemy30, Enemy31, Enemy32, Enemy33, Enemy34,
         Enemy35, Enemy36, Enemy37, Enemy38, Enemy39, None

@@ -64,7 +64,7 @@ public class EnergyHandler : MonoBehaviour
 
     private void Update()
     {
-        if (_usesBurstRecharge)
+        if (_usesBurstRecharge && _currentEnergy < _maxEnergyPoints/2f)
         {
             _burstRechargeCountdown -= Time.deltaTime * (1 - _health.IonFactor);
             if (_burstRechargeCountdown <= 0)

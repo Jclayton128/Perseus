@@ -90,7 +90,7 @@ public class BlasterWH : WeaponHandler, IBoltLauncher
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
         
-        _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
+        _hostRadarProfileHandler?.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
         if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
         else _hostAudioSource.PlayOneShot(GetRandomFireClip());
