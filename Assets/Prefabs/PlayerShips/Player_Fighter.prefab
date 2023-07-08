@@ -2271,7 +2271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _energyGainRate
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3598728220984623620, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2289,6 +2289,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.114
       objectReference: {fileID: 0}
+    - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a9fdc92ef7b8e074f9cfbb7c38f0c8b9, type: 3}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _name
       value: Fighter

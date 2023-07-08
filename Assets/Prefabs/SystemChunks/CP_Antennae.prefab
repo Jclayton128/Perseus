@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: eafa254de55d2e64183a898f2dd7b51a, type: 3}
   _name: Sensor Cockpit
-  _description: Improved signal reception decreases radar direction error and increases
+  _description: Improved signal reception decreases radar direction error whie increasing
     visual range.
   _upgradeDescription: Upgrading further decreases radar error and increases sight
     range.

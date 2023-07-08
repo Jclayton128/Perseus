@@ -262,8 +262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 9fe850fa0a9e6784ab63645643dfd42f, type: 3}
   _name: Magneton Shield
-  _description: Greatly increased maximum shield level, but shields only regen during
-    sector warp.
+  _description: Greatly increased maximum shield level, but shields only regen when
+    warping into a new sector.
   _upgradeDescription: Upgrading further increase maximum shield level
   SystemType: 18
   SystemLocation: 5

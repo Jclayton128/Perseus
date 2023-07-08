@@ -346,8 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 04211fbca3613b4449be70e181a9eb64, type: 3}
   _name: Reactive Hull
-  _description: Upon receiving sufficient damage, this hull emits a blast of particles
-    in retaliation.
+  _description: Upon receiving sufficient damage, this hull emits a blast of damaging
+    particles in retaliation.
   _upgradeDescription: Upgrading lowers damage threshold and increases particle count.
   SystemType: 13
   SystemLocation: 4

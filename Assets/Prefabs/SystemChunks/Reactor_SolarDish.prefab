@@ -336,9 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 8748ab583fa109e4299f7d15b3e08d15, type: 3}
-  _name: Solar Reactor
-  _description: Releases solar dishes when warping into a new system. These dishes
-    boost energy regen while nearby.
+  _name: Solar Dish
+  _description: Releases satellites into solar flux points when entering new system.
+    These satellites boost energy regen while nearby.
   _upgradeDescription: Upgrading increase the amount of dishes released when warping.
   SystemType: 21
   SystemLocation: 6

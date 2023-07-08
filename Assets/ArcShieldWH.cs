@@ -98,7 +98,11 @@ public class ArcShieldWH : WeaponHandler
             _shieldAudioSource.Stop();
         }
 
-        _emitTime = _shieldTime; // Make the system start at empty for Hammers to look better
+        if (!_isPlayer)
+        {
+            _emitTime = _shieldTime; // Make the system start at empty for Hammers to look better
+        }
+        
     }
 
     private void FadeoutAudioLoop()

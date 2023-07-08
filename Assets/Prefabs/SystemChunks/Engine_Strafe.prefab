@@ -174,4 +174,4 @@ MonoBehaviour:
   SystemLocation: 0
   _maxUpgradeLevel: 5
   _newStrafeColor: {r: 1, g: 1, b: 1, a: 0.8156863}
-  _strafeMultiplier_Upgrade: 0.3
+  _strafeMultiplier_Upgrade: 0.4

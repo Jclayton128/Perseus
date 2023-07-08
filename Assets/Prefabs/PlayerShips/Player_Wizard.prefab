@@ -558,6 +558,10 @@ PrefabInstance:
       value: 0.303
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 0169075401aa03c418012786b640a12e, type: 3}
+    - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _name
       value: Wizard
       objectReference: {fileID: 0}

@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3419205007373433166, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3577009792823772659, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _energyGainRate
       value: 3
@@ -581,6 +585,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.377
       objectReference: {fileID: 0}
+    - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: _icon
+      value: 
+      objectReference: {fileID: 21300000, guid: c36a8d5b6c2e30e42af769fc3b76698f, type: 3}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _name
       value: Ranger
@@ -720,6 +728,10 @@ PrefabInstance:
     - target: {fileID: 8918660936316605451, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_SortingOrder
       value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978884934112690309, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name

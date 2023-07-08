@@ -267,7 +267,7 @@ MonoBehaviour:
   _normalDamage: 4
   _shieldBonusDamage: 0
   _ionDamage: 3
-  _knockBackAmount: 6
+  _knockBackAmount: 10
   _scrapBonus: 0
   _projectileLifetime: 0
   _projectileSpeed: 0
@@ -283,6 +283,7 @@ MonoBehaviour:
   IsSecondary: 1
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0
+  WeaponMountIndex: -1
   _arcShieldPrefab: {fileID: 1149342279754515068, guid: abd5c249aa0a18d43972e32247ed1169, type: 3}
   _shieldTime: 5
   _coolRate: 0.5
