@@ -22,7 +22,7 @@ public class StealthCockpitSH : SystemHandler
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
         base.IntegrateSystem(connectedSID);
-        _hostRadarProfileHandler = transform.parent.GetComponentInChildren<RadarProfileHandler>();
+        _hostRadarProfileHandler = transform.root.GetComponentInChildren<RadarProfileHandler>();
         _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         _levelController = FindObjectOfType<LevelController>();
         _levelController.WarpedIntoNewLevel += OnWarpToNewLevel;

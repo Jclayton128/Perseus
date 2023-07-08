@@ -258,6 +258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3830901009853765642, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4540444473409002080, guid: 540a5332b8653cf44ac36f715b968407, type: 3}
       propertyPath: m_Name
       value: DarkBlade
