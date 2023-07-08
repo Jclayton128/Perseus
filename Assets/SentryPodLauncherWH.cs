@@ -29,7 +29,8 @@ public class SentryPodLauncherWH : WeaponHandler
         }
         _connectedWID?.UpdateUI(_modeNames[_currentMode]);
         _sentryPod?.SetSentryMode(_currentMode);
-        //TODO audio play some zip zoop UI noises to indicate aurally which mode currently in.
+
+        if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(_activationSounds[_currentMode]);
     }
 
     protected override void DeactivateInternal(bool wasPausedDuringDeactivationAttempt)
@@ -72,5 +73,10 @@ public class SentryPodLauncherWH : WeaponHandler
     private void DestroySentryPod()
     {
         if (_sentryPod) _sentryPod.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (_sentryPod) Destroy(_sentryPod);
     }
 }

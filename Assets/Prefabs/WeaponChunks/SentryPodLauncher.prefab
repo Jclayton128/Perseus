@@ -163,8 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 5a603c097e8ea8a41be91e06ab6f14e9, type: 3}
   _name: Sentry Pod
-  _description: Upon warping in, creates a tough multi-mode drone to fight alongside
-    you. RMB to cycle modes.
+  _description: Upon warping in, creates a multi-mode drone to fight alongside you.
+    Once upgraded, click to cycle between ionizing STUN, rapid-fire SWAT, and powerful
+    SLAY.
   _upgradeDescription: Upgrading increases available modes.
   WeaponType: 16
   _projectileType: 0
@@ -177,7 +178,12 @@ MonoBehaviour:
   _projectileSpeed: 10.1
   _activationCost: 0
   _profileIncreaseOnActivation: 0
-  _activationSounds: []
+  _activationSounds:
+  - {fileID: 8300000, guid: 263b993fba495154c8f6199ba915871e, type: 3}
+  - {fileID: 8300000, guid: e470120b940eeaf40885f19a05b61113, type: 3}
+  - {fileID: 8300000, guid: e470120b940eeaf40885f19a05b61113, type: 3}
+  - {fileID: 8300000, guid: e470120b940eeaf40885f19a05b61113, type: 3}
+  - {fileID: 8300000, guid: e470120b940eeaf40885f19a05b61113, type: 3}
   _activationSoundVolume: 1
   _firingSounds: []
   _firingSoundVolume: 1
@@ -194,3 +200,5 @@ MonoBehaviour:
   - HEAL
   - SLAY
   _sentryPodPrefab: {fileID: 3359123771773826695, guid: 09d10c46ac684e14ba9b60ec6f3443bc, type: 3}
+  _currentMode: 0
+  _maxMode: 1

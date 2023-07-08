@@ -141,8 +141,15 @@ public class SentryPodBrain : MonoBehaviour
 
     private void UpdateFacing()
     {
-        if (!_currentTarget) return;
-        _lookAngle = Vector3.SignedAngle(Vector3.up, _lookDir, Vector3.forward);
+        if (!_currentTarget)
+        {
+            _lookAngle = Vector3.SignedAngle(Vector3.up, _moveDir, Vector3.forward);
+        }
+        else
+        {
+            _lookAngle = Vector3.SignedAngle(Vector3.up, _lookDir, Vector3.forward);
+        }
+
 
         Quaternion angleToPoint = Quaternion.Euler(0, 0, _lookAngle);
         transform.rotation =

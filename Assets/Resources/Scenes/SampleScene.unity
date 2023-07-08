@@ -16055,11 +16055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_text
-      value: 3.17
+      value: 7.6.23
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontSize
-      value: 39.6
+      value: 25.45
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontSizeBase
@@ -46119,6 +46119,7 @@ MonoBehaviour:
   - {fileID: 4810833131604385186, guid: 2e3271816713d7a4789b46b5a15b8b4b, type: 3}
   - {fileID: 4810833131604385186, guid: 7cc8a6378a0aeba4f9f74e7e1c507e8c, type: 3}
   - {fileID: 4810833131604385186, guid: bf187307dce95fc47b38bc45fe4b7b1b, type: 3}
+  - {fileID: 6258587682615267321, guid: eeb1792e18fa7904fa50769b082a8591, type: 3}
   - {fileID: 2501287643560770377, guid: 338199f47aff9b742bce9d224a9b7390, type: 3}
   - {fileID: 8390517452212356601, guid: f442e2b88dd26c544bb3290135bc7360, type: 3}
   - {fileID: 6817956585010561410, guid: fc41a420b4ec4954198ae30b154b3576, type: 3}

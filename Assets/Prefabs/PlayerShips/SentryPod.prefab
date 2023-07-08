@@ -425,13 +425,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ionizationParticles: {fileID: 0}
-  _maxHullPoints: 100
+  _maxHullPoints: 5
   _emitsHullChunks: 1
   _isShip: 1
-  _maxShieldPoints: 0
-  _shieldHealRate: 0
-  _ionHealRate: 10
-  _deathSounds: []
+  _maxShieldPoints: 5
+  _shieldHealRate: 0.5
+  _ionHealRate: 1
+  _deathSounds:
+  - {fileID: 8300000, guid: 7f1e0c22a69020e469447c7ee57550da, type: 3}
   IonFactor: 0
 --- !u!114 &3359123771773826695
 MonoBehaviour:
