@@ -78,5 +78,7 @@ public class SentryPodLauncherWH : WeaponHandler
     private void OnDestroy()
     {
         if (_sentryPod) Destroy(_sentryPod);
+        _levelCon.WarpingOutFromOldLevel -= DestroySentryPod;
+        _levelCon.WarpedIntoNewLevel -= DeploySentryPod;
     }
 }

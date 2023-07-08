@@ -39,7 +39,7 @@ public class DetectionHandler : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.root.tag == "Player")
+        if (collision.transform.root.tag == "Player" && _playerRB)
         {
             PlayerPosVelLost?.Invoke(_playerRB.position, _playerRB.velocity);
             _playerRB = null;

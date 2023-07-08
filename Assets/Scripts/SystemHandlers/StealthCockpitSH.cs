@@ -85,5 +85,10 @@ public class StealthCockpitSH : SystemHandler
         _particleSystem.Play();
     }
 
-    
+    private void OnDestroy()
+    {
+        _levelController.WarpedIntoNewLevel -= OnWarpToNewLevel;
+    }
+
+
 }

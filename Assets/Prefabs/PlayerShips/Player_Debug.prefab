@@ -419,7 +419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingSystems.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.size
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingSystems.Array.data[1]
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.data[0]
@@ -439,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.data[1]
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.data[2]
@@ -2291,12 +2291,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _name
-      value: Fighter
+      value: Debugatron
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: Armed with a repeating blaster and shield, the Fighter is built for
-        close combat
+      value: The premier fighting vessel in the nebula, the Debugatron is equipped
+        with the latest gadgets and impressive stats.
       objectReference: {fileID: 0}
     - target: {fileID: 4369430510534326286, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2316,19 +2316,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _ionHealRate
-      value: 0.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxHullPoints
-      value: 25
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _shieldHealRate
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _maxShieldPoints
-      value: 12
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4733614743688848574, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2380,7 +2380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9089745778583505210, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_Name
-      value: Player_Fighter
+      value: Player_Debug
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6236703678204536076, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
