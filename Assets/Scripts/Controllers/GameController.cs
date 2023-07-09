@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     AudioController _audioController;
 
     public Action<GameObject> PlayerSpawned;
-
+    public Action PlayerDespawning;
 
     //settings
     [SerializeField] float _deathDwellTime = 5f;
@@ -85,6 +85,7 @@ public class GameController : MonoBehaviour
 
     public void EndGameOnPlayerChoice()
     {
+        PlayerDespawning?.Invoke();
         _levelController.ClearLevel();
         Destroy(_player);
         _player = null;
@@ -93,11 +94,13 @@ public class GameController : MonoBehaviour
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
         PauseGame(0.7f);
+
     }
 
     public void EndGameOnPlayerDeath()
     {
         BeginPlayerDeathSequence();
+        PlayerDespawning?.Invoke();
     }
 
     private void BeginPlayerDeathSequence()

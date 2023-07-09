@@ -217,6 +217,9 @@ public class HealthHandler : MonoBehaviour
             SpawnScrapUponDeath();
             transform.gameObject.SetActive(false);
             FindObjectOfType<GameController>().EndGameOnPlayerDeath();
+
+
+
         }
 
         if (_isShip && !_isPlayer) Destroy(gameObject);

@@ -24,9 +24,15 @@ public class PlayerStateHandler : MonoBehaviour
     [SerializeField] float _energyRegenGainOnLevelUp = 0.1f;
 
     //State
+    int _totalScrapCollected = 0;
+    public int TotalScrapCollected => _totalScrapCollected;
+
+
     int _scrapCollected = 0;
     int _currentUpgradePoints = 0;
+    public int UnspentUpgradePoints => _currentUpgradePoints;
     int _currentShipLevel = 0;
+    public int ShipLevel => _currentShipLevel;
     int _scrapNeededForNextUpgradeLevel;
     float _scrapFactor = 0;
     float _timeForNextPossibleUpgradeMenuToggle = -1;
@@ -82,6 +88,7 @@ public class PlayerStateHandler : MonoBehaviour
     {
         ScrapGained?.Invoke();
         _scrapCollected++;
+        _totalScrapCollected++;
 
         if (_scrapCollected >= _scrapNeededForNextUpgradeLevel)
         {
