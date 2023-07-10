@@ -216,7 +216,8 @@ public abstract class Projectile : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint((AudioClip)CUR.GetRandomFromCollection(_detonateSounds), transform.position);
 
-            //_auso?.PlayOneShot((AudioClip)CUR.GetRandomFromCollection(_detonateSounds));
+            //_auso.PlayOneShot((AudioClip)CUR.GetRandomFromCollection(_detonateSounds));
+            _auso.PlayOneShot(_detonateSounds[0]);
         } 
 
         if (maxDamageRange <=0 )

@@ -104,7 +104,8 @@ MonoBehaviour:
   _profileIncreaseOnActivation: 0
   _activationSounds: []
   _activationSoundVolume: 1
-  _firingSounds: []
+  _firingSounds:
+  - {fileID: 8300000, guid: 40a7044a5ff3ae1449e7a159a8b73e3e, type: 3}
   _firingSoundVolume: 1
   _deactivationSounds: []
   _deactivationSoundVolume: 1

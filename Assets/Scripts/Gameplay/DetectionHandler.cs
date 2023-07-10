@@ -49,7 +49,7 @@ public class DetectionHandler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.root.tag == "Player")
+        if (collision.transform.root.tag == "Player" && _playerRB)
         {
             _distToPlayer = (_playerRB.position - (Vector2)transform.position).magnitude;
             PlayerDistanceUpdated?.Invoke(_distToPlayer);
