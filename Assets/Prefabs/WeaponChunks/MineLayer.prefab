@@ -93,8 +93,8 @@ MonoBehaviour:
   _upgradeDescription: No upgrades possible.
   WeaponType: 0
   _projectileType: 12
-  _normalDamage: 3
-  _shieldBonusDamage: 0
+  _normalDamage: 1
+  _shieldBonusDamage: 3
   _ionDamage: 0
   _knockBackAmount: 3
   _scrapBonus: 0
@@ -103,8 +103,12 @@ MonoBehaviour:
   _activationCost: 10
   _profileIncreaseOnActivation: 0
   _activationSounds: []
+  _activationSoundVolume: 1
   _firingSounds: []
+  _firingSoundVolume: 1
   _deactivationSounds: []
+  _deactivationSoundVolume: 1
   IsSecondary: 0
   _isPermanent: 0
-  _maxUpgradeLevel: 5
+  _invokesAutosteerWhenActivated: 0
+  WeaponMountIndex: -1

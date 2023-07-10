@@ -183,7 +183,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 752881964, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _detectorRange
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 264755010771906002, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: CurrentRadarProfile

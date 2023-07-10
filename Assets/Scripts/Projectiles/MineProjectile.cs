@@ -77,7 +77,7 @@ public class MineProjectile : Projectile
             _damageRange,
             transform.position);
         ExecuteGenericExpiration_Explode(_damageRange, 
-            LayerLibrary.PlayerEnemyNeutralLayerMask);
+            LayerLibrary.PlayerLayerMask);
     }
 
     private void HandlePlayerDistanceUpdated(float dist)

@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _thrust
-      value: 400
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 1804585079, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _turnRate
@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _range
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _closeEnough
