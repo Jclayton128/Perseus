@@ -3,6 +3,7 @@ using Unity.Services.Core;
 using Unity.Services.Analytics;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Unity.Services.Core.Environments;
 
 public class AnalyticsController : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class AnalyticsController : MonoBehaviour
 
 	async void Start()
 	{
-		await UnityServices.InitializeAsync();
+
+		var options = new InitializationOptions();
+		options.SetEnvironmentName("production");
+
+		await UnityServices.InitializeAsync(options);
 
 		_gameController = FindObjectOfType<GameController>();
 		_levelController = FindObjectOfType<LevelController>();
@@ -27,7 +32,6 @@ public class AnalyticsController : MonoBehaviour
 
 	void CheckForConsent()
 	{
-		Debug.Log("checking for consent");
 		if (_analyticsOptinToggle.isOn)
         {
 			ConsentGiven();
@@ -37,16 +41,15 @@ public class AnalyticsController : MonoBehaviour
 	void ConsentGiven()
 	{
 		AnalyticsService.Instance.StartDataCollection();
-		Debug.Log("analytics ready to collect");
 	}
 
 	void HandlePlayerSpawned(GameObject throwaway)
     {
-		Debug.Log("handle player spawned");
 		CheckForConsent();
 
 		_gameController.Player.GetComponentInChildren<HealthHandler>().Dying += FireEvent_PlayerDeath;
 
+		PlayerSystemHandler psh = _gameController.Player.GetComponentInChildren<PlayerSystemHandler>();
 	}
 
 	void HandlePlayerDespawned()
@@ -63,13 +66,31 @@ public class AnalyticsController : MonoBehaviour
 		Dictionary<string, object> parameters = new Dictionary<string, object>()
 		{
 			{ "ShipLevel", psh.ShipLevel },
-			{"CurrentSectorCount", _runController.CurrentSectorCount}
+			{"CurrentSectorCount", _runController.CurrentSectorCount},
+			{"CurrentSectorName", _levelController.CurrentLevel.LevelName }
 		};
 
 		AnalyticsService.Instance.CustomData("PlayerDeath", parameters);
-
-
-
 	}
+
+	private void FireEvent_UpgradeSystem()
+    {
+
+    }
+
+	private void FireEvent_UpgradeWeapon()
+    {
+
+    }
+
+	private void FireEvent_InstallWeapon()
+    {
+
+    }
+
+	private void FireEvent_InstallSystem()
+    {
+
+    }
 }
 

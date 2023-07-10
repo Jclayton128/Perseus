@@ -40,7 +40,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] Level _tutorialLevel = null;
 
     //state
-    public Level _nextLevel;
+    Level _currentLevel;
+    public Level CurrentLevel => _currentLevel;
     [SerializeField] Color _filterColor = Color.white;
     Tween _filterTween;
 
@@ -84,9 +85,9 @@ public class LevelController : MonoBehaviour
 
     public void StartGameWithTutorial()
     {
-        _nextLevel = _tutorialLevel;
+        _currentLevel = _tutorialLevel;
         BuildTutorialLevel();
-        Debug.Log($"Entering level: {_nextLevel.name} ");
+        Debug.Log($"Entering level: {_currentLevel.name} ");
     }
 
     public void StartGameWithRegular()
@@ -101,10 +102,10 @@ public class LevelController : MonoBehaviour
 
     private void LoadLevelOfCurrentWormhole()
     {
-        _levelLibrary.RemoveBeatenBossLevel(_nextLevel);
+        _levelLibrary.RemoveBeatenBossLevel(_currentLevel);
 
-        if (_selectedWormhole) _nextLevel = _selectedWormhole.AssociatedLevel;
-        else _nextLevel = _levelLibrary.GetRandomLevel();
+        if (_selectedWormhole) _currentLevel = _selectedWormhole.AssociatedLevel;
+        else _currentLevel = _levelLibrary.GetRandomLevel();
 
         ClearLevel();
         WarpIntoNewLevel();
@@ -130,11 +131,11 @@ public class LevelController : MonoBehaviour
 
         _filterTween.Kill();
         _filterTween = DOTween.To(() =>
-            _filterSR.color, x => _filterSR.color = x, _nextLevel.BackgroundColor, 0.5f);
+            _filterSR.color, x => _filterSR.color = x, _currentLevel.BackgroundColor, 0.5f);
 
         //_currentLevel = _selectedWormhole.AssociatedLevel;// _levelLibrary.GetRandomLevel();
-        Debug.Log($"Entering level: {_nextLevel.name} ");
-        WarpedIntoNewLevel?.Invoke(_nextLevel);
+        Debug.Log($"Entering level: {_currentLevel.name} ");
+        WarpedIntoNewLevel?.Invoke(_currentLevel);
         //Player should listen in to this^ to recharge energy, shields, and systems, and reduce profile
 
         //TODO ripping audio sound for warp in;
@@ -156,7 +157,7 @@ public class LevelController : MonoBehaviour
         }
 
 
-        _asteroidPoolController.SpawnInitialAsteroids(_nextLevel);
+        _asteroidPoolController.SpawnInitialAsteroids(_currentLevel);
         //Spawn Nebula too?
     }
 
@@ -232,7 +233,7 @@ public class LevelController : MonoBehaviour
     private void SpawnBossInNewSector()
     {
         List<GameObject> enemiesToMake =
-            _enemyLibrary.CreateMenuFromBossLevel(_nextLevel);
+            _enemyLibrary.CreateMenuFromBossLevel(_currentLevel);
 
         _currentBoss = Instantiate(enemiesToMake[0], Vector2.zero, Quaternion.identity);
         RegisterEnemy(_currentBoss.GetComponent<EnemyRegistrationHandler>(), false);
@@ -266,7 +267,7 @@ public class LevelController : MonoBehaviour
     private void SpawnEnemiesInNewSector()
     {
         List<GameObject> enemiesToMake =
-            _enemyLibrary.CreateMenuFromBudgetAndLevel(_runController.CurrentThreatBudget, _nextLevel);
+            _enemyLibrary.CreateMenuFromBudgetAndLevel(_runController.CurrentThreatBudget, _currentLevel);
 
         foreach (var enemy in enemiesToMake)
         {

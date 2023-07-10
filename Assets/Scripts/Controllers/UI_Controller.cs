@@ -702,12 +702,12 @@ public class UI_Controller : MonoBehaviour
     {
         if (_currentUpgradeableSelection.GetWeaponType() != SystemWeaponLibrary.WeaponType.None)
         {
-            _playerSystemHandler.GainWeapon(_currentUpgradeableSelection.GetWeaponType());
+            _playerSystemHandler.GainWeapon(_currentUpgradeableSelection.GetWeaponType(), false);
         }
 
         if (_currentUpgradeableSelection.GetSystemType() != SystemWeaponLibrary.SystemType.None)
         {
-            _playerSystemHandler.GainSystem(_currentUpgradeableSelection.GetSystemType());
+            _playerSystemHandler.GainSystem(_currentUpgradeableSelection.GetSystemType(), false);
         }
 
         //TODO play install audio

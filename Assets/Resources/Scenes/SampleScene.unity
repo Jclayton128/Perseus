@@ -16142,11 +16142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_text
-      value: 7.6.23
+      value: 7.9.23a
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontSize
-      value: 25.45
+      value: 22.5
       objectReference: {fileID: 0}
     - target: {fileID: 6902645772035246618, guid: c34e3db19f69d9f49b46c52dd705947d, type: 3}
       propertyPath: m_fontSizeBase
@@ -27093,7 +27093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4118629263534397455, guid: 7fbc1b544df6f5c44b8d0e3f566ada3e, type: 3}
       propertyPath: m_Name
-      value: ShipSelectButton_0
+      value: VersionAndDebugStart
       objectReference: {fileID: 0}
     - target: {fileID: 5163744791470435559, guid: 7fbc1b544df6f5c44b8d0e3f566ada3e, type: 3}
       propertyPath: m_Pivot.x
@@ -46831,7 +46831,6 @@ MonoBehaviour:
   _wormholePrefab: {fileID: 7550026786897206232, guid: a8af1e2d37b38fd4d85e0b50aa3aa990, type: 3}
   _filterSR: {fileID: 1293374296}
   _tutorialLevel: {fileID: 11400000, guid: 06837d425d647804ca1856993ea6be2f, type: 2}
-  _nextLevel: {fileID: 0}
   _filterColor: {r: 0.6890987, g: 0.28166604, b: 0.8679245, a: 1}
 --- !u!114 &2102641481
 MonoBehaviour:

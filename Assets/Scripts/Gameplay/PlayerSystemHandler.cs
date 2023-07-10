@@ -16,6 +16,11 @@ public class PlayerSystemHandler : MonoBehaviour
     UI_Controller _UICon;
     Scanner _crateScanner;
 
+    public Action<SystemWeaponLibrary.SystemType> InstalledSystem;
+    public Action<SystemWeaponLibrary.WeaponType> InstalledWeapon;
+    public Action<SystemWeaponLibrary.SystemType, int> UpgradedSystem;
+    public Action<SystemWeaponLibrary.WeaponType, int> UpgradedWeapon;
+
 
     //These are used to check for overlap between two weapons or two systems.
     Dictionary<SystemWeaponLibrary.WeaponType, GameObject> _weaponsOnBoard =
@@ -84,7 +89,7 @@ public class PlayerSystemHandler : MonoBehaviour
         ActiveSecondaryWeapon = null;
         foreach (var weapon in _startingWeapons)
         {
-            GainWeapon(_syslib.GetWeapon(weapon));
+            GainWeapon(weapon, true);
         }
     }
 
@@ -142,7 +147,7 @@ public class PlayerSystemHandler : MonoBehaviour
     #region System Gain/Loss
     
 
-    public void GainWeapon(SystemWeaponLibrary.WeaponType weaponType)
+    public void GainWeapon(SystemWeaponLibrary.WeaponType weaponType, bool isStartingWeapon)
     {
         GainWeapon(_syslib.GetWeapon(weaponType));
     }
@@ -180,7 +185,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _crateScanner.DestroyScannedCrateAfterInstall();
     }
 
-    public void GainSystem(SystemWeaponLibrary.SystemType systemType)
+    public void GainSystem(SystemWeaponLibrary.SystemType systemType, bool isStartingSystem)
     {
         GainSystem(_syslib.GetSystem(systemType));
 
