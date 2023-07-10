@@ -94,6 +94,7 @@ public abstract class SystemHandler : MonoBehaviour, IInstallable
         _connectedID?.ModifySystemLevel(CurrentUpgradeLevel);
         Debug.Log($"Implementing system-specific upgrades for level {CurrentUpgradeLevel}");
         ImplementSystemUpgrade();
+        FindObjectOfType<AnalyticsController>().FireEvent_UpgradeSystem(SystemType, CurrentUpgradeLevel);
     }
 
     /// <summary>

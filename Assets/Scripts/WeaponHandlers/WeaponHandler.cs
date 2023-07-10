@@ -191,6 +191,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         CurrentUpgradeLevel++;
         _connectedWID.ModifySystemLevel(CurrentUpgradeLevel);
         ImplementWeaponUpgrade();
+        FindObjectOfType<AnalyticsController>().FireEvent_UpgradeWeapon(WeaponType, CurrentUpgradeLevel);
     }
 
     public void Scrap()

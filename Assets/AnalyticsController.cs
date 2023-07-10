@@ -50,6 +50,8 @@ public class AnalyticsController : MonoBehaviour
 		_gameController.Player.GetComponentInChildren<HealthHandler>().Dying += FireEvent_PlayerDeath;
 
 		PlayerSystemHandler psh = _gameController.Player.GetComponentInChildren<PlayerSystemHandler>();
+		psh.InstalledWeapon += FireEvent_InstallWeapon;
+		psh.InstalledSystem += FireEvent_InstallSystem;
 	}
 
 	void HandlePlayerDespawned()
@@ -73,24 +75,47 @@ public class AnalyticsController : MonoBehaviour
 		AnalyticsService.Instance.CustomData("PlayerDeath", parameters);
 	}
 
-	private void FireEvent_UpgradeSystem()
+	public void FireEvent_UpgradeSystem(SystemWeaponLibrary.SystemType st, int newLevel)
     {
+		Dictionary<string, object> parameters = new Dictionary<string, object>()
+		{
+			{ "SystemName", st.ToString() },
+			{"SystemUpgradeLevel", newLevel},
+		};
 
-    }
+		AnalyticsService.Instance.CustomData("UpgradedSystem", parameters);
+	}
 
-	private void FireEvent_UpgradeWeapon()
+	public void FireEvent_UpgradeWeapon(SystemWeaponLibrary.WeaponType wt, int newLevel)
     {
+		Dictionary<string, object> parameters = new Dictionary<string, object>()
+		{
+			{ "WeaponName", wt.ToString() },
+			{"WeaponUpgradeLevel", newLevel},
+		};
 
-    }
+		AnalyticsService.Instance.CustomData("UpgradedWeapon", parameters);
+	}
 
-	private void FireEvent_InstallWeapon()
+	private void FireEvent_InstallWeapon(SystemWeaponLibrary.WeaponType wt)
     {
+		Dictionary<string, object> parameters = new Dictionary<string, object>()
+		{
+			{ "WeaponName", wt.ToString() }
+		};
 
-    }
+		AnalyticsService.Instance.CustomData("InstalledWeapon", parameters);
+	}
 
-	private void FireEvent_InstallSystem()
+	private void FireEvent_InstallSystem(SystemWeaponLibrary.SystemType st)
     {
+		Dictionary<string, object> parameters = new Dictionary<string, object>()
+		{
+			{ "SystemName", st.ToString() }
+		};
 
-    }
+		AnalyticsService.Instance.CustomData("InstalledSystem", parameters);
+
+	}
 }
 

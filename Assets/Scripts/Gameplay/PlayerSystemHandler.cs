@@ -75,7 +75,7 @@ public class PlayerSystemHandler : MonoBehaviour
         _systemsOnBoard.Clear();
         foreach (var system in _startingSystems)
         {
-            GainSystem(_syslib.GetSystem(system));
+            GainSystem(system, true);
         }
 
     }
@@ -150,6 +150,7 @@ public class PlayerSystemHandler : MonoBehaviour
     public void GainWeapon(SystemWeaponLibrary.WeaponType weaponType, bool isStartingWeapon)
     {
         GainWeapon(_syslib.GetWeapon(weaponType));
+        if (!isStartingWeapon) InstalledWeapon?.Invoke(weaponType);
     }
 
     private void GainWeapon(GameObject newWeapon)
@@ -188,7 +189,7 @@ public class PlayerSystemHandler : MonoBehaviour
     public void GainSystem(SystemWeaponLibrary.SystemType systemType, bool isStartingSystem)
     {
         GainSystem(_syslib.GetSystem(systemType));
-
+        if (!isStartingSystem) InstalledSystem?.Invoke(systemType);
     }
 
     private void GainSystem(GameObject newSystem)

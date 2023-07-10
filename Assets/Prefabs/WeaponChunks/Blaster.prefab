@@ -264,7 +264,7 @@ MonoBehaviour:
   _isPermanent: 1
   _invokesAutosteerWhenActivated: 1
   WeaponMountIndex: -1
-  _spoolUpTime: 6
+  _spoolUpTime: 4
   _BestTimeBetweenShots: 0.25
   _fireRateModifier_Initial: 0.33
   _timeBetweenShotsMultiplier_Upgrade: 0.9
