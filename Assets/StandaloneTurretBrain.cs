@@ -19,6 +19,8 @@ public class StandaloneTurretBrain : MonoBehaviour
     [SerializeField] bool _targetsPlayers = false;
     [SerializeField] bool _targetsEnemies = false;
     [SerializeField] bool _leadsTarget = false;
+    [SerializeField] bool _usesOwnDetectionRange = false;
+    [SerializeField] bool _attacksIndependently = true;
     [SerializeField] float _backupDetectionRange = 12f;
 
     //state
@@ -44,7 +46,7 @@ public class StandaloneTurretBrain : MonoBehaviour
         if (_targetsPlayers && _targetsEnemies) _layerMask = LayerLibrary.PlayerEnemyLayerMask;
 
         var asdf = GetComponentInParent<MindsetHandler>();
-        if (asdf) _targetScanRange = asdf.DetectorRange;
+        if (asdf && !_usesOwnDetectionRange) _targetScanRange = asdf.DetectorRange;
         else _targetScanRange = _backupDetectionRange;
 
     }
@@ -90,7 +92,7 @@ public class StandaloneTurretBrain : MonoBehaviour
             _lookAngle = Vector3.SignedAngle(Vector3.up, dir + leadDist, Vector3.forward);
         }
         _turretSteerer.SetLookAngle(_lookAngle);
-        _weaponHandler.Activate();
+        if (_attacksIndependently) _weaponHandler.Activate();
     }
 
     private void UpdateScan()

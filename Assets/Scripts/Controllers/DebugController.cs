@@ -204,8 +204,13 @@ public class DebugController : MonoBehaviour
         _spawnEnemyLabels[0].transform.parent.parent.gameObject.SetActive(true);
         for (int i = 0; i < types.Length; i++)
         {
+            if (i >= _spawnEnemyLabels.Length)
+            {
+                Debug.Log("more enemies than labels to put them on!");
+                break;
+            }
             int etypeAsInt = (int)types[i];
-
+            
             _spawnEnemyLabels[i].text = $"Spawn {types[i]}";
             _spawnEnemyLabels[i].GetComponentInParent<Button>().
                 onClick.AddListener(() => SpawnEnemy_Debug(etypeAsInt));
