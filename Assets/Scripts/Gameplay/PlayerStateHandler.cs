@@ -15,7 +15,8 @@ public class PlayerStateHandler : MonoBehaviour
     EnergyHandler _energyHandler;
 
     //Settings
-    int _scrapsPerLevelMod = 4;
+    [SerializeField] int _scrapsPerLevelMod = 0;
+    [SerializeField] int _scrapsPerLevel = 6;
     float _timeBetweenUpgradeMenuToggles = 0.9f; // Should be the same as the time to deploy the menu
     
     [SerializeField] float _shieldGainOnLevelUp = 1f;
@@ -54,7 +55,7 @@ public class PlayerStateHandler : MonoBehaviour
         _inputController.UpgradeMenuToggled += ToggleUpgradeMenu;
 
         _gameController = _uiController.GetComponent<GameController>();
-        _scrapNeededForNextUpgradeLevel = _scrapsPerLevelMod;
+        _scrapNeededForNextUpgradeLevel = _scrapsPerLevel;
 
         _energyHandler = GetComponent<EnergyHandler>();
         _healthHandler = GetComponent<HealthHandler>();
