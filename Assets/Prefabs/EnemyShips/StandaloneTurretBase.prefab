@@ -99,6 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsPlayers: 1
   _targetsEnemies: 0
+  _leadsTarget: 0
+  _usesOwnDetectionRange: 0
+  _attacksIndependently: 1
+  _backupDetectionRange: 12
 --- !u!114 &6820736381641151240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +232,10 @@ PrefabInstance:
       propertyPath: _turretTurnRate
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
+      propertyPath: _beamFX
+      value: 
+      objectReference: {fileID: 9093641688725695630, guid: 65ab5a0e058cffd43a3f5a907c2141f2, type: 3}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _maxRange
       value: 7

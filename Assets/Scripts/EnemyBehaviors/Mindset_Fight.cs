@@ -10,12 +10,17 @@ public class Mindset_Fight : Mindset
     LevelController _levelController;
     WeaponHandler[] _weaponHandlers;
 
-    public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement, FlyToOffset}
+    public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement, FlyToOffset,
+    FlyToRandomRadiusOffset}
 
     [ShowIf("FightMovement", FightMovements.FlyToOffset)]
     [Tooltip("The local offset (from the player) this enemy should fly towards")]
     [SerializeField] Vector2 _offsetToFlyTo = Vector2.zero;
-    
+
+    [ShowIf("FightMovement", FightMovements.FlyToRandomRadiusOffset)]
+    [Tooltip("The radius (from the player) this enemy should fly select as a random offset point")]
+    [SerializeField] float _radiusToFlyTo = 1f;
+
     public enum FightWeaponUse { FireWhenAccurate, FireContinuously,
         FireContinuouslyIfSeePlayer, NeverFire}
 
@@ -46,6 +51,11 @@ public class Mindset_Fight : Mindset
 
         if (_weaponHandlers[0]) _decisionRange = _weaponHandlers[0].GetMaxWeaponRange() * _decisionRangeFactor;
         else _decisionRange = 1;
+
+        if (FightMovement == FightMovements.FlyToRandomRadiusOffset)
+        {
+            _offsetToFlyTo = UnityEngine.Random.insideUnitCircle.normalized * _radiusToFlyTo;
+        }
     }
 
     public override void EnterMindset()
@@ -167,6 +177,7 @@ public class Mindset_Fight : Mindset
                 break;
 
             case FightMovements.FlyToOffset:
+            case FightMovements.FlyToRandomRadiusOffset:
                 if (_mindsetHandler.PlayerTransform != null)
                 {
                     newTargetPos = _mindsetHandler.PlayerTransform.TransformPoint(_offsetToFlyTo);
