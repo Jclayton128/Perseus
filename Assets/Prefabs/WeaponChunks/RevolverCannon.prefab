@@ -290,3 +290,4 @@ MonoBehaviour:
   _isPermanent: 0
   _invokesAutosteerWhenActivated: 0
   WeaponMountIndex: -1
+  _resilience: 6

@@ -8,6 +8,8 @@ public class RevolverCannonSH : WeaponHandler
 
     //settings
     int _chargesPerUpgrade = 1;
+    [SerializeField] int _resilience = 6;
+
 
     //state
     Vector2Int _chargeStatus = new Vector2Int(1,1);
@@ -40,7 +42,7 @@ public class RevolverCannonSH : WeaponHandler
     {
         Projectile pb = _poolCon.SpawnProjectile(_projectileType, _muzzle);
         pb.SetupInstance(this);
-        
+        pb.SetResilience(_resilience);
         _hostRadarProfileHandler.AddToCurrentRadarProfile(_profileIncreaseOnActivation);
 
         if (_isPlayer) _playerAudioSource.PlayClipAtPlayer(GetRandomFireClip());
@@ -74,4 +76,6 @@ public class RevolverCannonSH : WeaponHandler
         _chargeStatus.x = _chargeStatus.y;
         UpdateUI();
     }
+
+
 }
