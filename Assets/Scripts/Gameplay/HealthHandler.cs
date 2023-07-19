@@ -123,6 +123,7 @@ public class HealthHandler : MonoBehaviour
         {
             _shouldEndGameSessionUponDeath = true;
             _cis = Camera.main.GetComponentInChildren<CinemachineImpulseSource>();
+            FindObjectOfType<LevelController>().WarpingIntoNewLevel += ResetShieldsToMax;
         }
 
 

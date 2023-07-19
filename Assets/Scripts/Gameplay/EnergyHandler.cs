@@ -43,6 +43,7 @@ public class EnergyHandler : MonoBehaviour
             _health.IonFactorChanged += HandleIonFactorChange;
             _uicontroller = FindObjectOfType<UI_Controller>();
         }
+        FindObjectOfType<LevelController>().WarpedIntoNewLevel += ResetEnergyToMaxEnergy;
 
         //if (_movement == null || _health == null)
         //{
@@ -142,5 +143,9 @@ public class EnergyHandler : MonoBehaviour
 
     #endregion
 
+    private void ResetEnergyToMaxEnergy(Level throwaway)
+    {
+        _currentEnergy = _maxEnergyPoints;
+    }
 
 }
