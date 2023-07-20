@@ -4918,6 +4918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deliversDamageOnlyAtExpiration: 0
   _detonateSounds: []
+  _postDeathAudioSource: {fileID: 5317776812472430998, guid: 2a8e4bf1c475d5740bc0162f4abbf9c1, type: 3}
   PType: 14
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 79b9051a30ea7874ca03b6569a6dabb2, type: 3}

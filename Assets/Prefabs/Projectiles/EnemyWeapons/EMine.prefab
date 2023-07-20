@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 193562253237218133, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: MaxDistance
-      value: 9.65
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 193562253237218133, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: rolloffMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 193562253237218133, guid: 2d11fd32e7c9f814eb28734b2a7f3b7a, type: 3}
       propertyPath: m_PlayOnAwake
@@ -425,6 +425,7 @@ MonoBehaviour:
   _deliversDamageOnlyAtExpiration: 0
   _detonateSounds:
   - {fileID: 8300000, guid: 887ecd0f11db7dc46878f9004f339e35, type: 3}
+  _postDeathAudioSource: {fileID: 5317776812472430998, guid: 2a8e4bf1c475d5740bc0162f4abbf9c1, type: 3}
   PType: 12
   ImpactHeading: {x: 0, y: 0}
   _safeSprite: {fileID: 21300000, guid: 2f68826b799f2ca4b92ba3a7fcbfe822, type: 3}

@@ -32,6 +32,7 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] protected bool _deliversDamageOnlyAtExpiration = false;
     public bool DeliversDamageOnlyAtExpiration => _deliversDamageOnlyAtExpiration;
     [SerializeField] AudioClip[] _detonateSounds = null;
+    [SerializeField] GameObject _postDeathAudioSource = null;
 
 
     //state
@@ -214,10 +215,13 @@ public abstract class Projectile : MonoBehaviour
     {
         if (_detonateSounds.Length > 0)
         {
-            AudioSource.PlayClipAtPoint((AudioClip)CUR.GetRandomFromCollection(_detonateSounds), transform.position);
+            
+            float dist = ((Vector2)Camera.main.transform.position - (Vector2)transform.position).magnitude;
+            float volumeFactor = 1-Mathf.InverseLerp(0, 13, dist); //Magic number of 13 is just offscreen from the player. Won't hear any explosions beyond that number
+            //Debug.Log($"factor: {volumeFactor} at dist: {dist}");
+            AudioSource.PlayClipAtPoint((AudioClip)CUR.GetRandomFromCollection(_detonateSounds), transform.position, volumeFactor);
 
             //_auso.PlayOneShot((AudioClip)CUR.GetRandomFromCollection(_detonateSounds));
-            _auso.PlayOneShot(_detonateSounds[0]);
         } 
 
         if (maxDamageRange <=0 )

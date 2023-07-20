@@ -180,6 +180,7 @@ MonoBehaviour:
   _deliversDamageOnlyAtExpiration: 1
   _detonateSounds:
   - {fileID: 8300000, guid: 6e085ad158ccc774bacc677360eee559, type: 3}
+  _postDeathAudioSource: {fileID: 5317776812472430998, guid: 2a8e4bf1c475d5740bc0162f4abbf9c1, type: 3}
   PType: 11
   ImpactHeading: {x: 0, y: 0}
   _lockedOnSprite: {fileID: 21300000, guid: 2c02eb8f501bf774cb2b1983171bef5a, type: 3}
