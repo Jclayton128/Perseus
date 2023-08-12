@@ -6,12 +6,12 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     AudioLibrary _audioLibrary;
-    AudioSource _cameraAudioSource;
+    [SerializeField] AudioSource _cameraAudioSource = null;
 
 
     private void Awake()
     {
-        _cameraAudioSource = Camera.main.GetComponent<AudioSource>();
+        //_cameraAudioSource = Camera.main.GetComponent<AudioSource>();
         _audioLibrary = FindObjectOfType<AudioLibrary>();
     }
 

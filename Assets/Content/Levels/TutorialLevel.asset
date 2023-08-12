@@ -17,3 +17,5 @@ MonoBehaviour:
   AsteroidAmount: 0
   NebulaAmount: 0
   _possibleEnemies: 
+  _music: {fileID: 8300000, guid: fb44043a9f32fe744a3091e2487a64e9, type: 3}
+  BackgroundColor: {r: 0, g: 0, b: 0, a: 0}

@@ -139,6 +139,7 @@ public class LevelController : MonoBehaviour
         //Player should listen in to this^ to recharge energy, shields, and systems, and reduce profile
 
         //TODO ripping audio sound for warp in;
+        MusicController.Instance.PlayNewMusic(_currentLevel.Music);
     }
 
     private void BuildNewLevel()
@@ -167,6 +168,7 @@ public class LevelController : MonoBehaviour
         _selectedWormhole = wh;
         _timeToSelectWormhole = 0;
         //Debug.Log("Player in wormhole");
+        MusicController.Instance.BeginWarpInMusic();
     }
 
     private void Update()
@@ -193,6 +195,7 @@ public class LevelController : MonoBehaviour
 
         //_timeToSelectWormhole = Mathf.Infinity;
         //Debug.Log("Player exits wormhole");
+        MusicController.Instance.CeaseWarp();
     }
     #endregion
 

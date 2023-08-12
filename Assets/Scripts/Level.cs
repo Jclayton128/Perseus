@@ -17,6 +17,9 @@ public class Level : ScriptableObject
         LevelController.NebulaAmounts.None;
 
     [SerializeField] private List<ShipInfoHolder.ShipType> _possibleEnemies;
+    [SerializeField] AudioClip _music = null;
+    public AudioClip Music => _music;
+    
     public List<ShipInfoHolder.ShipType> PossibleEnemies => _possibleEnemies;
 
     public Color BackgroundColor = Color.clear;
