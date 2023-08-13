@@ -599,7 +599,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: With 2 turrets, the Ranger is ready for ranged battles.
+      value: The Ranger's Archer Turret can be charged up to unleash powerful attacks.
+        The Reactive Hull can repels swarms, making up for the Ranger's slow speed.
       objectReference: {fileID: 0}
     - target: {fileID: 4369430510534326286, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalScale.x

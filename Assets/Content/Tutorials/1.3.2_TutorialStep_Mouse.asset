@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d16e446837e5544a9b26dd6fdc6c6e9, type: 3}
-  m_Name: 1.3_TutorialStep_Turn
+  m_Name: 1.3.2_TutorialStep_Mouse
   m_EditorClassIdentifier: 
   _location: 4
-  _completionCriteria: 3
+  _completionCriteria: 10
   _outcome: 0
-  _tutorialText: A/D strafes left or right. Your ship auto-turns to face the look
-    direction, set by your mouse.
+  _tutorialText: Your ship <rot>turns</rot> to face the look direction, set by your
+    mouse.

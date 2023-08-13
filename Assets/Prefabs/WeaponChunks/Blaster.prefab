@@ -235,9 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 7beb28aaa766581439f9017ff8e7ad47, type: 3}
-  _name: Blaster!
-  _description: This is the description of the standard blaster.
-  _upgradeDescription: Upgrading makes it better and cheaper.
+  _name: Turbine Blaster
+  _description: Standard-issue energy weapon. The firing rate accelerates the longer
+    it is fired.
+  _upgradeDescription: Upgrading makes the firing rate increases even faster.
   WeaponType: 0
   _projectileType: 0
   _normalDamage: 2

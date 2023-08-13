@@ -7,6 +7,9 @@ using System;
 
 public class SystemIconDriver : MonoBehaviour
 {
+    public Action IconCleared;
+    public Action IconSet;
+
     [SerializeField] protected TextMeshProUGUI _levelTMP = null;
     [SerializeField] protected Image _systemIcon;
     protected UI_Controller _uiController;
@@ -112,6 +115,7 @@ public class SystemIconDriver : MonoBehaviour
         IsOccupied = true;
 
         SetupUIType(sh.GetUIStatus());
+        IconSet?.Invoke();
     }
 
     public virtual void ClearUIIcon()
@@ -123,6 +127,7 @@ public class SystemIconDriver : MonoBehaviour
         IsOccupied = false;
 
         SetupUIType(null);
+        IconCleared?.Invoke();
     }
 
     public void UpdateUI(string newString)

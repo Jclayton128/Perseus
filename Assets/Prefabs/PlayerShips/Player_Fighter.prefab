@@ -2299,8 +2299,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: Armed with a repeating blaster and shield, the Fighter is built for
-        close combat
+      value: Armed with a Turbine Blaster and Arc Shield, the Fighter is built for
+        close combat.
       objectReference: {fileID: 0}
     - target: {fileID: 4369430510534326286, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.x

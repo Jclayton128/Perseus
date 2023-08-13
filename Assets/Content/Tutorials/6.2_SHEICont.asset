@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 3
   _completionCriteria: 10
-  _tutorialText: Shield is depicted in Blue, Hull in Red, and Energy in Yellow. Shields
-    and Energy regenerate slowly. If Hull reaches zero, you die.
+  _outcome: 0
+  _tutorialText: Shield is depicted in <color="blue>Blue</color>, Hull in <color
+    = "red">Red</color>, and Energy in <color="yellow">Yellow</color>. Shields and
+    Energy regenerate slowly. If Hull reaches zero, you die.

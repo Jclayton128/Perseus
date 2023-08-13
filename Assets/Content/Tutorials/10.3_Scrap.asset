@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 5
   _completionCriteria: 10
-  _tutorialText: You can also Scrap most Weapons to free up a slot and receive half
-    of its Upgrade Points back.
+  _outcome: 0
+  _tutorialText: You can also Salvage most Weapons to free up a slot and receive
+    half of its Upgrade Points back.

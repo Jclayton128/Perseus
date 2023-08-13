@@ -42,7 +42,7 @@ public class MusicController : MonoBehaviour
         _musicAusoTween.Kill();
         _musicAusoTween = _musicAudioSource.DOFade(0, _warpClip.length / 2f);
         _warpAusoTween.Kill();
-        _warpAudioSource.volume = 1;
+        _warpAudioSource.volume = _musicVolume_max;
         _warpAudioSource.clip = _warpClip;
         _warpAudioSource.Play();
     }

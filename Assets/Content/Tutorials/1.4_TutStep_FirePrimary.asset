@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 4
   _completionCriteria: 5
-  _tutorialText: Press the left mouse button to fire your primary weapon.
+  _outcome: 0
+  _tutorialText: Press the left mouse button to <bounce>fire</bounce> your primary
+    weapon.

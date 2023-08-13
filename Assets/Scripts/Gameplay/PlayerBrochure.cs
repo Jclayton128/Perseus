@@ -6,7 +6,7 @@ public class PlayerBrochure : MonoBehaviour
 {
     [SerializeField] Sprite _icon = null;
     [SerializeField] string _name = "default ship name";
-    [SerializeField] string _description = "default ship description";
+    [SerializeField][Multiline(3)] string _description = "default ship description";
 
     public (Sprite, string, string) GetShipDetails()
     {

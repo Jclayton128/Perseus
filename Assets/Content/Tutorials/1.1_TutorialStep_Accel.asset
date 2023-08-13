@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 4
   _completionCriteria: 1
-  _tutorialText: Press W to Accelerate
+  _outcome: 0
+  _tutorialText: Press W to <shake a=0.5>Accelerate</shake>

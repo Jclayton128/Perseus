@@ -15,4 +15,4 @@ MonoBehaviour:
   _location: 5
   _completionCriteria: 10
   _outcome: 1
-  _tutorialText: Use the radar to find an enemy and destroy it.
+  _tutorialText: Use the radar to find an enemy and <color="red>destroy</color> it.

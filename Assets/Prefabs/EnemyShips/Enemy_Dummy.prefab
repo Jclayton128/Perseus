@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 1939738846384467041, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467043, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -167,6 +171,10 @@ PrefabInstance:
     - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: ThreatScore
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683091770654198741, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _threatScore
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8716158890381425836, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _exploreBehavior

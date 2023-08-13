@@ -129,8 +129,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: Nimble, stealthy, and armed with a Dark Blade, the Ninja is ready for
-        backstabbing.
+      value: Nimble and stealthy, the Thief can use its Dark Blade and Warp Gate
+        for deadly backstab attacks.
       objectReference: {fileID: 0}
     - target: {fileID: 4691011983045253245, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _ionHealRate

@@ -270,7 +270,7 @@ MonoBehaviour:
   _normalDamage: 2
   _shieldBonusDamage: 0
   _ionDamage: 0
-  _knockBackAmount: 2
+  _knockBackAmount: 0
   _scrapBonus: 0
   _projectileLifetime: 2
   _projectileSpeed: 8

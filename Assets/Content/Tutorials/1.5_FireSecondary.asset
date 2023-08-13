@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location: 4
   _completionCriteria: 8
-  _tutorialText: Press your right mouse button to fire your selected secondary weapon.
-    Scroll wheel toggles between your secondaries, if you have more than one.
+  _outcome: 0
+  _tutorialText: Press your right mouse button to <bounce>fire</bounce> your selected
+    secondary weapon. Scroll wheel toggles between your secondaries, if you have
+    more than one.
