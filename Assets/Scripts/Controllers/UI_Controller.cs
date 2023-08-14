@@ -12,6 +12,9 @@ public class UI_Controller : MonoBehaviour
     #region Scene References
 
     [FoldoutGroup("Meta Menu")]
+    [SerializeField] TextMeshProUGUI _introTitle = null;
+    
+    [FoldoutGroup("Meta Menu")]
     [SerializeField] Image _topMetaWing = null;
 
     [FoldoutGroup("Meta Menu")]
@@ -19,6 +22,9 @@ public class UI_Controller : MonoBehaviour
 
     [FoldoutGroup("Meta Menu")]
     [SerializeField] Toggle _tutorialModeToggle = null;
+
+    [FoldoutGroup("Meta Menu")]
+    [SerializeField] GameObject[] _cockpitItems = null;
 
     [FoldoutGroup("Systems & Weapons")]
     [SerializeField] SystemIconDriver[] _systemIcons = null;
@@ -359,6 +365,21 @@ public class UI_Controller : MonoBehaviour
 
     #region Meta Menu
 
+    public void ShowHideIntroTitle(bool shouldShow)
+    {
+        if (shouldShow)
+        {
+            Color col = _introTitle.color;
+            col.a = 0;
+            _introTitle.color = col;
+            _introTitle.DOFade(1, 1f);
+        }
+        else
+        {
+            _introTitle.DOFade(0, 0.1f);
+        }
+    }
+
     public void DeployMetaMenu()
     {
         _topMetaTween.Kill();
@@ -448,6 +469,15 @@ public class UI_Controller : MonoBehaviour
     public bool GetTutorialModeCheckStatus()
     {
         return _tutorialModeToggle.isOn;
+    }
+
+    public void ShowHideAllCockpitUI(bool shouldShow)
+    {
+        _lookDirector.gameObject.gameObject.SetActive(shouldShow);
+        foreach (var item in _cockpitItems)
+        {
+            item.SetActive(shouldShow);
+        }
     }
 
     #endregion

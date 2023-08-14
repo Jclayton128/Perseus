@@ -84,8 +84,12 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
+      propertyPath: _ionDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _normalDamage
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _knockBackAmount
@@ -93,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7298886654218497150, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}
       propertyPath: _shieldBonusDamage
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3559c80c0e95514a96d2922bdcead19, type: 3}

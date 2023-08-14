@@ -46,16 +46,18 @@ public class SystemSelectorDriver : MonoBehaviour
 
     public void DeploySelector()
     {
-        _button.interactable = _associatedIconDriver.IsOccupied;
-        if (_associatedIconDriver.IsOccupied)
+        if (_associatedIconDriver)
         {
-            _tmp.text = _selectText;
+            _button.interactable = _associatedIconDriver.IsOccupied;
+            if (_associatedIconDriver.IsOccupied)
+            {
+                _tmp.text = _selectText;
+            }
+            else
+            {
+                _tmp.text = _emptyText;
+            }
         }
-        else
-        {
-            _tmp.text = _emptyText;
-        }
-
         if (!_deploysDown)
         {
             _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;

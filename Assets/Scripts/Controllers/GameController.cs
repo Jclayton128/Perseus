@@ -46,13 +46,22 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        _uiController.InstantDeployMetaMenu();
+        Invoke(nameof(DelayDeployMetaMenu), 8f);
+        //_uiController.InstantDeployMetaMenu();
         //PauseGame(1.2f);
+        _uiController.ShowHideAllCockpitUI(false);
+        _uiController.ShowHideIntroTitle(true);
+    }
+
+    private void DelayDeployMetaMenu()
+    {
+        _uiController.DeployMetaMenu();
     }
 
     public void SetupNewGame()
     {
-
+        _uiController.ShowHideIntroTitle(false);
+        _uiController.ShowHideAllCockpitUI(true);
         GameObject playerPrefab = _playerShipLibrary.GetSelectedPlayerShipPrefab();
 
         if (playerPrefab == null)

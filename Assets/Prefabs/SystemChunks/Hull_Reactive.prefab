@@ -332,6 +332,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8836162299300015956, guid: 9475630cbcd8487498e4a6631b19ff02, type: 3}
   m_PrefabInstance: {fileID: 5669989247264875180}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2578241166111731501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751362040115498488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706f0645c2aea534ea0882e1e36f9f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4610636124854757715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,8 +384,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _name: default name
-  _description: default description
+  _name: Reactive Hull
+  _description: Upon receiving sufficient damage, a powerful blast of ionizing particles
+    knocks enemies away.
   _upgradeDescription: upgrade description
   WeaponType: 0
   _projectileType: 7
@@ -404,15 +417,3 @@ MonoBehaviour:
   _degreeSpread: 360
   _rocketCount_Upgrade: 2
   _rocketSpeed_Upgrade: 20
---- !u!114 &2578241166111731501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3751362040115498488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706f0645c2aea534ea0882e1e36f9f90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
