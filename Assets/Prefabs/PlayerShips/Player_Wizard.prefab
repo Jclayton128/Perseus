@@ -567,8 +567,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: With its Javelin Pod, the Wizard has powerful ranged attacks. The Magneton
-        Core offers high shielding but no ability to recharge shields.
+      value: Protected by a Magneton Core and Javelin Pod, the Wizard is set for
+        long-range combat.
       objectReference: {fileID: 0}
     - target: {fileID: 4369430510534326286, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.x

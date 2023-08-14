@@ -28,23 +28,41 @@ public class SystemSelectorDriver : MonoBehaviour
         _tmp = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    //private void Start()
+    private void Start()
+    {
+        if (_associatedIconDriver)
+        {
+            _associatedIconDriver.IconCleared += SetSelectabilityOfButton;
+            _associatedIconDriver.IconSet += SetSelectabilityOfButton;
+        }
+
+    }
+
+    //private void HandleIconCleared()
     //{
-    //    _associatedIconDriver.IconCleared += HandleIconCleared;
-    //    _associatedIconDriver.IconSet += HandleIconSet;
+    //    _button.interactable = false;
     //}
 
-    private void HandleIconCleared()
-    {
-        _button.interactable = false;
-    }
-
-    private void HandleIconSet()
-    {
-        _button.interactable = true;
-    }
+    //private void HandleIconSet()
+    //{
+    //    _button.interactable = true;
+    //}
 
     public void DeploySelector()
+    {
+        SetSelectabilityOfButton();
+
+        if (!_deploysDown)
+        {
+            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
+        }
+        else
+        {
+            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
+        }
+    }
+
+    public void SetSelectabilityOfButton()
     {
         if (_associatedIconDriver)
         {
@@ -57,14 +75,6 @@ public class SystemSelectorDriver : MonoBehaviour
             {
                 _tmp.text = _emptyText;
             }
-        }
-        if (!_deploysDown)
-        {
-            _rt.DOAnchorPosY(_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
-        }
-        else
-        {
-            _rt.DOAnchorPosY(-_traverseAmount, _traverseTime).SetEase(Ease.InOutQuad).SetUpdate(true); ;
         }
     }
 

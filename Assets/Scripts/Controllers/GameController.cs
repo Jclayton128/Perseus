@@ -21,7 +21,8 @@ public class GameController : MonoBehaviour
 
     //settings
     [SerializeField] float _deathDwellTime = 5f;
-
+    [SerializeField] float _introDwellTime = 5f;
+    [SerializeField] GameObject _startingNebula = null;
 
     //state
     GameObject _player;
@@ -46,7 +47,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        Invoke(nameof(DelayDeployMetaMenu), 8f);
+        Invoke(nameof(DelayDeployMetaMenu), _introDwellTime);
         //_uiController.InstantDeployMetaMenu();
         //PauseGame(1.2f);
         _uiController.ShowHideAllCockpitUI(false);
@@ -62,6 +63,7 @@ public class GameController : MonoBehaviour
     {
         _uiController.ShowHideIntroTitle(false);
         _uiController.ShowHideAllCockpitUI(true);
+        _startingNebula.SetActive(false);
         GameObject playerPrefab = _playerShipLibrary.GetSelectedPlayerShipPrefab();
 
         if (playerPrefab == null)
@@ -134,6 +136,8 @@ public class GameController : MonoBehaviour
         _uiController.DeployMetaMenu();
         _uiController.ResetAllShipRelatedUI();
         PauseGame(0.7f);
+        //_startingNebula.SetActive(true);
+        //_camCon.FocusCameraOnTarget(_startingNebula.transform);
     }
 
     #region Time Scale

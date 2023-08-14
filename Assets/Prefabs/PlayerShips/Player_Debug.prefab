@@ -468,18 +468,18 @@ PrefabInstance:
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.SerializedBytes.Array.size
-      value: 879
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.SerializationNodes.Array.size
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 1480908697539541751, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: serializationData.SerializedBytes.Array.data[0]
@@ -2295,8 +2295,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710267741437525808, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _description
-      value: The premier fighting vessel in the nebula, the Debugatron is equipped
-        with the latest gadgets and impressive stats.
+      value: The premier fighting vessel, the Debugatron is equipped with the latest
+        gadgets and impressive stats.
       objectReference: {fileID: 0}
     - target: {fileID: 4369430510534326286, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: m_LocalPosition.x
