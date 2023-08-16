@@ -23,6 +23,13 @@ public class VisualCloakingHandler : MonoBehaviour
         _detectionHandler.PlayerPosVelLost += HandlePlayerTransformLost;
     }
 
+    private void Start()
+    {
+        _sr.color = Color.black;
+        _isSupposedToBeCloaked = true;
+        
+    }
+
     private void HandlePlayerDistanceUpdate(float dist)
     {
         if (dist > _cloakDecloakThreshold)
