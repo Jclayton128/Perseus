@@ -6,7 +6,7 @@ public class RunController : MonoBehaviour
 {
     //settings
     [SerializeField] int _startingThreatBudget = 2;
-    int _levelsBetweenBosses = 10;
+    int _levelsBetweenBosses = 7;
     [SerializeField] int _budgetIncreasePerLevel = 3;
 
     //state
@@ -77,6 +77,7 @@ public class RunController : MonoBehaviour
 
     public bool CheckIfPreBossLevel()
     {
+        //Debug.Log($"csc % lbb {_currentSectorCount} % {_levelsBetweenBosses}. preboss if {_levelsBetweenBosses - 1}");
         if (_currentSectorCount % _levelsBetweenBosses == _levelsBetweenBosses - 1)
         {
             return true;

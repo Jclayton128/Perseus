@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e73a52520649364aa09105557716ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scrapsPerLevelMod: 0
+  _scrapsPerLevelMod: 1
   _scrapsPerLevel: 10
   _shieldGainOnLevelUp: 1
   _hullGainOnLevelUp: 0.6
