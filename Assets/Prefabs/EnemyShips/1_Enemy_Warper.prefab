@@ -101,6 +101,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
+--- !u!114 &2048431270020884228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1956077029239354867, guid: 59aaf4bae355f284e8b7b7925d1033ee, type: 3}
+  m_PrefabInstance: {fileID: 524701048438870775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54381d5cf134724ea8bc2b113f1400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4790640282499899371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +224,14 @@ PrefabInstance:
       propertyPath: _minBoresightErrorToFire
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 2048431270020884228}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: 1_Enemy_Warper

@@ -430,6 +430,8 @@ MonoBehaviour:
   _targetsPlayers: 1
   _targetsEnemies: 0
   _leadsTarget: 0
+  _usesOwnDetectionRange: 0
+  _attacksIndependently: 1
   _backupDetectionRange: 12
 --- !u!1001 &134792780408705506
 PrefabInstance:
@@ -552,6 +554,14 @@ PrefabInstance:
       propertyPath: _minBoresightErrorToFire
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 2849997628378490465}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: 4_Enemy_Rocker
@@ -859,3 +869,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3092739481744609522, guid: 14bfc99293ab507478752e81919b4213, type: 3}
   m_PrefabInstance: {fileID: 7814314381706306097}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2849997628378490465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+  m_PrefabInstance: {fileID: 7814314381706306097}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609e4e67cfa036642928d01be6ea139c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

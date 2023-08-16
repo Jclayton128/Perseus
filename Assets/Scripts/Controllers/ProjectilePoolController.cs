@@ -59,7 +59,7 @@ public class ProjectilePoolController : MonoBehaviour
         Projectile pb;
         if (_unusedPools[projectileType].Count == 0)
         {
-            pb = Instantiate(_projectileMenu[projectileType], Vector3.zero, Quaternion.identity)
+            pb = Instantiate(_projectileMenu[projectileType], Vector3.zero, muzzle.rotation)
                 .GetComponent<Projectile>();
             pb.Initialize(this);
             

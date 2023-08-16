@@ -8,7 +8,7 @@ public class Mindset_Fight : Mindset
 {
     MindsetHandler _mindsetHandler;
     LevelController _levelController;
-    WeaponHandler[] _weaponHandlers;
+    [SerializeField] WeaponHandler[] _weaponHandlers = null;
 
     public enum FightMovements { Contact, StandoffDumb, StandoffLead, NoSpecialFightMovement, FlyToOffset,
     FlyToRandomRadiusOffset}
@@ -43,7 +43,7 @@ public class Mindset_Fight : Mindset
         _levelController = levelConRef;
 
         EnergyHandler eh = GetComponent<EnergyHandler>();
-        _weaponHandlers = GetComponentsInChildren<WeaponHandler>();
+        //_weaponHandlers = GetComponentsInChildren<WeaponHandler>();
         foreach (var wh in _weaponHandlers)
         {
             wh.Initialize(eh, false, null);

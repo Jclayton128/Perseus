@@ -9670,9 +9670,17 @@ PrefabInstance:
       propertyPath: _minBoresightErrorToFire
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 3555080167845006313}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
-      value: Enemy_Grinder
+      value: 4_Enemy_Grinder
       objectReference: {fileID: 0}
     - target: {fileID: 1939738846384467041, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Mass
@@ -9850,6 +9858,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef99901869d27e54caa3888044e3ed8d, type: 3}
+--- !u!114 &3555080167845006313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1956077029239354867, guid: ef99901869d27e54caa3888044e3ed8d, type: 3}
+  m_PrefabInstance: {fileID: 3058875581399367194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54381d5cf134724ea8bc2b113f1400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4576038571700597912
 PrefabInstance:
   m_ObjectHideFlags: 0

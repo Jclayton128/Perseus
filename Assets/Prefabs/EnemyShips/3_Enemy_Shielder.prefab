@@ -36,9 +36,25 @@ PrefabInstance:
       value: -0.722
       objectReference: {fileID: 0}
     - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: FightMovement
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: _fightWeaponUse
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _offsetToFlyTo.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8579568828808553124}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: 3_Enemy_Shielder
@@ -287,3 +303,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+--- !u!114 &8579568828808553124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4203932618607404, guid: 8db54393cf5bf494cb1cddeef86b7a79, type: 3}
+  m_PrefabInstance: {fileID: 8583349689762556296}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c689fdd9a9c87ea40a9ca33d442ae6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

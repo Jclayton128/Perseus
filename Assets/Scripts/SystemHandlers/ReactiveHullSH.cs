@@ -24,18 +24,29 @@ public class ReactiveHullSH : SystemHandler
     float _receivedDamageRaw = 0;
     float _receivedDamageFactor = 0;
     Color _receivedDamageColor = Color.white;
+    bool _isPlayer;
+
+
+    private void Start()
+    {
+        _isPlayer = GetComponentInParent<ActorMovement>().IsPlayer;
+        if (!_isPlayer)
+        {
+            IntegrateSystem(null);
+        }
+    }
 
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
-        base.IntegrateSystem(connectedSID);
+        if (connectedSID) base.IntegrateSystem(connectedSID);
         _healthHandler = GetComponentInParent<HealthHandler>();
         _healthHandler.ReceivingShieldDamage += HandleDamageReceived;
         _healthHandler.ReceivingThreatVector += HandleNewThreatVector;
         _energyHandler = GetComponentInParent<EnergyHandler>();
         _weaponHandler = transform.root.GetComponentInChildren<RocketLauncherWH>();
         _muzzle = _weaponHandler.GetComponentInChildren<MuzzleTag>().transform;
-        bool isPlayer = GetComponentInParent<ActorMovement>().IsPlayer;
-        _weaponHandler.Initialize(_energyHandler, isPlayer, null);
+        _isPlayer = GetComponentInParent<ActorMovement>().IsPlayer;
+        _weaponHandler.Initialize(_energyHandler, _isPlayer, null);
     }
 
 
@@ -81,8 +92,8 @@ public class ReactiveHullSH : SystemHandler
             _receivedDamageRaw -= Time.deltaTime * _reactionDecreaseRate;
             _receivedDamageRaw = Mathf.Clamp(_receivedDamageRaw, 0, 999);
         }
-
-        UpdateUI();
+        
+        if (_isPlayer) UpdateUI();
     }
 
    

@@ -113,6 +113,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 392e7dc0c019fc34186f0241b0b03b35, type: 3}
+--- !u!114 &7200888199704284482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4160023869044057807, guid: 392e7dc0c019fc34186f0241b0b03b35, type: 3}
+  m_PrefabInstance: {fileID: 2714001510728373363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cecd35db516513488cb8a2c261481a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4614046734359886297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -144,6 +155,14 @@ PrefabInstance:
       propertyPath: FightMovement
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 7200888199704284482}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: 3_Enemy_Stalker

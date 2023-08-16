@@ -67,6 +67,14 @@ PrefabInstance:
       propertyPath: _decisionRangeFactor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575310513218350232, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
+      propertyPath: _weaponHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8844133194824828999}
     - target: {fileID: 1939738846384466972, guid: dc544c65fe90fee4d825f624d4df64fa, type: 3}
       propertyPath: m_Name
       value: B_Enemy_Hephaestus
@@ -313,3 +321,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
+--- !u!114 &8844133194824828999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1432692344082372770, guid: 4d68750cd22c11048ae8d4b3d9bb7702, type: 3}
+  m_PrefabInstance: {fileID: 7592328248511811813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956e360fd52940640a9bcd763a739f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

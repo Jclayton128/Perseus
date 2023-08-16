@@ -13,6 +13,7 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
     [Tooltip("Radius of search area. Offset = Radius * 1.5")]
     [SerializeField] float _missileScanRadius = 0.25f;
 
+
     [Header("Upgrade Parameters")]
     [SerializeField] float _missileDamageAddition_Upgrade = 0;
     [SerializeField] float _missileSpeedAddition_Upgrade = 20f;
@@ -58,15 +59,12 @@ public class MissileLauncherWH : WeaponHandler, IMissileLauncher
 
     protected override void InitializeWeaponSpecifics()
     {
-        // 9 is EnemyShip
-        // 11 is NeutralShip
         if (_isPlayer)
         {
             _legalTarget_layerMask = LayerLibrary.EnemyNeutralLayerMask;
         }
         else
         {
-            // 7 is PlayerShip
             _legalTarget_layerMask = LayerLibrary.PlayerLayerMask;
         }
 
