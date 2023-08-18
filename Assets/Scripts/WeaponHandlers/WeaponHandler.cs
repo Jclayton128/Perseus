@@ -101,7 +101,7 @@ public abstract class WeaponHandler : MonoBehaviour, IInstallable
         _poolCon = _inputCon.GetComponent<ProjectilePoolController>();
         _muzzle = GetComponentInChildren<MuzzleTag>().transform;
         _hostEnergyHandler = hostEnergyHandler;
-        _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();
+        if (_hostEnergyHandler) _hostRadarProfileHandler = hostEnergyHandler.GetComponentInChildren<RadarProfileHandler>();
         _isPlayer = isPlayer;
 
 

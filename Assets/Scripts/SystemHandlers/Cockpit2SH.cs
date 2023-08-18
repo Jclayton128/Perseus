@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Cockpit2SH : SystemHandler
 {
+
+    //settings
+    [SerializeField] WeaponHandler _weaponHandler = null;
+
     public override void IntegrateSystem(SystemIconDriver connectedSID)
     {
         base.IntegrateSystem(connectedSID);
+        LevelController lc = FindObjectOfType<LevelController>();
+        lc.WarpedIntoNewLevel += ActivateBowWave;
+        _weaponHandler.Initialize(null, true, null);
     }
 
     public override void DeintegrateSystem()
@@ -28,4 +36,10 @@ public class Cockpit2SH : SystemHandler
     {
 
     }
+
+    private void ActivateBowWave(Level throwaway)
+    {
+        _weaponHandler.Activate();
+    }
+
 }

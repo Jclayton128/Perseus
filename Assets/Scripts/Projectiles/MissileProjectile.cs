@@ -52,15 +52,30 @@ public class MissileProjectile : Projectile, IProximityFuzed
 
         IMissileLauncher sml = _launchingWeaponHandler.GetComponent<IMissileLauncher>();
 
-        _targetPosition = sml.GetTargetPosition();
-        //_thrust = sml.GetThrustSpec();
-        _speed = sml.GetSpeedSpec();
-        _turnRate = sml.GetTurnSpec();
-        _scanRadius = sml.GetMissileScanRadius();
-        _snakeAmount = sml.GetSnakeAmount();
+        if (sml != null)
+        {
+            _targetPosition = sml.GetTargetPosition();
+            //_thrust = sml.GetThrustSpec();
+            _speed = sml.GetSpeedSpec();
+            _turnRate = sml.GetTurnSpec();
+            _scanRadius = sml.GetMissileScanRadius();
+            _snakeAmount = sml.GetSnakeAmount();
+            _legalTarget_LayerMask = sml.GetLegalTargetsLayerMask();
+        }
+        else
+        {
+            //magic numbers here
+            _targetPosition = transform.position + (transform.forward * 30f);
+            _turnRate = 90f;
+            _snakeAmount = 20f;
+            _scanRadius = 0.3f;
+            _legalTarget_LayerMask = LayerLibrary.EnemyNeutralLayerMask;
+            _speed = 5f;
+        }
+
         _targetTransform = null; // in case this is a pool object that otherwise retains old target
         _hasHitTargetPosition = false;
-        _legalTarget_LayerMask = sml.GetLegalTargetsLayerMask();
+
 
         if (_snakeAmount > Mathf.Epsilon)
         {

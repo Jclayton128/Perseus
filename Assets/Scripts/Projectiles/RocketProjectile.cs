@@ -32,12 +32,24 @@ public class RocketProjectile : Projectile, IProximityFuzed
             _launchingWeaponHandler.GetInitialProjectileVelocity(transform);
 
         IMissileLauncher sml = _launchingWeaponHandler.GetComponent<IMissileLauncher>();
+        
+        if (sml != null)
+        {
+            _targetPosition = sml.GetTargetPosition();
+            _turnRate = sml.GetTurnSpec();
+            _snakeAmount = sml.GetSnakeAmount();
+        } 
+        else
+        {
+            //magic numbers here
+            _targetPosition = transform.position + (transform.forward * 30f);
+            _turnRate = 90f;
+            _snakeAmount = 20f;
+        }
 
-        _targetPosition = sml.GetTargetPosition();
         //_thrust = sml.GetThrustSpec();
         _speed = _rb.velocity.magnitude;
-        _turnRate = sml.GetTurnSpec();
-        _snakeAmount = sml.GetSnakeAmount();
+
         _hasHitTargetPosition = false;
 
         if (_snakeAmount > Mathf.Epsilon)

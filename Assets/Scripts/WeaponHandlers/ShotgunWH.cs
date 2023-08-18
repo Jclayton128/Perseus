@@ -33,9 +33,13 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     {
         if (_chargeLevel < _minChargeToFire) return;
         float cost = _chargeLevel * _activationCost;
-        if (_hostEnergyHandler.CheckEnergy(cost))
+        if (_hostEnergyHandler && _hostEnergyHandler.CheckEnergy(cost))
         {
             _hostEnergyHandler.SpendEnergy(cost);
+            Fire();
+        }
+        else
+        {
             Fire();
         }
     }

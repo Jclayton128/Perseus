@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingSystems.Array.data[1]
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3081601235201472098, guid: e05ced9d660592e4fbfb155f3eb1612d, type: 3}
       propertyPath: _startingWeapons.Array.data[0]
