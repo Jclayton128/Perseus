@@ -30,7 +30,7 @@ public class Cockpit2SH : SystemHandler
 
     protected override void ImplementSystemUpgrade()
     {
-        
+        _weaponHandler.ImplementWeaponUpgrade_Public();
     }
     protected override void ImplementSystemDowngrade()
     {

@@ -12,6 +12,10 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
     [SerializeField] float _maxCharge = 5f;
     [SerializeField] float _minChargeToFire = 3f;
 
+    [SerializeField] int _maxChargeAddition_Upgrade = 2;
+    [SerializeField] float _projectileLifetimeMultiplier_Upgrade = 1.2f;
+
+
     //state
     Color _chargeColor;
     public float _chargeLevel;
@@ -85,8 +89,8 @@ public class ShotgunWH : WeaponHandler, IBoltLauncher
 
     protected override void ImplementWeaponUpgrade()
     {
-        _maxCharge += 2;
-        _projectileLifetime *= 1.2f;
+        _maxCharge += _maxChargeAddition_Upgrade;
+        _projectileLifetime *= _projectileLifetimeMultiplier_Upgrade;
         _activationCost *= .9f;
     }
 

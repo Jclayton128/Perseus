@@ -170,9 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: c41f70f32b4f4894e954b584c2eb41ec, type: 3}
-  _name: Wave Cockpit
-  _description: Converts residual warp energy into a powerful temporary bow wave.
-  _upgradeDescription: Upgrading increases the duration of the bow wave.
+  _name: Storm Cockpit
+  _description: 'Converts residual warp energy into a unpredictable, deadly warp-storm. '
+  _upgradeDescription: Upgrading increases the intensity and duration of the bow
+    wave.
   SystemType: 6
   SystemLocation: 1
   _maxUpgradeLevel: 5
@@ -238,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _maxCharge
-      value: 36
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _degreeSpread
@@ -267,6 +268,14 @@ PrefabInstance:
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileLifetime
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _maxChargeAddition_Upgrade
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _projectileLifetimeMultiplier_Upgrade
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14bfc99293ab507478752e81919b4213, type: 3}
