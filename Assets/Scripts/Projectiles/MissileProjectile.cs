@@ -66,11 +66,11 @@ public class MissileProjectile : Projectile, IProximityFuzed
         {
             //magic numbers here
             _targetPosition = transform.position + (transform.forward * 30f);
-            _turnRate = 90f;
+            _turnRate = 200f;
             _snakeAmount = 20f;
             _scanRadius = 0.3f;
-            _legalTarget_LayerMask = LayerLibrary.EnemyNeutralLayerMask;
-            _speed = 5f;
+            _legalTarget_LayerMask = LayerLibrary.EnemyLayerMask;
+            _speed = 3f;
         }
 
         _targetTransform = null; // in case this is a pool object that otherwise retains old target

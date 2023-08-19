@@ -17,7 +17,8 @@ public abstract class Projectile : MonoBehaviour
         PlayerBolt0, PlayerMissile1, PlayerScrapedo2, PlayerRocket3, PlayerCannon4,
         PlayerTorpedo5, PlayerJavelin6, PlayerShieldBlast7, PlayerWarpBlast8, PBoltGreen9,
         EnemyBolt10, EnemyMissile11, EnemyMine12, EnemyRocket13, EnemyJavelin14, EnemyShieldBlast15,
-        EnemySAD16, Enemy17,Enemy18, Enemy19
+        EnemySAD16, Enemy17,Enemy18, Enemy19,
+        PlayerWarpBlob20
     }
 
     //init

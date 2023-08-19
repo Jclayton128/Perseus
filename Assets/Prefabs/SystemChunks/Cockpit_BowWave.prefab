@@ -233,12 +233,20 @@ PrefabInstance:
       value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _ionDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _maxCharge
-      value: 24
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _degreeSpread
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _normalDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _activationCost
@@ -246,11 +254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileType
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
+      propertyPath: _shieldBonusDamage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5476161887666177104, guid: 14bfc99293ab507478752e81919b4213, type: 3}
       propertyPath: _projectileLifetime
